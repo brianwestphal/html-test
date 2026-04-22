@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 — display: contents</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .flex { display: flex; gap: 8px; background: #e2e8f0; padding: 8px; }
+  .flex > * { background: #4f46e5; color: white; padding: 6px 10px; }
+  .pass { display: contents; }   /* wrapper disappears from layout */
+  .also { display: contents; background: red; /* ignored */ }
+</style>
+</head>
+<body>
+<h1>display: contents</h1>
+<p>The wrapper <code>&lt;div class="pass"&gt;</code> contributes no box, so
+its children become direct flex items of the outer flex container.</p>
+
+<div class="flex">
+  <span>Direct A</span>
+  <div class="pass">
+    <span>Through-wrapper B</span>
+    <span>Through-wrapper C</span>
+  </div>
+  <span>Direct D</span>
+</div>
+</body>
+</html>

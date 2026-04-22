@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — type / class / id / universal selectors</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+
+  /* Universal */
+  * { box-sizing: border-box; }
+
+  /* Type selector */
+  p { color: #334155; line-height: 1.5; }
+
+  /* Class selector */
+  .highlight { background: #fef08a; padding: 2px 4px; }
+  .danger { color: #b91c1c; font-weight: bold; }
+
+  /* ID selector */
+  #unique { border-left: 4px solid #4f46e5; padding-left: 10px; }
+
+  /* Multiple classes AND'd */
+  .pill.primary { background: #4f46e5; color: white; padding: 2px 8px; border-radius: 999px; }
+  .pill.danger  { background: #dc2626; color: white; padding: 2px 8px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<h1>Basic selectors</h1>
+
+<p>All <code>&lt;p&gt;</code> elements share the slate color (type selector).</p>
+<p class="highlight">This paragraph is highlighted via the <code>.highlight</code> class.</p>
+<p class="danger">This paragraph is <code>.danger</code>.</p>
+<p id="unique">This paragraph has id <code>#unique</code>.</p>
+<p>
+  <span class="pill primary">multi-class primary</span>
+  <span class="pill danger">multi-class danger</span>
+</p>
+</body>
+</html>

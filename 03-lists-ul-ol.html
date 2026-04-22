@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>03 — ul, ol, nesting, start, reversed</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.5; }
+  section { margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<h1>Lists — unordered and ordered, nesting, start, reversed</h1>
+
+<section>
+  <h2>Unordered list</h2>
+  <ul>
+    <li>Alpha</li>
+    <li>Beta
+      <ul>
+        <li>Beta-1</li>
+        <li>Beta-2
+          <ul>
+            <li>Beta-2-a</li>
+            <li>Beta-2-b</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Gamma</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Ordered list (defaults)</h2>
+  <ol>
+    <li>One</li>
+    <li>Two
+      <ol>
+        <li>Two-point-one</li>
+        <li>Two-point-two</li>
+      </ol>
+    </li>
+    <li>Three</li>
+  </ol>
+</section>
+
+<section>
+  <h2><code>start=5</code> and explicit <code>value</code></h2>
+  <ol start="5">
+    <li>Fifth</li>
+    <li value="10">Jumped to ten via value</li>
+    <li>Eleven</li>
+  </ol>
+</section>
+
+<section>
+  <h2><code>reversed</code> attribute</h2>
+  <ol reversed>
+    <li>Counts down</li>
+    <li>from here</li>
+    <li>to one</li>
+  </ol>
+</section>
+
+<section>
+  <h2><code>type</code> attribute</h2>
+  <ol type="A"><li>Upper alpha</li><li>items</li></ol>
+  <ol type="a"><li>Lower alpha</li><li>items</li></ol>
+  <ol type="I"><li>Upper roman</li><li>items</li></ol>
+  <ol type="i"><li>Lower roman</li><li>items</li></ol>
+  <ol type="1"><li>Numeric</li><li>items</li></ol>
+</section>
+</body>
+</html>

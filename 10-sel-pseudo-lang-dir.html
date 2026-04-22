@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — :lang() and :dir()</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.8; }
+  p:lang(en) { border-left: 3px solid #2563eb; padding-left: 8px; }
+  p:lang(fr) { border-left: 3px solid #ea580c; padding-left: 8px; }
+  p:lang(de) { border-left: 3px solid #16a34a; padding-left: 8px; }
+  p:lang(ja) { border-left: 3px solid #a855f7; padding-left: 8px; }
+
+  p:dir(ltr) { background: #eff6ff; }
+  p:dir(rtl) { background: #fef3c7; }
+  q:lang(fr) { quotes: "« " " »"; }
+  q:lang(de) { quotes: "„" "“"; }
+  q:lang(en) { quotes: "“" "”"; }
+</style>
+</head>
+<body>
+<h1>:lang() and :dir()</h1>
+
+<p lang="en">English paragraph with <q>auto quotes</q> per the locale.</p>
+<p lang="fr">Un paragraphe en français avec <q>des guillemets automatiques</q>.</p>
+<p lang="de">Ein deutscher Absatz mit <q>automatischen Anführungszeichen</q>.</p>
+<p lang="ja">日本語の段落。自動の引用符はロケール次第。</p>
+
+<h2>:dir()</h2>
+<p dir="ltr">Left-to-right (:dir(ltr) → light blue).</p>
+<p dir="rtl">מימין לשמאל (:dir(rtl) → amber).</p>
+</body>
+</html>

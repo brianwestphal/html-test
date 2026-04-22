@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>24 — quotes property + content: open-quote/close-quote</title>
+<style>
+  body { font-family: serif; margin: 2em; line-height: 1.8; }
+
+  :root { quotes: "\201C" "\201D" "\2018" "\2019"; }  /* “ ” ‘ ’ */
+  :lang(en) { quotes: "\201C" "\201D" "\2018" "\2019"; }
+  :lang(fr) { quotes: "« " " »" "“ " " ”"; }
+  :lang(de) { quotes: "„" "“" "‚" "‘"; }
+
+  .manual q::before { content: open-quote; color: #dc2626; }
+  .manual q::after  { content: close-quote; color: #dc2626; }
+
+  .no-close q::before { content: no-open-quote; }
+  .no-close q::after  { content: no-close-quote; }
+</style>
+</head>
+<body>
+<h1>quotes property — locale-aware automatic quotes</h1>
+
+<p lang="en">English: She said <q>Hello, world — <q>really</q>, she said</q>.</p>
+<p lang="fr">Français : Elle a dit <q>Bonjour — <q>vraiment</q>, a-t-elle dit</q>.</p>
+<p lang="de">Deutsch: Sie sagte <q>Hallo — <q>wirklich</q>, sagte sie</q>.</p>
+
+<h2>Manual open-quote / close-quote via generated content</h2>
+<p class="manual">Manual: <q>Outer <q>inner</q> outer</q>.</p>
+
+<h2>no-open-quote / no-close-quote</h2>
+<p class="no-close">no-open/close: <q>nothing rendered where quotes would be</q>.</p>
+</body>
+</html>

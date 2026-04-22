@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — font-stretch</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row { display: grid; grid-template-columns: 220px 1fr; gap: 6px 20px; font-size: 20px; margin: 4px 0; align-items: baseline; }
+  .name { font-family: monospace; font-size: 14px; color: #64748b; }
+  .s1 { font-stretch: ultra-condensed; }
+  .s2 { font-stretch: extra-condensed; }
+  .s3 { font-stretch: condensed; }
+  .s4 { font-stretch: semi-condensed; }
+  .s5 { font-stretch: normal; }
+  .s6 { font-stretch: semi-expanded; }
+  .s7 { font-stretch: expanded; }
+  .s8 { font-stretch: extra-expanded; }
+  .s9 { font-stretch: ultra-expanded; }
+  .s10 { font-stretch: 50%; }
+  .s11 { font-stretch: 200%; }
+</style>
+</head>
+<body>
+<h1>font-stretch — keywords &amp; percentages</h1>
+<p><em>Visual effect depends on the available face in the installed font.</em></p>
+<div class="row"><span class="name">ultra-condensed</span> <span class="s1">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">extra-condensed</span> <span class="s2">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">condensed</span>       <span class="s3">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">semi-condensed</span>  <span class="s4">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">normal</span>          <span class="s5">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">semi-expanded</span>   <span class="s6">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">expanded</span>        <span class="s7">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">extra-expanded</span>  <span class="s8">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">ultra-expanded</span>  <span class="s9">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">50%</span>             <span class="s10">Hamburgefontsiv</span></div>
+<div class="row"><span class="name">200%</span>            <span class="s11">Hamburgefontsiv</span></div>
+</body>
+</html>

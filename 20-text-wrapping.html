@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — white-space, word-break, overflow-wrap, hyphens</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .narrow { width: 240px; border: 1px solid #334155; padding: 8px; margin-bottom: 10px; background: #f8fafc; }
+  .pre         { white-space: pre; }
+  .pre-wrap    { white-space: pre-wrap; }
+  .pre-line    { white-space: pre-line; }
+  .nowrap      { white-space: nowrap; }
+  .break-all   { word-break: break-all; }
+  .keep-all    { word-break: keep-all; }
+  .ow-word     { overflow-wrap: break-word; }
+  .ow-any      { overflow-wrap: anywhere; }
+  .hyphen-auto { hyphens: auto; }
+  .hyphen-none { hyphens: none; }
+  .text-wrap-balance { text-wrap: balance; }
+  .text-wrap-pretty  { text-wrap: pretty; }
+</style>
+</head>
+<body>
+<h1>white-space / word-break / overflow-wrap / hyphens</h1>
+
+<h2>white-space</h2>
+<pre class="narrow pre">   pre: preserves
+   spaces and
+   newlines,    no wrap</pre>
+<p class="narrow pre-wrap">   pre-wrap: preserves spaces and newlines
+but also wraps    when needed.</p>
+<p class="narrow pre-line">   pre-line: collapses spaces,
+preserves newlines,
+wraps normally.</p>
+<p class="narrow nowrap">nowrap: single line, overflows horizontally in a narrow container rather than wrapping.</p>
+
+<h2>word-break</h2>
+<p class="narrow">default break-word — Supercalifragilisticexpialidocious antidisestablishmentarianism.</p>
+<p class="narrow break-all">break-all — Supercalifragilisticexpialidocious antidisestablishmentarianism (break inside any token).</p>
+<p class="narrow keep-all">keep-all — supercalifragilisticexpialidocious CJK-like keep-together semantics.</p>
+
+<h2>overflow-wrap</h2>
+<p class="narrow ow-word">overflow-wrap: break-word — aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa breaks only if it would overflow.</p>
+<p class="narrow ow-any">overflow-wrap: anywhere — aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa allows break even mid-word always.</p>
+
+<h2>hyphens</h2>
+<p class="narrow hyphen-auto" lang="en">hyphens:auto — A long representation of the word antidisestablishmentarianism should be hyphenated appropriately.</p>
+<p class="narrow hyphen-none" lang="en">hyphens:none — antidisestablishmentarianism stays unbroken unless overflow forces it.</p>
+
+<h2>text-wrap</h2>
+<h3 class="narrow text-wrap-balance">balance — A multi-line heading that the browser tries to balance into lines of similar length.</h3>
+<p class="narrow text-wrap-pretty">pretty — avoids orphaned short last lines when possible, for aesthetic paragraph rags.</p>
+</body>
+</html>

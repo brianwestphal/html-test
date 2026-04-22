@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 — display: table / table-* on non-table elements</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .t  { display: table; border-collapse: collapse; width: 100%; }
+  .tr { display: table-row; }
+  .td { display: table-cell; border: 1px solid #334155; padding: 6px 10px; }
+  .th { display: table-cell; border: 1px solid #334155; padding: 6px 10px; background: #1e293b; color: white; font-weight: bold; }
+  .cap { display: table-caption; caption-side: top; font-style: italic; text-align: left; padding: 4px 0; }
+  .tgroup { display: table-row-group; }
+  .thead  { display: table-header-group; }
+  .tfoot  { display: table-footer-group; }
+  .colg   { display: table-column-group; }
+  .col    { display: table-column; background: #fef3c7; }
+</style>
+</head>
+<body>
+<h1>display: table and table-* on plain divs</h1>
+
+<div class="t">
+  <div class="cap">Caption rendered by display:table-caption</div>
+  <div class="colg"><div class="col"></div><div class="col"></div><div class="col"></div></div>
+  <div class="thead">
+    <div class="tr"><div class="th">Name</div><div class="th">Qty</div><div class="th">Price</div></div>
+  </div>
+  <div class="tgroup">
+    <div class="tr"><div class="td">Apple</div><div class="td">3</div><div class="td">$1.50</div></div>
+    <div class="tr"><div class="td">Banana</div><div class="td">6</div><div class="td">$0.30</div></div>
+  </div>
+  <div class="tfoot">
+    <div class="tr"><div class="td">Total</div><div class="td">9</div><div class="td">$6.30</div></div>
+  </div>
+</div>
+</body>
+</html>

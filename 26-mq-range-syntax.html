@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>26 — Media query range syntax</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .tag { display: inline-block; padding: 6px 12px; margin: 4px; background: #64748b; color: white; border-radius: 4px; font-weight: 600; }
+
+  /* Range syntax: width <= 600px */
+  @media (width <= 600px) { .lt600 { background: #16a34a; } }
+  /* width >= 600px */
+  @media (width >= 600px) { .gte600 { background: #16a34a; } }
+  /* compound range: 400px <= width <= 1200px */
+  @media (400px <= width <= 1200px) { .range { background: #16a34a; } }
+
+  /* Combined with and / or / not */
+  @media (width >= 400px) and (width <= 1200px) { .and { background: #dc2626; } }
+  @media (width <= 300px), (width >= 1600px) { .or { background: #dc2626; } }
+  @media not (width <= 300px) { .not { background: #ea580c; } }
+</style>
+</head>
+<body>
+<h1>Media query range syntax + and / or / not</h1>
+<p>Active queries glow. Resize the viewport to see changes.</p>
+
+<span class="tag lt600">width ≤ 600px</span>
+<span class="tag gte600">width ≥ 600px</span>
+<span class="tag range">400 ≤ width ≤ 1200</span>
+<span class="tag and">(≥400) and (≤1200)</span>
+<span class="tag or">(≤300) or (≥1600)</span>
+<span class="tag not">not (≤300)</span>
+</body>
+</html>

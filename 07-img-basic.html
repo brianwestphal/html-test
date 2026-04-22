@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>07 — Basic img element</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  figure { display: inline-block; margin: 8px 12px; text-align: center; vertical-align: top; }
+  figcaption { font-size: 12px; color: #475569; }
+  img { border: 1px solid #cbd5e1; }
+</style>
+</head>
+<body>
+<h1>&lt;img&gt; basics</h1>
+
+<figure><img src="assets/img-red.png" alt="red PNG" width="128" height="128">
+  <figcaption>src + alt + width + height</figcaption></figure>
+
+<figure><img src="assets/img-red.png" alt="scaled down" width="64" height="64">
+  <figcaption>intrinsic 128 → displayed 64</figcaption></figure>
+
+<figure><img src="assets/img-red.png" alt="no size set">
+  <figcaption>no width/height → intrinsic</figcaption></figure>
+
+<figure><img src="assets/img-red.png" alt="loading lazy" loading="lazy" decoding="async" width="128" height="128">
+  <figcaption>loading=lazy, decoding=async</figcaption></figure>
+
+<figure><img src="assets/does-not-exist.png" alt="Missing image — this alt text renders as fallback" width="200" height="80">
+  <figcaption>Broken src → alt shown</figcaption></figure>
+
+<figure><img src="" alt="Empty src" width="100" height="80">
+  <figcaption>empty src</figcaption></figure>
+</body>
+</html>

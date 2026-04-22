@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — text-transform</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.8; font-size: 18px; }
+  .uc { text-transform: uppercase; }
+  .lc { text-transform: lowercase; }
+  .cap { text-transform: capitalize; }
+  .none-t { text-transform: none; }
+  .fw { text-transform: full-width; font-family: monospace; }
+  .fs { text-transform: full-size-kana; }
+</style>
+</head>
+<body>
+<h1>text-transform</h1>
+<p><code>uppercase:</code> <span class="uc">the quick brown fox JUMPS over 12 lazy dogs.</span></p>
+<p><code>lowercase:</code> <span class="lc">THE QUICK BROWN FOX jumps over 12 LAZY dogs.</span></p>
+<p><code>capitalize:</code> <span class="cap">the quick brown fox jumps over 12 lazy dogs.</span></p>
+<p><code>none:</code> <span class="none-t">Left As-Is With MiXeD cAsE.</span></p>
+<p><code>full-width:</code> <span class="fw">abc 123</span> (halfwidth → fullwidth)</p>
+<p><code>full-size-kana:</code> <span class="fs">ぁぃぅぇぉっゃゅょ</span> (small kana → normal)</p>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>01 — Base element</title>
+<base href="assets/" target="_blank">
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  img { width: 64px; height: 64px; border: 1px solid #999; margin-right: 8px; }
+</style>
+</head>
+<body>
+<h1>Document structure — Base URL + target</h1>
+<p>The <code>&lt;base href="assets/"&gt;</code> makes the relative image
+sources below resolve into the <code>assets/</code> directory. The
+<code>target="_blank"</code> also makes every link below open in a new tab by
+default.</p>
+<p>
+  <img src="img-red.png" alt="red PNG">
+  <img src="img-blue.jpg" alt="blue JPEG">
+  <img src="img-green.gif" alt="green GIF">
+  <img src="img-orange.svg" alt="orange SVG">
+</p>
+<p><a href="img-red.png">Relative link → resolves to assets/img-red.png and opens in new tab</a></p>
+</body>
+</html>

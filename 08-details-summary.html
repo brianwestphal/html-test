@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>08 — details / summary</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.5; }
+  details { border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 12px; margin: 8px 0; background: #f8fafc; }
+  summary { cursor: pointer; font-weight: 600; }
+  details.custom summary::marker,
+  details.custom > summary::-webkit-details-marker { color: transparent; }
+  details.custom summary::before {
+    content: "▶ ";
+    color: #ea580c;
+    display: inline-block;
+    transition: transform .1s;
+  }
+  details.custom[open] summary::before { content: "▼ "; }
+</style>
+</head>
+<body>
+<h1>&lt;details&gt; + &lt;summary&gt;</h1>
+
+<details>
+  <summary>Closed by default — click to reveal</summary>
+  <p>Contents become visible when the disclosure widget is expanded.</p>
+</details>
+
+<details open>
+  <summary>Open by default</summary>
+  <p>This one renders expanded because of the <code>open</code> attribute.</p>
+</details>
+
+<details>
+  <summary>Nested details</summary>
+  <p>Top-level body.</p>
+  <details>
+    <summary>Inner disclosure</summary>
+    <p>Inner body content.</p>
+    <details open>
+      <summary>Innermost (open)</summary>
+      <p>Three levels deep.</p>
+    </details>
+  </details>
+</details>
+
+<details class="custom">
+  <summary>Custom marker via ::before</summary>
+  <p>The triangle flips when this element is opened.</p>
+</details>
+</body>
+</html>

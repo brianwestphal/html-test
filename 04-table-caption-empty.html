@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 — caption-side, empty-cells</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  table { border-collapse: separate; border-spacing: 0; margin-bottom: 20px; border: 1px solid #334155; }
+  th, td { border: 1px solid #64748b; padding: 6px 12px; }
+  caption { font-style: italic; background: #e0f2fe; padding: 4px 8px; }
+  table.top    caption { caption-side: top; }
+  table.bottom caption { caption-side: bottom; }
+  table.show-empty { empty-cells: show; }
+  table.hide-empty { empty-cells: hide; }
+  /* make the background clearly different so hidden empty cells are obvious */
+  .show-empty td, .show-empty th { background: #fef3c7; }
+  .hide-empty td, .hide-empty th { background: #fef3c7; }
+</style>
+</head>
+<body>
+<h1>caption-side &amp; empty-cells</h1>
+
+<h2>caption-side: top</h2>
+<table class="top">
+  <caption>Caption on top</caption>
+  <tr><th>A</th><th>B</th></tr>
+  <tr><td>1</td><td>2</td></tr>
+</table>
+
+<h2>caption-side: bottom</h2>
+<table class="bottom">
+  <caption>Caption on bottom</caption>
+  <tr><th>A</th><th>B</th></tr>
+  <tr><td>1</td><td>2</td></tr>
+</table>
+
+<h2>empty-cells: show (empty cell still drawn)</h2>
+<table class="show-empty">
+  <tr><td>a</td><td></td><td>c</td></tr>
+  <tr><td></td><td>b</td><td></td></tr>
+</table>
+
+<h2>empty-cells: hide (empty cells suppressed, with separate borders)</h2>
+<table class="hide-empty">
+  <tr><td>a</td><td></td><td>c</td></tr>
+  <tr><td></td><td>b</td><td></td></tr>
+</table>
+</body>
+</html>

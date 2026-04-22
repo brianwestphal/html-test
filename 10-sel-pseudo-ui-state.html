@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — UI state pseudo-classes</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  label { display: block; margin: 6px 0; }
+  .box { display: inline-block; padding: 6px 10px; border: 1px solid #475569; margin: 4px 4px 4px 0; }
+  .box:hover { background: #fef3c7; }
+  .box:focus, .box:focus-visible { outline: 2px solid #4f46e5; }
+  .fw-parent { border: 2px dashed #94a3b8; padding: 10px; }
+  .fw-parent:focus-within { border-color: #dc2626; background: #fff1f2; }
+
+  button:active { transform: translateY(1px); background: #bae6fd; }
+
+  input:enabled  { background: #ecfccb; }
+  input:disabled { background: #e5e7eb; }
+  input:required { outline: 1px solid #ea580c; }
+  input:optional { outline: 1px dotted #64748b; }
+  input:valid    { border-left: 4px solid #16a34a; }
+  input:invalid  { border-left: 4px solid #dc2626; }
+  input:read-only  { font-style: italic; }
+  input:read-write { font-weight: 600; }
+
+  input[type=checkbox]:checked + span,
+  input[type=radio]:checked + span { color: #16a34a; font-weight: bold; }
+  input[type=checkbox]:indeterminate + span { color: #7c3aed; }
+
+  input:placeholder-shown { background: #f0f9ff; }
+
+  :target {
+    background: #fee2e2;
+    box-shadow: 0 0 0 3px #dc2626 inset;
+  }
+  input:default + span { font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>UI state pseudo-classes</h1>
+
+<h2>:hover / :focus / :focus-visible / :active</h2>
+<a class="box" href="#" tabindex="0">hover + focus + active me</a>
+<button class="box">button (mouse down = :active)</button>
+
+<h2>:focus-within</h2>
+<div class="fw-parent">
+  Parent gains red border when child is focused:
+  <input type="text" placeholder="focus me">
+</div>
+
+<h2>Form state pseudo-classes</h2>
+<label>:enabled <input type="text" value="editable"></label>
+<label>:disabled <input type="text" value="disabled" disabled></label>
+<label>:required <input type="text" required placeholder="required"></label>
+<label>:optional <input type="text" placeholder="optional"></label>
+<label>:valid email <input type="email" value="user@example.com"></label>
+<label>:invalid email <input type="email" value="xyz"></label>
+<label>:read-only <input type="text" value="read-only" readonly></label>
+<label>:placeholder-shown <input type="text" placeholder="typing hint"></label>
+
+<h2>:checked / :default / :indeterminate</h2>
+<label><input type="checkbox" checked> <span>checkbox checked</span></label>
+<label><input type="checkbox"> <span>unchecked</span></label>
+<label><input type="radio" name="r" checked> <span>radio checked</span></label>
+
+<h2>:target</h2>
+<p>Click <a href="#target-me">this link</a> to activate :target styling:</p>
+<section id="target-me">
+  <h3>Targeted section</h3>
+  <p>This gets red inset styling when it's the fragment target.</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — Structural pseudo-classes</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  ul, ol { padding-left: 22px; }
+  :root { --accent: #4f46e5; }
+
+  li:first-child  { color: #16a34a; font-weight: bold; }
+  li:last-child   { color: #dc2626; font-weight: bold; }
+  li:only-child   { background: #fef9c3; }
+  li:nth-child(odd)  { background: #f1f5f9; }
+  li:nth-child(3n+2) { outline: 1px dashed #ea580c; }
+
+  .of-type p:first-of-type { color: #059669; }
+  .of-type p:last-of-type  { color: #be123c; }
+  .of-type p:only-of-type  { font-style: italic; }
+  .of-type h3:nth-of-type(2) { text-decoration: underline; }
+
+  div:empty { width: 60px; height: 20px; background: #fb7185; display: inline-block; margin-right: 6px; }
+  .spacer { border: 1px dashed #6b7280; display: inline-block; padding: 2px; }
+</style>
+</head>
+<body>
+<h1>Structural pseudo-classes</h1>
+
+<h2>:first-child / :last-child / :nth-child()</h2>
+<ul>
+  <li>1 — first (green bold)</li>
+  <li>2 — nth-child(3n+2) (orange outline)</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5 — nth-child(3n+2)</li>
+  <li>6 — last (red bold)</li>
+</ul>
+
+<h2>:only-child</h2>
+<ul><li>I am alone (yellow background)</li></ul>
+
+<h2>:first-of-type / :last-of-type / :nth-of-type / :only-of-type</h2>
+<section class="of-type">
+  <p>I'm the first p (green).</p>
+  <h3>heading 1</h3>
+  <p>middle p</p>
+  <h3>heading 2 (underlined — nth-of-type(2))</h3>
+  <p>middle p</p>
+  <h3>heading 3</h3>
+  <p>I'm the last p (crimson).</p>
+</section>
+
+<h2>:empty</h2>
+<p class="spacer">empty divs render as red boxes →
+  <div></div><div></div><div>not empty</div>
+</p>
+</body>
+</html>

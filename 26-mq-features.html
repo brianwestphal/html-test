@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>26 — @media feature queries</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .q { padding: 8px 14px; margin: 4px; border-radius: 6px; background: #cbd5e1; color: #334155; }
+  .q.on { background: #16a34a; color: white; font-weight: bold; }
+
+  @media (prefers-color-scheme: light) { .pcs-light.q { background: #16a34a; color: white; } }
+  @media (prefers-color-scheme: dark)  { .pcs-dark.q  { background: #16a34a; color: white; } }
+
+  @media (prefers-reduced-motion: reduce)    { .prm-r.q  { background: #16a34a; color: white; } }
+  @media (prefers-reduced-motion: no-preference) { .prm-n.q { background: #16a34a; color: white; } }
+
+  @media (prefers-contrast: more)    { .pc-more.q { background: #16a34a; color: white; } }
+  @media (prefers-contrast: less)    { .pc-less.q { background: #16a34a; color: white; } }
+  @media (prefers-contrast: no-preference) { .pc-none.q { background: #16a34a; color: white; } }
+
+  @media (hover: hover) { .hover-h.q { background: #16a34a; color: white; } }
+  @media (hover: none)  { .hover-n.q { background: #16a34a; color: white; } }
+  @media (pointer: fine)    { .pt-fine.q   { background: #16a34a; color: white; } }
+  @media (pointer: coarse)  { .pt-coarse.q { background: #16a34a; color: white; } }
+  @media (pointer: none)    { .pt-none.q   { background: #16a34a; color: white; } }
+
+  @media (min-resolution: 2dppx) { .hi.q { background: #16a34a; color: white; } }
+  @media (max-resolution: 1dppx) { .lo.q { background: #16a34a; color: white; } }
+
+  @media (color) { .color.q { background: #16a34a; color: white; } }
+  @media (monochrome) { .mono.q { background: #16a34a; color: white; } }
+</style>
+</head>
+<body>
+<h1>@media feature queries (green = matched on this device)</h1>
+
+<h2>prefers-color-scheme</h2>
+<span class="q pcs-light">light</span>
+<span class="q pcs-dark">dark</span>
+
+<h2>prefers-reduced-motion</h2>
+<span class="q prm-n">no-preference</span>
+<span class="q prm-r">reduce</span>
+
+<h2>prefers-contrast</h2>
+<span class="q pc-none">no-preference</span>
+<span class="q pc-more">more</span>
+<span class="q pc-less">less</span>
+
+<h2>hover / pointer</h2>
+<span class="q hover-h">hover:hover</span>
+<span class="q hover-n">hover:none</span>
+<span class="q pt-fine">pointer:fine</span>
+<span class="q pt-coarse">pointer:coarse</span>
+<span class="q pt-none">pointer:none</span>
+
+<h2>resolution</h2>
+<span class="q hi">min-resolution 2dppx (hi-dpi)</span>
+<span class="q lo">max-resolution 1dppx (std-dpi)</span>
+
+<h2>color / monochrome</h2>
+<span class="q color">color</span>
+<span class="q mono">monochrome</span>
+</body>
+</html>

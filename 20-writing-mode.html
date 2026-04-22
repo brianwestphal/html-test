@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — writing-mode, text-orientation, direction</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .box {
+    display: inline-block;
+    width: 140px;
+    height: 180px;
+    margin: 8px;
+    padding: 8px;
+    background: #fde68a;
+    border: 1px solid #ca8a04;
+    font-size: 18px;
+    vertical-align: top;
+  }
+  .htb  { writing-mode: horizontal-tb; }
+  .vrl  { writing-mode: vertical-rl; }
+  .vlr  { writing-mode: vertical-lr; }
+  .srl  { writing-mode: sideways-rl; }
+  .slr  { writing-mode: sideways-lr; }
+
+  .mixed   { text-orientation: mixed; }
+  .upright { text-orientation: upright; }
+  .side    { text-orientation: sideways; }
+
+  .rtl { direction: rtl; background: #bae6fd; border-color: #0369a1; }
+  .ltr { direction: ltr; }
+</style>
+</head>
+<body>
+<h1>writing-mode / text-orientation / direction</h1>
+
+<h2>writing-mode</h2>
+<div class="box htb">horizontal-tb (default) — Hello world</div>
+<div class="box vrl">vertical-rl — Hello world 漢字</div>
+<div class="box vlr">vertical-lr — Hello world 漢字</div>
+<div class="box srl">sideways-rl — Hello world</div>
+<div class="box slr">sideways-lr — Hello world</div>
+
+<h2>text-orientation (in vertical-rl)</h2>
+<div class="box vrl mixed">mixed: ABC 123 漢字 abc</div>
+<div class="box vrl upright">upright: ABC 123 漢字 abc</div>
+<div class="box vrl side">sideways: ABC 123 漢字 abc</div>
+
+<h2>direction (rtl flips inline direction)</h2>
+<div class="box ltr">ltr: one two three four</div>
+<div class="box rtl">rtl: one two three four (English words but RTL ordering)</div>
+</body>
+</html>

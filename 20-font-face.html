@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — @font-face with local() fallbacks</title>
+<style>
+  @font-face {
+    font-family: "TestMono";
+    src: local("Menlo"), local("Monaco"), local("Courier New"), local("Courier");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "TestSerif";
+    src: local("Georgia"), local("Times New Roman"), local("Times");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "TestSerif";
+    src: local("Georgia Italic"), local("Times New Roman Italic");
+    font-weight: 400;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "TestSerif";
+    src: local("Georgia Bold"), local("Times New Roman Bold");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  body { font-family: sans-serif; margin: 2em; line-height: 1.7; }
+  .mono   { font-family: "TestMono", monospace; }
+  .serif  { font-family: "TestSerif", serif; }
+  .it     { font-style: italic; }
+  .b      { font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>@font-face with local() fallbacks</h1>
+<p>No binary font download — these @font-face rules resolve via <code>local()</code>
+to common system fonts. That exercises the @font-face parser and family
+registration without a network dependency.</p>
+
+<p class="mono">TestMono → Menlo/Monaco/Courier New/Courier. 0123456789 if ll Il</p>
+
+<p class="serif">TestSerif regular: The quick brown fox jumps over the lazy dog.</p>
+<p class="serif it">TestSerif italic face</p>
+<p class="serif b">TestSerif bold face</p>
+<p class="serif b it">TestSerif bold-italic (synthesized if no dedicated face)</p>
+</body>
+</html>

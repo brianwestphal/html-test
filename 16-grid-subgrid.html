@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 — subgrid</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .outer {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 120px;
+    grid-template-rows: auto auto auto;
+    gap: 6px;
+    background: #e2e8f0;
+    padding: 6px;
+  }
+  .outer > div { background: #4f46e5; color: white; padding: 6px 10px; }
+  .card {
+    grid-column: 2 / -2;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / 4;
+    gap: inherit;
+    background: #fde68a;
+    color: #78350f;
+  }
+  .card > span { background: #dc2626; color: white; padding: 4px 8px; }
+  .card > span.a { grid-column: 1; grid-row: 1; }
+  .card > span.b { grid-column: 2; grid-row: 2; }
+  .card > span.c { grid-column: 1 / span 2; grid-row: 3; }
+</style>
+</head>
+<body>
+<h1>subgrid — inner grid shares parent's tracks</h1>
+<p>The yellow card spans columns 2–3 (and rows 1–3) of the outer grid, and
+declares <code>grid-template-columns: subgrid</code> so its inner items
+align to the outer grid's column lines.</p>
+
+<div class="outer">
+  <div>A</div><div>B</div><div>C</div><div>D</div>
+  <div>E</div>
+    <div class="card">
+      <span class="a">sub-col 1 row 1</span>
+      <span class="b">sub-col 2 row 2</span>
+      <span class="c">sub-cols 1-2 row 3</span>
+    </div>
+  <div>F</div>
+  <div>G</div><div>H</div>
+</div>
+</body>
+</html>

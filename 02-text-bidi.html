@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 — Bidirectional text</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.8; }
+  .bordered { border: 1px solid #cbd5e1; padding: 8px; margin: 6px 0; }
+</style>
+</head>
+<body>
+<h1>Bidirectional text — dir, bdi, bdo</h1>
+
+<p class="bordered" dir="ltr">Default LTR paragraph with embedded Arabic:
+the phrase "العربية" means "Arabic" in Arabic, and should read right-to-left
+within this left-to-right line.</p>
+
+<p class="bordered" dir="rtl">פסקה זו היא RTL: this English phrase is embedded
+inside a right-to-left paragraph in Hebrew.</p>
+
+<p class="bordered" dir="ltr">Usernames of mixed direction without <code>&lt;bdi&gt;</code>:
+user "سمير_ali" posted 5 comments.
+With <code>&lt;bdi&gt;</code>: user "<bdi>سمير_ali</bdi>" posted 5 comments.</p>
+
+<p class="bordered"><code>&lt;bdo dir="rtl"&gt;</code> forces override:
+<bdo dir="rtl">This text is forced right-to-left.</bdo></p>
+
+<p class="bordered">
+  Arabic sample: <span lang="ar" dir="rtl">مرحبا بالعالم</span><br>
+  Hebrew sample: <span lang="he" dir="rtl">שלום עולם</span>
+</p>
+</body>
+</html>

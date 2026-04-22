@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 — Margin collapsing</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .group { outline: 1px dashed #64748b; padding: 0; margin-bottom: 24px; background: #f1f5f9; }
+  .a { background: #fef3c7; padding: 8px; margin: 30px 0; }
+  .b { background: #dbeafe; padding: 8px; margin: 30px 0; }
+
+  /* Parent-child collapsing (no padding/border on parent → child's top margin escapes) */
+  .parent-nobreak { background: #e5e7eb; }
+  .parent-nobreak .child { margin-top: 40px; background: #a7f3d0; padding: 6px; }
+
+  /* Break collapse via padding on parent */
+  .parent-break { background: #e5e7eb; padding: 4px; }
+  .parent-break .child { margin-top: 40px; background: #a7f3d0; padding: 6px; }
+
+  .empty { margin: 20px 0; }
+</style>
+</head>
+<body>
+<h1>Margin collapsing</h1>
+
+<h2>Adjacent siblings collapse: 30 + 30 → 30px gap</h2>
+<div class="group">
+  <div class="a">A (margin-top/bottom 30)</div>
+  <div class="b">B (margin-top/bottom 30)</div>
+</div>
+
+<h2>Parent with no padding/border: child's top margin escapes</h2>
+<div class="parent-nobreak">
+  <div class="child">Child has margin-top:40 but visually sits at parent's top because it collapses through.</div>
+</div>
+
+<h2>Parent with padding — collapse is prevented</h2>
+<div class="parent-break">
+  <div class="child">Same child, but the parent has padding:4 so the margin stays inside.</div>
+</div>
+
+<h2>Collapsing through an empty block</h2>
+<div class="group">
+  <div class="a">A</div>
+  <div class="empty"></div>
+  <div class="b">B (a single 30px gap, not 60)</div>
+</div>
+</body>
+</html>

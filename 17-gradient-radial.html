@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>17 — radial-gradient</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .g { display: inline-block; width: 220px; height: 140px; margin: 6px; color: white; padding: 8px; font-weight: bold; vertical-align: top; }
+  .circle    { background: radial-gradient(circle, #f59e0b, #7c2d12); }
+  .ellipse   { background: radial-gradient(ellipse, #0ea5e9, #082f49); }
+  .closest-side   { background: radial-gradient(circle closest-side at 30% 30%, #facc15, #854d0e); }
+  .farthest-side  { background: radial-gradient(circle farthest-side at 50% 50%, #4ade80, #065f46); }
+  .farthest-corner { background: radial-gradient(circle farthest-corner at 0 0, #60a5fa, #1e3a8a); }
+  .sized     { background: radial-gradient(80px 60px at 70% 40%, #fb7185, #881337); }
+  .stops     { background: radial-gradient(circle, white 0%, white 30%, #ef4444 30%, #ef4444 60%, white 60%); }
+  .conic-ish { background: radial-gradient(ellipse at top, #fde68a, #dc2626 70%); }
+</style>
+</head>
+<body>
+<h1>radial-gradient</h1>
+<div class="g circle">circle (default ending)</div>
+<div class="g ellipse">ellipse</div>
+<div class="g closest-side">closest-side at 30% 30%</div>
+<div class="g farthest-side">farthest-side center</div>
+<div class="g farthest-corner">farthest-corner at 0 0</div>
+<div class="g sized">80×60 ellipse at 70% 40%</div>
+<div class="g stops">concentric rings (bullseye)</div>
+<div class="g conic-ish">ellipse at top</div>
+</body>
+</html>

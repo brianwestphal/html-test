@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>07 — Image formats</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .grid { display: grid; grid-template-columns: repeat(5, 140px); gap: 14px; }
+  .cell { text-align: center; }
+  .cell img { width: 128px; height: 128px; border: 1px solid #334155; }
+  .cell span { display: block; margin-top: 4px; font-size: 13px; color: #475569; }
+</style>
+</head>
+<body>
+<h1>Image formats — PNG / JPEG / GIF / WebP / SVG</h1>
+<div class="grid">
+  <div class="cell"><img src="assets/img-red.png"     alt="PNG"><span>PNG</span></div>
+  <div class="cell"><img src="assets/img-blue.jpg"    alt="JPEG"><span>JPEG</span></div>
+  <div class="cell"><img src="assets/img-green.gif"   alt="GIF"><span>GIF</span></div>
+  <div class="cell"><img src="assets/img-purple.webp" alt="WebP"><span>WebP</span></div>
+  <div class="cell"><img src="assets/img-orange.svg"  alt="SVG"><span>SVG (via img)</span></div>
+</div>
+</body>
+</html>

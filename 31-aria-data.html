@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>31 — role, aria-*, data-*</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+  [role=alert]  { background: #fee2e2; border-left: 4px solid #dc2626; padding: 8px 12px; }
+  [role=status] { background: #dcfce7; border-left: 4px solid #16a34a; padding: 8px 12px; }
+  [role=tab]    { display: inline-block; padding: 6px 10px; border: 1px solid #334155; cursor: pointer; }
+  [role=tab][aria-selected=true] { background: #4f46e5; color: white; }
+  [aria-hidden=true] { display: none; }
+
+  /* Style via data-* attribute selectors (no JS) */
+  [data-severity=low]    { color: #64748b; }
+  [data-severity=medium] { color: #d97706; font-weight: bold; }
+  [data-severity=high]   { color: #b91c1c; font-weight: bold; text-decoration: underline wavy; }
+</style>
+</head>
+<body>
+<h1>role, aria-*, data-* attributes</h1>
+
+<h2>role (attribute parsing, styled via attribute selectors)</h2>
+<div role="alert">role=alert — red left border</div>
+<div role="status">role=status — green left border</div>
+
+<h2>aria-selected on tabs</h2>
+<div role="tablist">
+  <span role="tab">Tab 1</span>
+  <span role="tab" aria-selected="true">Tab 2 (selected)</span>
+  <span role="tab">Tab 3</span>
+</div>
+
+<h2>aria-hidden hides via our CSS rule</h2>
+<p aria-hidden="true">SHOULD NOT BE VISIBLE</p>
+<p>Visible paragraph.</p>
+
+<h2>data-* attributes (styleable via attribute selectors)</h2>
+<ul>
+  <li data-severity="low">Low severity item</li>
+  <li data-severity="medium">Medium severity item</li>
+  <li data-severity="high">High severity item</li>
+  <li data-severity="low" data-tag="x">Another low</li>
+</ul>
+</body>
+</html>

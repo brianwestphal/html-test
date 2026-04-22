@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>25 — overflow values</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .box {
+    display: inline-block;
+    width: 180px;
+    height: 120px;
+    border: 2px solid #334155;
+    margin: 8px;
+    padding: 6px;
+    background: #fef3c7;
+    vertical-align: top;
+  }
+  .content { white-space: nowrap; }
+  .v  { overflow: visible; }
+  .h  { overflow: hidden; }
+  .s  { overflow: scroll; }
+  .a  { overflow: auto; }
+  .c  { overflow: clip; }
+  .xy { overflow-x: auto; overflow-y: hidden; }
+  .hy { overflow-x: visible; overflow-y: hidden; }
+</style>
+</head>
+<body>
+<h1>overflow — visible, hidden, scroll, auto, clip, x/y</h1>
+
+<div class="box v"><b>visible</b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br><span class="content">LongUnbreakableString_______________________________</span></div>
+
+<div class="box h"><b>hidden</b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br><span class="content">LongUnbreakableString_______________________________</span></div>
+
+<div class="box s"><b>scroll</b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br><span class="content">LongUnbreakableString_______________________________</span></div>
+
+<div class="box a"><b>auto</b><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br><span class="content">LongUnbreakableString_______________________________</span></div>
+
+<div class="box c"><b>clip</b> (no scrollbar, no scroll)<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br><span class="content">LongUnbreakableString_______________________________</span></div>
+
+<div class="box xy"><b>x:auto / y:hidden</b><br>Short.<br><span class="content">LongUnbreakableString_______________________________</span></div>
+
+<div class="box hy"><b>x:visible / y:hidden</b><br><span class="content">LongUnbreakableString_______________________________</span></div>
+</body>
+</html>

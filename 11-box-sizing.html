@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 — box-sizing</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .container { width: 300px; background: #e2e8f0; padding: 4px; margin-bottom: 10px; }
+  .child {
+    width: 100%;
+    padding: 20px;
+    border: 6px solid #0f172a;
+    background: #fde68a;
+  }
+  .content-box { box-sizing: content-box; }
+  .border-box  { box-sizing: border-box; }
+</style>
+</head>
+<body>
+<h1>box-sizing</h1>
+
+<h2>content-box (width excludes padding + border)</h2>
+<div class="container">
+  <div class="child content-box">width:100% + padding 20 + border 6 = overflows container</div>
+</div>
+
+<h2>border-box (width includes padding + border)</h2>
+<div class="container">
+  <div class="child border-box">width:100% fits exactly inside the 300px container</div>
+</div>
+</body>
+</html>

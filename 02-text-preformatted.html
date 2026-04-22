@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 — Preformatted text</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  pre { background: #0f172a; color: #f1f5f9; padding: 12px; border-radius: 6px; overflow: auto; }
+</style>
+</head>
+<body>
+<h1>Preformatted text — &lt;pre&gt;</h1>
+<p>Whitespace (spaces, tabs, newlines) inside a <code>&lt;pre&gt;</code> is
+preserved and rendered in a monospace font by default.</p>
+<pre>
+function   greet   (name ) {
+	// tab-indented (one tab above)
+	return "Hello, " + name + "!";
+}
+
+┌──────────┬──────────┐
+│   col 1  │   col 2  │
+├──────────┼──────────┤
+│  aaaa    │  bbbb    │
+└──────────┴──────────┘
+</pre>
+<p>A long un-wrapped line in a pre with overflow:auto should scroll horizontally:</p>
+<pre>This-is-a-really-long-line-that-has-no-spaces-and-should-cause-horizontal-scrolling-because-the-default-white-space-of-pre-is-pre-and-pre-does-not-wrap-text.</pre>
+</body>
+</html>

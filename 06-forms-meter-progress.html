@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — meter & progress</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row { margin: 8px 0; display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 12px; }
+  meter, progress { width: 240px; height: 16px; }
+</style>
+</head>
+<body>
+<h1>&lt;meter&gt; and &lt;progress&gt;</h1>
+
+<h2>meter — gauge of a known range</h2>
+<div class="row"><span>low (value=2/10)</span>
+  <meter value="2" min="0" max="10" low="3" high="7" optimum="8">2 of 10</meter></div>
+<div class="row"><span>optimal (value=8/10)</span>
+  <meter value="8" min="0" max="10" low="3" high="7" optimum="8">8 of 10</meter></div>
+<div class="row"><span>high (above 7/10)</span>
+  <meter value="9" min="0" max="10" low="3" high="7" optimum="5">9 of 10</meter></div>
+<div class="row"><span>percent-style 0.6</span>
+  <meter value="0.6">60%</meter></div>
+<div class="row"><span>full</span>
+  <meter value="1">100%</meter></div>
+
+<h2>progress — task completion</h2>
+<div class="row"><span>25% determinate</span>
+  <progress value="25" max="100">25%</progress></div>
+<div class="row"><span>60% determinate</span>
+  <progress value="60" max="100">60%</progress></div>
+<div class="row"><span>100% determinate</span>
+  <progress value="100" max="100">100%</progress></div>
+<div class="row"><span>indeterminate (no value)</span>
+  <progress></progress></div>
+</body>
+</html>

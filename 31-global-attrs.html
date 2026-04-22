@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>31 — Global HTML attributes</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+  .row { border: 1px solid #cbd5e1; padding: 8px 12px; margin-bottom: 8px; }
+  .inert-demo { background: #f8fafc; }
+  [inert] { opacity: 0.5; }
+  [contenteditable]:focus { outline: 2px solid #2563eb; }
+  [draggable=true] { border: 2px dashed #ea580c; padding: 4px; display: inline-block; }
+</style>
+</head>
+<body>
+<h1>Global attributes</h1>
+
+<div class="row">
+  <span hidden>I am hidden (hidden attribute) — should not render.</span>
+  <span>I'm visible; previous span had <code>hidden</code>.</span>
+</div>
+
+<div class="row inert-demo">
+  <div inert>This subtree is <code>inert</code> — no focus, no events.
+    <input type="text" placeholder="can't focus me"> <button>can't click</button>
+  </div>
+  Above subtree is inert. Below is interactive:
+  <input type="text" placeholder="focus me"> <button>click me</button>
+</div>
+
+<div class="row">
+  <p lang="fr">Texte en français (lang="fr") — pour hyphénation et quotes.</p>
+  <p lang="ja">日本語のテキスト (lang="ja")</p>
+</div>
+
+<div class="row" dir="rtl">
+  <p>A full-row RTL paragraph via <code>dir="rtl"</code> — inline direction flips.</p>
+</div>
+
+<div class="row">
+  <abbr title="title tooltip: hover me">Hover for title tooltip</abbr>
+</div>
+
+<div class="row">
+  <button tabindex="3">tabindex=3</button>
+  <button tabindex="1">tabindex=1</button>
+  <button tabindex="2">tabindex=2</button>
+  <span tabindex="0">tabindex=0 (span, focusable)</span>
+</div>
+
+<div class="row">
+  <div contenteditable="true">This div is contenteditable — click and type.</div>
+</div>
+
+<div class="row">
+  <span draggable="true">draggable=true (try dragging me)</span>
+</div>
+
+<div class="row">
+  <p translate="no">"Brand Name™" translate="no" — should not be translated by auto-translators.</p>
+</div>
+</body>
+</html>

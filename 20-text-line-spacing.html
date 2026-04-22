@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — line-height, letter-spacing, word-spacing</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; font-size: 16px; }
+  .box { background: #f1f5f9; padding: 10px; margin-bottom: 12px; max-width: 40em; }
+  .lh1   { line-height: 1; }
+  .lh15  { line-height: 1.5; }
+  .lh25  { line-height: 2.5; }
+  .lh-em { line-height: 2em; }
+  .lh-px { line-height: 30px; }
+  .lh-pc { line-height: 150%; }
+
+  .ls-tight  { letter-spacing: -0.02em; }
+  .ls-wide   { letter-spacing: 0.25em; }
+  .ls-neg    { letter-spacing: -1px; }
+  .ws-wide   { word-spacing: 20px; }
+  .ws-tight  { word-spacing: -2px; }
+</style>
+</head>
+<body>
+<h1>line-height, letter-spacing, word-spacing</h1>
+
+<h2>line-height</h2>
+<p class="box lh1">line-height: 1 — Lorem ipsum dolor sit amet consectetur adipiscing elit. This is three lines of text to make the spacing difference obvious. Mauris rutrum vel dolor sed.</p>
+<p class="box lh15">line-height: 1.5 — Lorem ipsum dolor sit amet consectetur adipiscing elit. This is three lines of text to make the spacing difference obvious. Mauris rutrum vel dolor sed.</p>
+<p class="box lh25">line-height: 2.5 — Lorem ipsum dolor sit amet consectetur adipiscing elit. This is three lines of text to make the spacing difference obvious. Mauris rutrum vel dolor sed.</p>
+<p class="box lh-em">line-height: 2em — This uses absolute em, not unitless.</p>
+<p class="box lh-px">line-height: 30px — absolute pixels.</p>
+<p class="box lh-pc">line-height: 150% — percentage (resolved at declaration time, beware inheritance).</p>
+
+<h2>letter-spacing</h2>
+<p class="box ls-tight">letter-spacing: -0.02em — slightly tighter kerning.</p>
+<p class="box ls-wide">letter-spacing: 0.25em — widely tracked out.</p>
+<p class="box ls-neg">letter-spacing: -1px — negative (characters crowd).</p>
+
+<h2>word-spacing</h2>
+<p class="box ws-wide">word-spacing: 20px — Big gaps between words in this paragraph.</p>
+<p class="box ws-tight">word-spacing: -2px — Negative makes words crowd.</p>
+</body>
+</html>

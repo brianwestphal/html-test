@@ -1,0 +1,9 @@
+@import url("shared-import.css");
+
+.shared-banner {
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  color: white;
+  padding: 8px 12px;
+  font-family: system-ui, sans-serif;
+  border-radius: 6px;
+}

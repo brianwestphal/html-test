@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — button variants</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row { margin-bottom: 14px; }
+  button, input[type=button], input[type=submit], input[type=reset] { margin-right: 6px; }
+  button.custom {
+    background: linear-gradient(#4f46e5, #3730a3);
+    color: white;
+    border: 1px solid #312e81;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  button.custom:disabled { opacity: .5; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<h1>&lt;button&gt; and button-like &lt;input&gt;</h1>
+
+<div class="row">
+  <button type="submit">submit button</button>
+  <button type="reset">reset button</button>
+  <button type="button">plain button</button>
+  <button disabled>disabled button</button>
+</div>
+
+<div class="row">
+  <input type="submit" value="input[type=submit]">
+  <input type="reset" value="input[type=reset]">
+  <input type="button" value="input[type=button]">
+  <input type="button" value="disabled input button" disabled>
+</div>
+
+<div class="row">
+  <button>
+    <strong>Rich</strong> content: <em>button</em> can contain flow-ish
+    <span style="color:#dc2626">inline</span> content.
+  </button>
+</div>
+
+<div class="row">
+  <button class="custom">Styled primary button</button>
+  <button class="custom" disabled>Styled, disabled</button>
+</div>
+</body>
+</html>

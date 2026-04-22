@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — Every &lt;input&gt; type</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  form { display: grid; grid-template-columns: 200px 1fr; gap: 8px 16px; max-width: 600px; }
+  label { align-self: center; font-weight: 600; }
+  hr { grid-column: 1/-1; border: 0; border-top: 1px solid #cbd5e1; margin: 8px 0; }
+</style>
+</head>
+<body>
+<h1>All &lt;input&gt; types</h1>
+<form action="#" onsubmit="return false">
+  <label for="t_text">text</label>
+    <input id="t_text" type="text" value="sample text">
+  <label for="t_password">password</label>
+    <input id="t_password" type="password" value="hunter2">
+  <label for="t_email">email</label>
+    <input id="t_email" type="email" value="user@example.com">
+  <label for="t_url">url</label>
+    <input id="t_url" type="url" value="https://example.com">
+  <label for="t_tel">tel</label>
+    <input id="t_tel" type="tel" value="+1-555-123-4567">
+  <label for="t_search">search</label>
+    <input id="t_search" type="search" value="query">
+  <label for="t_number">number</label>
+    <input id="t_number" type="number" value="42" min="0" max="100" step="1">
+  <label for="t_range">range</label>
+    <input id="t_range" type="range" min="0" max="100" value="30">
+  <hr>
+  <label for="t_date">date</label>
+    <input id="t_date" type="date" value="2026-04-21">
+  <label for="t_time">time</label>
+    <input id="t_time" type="time" value="14:30">
+  <label for="t_dtlocal">datetime-local</label>
+    <input id="t_dtlocal" type="datetime-local" value="2026-04-21T14:30">
+  <label for="t_month">month</label>
+    <input id="t_month" type="month" value="2026-04">
+  <label for="t_week">week</label>
+    <input id="t_week" type="week" value="2026-W17">
+  <hr>
+  <label for="t_color">color</label>
+    <input id="t_color" type="color" value="#4f46e5">
+  <label for="t_file">file</label>
+    <input id="t_file" type="file" multiple>
+  <label for="t_checkbox">checkbox</label>
+    <span>
+      <input id="t_checkbox" type="checkbox" checked> checked
+      <input type="checkbox"> unchecked
+      <input type="checkbox" disabled> disabled
+    </span>
+  <label for="t_radio">radio</label>
+    <span>
+      <input id="t_radio" type="radio" name="r" checked> A
+      <input type="radio" name="r"> B
+      <input type="radio" name="r" disabled> C (disabled)
+    </span>
+  <label for="t_hidden">hidden</label>
+    <span><input id="t_hidden" type="hidden" value="hidden-value"> (not visible)</span>
+  <hr>
+  <label>submit / reset / button</label>
+    <span>
+      <input type="submit" value="Submit">
+      <input type="reset" value="Reset">
+      <input type="button" value="Button">
+    </span>
+  <label for="t_image">image</label>
+    <input id="t_image" type="image" src="assets/img-orange.svg" alt="Submit image" width="64" height="64">
+</form>
+</body>
+</html>

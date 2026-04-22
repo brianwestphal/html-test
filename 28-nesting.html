@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 — CSS nesting</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+
+  .card {
+    background: #fef3c7;
+    border: 1px solid #ca8a04;
+    padding: 10px;
+    margin: 10px 0;
+
+    & h2 {
+      margin: 0 0 6px;
+      color: #78350f;
+    }
+
+    & p {
+      margin: 0;
+      color: #422006;
+
+      &.muted {
+        color: #92400e;
+        font-style: italic;
+      }
+    }
+
+    & > .tag {
+      display: inline-block;
+      background: #7c2d12;
+      color: white;
+      padding: 0 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    &:hover {
+      background: #fde68a;
+    }
+
+    @media (min-width: 600px) {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>CSS nesting (&amp; parent reference, nested @media)</h1>
+
+<div class="card">
+  <span class="tag">NEW</span>
+  <h2>First card</h2>
+  <p>A paragraph.</p>
+  <p class="muted">A muted paragraph.</p>
+</div>
+
+<div class="card">
+  <h2>Second card — hover me</h2>
+  <p>The background changes on hover thanks to the nested <code>&amp;:hover</code> rule.</p>
+</div>
+</body>
+</html>

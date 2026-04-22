@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 — @charset, @namespace</title>
+<style>
+  @charset "UTF-8";
+  @namespace "http://www.w3.org/1999/xhtml";
+  @namespace svg "http://www.w3.org/2000/svg";
+
+  /* Default namespace matches html elements */
+  h1 { color: #1e40af; }
+
+  /* Target only SVG rect via namespace prefix */
+  svg|rect { stroke: #dc2626; stroke-width: 4; }
+
+  /* Any-namespace selector */
+  *|circle { fill: #16a34a; }
+
+  body { font-family: sans-serif; margin: 2em; }
+</style>
+</head>
+<body>
+<h1>@charset + @namespace</h1>
+<p>@charset: "UTF-8". @namespace declarations prefix SVG so CSS can target
+SVG elements with <code>svg|rect</code> syntax.</p>
+
+<svg width="300" height="120" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="120" height="100" fill="#fde68a"/>
+  <circle cx="220" cy="60" r="40"/>
+</svg>
+</body>
+</html>

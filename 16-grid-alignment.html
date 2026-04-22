@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 — Grid alignment</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .g {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(2, 80px);
+    gap: 6px;
+    background: #e2e8f0;
+    padding: 6px;
+    margin-bottom: 12px;
+    width: 420px;
+    height: 220px;
+  }
+  .g > div {
+    background: #4f46e5;
+    color: white;
+    padding: 4px;
+  }
+  /* justify-items / align-items: each cell's contents */
+  .ji-start    { justify-items: start; }
+  .ji-end      { justify-items: end; }
+  .ji-center   { justify-items: center; }
+  .ji-stretch  { justify-items: stretch; }
+  .ai-center   { align-items: center; }
+
+  /* justify-content / align-content: the whole grid inside container */
+  .jc-center  { justify-content: center; }
+  .ac-center  { align-content: center; }
+  .jc-between { justify-content: space-between; }
+  .ac-between { align-content: space-between; }
+
+  /* self */
+  .self-end-center { justify-self: end; align-self: center; background: #dc2626; }
+  .place-center    { place-self: center; background: #16a34a; }
+</style>
+</head>
+<body>
+<h1>Grid alignment</h1>
+
+<h2>justify-items (inline-axis of each cell)</h2>
+<div class="g ji-start"><div>start</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div></div>
+<div class="g ji-end"><div>end</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div></div>
+<div class="g ji-center"><div>center</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div></div>
+<div class="g ji-stretch ai-center"><div>stretch x / center y</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div></div>
+
+<h2>justify-content + align-content (whole grid in container)</h2>
+<div class="g jc-center ac-center" style="width:600px; height:260px;">
+  <div>centered</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div>
+</div>
+<div class="g jc-between ac-between" style="width:600px; height:260px;">
+  <div>space-between</div><div>A</div><div>B</div><div>C</div><div>D</div><div>E</div>
+</div>
+
+<h2>justify-self / align-self / place-self (per item)</h2>
+<div class="g" style="height:240px">
+  <div>default</div>
+  <div class="self-end-center">je, ac</div>
+  <div>default</div>
+  <div>default</div>
+  <div class="place-center">place-self:center</div>
+  <div>default</div>
+</div>
+</body>
+</html>

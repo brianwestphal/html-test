@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — form validation UI</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  label { display: block; margin: 8px 0; }
+  input:required { border-left: 4px solid #ea580c; padding-left: 6px; }
+  input:optional { border-left: 4px solid #64748b; padding-left: 6px; }
+  input:valid   { outline: 2px solid #16a34a; outline-offset: 2px; }
+  input:invalid { outline: 2px solid #dc2626; outline-offset: 2px; }
+  input:focus:invalid { background: #fee2e2; }
+  .key { margin-top: 14px; font-size: 13px; color: #475569; }
+</style>
+</head>
+<body>
+<h1>Form validation pseudo-classes</h1>
+<p class="key">Orange bar = required. Gray bar = optional. Outline green = valid. Outline red = invalid.</p>
+
+<form>
+  <label>Required text (empty = invalid)
+    <input type="text" required value="">
+  </label>
+  <label>Required + filled
+    <input type="text" required value="ok">
+  </label>
+  <label>Email pattern
+    <input type="email" value="not-an-email">
+  </label>
+  <label>Email valid
+    <input type="email" value="user@example.com">
+  </label>
+  <label>Number min=1 max=10 (out of range)
+    <input type="number" min="1" max="10" value="42">
+  </label>
+  <label>Pattern [A-Z]{3}
+    <input type="text" pattern="[A-Z]{3}" value="abc" required>
+  </label>
+  <label>Pattern match
+    <input type="text" pattern="[A-Z]{3}" value="XYZ" required>
+  </label>
+  <label>Optional
+    <input type="text" value="optional field">
+  </label>
+</form>
+</body>
+</html>

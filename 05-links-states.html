@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>05 — Link states</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 2; }
+  .demo a { font-size: 20px; margin-right: 24px; }
+  .demo a:link    { color: #2563eb; text-decoration: underline; }
+  .demo a:visited { color: #7c3aed; }
+  .demo a:hover   { color: #ea580c; text-decoration-thickness: 2px; background: #fef3c7; }
+  .demo a:active  { color: #dc2626; background: #fecaca; }
+  .demo a:focus   { outline: 2px solid #0ea5e9; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<h1>Link pseudo-classes — :link, :visited, :hover, :active, :focus</h1>
+<p>Hover over, click, and tab through the links below to exercise each state.
+Note: CSS for <code>:visited</code> is restricted by browsers (color only),
+so the purple "visited" hint may only apply if you've actually visited the
+target.</p>
+<p class="demo">
+  <a href="https://example.com/one">Link 1</a>
+  <a href="https://example.com/two">Link 2</a>
+  <a href="https://example.com/three">Link 3</a>
+</p>
+</body>
+</html>

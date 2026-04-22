@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — text-align</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .box { background: #f1f5f9; padding: 10px; margin-bottom: 10px; max-width: 34em; border-left: 4px solid #64748b; }
+  .left    { text-align: left; }
+  .right   { text-align: right; }
+  .center  { text-align: center; }
+  .justify { text-align: justify; }
+  .start   { text-align: start; }
+  .end     { text-align: end; }
+  .last-center { text-align: justify; text-align-last: center; }
+
+  .rtl { direction: rtl; }
+</style>
+</head>
+<body>
+<h1>text-align</h1>
+<p class="box left">left — Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p class="box right">right — Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p class="box center">center — Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p class="box justify">justify — Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p class="box start">start — LTR: same as left.</p>
+<p class="box end">end — LTR: same as right.</p>
+<p class="box rtl start">start in RTL — aligns to the right (Arabic: العربية is RTL)</p>
+<p class="box last-center">text-align-last:center affects only the final line when justified. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</body>
+</html>

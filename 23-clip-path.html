@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>23 — clip-path</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, 180px); gap: 14px; }
+  figure { margin: 0; text-align: center; font-size: 12px; color: #475569; }
+  figure > div {
+    width: 160px;
+    height: 120px;
+    background: url("assets/img-wide.png") center/cover;
+  }
+  .inset   { clip-path: inset(10px 20px 10px 20px round 14px); }
+  .circle  { clip-path: circle(60px at 50% 50%); }
+  .ellipse { clip-path: ellipse(70px 45px at 50% 50%); }
+  .poly    { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+  .star    { clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+  .arrow   { clip-path: polygon(0 20%, 60% 20%, 60% 0, 100% 50%, 60% 100%, 60% 80%, 0 80%); }
+  .path    { clip-path: path("M 0 0 H 160 V 60 Q 80 120 0 60 Z"); }
+</style>
+</head>
+<body>
+<h1>clip-path</h1>
+<div class="grid">
+  <figure><div class="inset"></div><figcaption>inset(10/20/10/20 round 14)</figcaption></figure>
+  <figure><div class="circle"></div><figcaption>circle()</figcaption></figure>
+  <figure><div class="ellipse"></div><figcaption>ellipse()</figcaption></figure>
+  <figure><div class="poly"></div><figcaption>polygon diamond</figcaption></figure>
+  <figure><div class="star"></div><figcaption>polygon star</figcaption></figure>
+  <figure><div class="arrow"></div><figcaption>polygon arrow</figcaption></figure>
+  <figure><div class="path"></div><figcaption>path()</figcaption></figure>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 — border-style variations</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .b {
+    display: inline-block;
+    width: 160px;
+    height: 80px;
+    margin: 6px;
+    padding: 8px;
+    border: 6px;
+    border-color: #334155;
+    text-align: center;
+    line-height: 64px;
+    background: #f1f5f9;
+    vertical-align: top;
+    font-weight: 600;
+  }
+  .solid   { border-style: solid; }
+  .dashed  { border-style: dashed; }
+  .dotted  { border-style: dotted; }
+  .double  { border-style: double; border-width: 10px; }
+  .groove  { border-style: groove; border-width: 10px; border-color: #94a3b8; }
+  .ridge   { border-style: ridge;  border-width: 10px; border-color: #94a3b8; }
+  .inset   { border-style: inset;  border-width: 10px; border-color: #94a3b8; }
+  .outset  { border-style: outset; border-width: 10px; border-color: #94a3b8; }
+  .hidden-bs { border-style: hidden; }
+  .none-bs   { border-style: none; background: #fecaca; }
+  .per-side {
+    border-style: solid dashed dotted double;
+    border-width: 6px 4px 8px 10px;
+    border-color: red green blue orange;
+  }
+</style>
+</head>
+<body>
+<h1>border-style, border-width, border-color</h1>
+<div class="b solid">solid</div>
+<div class="b dashed">dashed</div>
+<div class="b dotted">dotted</div>
+<div class="b double">double</div>
+<div class="b groove">groove</div>
+<div class="b ridge">ridge</div>
+<div class="b inset">inset</div>
+<div class="b outset">outset</div>
+<div class="b hidden-bs">hidden</div>
+<div class="b none-bs">none</div>
+<div class="b per-side">per-side: top solid red, right dashed green, bottom dotted blue, left double orange</div>
+</body>
+</html>

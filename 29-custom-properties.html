@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 — CSS custom properties (--vars)</title>
+<style>
+  :root {
+    --brand-hue: 220;
+    --brand: hsl(var(--brand-hue) 70% 50%);
+    --gap: 12px;
+    --shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+
+  body { font-family: sans-serif; margin: 2em; }
+
+  .card {
+    background: var(--brand);
+    color: white;
+    padding: var(--gap);
+    margin-bottom: var(--gap);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    width: 320px;
+  }
+  /* Scoped override changes only descendants */
+  .card.red   { --brand-hue: 0; }
+  .card.green { --brand-hue: 140; padding: calc(var(--gap) * 2); }
+  .card.warm  { --brand: linear-gradient(90deg, #dc2626, #f59e0b); }
+
+  /* Fallback when variable is undefined */
+  .fallback { color: var(--missing, purple); }
+
+  /* var() inside calc() */
+  .calc-demo { width: calc(var(--gap) * 20); background: #fde68a; padding: var(--gap); margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>Custom properties + var()</h1>
+
+<div class="card">Default --brand (blue).</div>
+<div class="card red">Override --brand-hue: 0 (red).</div>
+<div class="card green">Override hue + doubled --gap.</div>
+<div class="card warm">Override --brand to a gradient.</div>
+
+<p class="fallback">var(--missing, purple) fallback → purple.</p>
+<div class="calc-demo">calc(var(--gap) * 20) = 240px wide.</div>
+</body>
+</html>

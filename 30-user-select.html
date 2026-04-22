@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>30 — user-select</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.7; }
+  .box { border: 1px solid #334155; padding: 8px 12px; margin: 6px 0; background: #fef3c7; max-width: 40em; }
+  .none  { user-select: none; }
+  .text  { user-select: text; }
+  .all   { user-select: all; }
+  .auto  { user-select: auto; }
+  .contain { user-select: contain; }
+</style>
+</head>
+<body>
+<h1>user-select</h1>
+<p>Try to drag-select the text in each box.</p>
+<div class="box auto">user-select: auto — default selectable.</div>
+<div class="box text">user-select: text — explicitly selectable.</div>
+<div class="box none">user-select: none — dragging does not select text here.</div>
+<div class="box all">user-select: all — one click inside selects the ENTIRE text block at once.</div>
+<div class="box contain">user-select: contain — selections cannot extend past this element's boundary.</div>
+</body>
+</html>

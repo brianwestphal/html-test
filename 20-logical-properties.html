@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — Logical properties</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+
+  .box {
+    padding-inline: 20px;
+    padding-block: 10px;
+    margin-block: 8px;
+    border-inline-start: 4px solid #4f46e5;
+    border-inline-end: 4px solid #dc2626;
+    border-block-start: 2px solid #16a34a;
+    border-block-end: 2px solid #f59e0b;
+    background: #f1f5f9;
+  }
+  .rtl { direction: rtl; }
+
+  .float-card {
+    float: inline-start;
+    margin-inline-end: 14px;
+    margin-block-end: 8px;
+    padding: 6px;
+    background: #bae6fd;
+    border: 1px solid #0369a1;
+  }
+
+  .abs-parent { position: relative; height: 120px; background: #fef3c7; margin-top: 10px; }
+  .abs-parent > div {
+    position: absolute;
+    inset-inline-start: 10px;
+    inset-block-start: 10px;
+    padding: 4px 8px;
+    background: #0ea5e9; color: white;
+  }
+  .abs-parent .second {
+    inset-inline-start: auto;
+    inset-inline-end: 10px;
+    inset-block-start: auto;
+    inset-block-end: 10px;
+  }
+</style>
+</head>
+<body>
+<h1>Logical properties — inline/block equivalents</h1>
+
+<h2>LTR box with inline/block borders (start=purple, end=red, block-start=green, block-end=orange)</h2>
+<div class="box">A block in LTR: inline-start is the left edge; inline-end is the right edge.</div>
+
+<h2>Same rules, direction: rtl (purple/red swap visually)</h2>
+<div class="box rtl">Same CSS, but with <code>direction:rtl</code>: inline-start is now the right edge.</div>
+
+<h2>float: inline-start + margin-inline-end</h2>
+<p><span class="float-card">float card</span>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+<h2>inset-inline-start / inset-block-end (absolute)</h2>
+<div class="abs-parent">
+  <div>inline-start / block-start (top-left in LTR)</div>
+  <div class="second">inline-end / block-end (bottom-right in LTR)</div>
+</div>
+</body>
+</html>

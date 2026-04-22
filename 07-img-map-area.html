@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>07 — Image map &lt;map&gt; / &lt;area&gt;</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+</style>
+</head>
+<body>
+<h1>Image map — &lt;map&gt;, &lt;area&gt;</h1>
+<p>Hover over the image to see area titles; clicking each area goes to a
+different fragment / URL.</p>
+
+<img src="assets/img-wide.png" alt="A wide image with three clickable regions"
+     usemap="#wide-map" width="384" height="128">
+
+<map name="wide-map">
+  <area shape="rect"   coords="0,0,128,128"   href="#rect"   alt="left rect"   title="Left rectangle (rect)">
+  <area shape="circle" coords="192,64,50"     href="#circle" alt="middle circle" title="Middle circle (circle)">
+  <area shape="poly"   coords="260,10,370,10,370,118,260,118,310,64" href="#poly" alt="right polygon" title="Right polygon (poly)">
+</map>
+
+<div id="rect"><h2>rect target</h2></div>
+<div id="circle"><h2>circle target</h2></div>
+<div id="poly"><h2>poly target</h2></div>
+</body>
+</html>

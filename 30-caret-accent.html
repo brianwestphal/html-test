@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>30 — caret-color, accent-color</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  label { display: block; margin: 6px 0; }
+
+  .red      { caret-color: #dc2626; }
+  .blue     { caret-color: #2563eb; }
+  .auto     { caret-color: auto; }
+  .currentc { color: #ea580c; caret-color: currentcolor; }
+
+  .accent-red   { accent-color: #dc2626; }
+  .accent-green { accent-color: #16a34a; }
+  .accent-orange{ accent-color: #ea580c; }
+</style>
+</head>
+<body>
+<h1>caret-color (type in each input to see)</h1>
+<label>auto caret
+  <input class="auto" type="text" value="type at end ">
+</label>
+<label>red caret
+  <input class="red" type="text" value="type at end ">
+</label>
+<label>blue caret
+  <input class="blue" type="text" value="type at end ">
+</label>
+<label>currentcolor (orange text)
+  <input class="currentc" type="text" value="type at end ">
+</label>
+
+<h1>accent-color (form control accents)</h1>
+<label>default
+  <input type="checkbox" checked>
+  <input type="radio" name="r" checked>
+  <progress value="40" max="100"></progress>
+  <input type="range" value="40">
+</label>
+<label>red
+  <input type="checkbox" checked class="accent-red">
+  <input type="radio" name="r2" checked class="accent-red">
+  <progress value="40" max="100" class="accent-red"></progress>
+  <input type="range" value="40" class="accent-red">
+</label>
+<label>green
+  <input type="checkbox" checked class="accent-green">
+  <input type="radio" name="r3" checked class="accent-green">
+  <progress value="40" max="100" class="accent-green"></progress>
+  <input type="range" value="40" class="accent-green">
+</label>
+<label>orange
+  <input type="checkbox" checked class="accent-orange">
+  <input type="radio" name="r4" checked class="accent-orange">
+  <progress value="40" max="100" class="accent-orange"></progress>
+  <input type="range" value="40" class="accent-orange">
+</label>
+</body>
+</html>

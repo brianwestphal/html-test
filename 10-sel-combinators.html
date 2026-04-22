@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — Combinators</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  section { border: 1px solid #cbd5e1; padding: 10px; margin-bottom: 14px; }
+
+  /* Descendant (space) */
+  .desc p { color: #0e7490; }
+
+  /* Child (>) */
+  .child > p { background: #dcfce7; padding: 2px 6px; }
+
+  /* Adjacent sibling (+) */
+  .sib h2 + p { font-weight: bold; color: #b45309; }
+
+  /* General sibling (~) */
+  .gen h2 ~ p { border-left: 3px solid #dc2626; padding-left: 8px; }
+</style>
+</head>
+<body>
+<h1>Combinators — descendant, child, adjacent, general sibling</h1>
+
+<section class="desc">
+  <h2>Descendant (A B) — space</h2>
+  <p>Direct child p (teal).</p>
+  <div><p>Nested inside a div — still matched (teal).</p></div>
+</section>
+
+<section class="child">
+  <h2>Child (A &gt; B)</h2>
+  <p>Direct child p (green background).</p>
+  <div><p>Nested p — NOT matched.</p></div>
+</section>
+
+<section class="sib">
+  <h2>Adjacent sibling (A + B)</h2>
+  <p>Paragraph immediately after the h2 (bold amber).</p>
+  <p>Second paragraph — NOT matched (only immediate next).</p>
+</section>
+
+<section class="gen">
+  <h2>General sibling (A ~ B)</h2>
+  <p>Paragraph sibling of the h2 (red left border).</p>
+  <p>Another sibling (also red left border).</p>
+  <div>A div in between (no style).</div>
+  <p>Still a later sibling (red left border).</p>
+</section>
+</body>
+</html>

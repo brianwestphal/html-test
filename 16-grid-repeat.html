@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 — repeat / minmax / auto-fit / auto-fill</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .g { display: grid; gap: 6px; background: #e2e8f0; padding: 6px; margin-bottom: 14px; }
+  .g > div { background: #4f46e5; color: white; padding: 6px 10px; }
+
+  .rep     { grid-template-columns: repeat(5, 1fr); }
+  .rep-mm  { grid-template-columns: repeat(4, minmax(80px, 1fr)); }
+  .fit     { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .fill    { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .narrow  { max-width: 500px; }
+</style>
+</head>
+<body>
+<h1>repeat(), minmax(), auto-fit vs auto-fill</h1>
+
+<h2>repeat(5, 1fr)</h2>
+<div class="g rep">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
+</div>
+
+<h2>repeat(4, minmax(80px, 1fr))</h2>
+<div class="g rep-mm">
+  <div>1</div><div>2</div><div>3</div><div>4</div>
+</div>
+
+<h2>auto-fit (collapses empty tracks → items stretch)</h2>
+<div class="g fit narrow">
+  <div>a</div><div>b</div><div>c</div>
+</div>
+
+<h2>auto-fill (keeps empty tracks → items don't stretch)</h2>
+<div class="g fill narrow">
+  <div>a</div><div>b</div><div>c</div>
+</div>
+</body>
+</html>

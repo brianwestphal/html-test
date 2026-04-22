@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>24 — Generated content ::before / ::after</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+  .flag::before { content: "⚑ "; color: #dc2626; }
+  .stamp::after { content: " ✓"; color: #16a34a; }
+
+  a[target="_blank"]::after  { content: " ↗"; color: #6b7280; }
+  abbr[title]::after         { content: " (" attr(title) ")"; color: #2563eb; font-size: 0.9em; }
+
+  li[data-badge]::before {
+    content: attr(data-badge) " — ";
+    font-weight: bold;
+    color: #7c3aed;
+  }
+
+  .img-before::before {
+    content: url("assets/img-orange.svg");
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+<h1>Generated content (::before / ::after)</h1>
+<p class="flag">I am prefixed with a flag.</p>
+<p class="stamp">I am suffixed with a check.</p>
+<p><a href="https://example.com" target="_blank">External link (auto ↗)</a></p>
+<p>This document uses <abbr title="Hypertext Markup Language">HTML</abbr>.</p>
+<ul>
+  <li data-badge="NEW">First item with data-badge</li>
+  <li data-badge="FIX">Second item</li>
+  <li>No badge → no ::before output</li>
+</ul>
+<p class="img-before">A paragraph that begins with an SVG icon as generated content.</p>
+</body>
+</html>

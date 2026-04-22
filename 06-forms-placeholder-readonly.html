@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — placeholder, readonly, disabled</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  label { display: block; margin: 8px 0; }
+  input::placeholder, textarea::placeholder {
+    color: #9333ea;
+    font-style: italic;
+    opacity: 1;
+  }
+  input:placeholder-shown { background: #f0f9ff; }
+  input:read-only { background: #f3f4f6; color: #6b7280; border-style: dashed; }
+  input:read-write { background: white; }
+  input:disabled { opacity: .6; }
+</style>
+</head>
+<body>
+<h1>Placeholder, :placeholder-shown, :read-only, :read-write, disabled</h1>
+
+<label>Empty with placeholder (placeholder-shown background = sky)
+  <input type="text" placeholder="Type something…">
+</label>
+<label>Pre-filled (no placeholder-shown background)
+  <input type="text" placeholder="Type something…" value="already filled">
+</label>
+<label>Styled ::placeholder (italic purple)
+  <input type="text" placeholder="I am purple and italic">
+</label>
+<label>readonly (dashed border, gray)
+  <input type="text" readonly value="cannot be edited but is focusable">
+</label>
+<label>disabled (dimmed)
+  <input type="text" disabled value="cannot focus or edit">
+</label>
+<label>textarea placeholder
+  <textarea rows="2" cols="40" placeholder="Multi-line placeholder…"></textarea>
+</label>
+</body>
+</html>

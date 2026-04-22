@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 — table-layout auto vs fixed</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  table { width: 600px; border-collapse: collapse; margin-bottom: 18px; }
+  th, td { border: 1px solid #64748b; padding: 6px 10px; }
+  table.fixed { table-layout: fixed; }
+  table.auto  { table-layout: auto; }
+</style>
+</head>
+<body>
+<h1>table-layout — auto vs fixed</h1>
+
+<h2>table-layout: auto (widths grow to fit content)</h2>
+<table class="auto">
+  <tr><th>short</th><th>medium column header</th><th>a_really_long_token_that_cannot_break</th></tr>
+  <tr><td>x</td><td>lorem ipsum</td><td>abcdefghij</td></tr>
+</table>
+
+<h2>table-layout: fixed (widths from first row, content may overflow)</h2>
+<table class="fixed">
+  <tr><th>short</th><th>medium column header</th><th>a_really_long_token_that_cannot_break</th></tr>
+  <tr><td>x</td><td>lorem ipsum dolor sit amet</td><td>abcdefghij</td></tr>
+</table>
+
+<h2>Fixed with explicit column widths</h2>
+<table class="fixed">
+  <colgroup>
+    <col style="width:80px">
+    <col style="width:160px">
+    <col>
+  </colgroup>
+  <tr><th>80px</th><th>160px</th><th>remaining</th></tr>
+  <tr><td>a</td><td>b</td><td>c c c c c c c c c</td></tr>
+</table>
+</body>
+</html>

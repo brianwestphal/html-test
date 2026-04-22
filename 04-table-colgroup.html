@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 — colgroup / col</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #64748b; padding: 6px 10px; text-align: left; }
+  /* Styles applied via col — background-color and width are col-applicable */
+  col.name { background: #fef3c7; width: 30%; }
+  col.qty  { background: #dbeafe; width: 15%; }
+  col.desc { background: #dcfce7; }
+</style>
+</head>
+<body>
+<h1>colgroup + col</h1>
+<table>
+  <colgroup>
+    <col class="name">
+    <col class="qty">
+    <col span="2" class="desc">
+  </colgroup>
+  <thead>
+    <tr><th>Name</th><th>Qty</th><th>Color</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Apple</td><td>3</td><td>Red</td><td>Crunchy</td></tr>
+    <tr><td>Banana</td><td>6</td><td>Yellow</td><td>Soft</td></tr>
+    <tr><td>Cherry</td><td>30</td><td>Deep red</td><td>Sour variety</td></tr>
+  </tbody>
+</table>
+</body>
+</html>

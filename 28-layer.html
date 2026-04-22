@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 — @layer cascade layers</title>
+<style>
+  /* Declare layer order explicitly — later overrides earlier */
+  @layer reset, base, theme, overrides;
+
+  @layer reset {
+    .demo { color: red; font-weight: normal; }
+  }
+  @layer base {
+    .demo { color: green; }
+  }
+  @layer theme {
+    .demo { color: blue; font-weight: bold; }
+  }
+  /* Unlayered rule beats anything in a named layer, regardless of specificity */
+  .demo { color: orange; }
+
+  @layer overrides {
+    .demo { color: purple; }     /* layered — still loses to unlayered */
+    .demo.win { color: magenta !important; }  /* !important flips: layered wins later-declared */
+  }
+
+  /* Important in earlier layer beats important in later layer */
+  @layer reset {
+    .imp { color: red !important; }
+  }
+  @layer overrides {
+    .imp { color: purple !important; }  /* loses: earlier-layer important wins */
+  }
+
+  body { font-family: sans-serif; margin: 2em; line-height: 1.8; font-size: 20px; }
+</style>
+</head>
+<body>
+<h1>@layer cascade layers</h1>
+<p>Layer order: <code>reset &lt; base &lt; theme &lt; overrides &lt; (unlayered)</code>.</p>
+<p class="demo">I am orange — the unlayered rule wins over any rule inside a named layer.</p>
+<p class="demo win">I am magenta — <code>!important</code> reverses the layer order: later layers' important wins.</p>
+<p class="imp">I am red — <code>!important</code> across layers: earlier-declared layer's important wins.</p>
+</body>
+</html>

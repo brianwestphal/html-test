@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 — Box model visualization</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; background: #f8fafc; }
+  .demo {
+    width: 240px;
+    padding: 20px;
+    border: 8px solid #0ea5e9;
+    margin: 24px;
+    background: #fef3c7;
+    background-clip: content-box;
+    outline: 2px dashed #dc2626;    /* marks the margin edge roughly */
+    box-shadow: inset 0 0 0 20px #bae6fd; /* visualizes the padding */
+  }
+  .label { color: #111; font-size: 14px; font-family: monospace; }
+</style>
+</head>
+<body>
+<h1>Box model — content, padding, border, margin</h1>
+<p>The box below has:</p>
+<ul>
+  <li>content width: 240px (yellow-ish inner area)</li>
+  <li>padding: 20px (light-blue band from box-shadow)</li>
+  <li>border: 8px solid sky blue</li>
+  <li>margin: 24px (space between red dashed outline and siblings)</li>
+</ul>
+<div class="demo"><span class="label">content area (240 × auto)</span></div>
+<div style="padding: 4px 8px; background: #e0e7ff;">Sibling below the demo — the 24px margin separates us.</div>
+</body>
+</html>

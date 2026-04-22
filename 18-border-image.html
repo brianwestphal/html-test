@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 — border-image</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .bi {
+    display: inline-block;
+    width: 180px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    background: #f1f5f9;
+    font-weight: 600;
+    vertical-align: top;
+    text-align: center;
+    line-height: 80px;
+    border: 20px solid #111; /* fallback */
+    border-image-source: url("assets/img-wide.png");
+  }
+  .stretch { border-image-slice: 30; border-image-repeat: stretch; }
+  .repeat  { border-image-slice: 30; border-image-repeat: repeat; }
+  .round   { border-image-slice: 30; border-image-repeat: round; }
+  .space   { border-image-slice: 30; border-image-repeat: space; }
+  .outset  { border-image-slice: 30; border-image-repeat: round; border-image-outset: 10px; }
+  .fill    { border-image-slice: 30 fill; border-image-repeat: round; }
+  .gradient-border {
+    border: 10px solid transparent;
+    border-image: linear-gradient(45deg, #dc2626, #f59e0b, #10b981, #0ea5e9) 1;
+    padding: 12px;
+    width: 200px;
+    background: #111;
+    color: white;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<h1>border-image</h1>
+
+<div class="bi stretch">stretch</div>
+<div class="bi repeat">repeat</div>
+<div class="bi round">round</div>
+<div class="bi space">space</div>
+<div class="bi outset">outset 10</div>
+<div class="bi fill">slice 30 fill (fills center too)</div>
+
+<h2>border-image with a CSS gradient</h2>
+<div class="gradient-border">border-image: linear-gradient(45deg, …) 1;</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>24 — CSS counters</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+
+  /* Basic counter */
+  h2 { counter-increment: section; }
+  h2::before { content: counter(section) ". "; color: #4f46e5; font-weight: bold; }
+  body { counter-reset: section; }
+
+  /* counter-set resetting to a specific value */
+  .restart { counter-set: section 99; }
+
+  /* Nested counters with counters() */
+  ol.toc { list-style: none; padding-left: 0; counter-reset: item; }
+  ol.toc li { counter-increment: item; }
+  ol.toc li::before { content: counters(item, ".") " "; color: #dc2626; font-weight: bold; }
+  ol.toc ol { padding-left: 1.4em; counter-reset: item; }
+
+  /* Styled counter */
+  .figures { counter-reset: fig; }
+  .figures figure { counter-increment: fig; }
+  .figures figcaption::before { content: "Figure " counter(fig) ": "; font-weight: bold; color: #ea580c; }
+</style>
+</head>
+<body>
+<h1>CSS counters</h1>
+
+<h2>First top-level section</h2>
+<p>Text.</p>
+<h2>Second top-level section</h2>
+<p>Text.</p>
+<h2 class="restart">counter-set to 99 — this renders as "100."</h2>
+<p>Counter was set to 99 immediately before increment.</p>
+
+<h2>Nested counters with counters(item, ".")</h2>
+<ol class="toc">
+  <li>Introduction</li>
+  <li>Body
+    <ol>
+      <li>Background</li>
+      <li>Method
+        <ol><li>Sub-method A</li><li>Sub-method B</li></ol>
+      </li>
+      <li>Results</li>
+    </ol>
+  </li>
+  <li>Conclusion</li>
+</ol>
+
+<h2>Figure numbering</h2>
+<div class="figures">
+  <figure>
+    <img src="assets/img-red.png" alt="red" width="64" height="64">
+    <figcaption>the red PNG</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/img-blue.jpg" alt="blue" width="64" height="64">
+    <figcaption>the blue JPEG</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/img-orange.svg" alt="orange" width="64" height="64">
+    <figcaption>the orange SVG</figcaption>
+  </figure>
+</div>
+</body>
+</html>

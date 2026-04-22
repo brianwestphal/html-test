@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — Attribute selectors</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  li { margin: 4px 0; }
+  a[href]                         { color: #1d4ed8; }
+  a[href^="https://"]             { font-weight: bold; }
+  a[href$=".pdf"]::after          { content: " 📄"; }
+  a[href*="example"]              { background: #fef3c7; padding: 0 2px; }
+  a[hreflang|="en"]               { border-bottom: 2px dotted #10b981; }
+  a[rel~="noopener"]              { outline: 1px dashed #dc2626; }
+  input[type="checkbox"]          { accent-color: #ea580c; }
+  p[data-tag="draft" i]           { color: #6b7280; font-style: italic; }  /* case-insensitive */
+  p[data-tag="Draft" s]           { background: #fee2e2; }                 /* case-sensitive */
+</style>
+</head>
+<body>
+<h1>Attribute selectors</h1>
+<ul>
+  <li><a href="https://example.com/">[href^="https://"]</a></li>
+  <li><a href="/local/path">relative (matches [href] only)</a></li>
+  <li><a href="/docs/spec.pdf">[href$=".pdf"] (trailing icon)</a></li>
+  <li><a href="https://foo.example.com/bar">[href*="example"] (contains)</a></li>
+  <li><a href="#" hreflang="en-US">[hreflang|="en"] (lang-family)</a></li>
+  <li><a href="#" rel="noopener noreferrer">[rel~="noopener"] (word match)</a></li>
+</ul>
+
+<p><label><input type="checkbox" checked> checkbox with accent-color</label></p>
+
+<p data-tag="Draft">Value "Draft" with case-sensitive "s" flag → red background.</p>
+<p data-tag="draft">Value "draft" matching [data-tag="draft" i] only.</p>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — font-family generics</title>
+<style>
+  body { margin: 2em; }
+  .row { display: grid; grid-template-columns: 180px 1fr; gap: 4px 20px; align-items: baseline; margin: 4px 0; }
+  .name { font-family: monospace; color: #64748b; }
+  .s1  { font-family: serif; }
+  .s2  { font-family: sans-serif; }
+  .s3  { font-family: monospace; }
+  .s4  { font-family: cursive; }
+  .s5  { font-family: fantasy; }
+  .s6  { font-family: system-ui; }
+  .s7  { font-family: ui-serif; }
+  .s8  { font-family: ui-sans-serif; }
+  .s9  { font-family: ui-monospace; }
+  .s10 { font-family: ui-rounded; }
+  .s11 { font-family: math; }
+  .s12 { font-family: emoji; }
+  .s13 { font-family: fangsong; }
+  .stack { font-family: "DoesNotExist", Georgia, "Times New Roman", serif; }
+</style>
+</head>
+<body>
+<h1>font-family — generic families</h1>
+<div class="row"><span class="name">serif</span>        <span class="s1">The quick brown fox jumps over the lazy dog 1234567890</span></div>
+<div class="row"><span class="name">sans-serif</span>   <span class="s2">The quick brown fox jumps over the lazy dog 1234567890</span></div>
+<div class="row"><span class="name">monospace</span>    <span class="s3">The quick brown fox jumps over the lazy dog 1234567890</span></div>
+<div class="row"><span class="name">cursive</span>      <span class="s4">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">fantasy</span>      <span class="s5">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">system-ui</span>    <span class="s6">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">ui-serif</span>     <span class="s7">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">ui-sans-serif</span><span class="s8">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">ui-monospace</span> <span class="s9">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">ui-rounded</span>   <span class="s10">The quick brown fox jumps over the lazy dog</span></div>
+<div class="row"><span class="name">math</span>         <span class="s11">∀x ∈ ℝ, x² ≥ 0 — 𝒜 𝒷 𝒞 ∈ 𝕊</span></div>
+<div class="row"><span class="name">emoji</span>        <span class="s12">Smile 😀 rocket 🚀 sparkle ✨</span></div>
+<div class="row"><span class="name">fangsong</span>     <span class="s13">你好世界 The quick brown fox</span></div>
+<hr>
+<p class="stack">Fallback stack: "DoesNotExist", Georgia, "Times New Roman", serif — falls through to Georgia (or serif).</p>
+</body>
+</html>

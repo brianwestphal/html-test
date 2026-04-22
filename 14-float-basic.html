@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>14 — float basic + clear</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  section { border: 1px solid #cbd5e1; padding: 10px; margin-bottom: 18px; }
+  .fl { float: left;  width: 100px; height: 80px; background: #fde68a; border: 1px solid #ca8a04; margin: 0 10px 10px 0; text-align: center; line-height: 80px; }
+  .fr { float: right; width: 100px; height: 80px; background: #bae6fd; border: 1px solid #0369a1; margin: 0 0 10px 10px; text-align: center; line-height: 80px; }
+  .cb { clear: both; background: #fecaca; padding: 4px; }
+  .cl { clear: left;  background: #fecaca; padding: 4px; }
+  .cr { clear: right; background: #fecaca; padding: 4px; }
+</style>
+</head>
+<body>
+<h1>Floats — left, right, clear</h1>
+
+<section>
+  <h2>float: left (yellow) and float: right (blue)</h2>
+  <div class="fl">L</div>
+  <div class="fr">R</div>
+  <p>Text flows around both floats. If enough text is present, it wraps under
+  and around, wrapping its lines on both sides of the floats. Lorem ipsum
+  dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua.</p>
+</section>
+
+<section>
+  <h2>clear: both</h2>
+  <div class="fl">L</div>
+  <div class="fr">R</div>
+  <div class="cb">I clear both floats — I appear fully below them.</div>
+</section>
+
+<section>
+  <h2>clear: left / clear: right</h2>
+  <div class="fl">L1</div>
+  <div class="fl">L2</div>
+  <div class="fr">R1</div>
+  <div class="cl">clear:left — starts below all left floats (not necessarily right).</div>
+  <div class="cr">clear:right — starts below all right floats.</div>
+</section>
+</body>
+</html>

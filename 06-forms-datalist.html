@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — datalist autocomplete</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  label { display: block; margin-top: 14px; font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>&lt;datalist&gt; providing autocomplete suggestions</h1>
+
+<label>Browser (type to see suggestions)
+  <input list="browsers" name="browser" placeholder="e.g. Firefox">
+</label>
+<datalist id="browsers">
+  <option value="Chrome">
+  <option value="Firefox">
+  <option value="Safari">
+  <option value="Edge">
+  <option value="Opera">
+</datalist>
+
+<label>Favorite color
+  <input list="colors" type="color">
+</label>
+<datalist id="colors">
+  <option value="#ff0000">
+  <option value="#00ff00">
+  <option value="#0000ff">
+  <option value="#ffaa00">
+</datalist>
+
+<label>Age (number list)
+  <input list="ages" type="number" min="0" max="120">
+</label>
+<datalist id="ages">
+  <option value="18" label="adult">
+  <option value="21">
+  <option value="65" label="senior">
+</datalist>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 — position: absolute</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .cb {
+    position: relative;
+    width: 400px;
+    height: 220px;
+    border: 2px solid #334155;
+    background: #f1f5f9;
+    margin-bottom: 16px;
+  }
+  .abs {
+    position: absolute;
+    background: #fde68a;
+    border: 1px solid #ca8a04;
+    padding: 4px 8px;
+  }
+  .tl { top: 8px; left: 8px; }
+  .tr { top: 8px; right: 8px; }
+  .bl { bottom: 8px; left: 8px; }
+  .br { bottom: 8px; right: 8px; }
+  .center {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #bae6fd;
+  }
+  .stretch {
+    top: 40%; bottom: 20%;
+    left: 30%; right: 10%;
+    background: #fecaca;
+    display: flex; align-items: center; justify-content: center;
+  }
+</style>
+</head>
+<body>
+<h1>position: absolute (relative containing block)</h1>
+<div class="cb">
+  <span class="abs tl">top:8 left:8</span>
+  <span class="abs tr">top:8 right:8</span>
+  <span class="abs bl">bottom:8 left:8</span>
+  <span class="abs br">bottom:8 right:8</span>
+  <span class="abs center">centered via translate(-50%, -50%)</span>
+  <span class="abs stretch">all four insets stretch this box</span>
+</div>
+
+<h2>Containing block — absolute relative to nearest positioned ancestor</h2>
+<div class="cb" style="height:120px">
+  <div style="padding:20px; border: 1px dashed #6b7280;">
+    Non-positioned wrapper (can't be a containing block)
+    <span class="abs" style="top:8px; right:8px; background:#c7d2fe;">right:8 relative to OUTER .cb</span>
+  </div>
+</div>
+</body>
+</html>

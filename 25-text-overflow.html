@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>25 — text-overflow</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .line {
+    width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid #334155;
+    padding: 4px 8px;
+    margin-bottom: 6px;
+    background: #fef3c7;
+  }
+  .clip     { text-overflow: clip; }
+  .ellipsis { text-overflow: ellipsis; }
+  .custom   { text-overflow: "…»"; }
+  .two      { text-overflow: ellipsis ellipsis; direction: rtl; }
+</style>
+</head>
+<body>
+<h1>text-overflow — clip, ellipsis, custom string</h1>
+<div class="line clip">clip: Supercalifragilisticexpialidocious antidisestablishmentarianism</div>
+<div class="line ellipsis">ellipsis: Supercalifragilisticexpialidocious antidisestablishmentarianism</div>
+<div class="line custom">custom "…»": Supercalifragilisticexpialidocious antidisestablishmentarianism</div>
+<div class="line two">two-value (LTR end + RTL start): Supercalifragilisticexpialidocious</div>
+</body>
+</html>

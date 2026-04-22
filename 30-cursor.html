@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>30 — cursor values</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, 160px); gap: 8px; }
+  .c {
+    border: 1px solid #334155;
+    padding: 10px;
+    text-align: center;
+    background: #f1f5f9;
+    font-family: monospace;
+    font-size: 13px;
+    user-select: none;
+  }
+  .custom { cursor: url("assets/img-orange.svg") 12 12, auto; }
+</style>
+</head>
+<body>
+<h1>cursor — hover each cell to see the cursor change</h1>
+<div class="grid">
+  <div class="c" style="cursor:auto">auto</div>
+  <div class="c" style="cursor:default">default</div>
+  <div class="c" style="cursor:none">none</div>
+  <div class="c" style="cursor:pointer">pointer</div>
+  <div class="c" style="cursor:text">text</div>
+  <div class="c" style="cursor:wait">wait</div>
+  <div class="c" style="cursor:help">help</div>
+  <div class="c" style="cursor:progress">progress</div>
+  <div class="c" style="cursor:crosshair">crosshair</div>
+  <div class="c" style="cursor:move">move</div>
+  <div class="c" style="cursor:not-allowed">not-allowed</div>
+  <div class="c" style="cursor:no-drop">no-drop</div>
+  <div class="c" style="cursor:grab">grab</div>
+  <div class="c" style="cursor:grabbing">grabbing</div>
+  <div class="c" style="cursor:zoom-in">zoom-in</div>
+  <div class="c" style="cursor:zoom-out">zoom-out</div>
+  <div class="c" style="cursor:cell">cell</div>
+  <div class="c" style="cursor:context-menu">context-menu</div>
+  <div class="c" style="cursor:alias">alias</div>
+  <div class="c" style="cursor:copy">copy</div>
+  <div class="c" style="cursor:all-scroll">all-scroll</div>
+  <div class="c" style="cursor:col-resize">col-resize</div>
+  <div class="c" style="cursor:row-resize">row-resize</div>
+  <div class="c" style="cursor:n-resize">n-resize</div>
+  <div class="c" style="cursor:e-resize">e-resize</div>
+  <div class="c" style="cursor:s-resize">s-resize</div>
+  <div class="c" style="cursor:w-resize">w-resize</div>
+  <div class="c" style="cursor:ne-resize">ne-resize</div>
+  <div class="c" style="cursor:nw-resize">nw-resize</div>
+  <div class="c" style="cursor:se-resize">se-resize</div>
+  <div class="c" style="cursor:sw-resize">sw-resize</div>
+  <div class="c" style="cursor:ew-resize">ew-resize</div>
+  <div class="c" style="cursor:ns-resize">ns-resize</div>
+  <div class="c" style="cursor:nesw-resize">nesw-resize</div>
+  <div class="c" style="cursor:nwse-resize">nwse-resize</div>
+  <div class="c" style="cursor:vertical-text">vertical-text</div>
+  <div class="c custom">url(svg), auto</div>
+</div>
+</body>
+</html>

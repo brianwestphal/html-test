@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 — visibility</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row > span {
+    display: inline-block;
+    width: 80px;
+    padding: 8px;
+    margin-right: 6px;
+    background: #fde68a;
+    border: 1px solid #ca8a04;
+    text-align: center;
+  }
+  .hidden  { visibility: hidden; }
+  .visible { visibility: visible; }
+
+  table { border-collapse: collapse; margin-top: 16px; }
+  th, td { border: 1px solid #334155; padding: 6px 12px; }
+  .collapse-row { visibility: collapse; }
+  .collapse-col { visibility: collapse; }
+</style>
+</head>
+<body>
+<h1>visibility — visible, hidden, collapse</h1>
+
+<h2>visibility: hidden (reserved space, invisible)</h2>
+<div class="row">
+  <span>A</span>
+  <span class="hidden">B (hidden, space reserved)</span>
+  <span>C</span>
+</div>
+
+<h2>visibility: collapse on table rows/columns</h2>
+<table>
+  <tr><th>h1</th><th>h2</th><th class="collapse-col">h3 (collapsed col)</th><th>h4</th></tr>
+  <tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>
+  <tr class="collapse-row"><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+  <tr><td>e</td><td>f</td><td>g</td><td>h</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 — border-collapse & border-spacing</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  table { margin-bottom: 18px; }
+  th, td { border: 2px solid #0f172a; padding: 8px 12px; }
+  table.collapse { border-collapse: collapse; }
+  table.separate { border-collapse: separate; border-spacing: 10px 6px; background: #fde68a; }
+  table.separate-default { border-collapse: separate; }
+</style>
+</head>
+<body>
+<h1>Table border models</h1>
+
+<h2>border-collapse: collapse</h2>
+<table class="collapse">
+  <tr><th>A</th><th>B</th><th>C</th></tr>
+  <tr><td>1</td><td>2</td><td>3</td></tr>
+  <tr><td>4</td><td>5</td><td>6</td></tr>
+</table>
+
+<h2>border-collapse: separate (default, default spacing)</h2>
+<table class="separate-default">
+  <tr><th>A</th><th>B</th><th>C</th></tr>
+  <tr><td>1</td><td>2</td><td>3</td></tr>
+</table>
+
+<h2>border-collapse: separate with border-spacing: 10px 6px</h2>
+<table class="separate">
+  <tr><th>A</th><th>B</th><th>C</th></tr>
+  <tr><td>1</td><td>2</td><td>3</td></tr>
+  <tr><td>4</td><td>5</td><td>6</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 — Length units</title>
+<style>
+  :root { font-size: 16px; }
+  body { font-family: sans-serif; margin: 2em; font-size: 16px; }
+  .bar { background: #60a5fa; color: white; padding: 4px 8px; margin: 3px 0; }
+  .em   { width: 10em;   font-size: 16px; }    /* 160px */
+  .emx2 { width: 10em;   font-size: 24px; }    /* 240px */
+  .rem  { width: 10rem;  }                     /* 160px */
+  .px   { width: 200px; }
+  .pct  { width: 50%; }
+  .ch   { width: 40ch; background: #f97316; font-family: monospace; }
+  .ex   { width: 40ex; background: #22c55e; }
+  .vw   { width: 25vw; background: #a855f7; }
+  .vh   { height: 20vh; background: #0ea5e9; }
+  .vmin { width: 20vmin; background: #ef4444; }
+  .vmax { width: 20vmax; background: #f59e0b; }
+  .pt   { width: 150pt; background: #10b981; }
+  .pc   { width: 15pc; background: #3b82f6; }
+  .mm   { width: 50mm; background: #14b8a6; }
+  .cm   { width: 5cm; background: #0891b2; }
+  .in   { width: 2in; background: #8b5cf6; }
+  .Q    { width: 400Q; background: #ec4899; }
+  .fr-grid { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 6px; background: #e5e7eb; padding: 4px; }
+  .fr-grid div { background: #334155; color: white; padding: 4px; text-align: center; }
+</style>
+</head>
+<body>
+<h1>CSS length units</h1>
+<div class="bar em">10em at 16px → 160px</div>
+<div class="bar emx2">10em at 24px → 240px</div>
+<div class="bar rem">10rem → 160px (root-relative)</div>
+<div class="bar px">200px</div>
+<div class="bar pct">50% of parent</div>
+<div class="bar ch">40ch (mono width of "0")</div>
+<div class="bar ex">40ex (x-height)</div>
+<div class="bar vw">25vw (25% viewport width)</div>
+<div class="bar vh">height 20vh</div>
+<div class="bar vmin">20vmin (min of vw/vh)</div>
+<div class="bar vmax">20vmax (max of vw/vh)</div>
+<div class="bar pt">150pt</div>
+<div class="bar pc">15pc</div>
+<div class="bar mm">50mm</div>
+<div class="bar cm">5cm</div>
+<div class="bar in">2in</div>
+<div class="bar Q">400Q</div>
+<h2>fr in a grid (1fr / 2fr / 1fr)</h2>
+<div class="fr-grid"><div>1fr</div><div>2fr</div><div>1fr</div></div>
+</body>
+</html>

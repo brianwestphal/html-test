@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — textarea</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  section { margin-bottom: 18px; }
+  textarea { font-family: inherit; padding: 6px; }
+</style>
+</head>
+<body>
+<h1>&lt;textarea&gt; variants</h1>
+
+<section>
+  <h2>Basic, rows=4 cols=40</h2>
+  <textarea rows="4" cols="40">Pre-populated content.
+Second line of content.</textarea>
+</section>
+
+<section>
+  <h2>With placeholder, maxlength=100</h2>
+  <textarea rows="3" cols="40" placeholder="Type up to 100 chars…" maxlength="100"></textarea>
+</section>
+
+<section>
+  <h2>wrap=soft (default) vs wrap=hard</h2>
+  <textarea rows="3" cols="24" wrap="soft">No hard line breaks inserted on submit; visible wrapping only.</textarea>
+  <textarea rows="3" cols="24" wrap="hard">Hard wrap inserts CRLF at soft-wrap points when submitted.</textarea>
+</section>
+
+<section>
+  <h2>readonly &amp; disabled</h2>
+  <textarea rows="2" cols="40" readonly>readonly — focusable, contents selectable, not editable</textarea>
+  <textarea rows="2" cols="40" disabled>disabled — not focusable, greyed out</textarea>
+</section>
+
+<section>
+  <h2>resize via CSS</h2>
+  <textarea rows="2" cols="40" style="resize: vertical;">resize: vertical</textarea>
+  <textarea rows="2" cols="40" style="resize: none;">resize: none</textarea>
+  <textarea rows="2" cols="40" style="resize: both;">resize: both</textarea>
+</section>
+</body>
+</html>

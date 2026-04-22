@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 — position: fixed</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .corner {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #4f46e5;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    z-index: 10;
+  }
+  .footbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #0f172a;
+    color: white;
+    padding: 8px 14px;
+    z-index: 10;
+  }
+  .filler { height: 180vh; background: linear-gradient(#fef9c3, #fecaca); padding: 12px; }
+</style>
+</head>
+<body>
+<div class="corner">position:fixed (top-right)</div>
+<div class="footbar">position:fixed (bottom bar) — stays put while scrolling</div>
+<h1>position: fixed — viewport-anchored</h1>
+<p>Scroll this page. The badge in the top-right and the footer bar stay fixed
+in the viewport.</p>
+<div class="filler">Lots of scroll content…</div>
+</body>
+</html>

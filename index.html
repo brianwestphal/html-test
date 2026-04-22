@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HTML/CSS rendering test suite — index</title>
+<link rel="icon" href="assets/img-orange.svg" type="image/svg+xml">
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 50em; line-height: 1.5; color: #0f172a; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  h2 { margin-top: 24px; color: #1e293b; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
+  p.lead { color: #475569; }
+  ul { padding-left: 20px; }
+  li { margin: 2px 0; }
+  a { color: #1d4ed8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { background: #f1f5f9; padding: 0 4px; border-radius: 3px; font-size: 13px; }
+  .cat-count { color: #64748b; font-size: 14px; font-weight: normal; }
+</style>
+</head>
+<body>
+<h1>HTML/CSS rendering test suite</h1>
+<p class="lead">Each link below is a small, focused HTML document that
+exercises a specific feature of current HTML and CSS. No JavaScript or
+animations are required to evaluate rendering. Every test references assets
+from <code>assets/</code> via a relative path, so <code>file://</code> opens
+work without a server.</p>
+
+<h2>01 — Document structure &amp; metadata</h2>
+<ul>
+  <li><a href="01-structure-doctype.html">Doctype, html, head, body, title</a></li>
+  <li><a href="01-structure-meta.html">Meta tags</a></li>
+  <li><a href="01-structure-link.html">Link relations</a></li>
+  <li><a href="01-structure-base.html">Base URL + target</a></li>
+  <li><a href="01-structure-external-css.html">External stylesheet + @import</a></li>
+</ul>
+
+<h2>02 — Text &amp; inline semantics</h2>
+<ul>
+  <li><a href="02-text-headings.html">Headings h1–h6, hgroup</a></li>
+  <li><a href="02-text-paragraphs.html">Paragraphs, br, wbr, hr</a></li>
+  <li><a href="02-text-emphasis.html">Emphasis (em/strong/b/i/u/s/small/mark/del/ins)</a></li>
+  <li><a href="02-text-phrasing.html">Phrasing content (cite/q/blockquote/abbr/dfn/time/etc.)</a></li>
+  <li><a href="02-text-sub-sup.html">sub, sup (nested formulas)</a></li>
+  <li><a href="02-text-preformatted.html">pre — preformatted text</a></li>
+  <li><a href="02-text-entities.html">Character entities (named / numeric / hex)</a></li>
+  <li><a href="02-text-ruby.html">Ruby annotations</a></li>
+  <li><a href="02-text-bidi.html">Bidirectional text (dir, bdi, bdo)</a></li>
+</ul>
+
+<h2>03 — Lists</h2>
+<ul>
+  <li><a href="03-lists-ul-ol.html">ul, ol, nesting, start, reversed</a></li>
+  <li><a href="03-lists-style-types.html">list-style-type values</a></li>
+  <li><a href="03-lists-style-image-position.html">list-style-image / list-style-position</a></li>
+  <li><a href="03-lists-dl.html">Description list (dl/dt/dd)</a></li>
+  <li><a href="03-lists-marker.html">::marker pseudo-element</a></li>
+</ul>
+
+<h2>04 — Tables</h2>
+<ul>
+  <li><a href="04-table-basic.html">Basic table with thead/tbody/tfoot/caption</a></li>
+  <li><a href="04-table-spans.html">colspan, rowspan</a></li>
+  <li><a href="04-table-colgroup.html">colgroup / col</a></li>
+  <li><a href="04-table-borders.html">border-collapse, border-spacing</a></li>
+  <li><a href="04-table-layout.html">table-layout auto vs fixed</a></li>
+  <li><a href="04-table-caption-empty.html">caption-side, empty-cells</a></li>
+</ul>
+
+<h2>05 — Links</h2>
+<ul>
+  <li><a href="05-links-anchors.html">Anchor href variations</a></li>
+  <li><a href="05-links-states.html">:link / :visited / :hover / :active</a></li>
+</ul>
+
+<h2>06 — Forms</h2>
+<ul>
+  <li><a href="06-forms-input-types.html">Every input type</a></li>
+  <li><a href="06-forms-textarea.html">textarea</a></li>
+  <li><a href="06-forms-select.html">select / optgroup</a></li>
+  <li><a href="06-forms-buttons.html">button variants</a></li>
+  <li><a href="06-forms-fieldset-legend.html">fieldset / legend</a></li>
+  <li><a href="06-forms-datalist.html">datalist</a></li>
+  <li><a href="06-forms-meter-progress.html">meter / progress</a></li>
+  <li><a href="06-forms-output.html">output</a></li>
+  <li><a href="06-forms-validation-ui.html">Validation UI pseudo-classes</a></li>
+  <li><a href="06-forms-placeholder-readonly.html">::placeholder, :read-only, disabled</a></li>
+</ul>
+
+<h2>07 — Images &amp; graphics</h2>
+<ul>
+  <li><a href="07-img-basic.html">img basics</a></li>
+  <li><a href="07-img-formats.html">PNG / JPEG / GIF / WebP / SVG</a></li>
+  <li><a href="07-img-picture-srcset.html">picture + srcset + sizes</a></li>
+  <li><a href="07-img-map-area.html">Image map (map/area)</a></li>
+  <li><a href="07-svg-shapes.html">Inline SVG shapes</a></li>
+  <li><a href="07-svg-text-gradient.html">SVG text, gradients, patterns, clip, mask</a></li>
+  <li><a href="07-object-fit.html">object-fit / object-position</a></li>
+  <li><a href="07-aspect-ratio.html">aspect-ratio</a></li>
+</ul>
+
+<h2>08 — Interactive (no JS)</h2>
+<ul>
+  <li><a href="08-details-summary.html">details / summary</a></li>
+  <li><a href="08-dialog.html">dialog (static)</a></li>
+</ul>
+
+<h2>09 — Sectioning &amp; landmarks</h2>
+<ul>
+  <li><a href="09-sectioning-landmarks.html">header / nav / main / section / article / aside / footer / search</a></li>
+</ul>
+
+<h2>10 — CSS selectors</h2>
+<ul>
+  <li><a href="10-sel-type-class-id.html">Type / class / id / universal</a></li>
+  <li><a href="10-sel-attribute.html">Attribute selectors</a></li>
+  <li><a href="10-sel-combinators.html">Combinators (space / &gt; / + / ~)</a></li>
+  <li><a href="10-sel-pseudo-structural.html">Structural pseudo-classes</a></li>
+  <li><a href="10-sel-pseudo-ui-state.html">UI-state pseudo-classes</a></li>
+  <li><a href="10-sel-pseudo-logical.html">:not / :is / :where / :has</a></li>
+  <li><a href="10-sel-pseudo-lang-dir.html">:lang() / :dir()</a></li>
+  <li><a href="10-sel-pseudo-elements.html">Pseudo-elements</a></li>
+</ul>
+
+<h2>11 — Box model &amp; sizing</h2>
+<ul>
+  <li><a href="11-box-basic.html">Content / padding / border / margin</a></li>
+  <li><a href="11-box-sizing.html">box-sizing</a></li>
+  <li><a href="11-box-margin-collapse.html">Margin collapsing</a></li>
+  <li><a href="11-box-min-max.html">min/max width &amp; height</a></li>
+  <li><a href="11-box-units.html">Length units</a></li>
+  <li><a href="11-box-calc-minmax.html">calc / min / max / clamp</a></li>
+</ul>
+
+<h2>12 — Display</h2>
+<ul>
+  <li><a href="12-display-block-inline.html">block / inline / inline-block / none</a></li>
+  <li><a href="12-display-table.html">display: table and table-*</a></li>
+  <li><a href="12-display-list-item.html">display: list-item</a></li>
+  <li><a href="12-display-contents.html">display: contents</a></li>
+  <li><a href="12-visibility.html">visibility visible/hidden/collapse</a></li>
+</ul>
+
+<h2>13 — Positioning</h2>
+<ul>
+  <li><a href="13-pos-static-relative.html">static / relative</a></li>
+  <li><a href="13-pos-absolute.html">absolute</a></li>
+  <li><a href="13-pos-fixed.html">fixed</a></li>
+  <li><a href="13-pos-sticky.html">sticky</a></li>
+  <li><a href="13-pos-z-index.html">z-index / stacking contexts</a></li>
+</ul>
+
+<h2>14 — Floats</h2>
+<ul>
+  <li><a href="14-float-basic.html">float left/right, clear</a></li>
+  <li><a href="14-float-text-wrap.html">Text wrap around floats</a></li>
+  <li><a href="14-float-shape-outside.html">shape-outside</a></li>
+</ul>
+
+<h2>15 — Flexbox</h2>
+<ul>
+  <li><a href="15-flex-container.html">Container: direction / wrap / gap</a></li>
+  <li><a href="15-flex-alignment.html">justify / align-items / align-content</a></li>
+  <li><a href="15-flex-items.html">grow / shrink / basis / order / align-self</a></li>
+  <li><a href="15-flex-nested.html">Nested flex</a></li>
+</ul>
+
+<h2>16 — Grid</h2>
+<ul>
+  <li><a href="16-grid-template.html">grid-template-columns / rows</a></li>
+  <li><a href="16-grid-areas.html">grid-template-areas</a></li>
+  <li><a href="16-grid-lines.html">line numbers, span, named lines</a></li>
+  <li><a href="16-grid-auto-flow.html">grid-auto-flow row / column / dense</a></li>
+  <li><a href="16-grid-repeat.html">repeat / minmax / auto-fit / auto-fill</a></li>
+  <li><a href="16-grid-subgrid.html">subgrid</a></li>
+  <li><a href="16-grid-alignment.html">justify / align / place</a></li>
+</ul>
+
+<h2>17 — Backgrounds &amp; gradients</h2>
+<ul>
+  <li><a href="17-bg-color-image.html">background color/image/position/repeat/size/…</a></li>
+  <li><a href="17-bg-multiple.html">Multiple layered backgrounds</a></li>
+  <li><a href="17-gradient-linear.html">linear-gradient</a></li>
+  <li><a href="17-gradient-radial.html">radial-gradient</a></li>
+  <li><a href="17-gradient-conic.html">conic-gradient</a></li>
+  <li><a href="17-gradient-repeating.html">repeating gradients</a></li>
+</ul>
+
+<h2>18 — Borders, outlines, shadows</h2>
+<ul>
+  <li><a href="18-border-styles.html">border-style variations</a></li>
+  <li><a href="18-border-radius.html">border-radius (per-corner, elliptical)</a></li>
+  <li><a href="18-border-image.html">border-image</a></li>
+  <li><a href="18-outline.html">outline / outline-offset</a></li>
+  <li><a href="18-shadows.html">box-shadow / text-shadow</a></li>
+</ul>
+
+<h2>19 — Colors</h2>
+<ul>
+  <li><a href="19-color-formats.html">Named / hex / rgb / hsl / hwb / lab / lch / oklch / color-mix</a></li>
+  <li><a href="19-color-opacity.html">opacity vs rgba alpha</a></li>
+</ul>
+
+<h2>20 — Typography &amp; text</h2>
+<ul>
+  <li><a href="20-font-family.html">Generic font families</a></li>
+  <li><a href="20-font-size-weight.html">font-size &amp; font-weight</a></li>
+  <li><a href="20-font-style-variant.html">font-style / font-variant*</a></li>
+  <li><a href="20-font-stretch.html">font-stretch</a></li>
+  <li><a href="20-font-face.html">@font-face</a></li>
+  <li><a href="20-text-line-spacing.html">line-height, letter-spacing, word-spacing</a></li>
+  <li><a href="20-text-align.html">text-align / text-align-last</a></li>
+  <li><a href="20-text-decoration.html">text-decoration</a></li>
+  <li><a href="20-text-transform.html">text-transform</a></li>
+  <li><a href="20-text-wrapping.html">white-space, word-break, overflow-wrap, hyphens</a></li>
+  <li><a href="20-text-indent-shadow.html">text-indent, vertical-align</a></li>
+  <li><a href="20-writing-mode.html">writing-mode, text-orientation, direction</a></li>
+  <li><a href="20-logical-properties.html">Logical properties</a></li>
+</ul>
+
+<h2>21 — Transforms</h2>
+<ul>
+  <li><a href="21-transform-2d.html">2D transforms</a></li>
+  <li><a href="21-transform-3d.html">3D transforms, perspective</a></li>
+</ul>
+
+<h2>22 — Filters, blending</h2>
+<ul>
+  <li><a href="22-filter.html">filter</a></li>
+  <li><a href="22-backdrop-filter.html">backdrop-filter</a></li>
+  <li><a href="22-blend-modes.html">mix-blend-mode / background-blend-mode</a></li>
+</ul>
+
+<h2>23 — Clipping &amp; masking</h2>
+<ul>
+  <li><a href="23-clip-path.html">clip-path</a></li>
+  <li><a href="23-mask.html">mask</a></li>
+</ul>
+
+<h2>24 — Generated content</h2>
+<ul>
+  <li><a href="24-generated-content.html">::before / ::after</a></li>
+  <li><a href="24-counters.html">CSS counters</a></li>
+  <li><a href="24-quotes.html">quotes property</a></li>
+</ul>
+
+<h2>25 — Overflow &amp; scrolling</h2>
+<ul>
+  <li><a href="25-overflow-values.html">overflow values</a></li>
+  <li><a href="25-text-overflow.html">text-overflow</a></li>
+  <li><a href="25-scrollbar-gutter.html">scrollbar-gutter</a></li>
+  <li><a href="25-scroll-snap.html">scroll-snap</a></li>
+  <li><a href="25-overscroll.html">overscroll-behavior</a></li>
+</ul>
+
+<h2>26 — Media queries &amp; @supports</h2>
+<ul>
+  <li><a href="26-mq-width-orientation.html">width / orientation / aspect-ratio</a></li>
+  <li><a href="26-mq-features.html">Feature queries</a></li>
+  <li><a href="26-mq-range-syntax.html">Range syntax + and/or/not</a></li>
+  <li><a href="26-supports.html">@supports</a></li>
+</ul>
+
+<h2>27 — Print / paged media</h2>
+<ul>
+  <li><a href="27-page.html">@page, break-*, widows, orphans</a></li>
+</ul>
+
+<h2>28 — @-rules &amp; organization</h2>
+<ul>
+  <li><a href="28-import.html">@import</a></li>
+  <li><a href="28-layer.html">@layer cascade layers</a></li>
+  <li><a href="28-nesting.html">CSS nesting</a></li>
+  <li><a href="28-container.html">@container</a></li>
+  <li><a href="28-charset-namespace.html">@charset, @namespace</a></li>
+</ul>
+
+<h2>29 — Cascade, inheritance, values</h2>
+<ul>
+  <li><a href="29-cascade-specificity.html">Specificity</a></li>
+  <li><a href="29-inheritance-keywords.html">inherit / initial / unset / revert / revert-layer</a></li>
+  <li><a href="29-important.html">!important</a></li>
+  <li><a href="29-custom-properties.html">Custom properties / var()</a></li>
+</ul>
+
+<h2>30 — UI &amp; interaction</h2>
+<ul>
+  <li><a href="30-cursor.html">cursor</a></li>
+  <li><a href="30-user-select.html">user-select</a></li>
+  <li><a href="30-resize.html">resize</a></li>
+  <li><a href="30-caret-accent.html">caret-color / accent-color</a></li>
+</ul>
+
+<h2>31 — Global attributes &amp; i18n</h2>
+<ul>
+  <li><a href="31-global-attrs.html">Global attributes</a></li>
+  <li><a href="31-aria-data.html">role, aria-*, data-*</a></li>
+</ul>
+</body>
+</html>

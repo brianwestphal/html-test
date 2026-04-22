@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 — display block/inline/inline-block/none</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
+  .block   { display: block;        background: #fde68a; padding: 4px; margin: 4px 0; }
+  .inline  { display: inline;       background: #bae6fd; padding: 0 4px; }
+  .iblock  { display: inline-block; background: #f9a8d4; padding: 6px 10px; width: 120px; height: 50px; vertical-align: middle; }
+  .none    { display: none; }
+</style>
+</head>
+<body>
+<h1>display — block, inline, inline-block, none</h1>
+
+<h2>block (full-width, new line)</h2>
+<span class="block">span forced to display:block — now takes full width.</span>
+<span class="block">Second block.</span>
+
+<h2>inline (flows with surrounding text)</h2>
+<p>Paragraph text with <div class="inline">this was a div set to display:inline</div> inline in the flow.</p>
+
+<h2>inline-block (inline placement, block sizing)</h2>
+<p>Three inline-block boxes with fixed size:
+  <span class="iblock">A</span><span class="iblock">B</span><span class="iblock">C</span>
+</p>
+
+<h2>none (removed from flow entirely)</h2>
+<p>There is <span class="none">HIDDEN TEXT (display:none)</span>no hidden text visible in this sentence.</p>
+</body>
+</html>

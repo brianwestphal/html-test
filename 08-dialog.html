@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>08 — dialog (static)</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  dialog {
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  }
+  dialog h2 { margin-top: 0; }
+  p.note { color: #6b7280; font-style: italic; }
+</style>
+</head>
+<body>
+<h1>&lt;dialog&gt; element (inline rendering)</h1>
+<p class="note">Without JavaScript, <code>dialog[open]</code> renders as an
+in-flow block. Modal promotion (showModal) is a JS-driven behavior and is
+not exercised here.</p>
+
+<p>Text before the dialog.</p>
+
+<dialog open>
+  <h2>Inline dialog</h2>
+  <p>This dialog has the <code>open</code> attribute, so it participates in
+  normal flow without being modal.</p>
+  <form method="dialog">
+    <button>OK</button>
+  </form>
+</dialog>
+
+<p>Text after the dialog.</p>
+
+<p>Dialog without <code>open</code> should not render (or be hidden):</p>
+<dialog>
+  <p>Should be invisible.</p>
+</dialog>
+<p>(end of page)</p>
+</body>
+</html>

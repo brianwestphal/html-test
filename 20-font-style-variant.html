@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — font-style &amp; font-variant</title>
+<style>
+  body { font-family: serif; margin: 2em; line-height: 1.8; }
+  .italic  { font-style: italic; }
+  .oblique { font-style: oblique; }
+  .ob14    { font-style: oblique 14deg; }
+  .sc       { font-variant: small-caps; }
+  .asc      { font-variant-caps: all-small-caps; }
+  .ps       { font-variant-caps: petite-caps; }
+  .aps      { font-variant-caps: all-petite-caps; }
+  .unicase  { font-variant-caps: unicase; }
+  .titling  { font-variant-caps: titling-caps; }
+  .num-lining    { font-variant-numeric: lining-nums; }
+  .num-oldstyle  { font-variant-numeric: oldstyle-nums; }
+  .num-prop      { font-variant-numeric: proportional-nums; }
+  .num-tab       { font-variant-numeric: tabular-nums; }
+  .num-frac      { font-variant-numeric: diagonal-fractions; }
+  .num-stack     { font-variant-numeric: stacked-fractions; }
+  .lig-no      { font-variant-ligatures: no-common-ligatures; font-family: serif; }
+  .lig-yes     { font-variant-ligatures: common-ligatures; }
+  .lig-disc    { font-variant-ligatures: discretionary-ligatures; }
+</style>
+</head>
+<body>
+<h1>font-style + font-variant*</h1>
+
+<p>normal | <span class="italic">italic</span> | <span class="oblique">oblique</span> | <span class="ob14">oblique 14deg</span></p>
+
+<h2>font-variant-caps</h2>
+<p>Normal → <span class="sc">small-caps text</span> →
+   <span class="asc">all-small-caps Text</span> →
+   <span class="ps">petite-caps text</span> →
+   <span class="aps">all-petite-caps Text</span> →
+   <span class="unicase">UnIcAsE</span> →
+   <span class="titling">TITLING CAPS</span></p>
+
+<h2>font-variant-numeric</h2>
+<p>1234567890 vs
+   <span class="num-lining">lining: 1234567890</span> ·
+   <span class="num-oldstyle">oldstyle: 1234567890</span> ·
+   <span class="num-prop">proportional: 111</span> ·
+   <span class="num-tab">tabular: 111</span> ·
+   <span class="num-frac">1/2 3/4</span> ·
+   <span class="num-stack">1/2 3/4</span>
+</p>
+
+<h2>font-variant-ligatures</h2>
+<p><span class="lig-yes">fi fl ffi ffl st</span> (common on)</p>
+<p><span class="lig-no">fi fl ffi ffl st</span> (common off)</p>
+<p><span class="lig-disc">fi fl ffi ffl st</span> (discretionary — font-dependent)</p>
+</body>
+</html>

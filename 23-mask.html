@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>23 — mask</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, 200px); gap: 16px; }
+  figure { margin: 0; text-align: center; font-size: 12px; color: #475569; }
+  figure > div {
+    width: 180px;
+    height: 120px;
+    background: url("assets/img-wide.png") center/cover;
+  }
+  .m-gradient  { mask-image: linear-gradient(to right, black, transparent); }
+  .m-radial    { mask-image: radial-gradient(circle at center, black 40%, transparent 70%); }
+  .m-image     { mask-image: url("assets/img-orange.svg"); mask-repeat: no-repeat; mask-position: center; mask-size: contain; }
+  .m-alpha     { mask-image: linear-gradient(45deg, black, transparent); mask-mode: alpha; }
+  .m-luminance { mask-image: linear-gradient(45deg, white, black); mask-mode: luminance; }
+  .m-size      { mask-image: url("assets/img-orange.svg"); mask-repeat: repeat; mask-size: 30px; }
+  .m-position  { mask-image: radial-gradient(circle, black 40%, transparent 40%); mask-position: 25% 25%; mask-size: 80px; mask-repeat: no-repeat; }
+  .m-composite {
+    mask-image: linear-gradient(to right, black, transparent), radial-gradient(circle, black 50%, transparent 50%);
+    mask-composite: intersect;
+    mask-size: auto, 100px;
+    mask-position: 0 0, center;
+    mask-repeat: no-repeat, no-repeat;
+  }
+</style>
+</head>
+<body>
+<h1>mask (image, mode, position, size, repeat, composite)</h1>
+<div class="grid">
+  <figure><div></div><figcaption>no mask</figcaption></figure>
+  <figure><div class="m-gradient"></div><figcaption>linear-gradient mask</figcaption></figure>
+  <figure><div class="m-radial"></div><figcaption>radial mask</figcaption></figure>
+  <figure><div class="m-image"></div><figcaption>SVG image mask (contain)</figcaption></figure>
+  <figure><div class="m-alpha"></div><figcaption>mask-mode: alpha</figcaption></figure>
+  <figure><div class="m-luminance"></div><figcaption>mask-mode: luminance</figcaption></figure>
+  <figure><div class="m-size"></div><figcaption>size 30, repeat</figcaption></figure>
+  <figure><div class="m-position"></div><figcaption>position 25/25, no-repeat</figcaption></figure>
+  <figure><div class="m-composite"></div><figcaption>composite: intersect</figcaption></figure>
+</div>
+</body>
+</html>

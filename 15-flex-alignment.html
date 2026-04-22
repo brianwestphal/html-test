@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 — Flex alignment</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .fx {
+    display: flex;
+    gap: 6px;
+    background: #e2e8f0;
+    padding: 8px;
+    min-height: 90px;
+    margin-bottom: 10px;
+  }
+  .fx > div { background: #4f46e5; color: white; padding: 6px 10px; }
+  .big    { padding: 20px 10px; font-size: 24px; background: #dc2626; }
+  .small  { padding: 2px 6px;  font-size: 12px; background: #16a34a; }
+
+  .jc-start   { justify-content: flex-start; }
+  .jc-end     { justify-content: flex-end; }
+  .jc-center  { justify-content: center; }
+  .jc-between { justify-content: space-between; }
+  .jc-around  { justify-content: space-around; }
+  .jc-evenly  { justify-content: space-evenly; }
+
+  .ai-start    { align-items: flex-start; }
+  .ai-end      { align-items: flex-end; }
+  .ai-center   { align-items: center; }
+  .ai-baseline { align-items: baseline; }
+  .ai-stretch  { align-items: stretch; min-height: 100px; }
+
+  .ac-container { flex-wrap: wrap; min-height: 180px; }
+  .ac-start    { align-content: flex-start; }
+  .ac-center   { align-content: center; }
+  .ac-between  { align-content: space-between; }
+  .ac-stretch  { align-content: stretch; }
+</style>
+</head>
+<body>
+<h1>Flex — justify-content, align-items, align-content</h1>
+
+<h2>justify-content</h2>
+<div class="fx jc-start"><div>start</div><div>A</div><div>B</div></div>
+<div class="fx jc-end"><div>end</div><div>A</div><div>B</div></div>
+<div class="fx jc-center"><div>center</div><div>A</div><div>B</div></div>
+<div class="fx jc-between"><div>between</div><div>A</div><div>B</div></div>
+<div class="fx jc-around"><div>around</div><div>A</div><div>B</div></div>
+<div class="fx jc-evenly"><div>evenly</div><div>A</div><div>B</div></div>
+
+<h2>align-items</h2>
+<div class="fx ai-start"><div>start</div><div class="big">big</div><div class="small">small</div></div>
+<div class="fx ai-end"><div>end</div><div class="big">big</div><div class="small">small</div></div>
+<div class="fx ai-center"><div>center</div><div class="big">big</div><div class="small">small</div></div>
+<div class="fx ai-baseline"><div>baseline</div><div class="big">big</div><div class="small">small</div></div>
+<div class="fx ai-stretch"><div>stretch</div><div class="big">big</div><div class="small">small</div></div>
+
+<h2>align-content (multi-line)</h2>
+<div class="fx ac-container ac-start">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+<div class="fx ac-container ac-center">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+<div class="fx ac-container ac-between">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+<div class="fx ac-container ac-stretch">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+</body>
+</html>

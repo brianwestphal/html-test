@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 — grid-template-columns/rows</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .g { display: grid; gap: 6px; background: #e2e8f0; padding: 6px; margin-bottom: 12px; }
+  .g > div { background: #16a34a; color: white; padding: 6px 10px; }
+
+  .fixed    { grid-template-columns: 80px 120px 200px; }
+  .mix      { grid-template-columns: 100px 1fr 2fr auto; }
+  .rows     { grid-template-rows: 40px 60px 80px; grid-template-columns: 1fr 1fr 1fr; }
+  .frs      { grid-template-columns: 1fr 2fr 1fr; }
+  .autoflow { grid-template-columns: auto auto auto; }
+</style>
+</head>
+<body>
+<h1>grid-template-columns &amp; rows</h1>
+
+<h2>Fixed columns (80 / 120 / 200)</h2>
+<div class="g fixed"><div>A</div><div>B</div><div>C</div></div>
+
+<h2>Mixed units (100px / 1fr / 2fr / auto)</h2>
+<div class="g mix"><div>100</div><div>1fr</div><div>2fr</div><div>auto</div></div>
+
+<h2>Explicit rows (40 / 60 / 80) × 3 columns</h2>
+<div class="g rows">
+  <div>1</div><div>2</div><div>3</div>
+  <div>4</div><div>5</div><div>6</div>
+  <div>7</div><div>8</div><div>9</div>
+</div>
+
+<h2>fr ratios (1 / 2 / 1)</h2>
+<div class="g frs"><div>1fr</div><div>2fr</div><div>1fr</div></div>
+
+<h2>auto columns (size to content)</h2>
+<div class="g autoflow">
+  <div>short</div><div>much longer content</div><div>x</div>
+</div>
+</body>
+</html>

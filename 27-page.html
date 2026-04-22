@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>27 — Print / @page</title>
+<style>
+  body { font-family: serif; margin: 2em; max-width: 40em; line-height: 1.5; }
+  h1, h2 { page-break-after: avoid; break-after: avoid; }
+  .never-split { page-break-inside: avoid; break-inside: avoid; background: #fef9c3; padding: 8px; margin: 10px 0; }
+  .new-page-after { page-break-after: always; break-after: page; border-bottom: 2px dashed #dc2626; padding-bottom: 8px; }
+  .widows-orphans { widows: 3; orphans: 3; }
+
+  @page {
+    size: A4;
+    margin: 2cm;
+    @top-center { content: "Rendering test suite — print test"; }
+    @bottom-right { content: "Page " counter(page) " of " counter(pages); }
+  }
+  @page :first {
+    @top-center { content: "FIRST PAGE ONLY"; }
+  }
+  @page :left {
+    margin-left: 3cm;
+  }
+  @page :right {
+    margin-right: 3cm;
+  }
+
+  @media print {
+    body { font-size: 12pt; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<h1>Print / paged media</h1>
+<p class="no-print"><em>To view the effect, use the browser's Print Preview
+(⌘P / Ctrl+P). On screen, this page renders like any other. The
+<code>@page</code> rules apply margin boxes and page size; the
+<code>break-*</code> properties control pagination.</em></p>
+
+<div class="never-split">
+  <h2>Block that must never split across pages</h2>
+  <p>page-break-inside: avoid keeps this box on one page even if it means
+  leaving whitespace at the bottom of the previous page.</p>
+  <p>Line 2.</p>
+  <p>Line 3.</p>
+</div>
+
+<p class="widows-orphans">
+  A paragraph with widows:3 and orphans:3 — forces at least three lines at
+  the start/end of a page break. Lorem ipsum dolor sit amet consectetur
+  adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna
+  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+  nisi ut aliquip ex ea commodo consequat.
+</p>
+
+<div class="new-page-after">
+  <h2>Forced page break after this block</h2>
+  <p>The next content starts on a new printed page.</p>
+</div>
+
+<h2>Second page content</h2>
+<p>Intentionally long to let widows/orphans hit the boundary.</p>
+<p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p>
+<p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p><p>Line.</p>
+</body>
+</html>

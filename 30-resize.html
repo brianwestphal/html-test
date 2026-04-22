@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>30 — resize</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .r {
+    overflow: auto;
+    border: 2px solid #334155;
+    padding: 8px;
+    margin: 8px 0;
+    width: 220px;
+    height: 100px;
+    background: #fef3c7;
+  }
+  .both { resize: both; }
+  .h    { resize: horizontal; }
+  .v    { resize: vertical; }
+  .none-r { resize: none; }
+  textarea { font-family: inherit; }
+</style>
+</head>
+<body>
+<h1>resize — drag the bottom-right corner</h1>
+<p><em>resize only takes effect when overflow is not visible.</em></p>
+
+<div class="r both">resize: both — drag any of horizontal/vertical.</div>
+<div class="r h">resize: horizontal — width only.</div>
+<div class="r v">resize: vertical — height only.</div>
+<div class="r none-r">resize: none — not resizable.</div>
+
+<h2>textarea</h2>
+<textarea style="resize: both"   rows="3" cols="30">resize: both (default for textarea)</textarea>
+<textarea style="resize: none"   rows="3" cols="30">resize: none</textarea>
+<textarea style="resize: vertical" rows="3" cols="30">resize: vertical</textarea>
+</body>
+</html>

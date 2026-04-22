@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>03 — ::marker pseudo-element</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  ul.custom li::marker {
+    content: "➤ ";
+    color: #ea580c;
+    font-size: 1.2em;
+  }
+  ol.counters li::marker {
+    color: #2563eb;
+    font-weight: bold;
+    font-family: monospace;
+  }
+  ul.emoji li::marker {
+    content: "🍎 ";
+  }
+  ul.emoji li.vegetable::marker {
+    content: "🥕 ";
+  }
+</style>
+</head>
+<body>
+<h1>::marker pseudo-element</h1>
+
+<h2>Custom marker content &amp; color</h2>
+<ul class="custom">
+  <li>First item with arrow marker</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ul>
+
+<h2>Styled numeric markers</h2>
+<ol class="counters">
+  <li>Alpha</li>
+  <li>Beta</li>
+  <li>Gamma</li>
+</ol>
+
+<h2>Per-item emoji markers</h2>
+<ul class="emoji">
+  <li>Apple</li>
+  <li class="vegetable">Carrot</li>
+  <li>Banana</li>
+</ul>
+</body>
+</html>

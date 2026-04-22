@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 — display: list-item</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+    margin: 4px 0;
+    padding: 2px 4px;
+    background: #ecfeff;
+  }
+  .row.square { list-style-type: square; }
+  .row.decimal { list-style-type: decimal; }
+  .row.custom::marker { content: "→ "; color: #ea580c; }
+</style>
+</head>
+<body>
+<h1>display: list-item on non-&lt;li&gt; elements</h1>
+<div class="row">a plain div behaving as a list item (disc)</div>
+<div class="row square">square marker</div>
+<div class="row decimal">decimal marker</div>
+<div class="row custom">custom ::marker with arrow</div>
+</body>
+</html>

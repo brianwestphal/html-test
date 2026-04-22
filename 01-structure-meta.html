@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>01 — Meta tags</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rendering test for meta tag parsing.">
+<meta name="author" content="Test Suite">
+<meta name="keywords" content="html, css, rendering, test">
+<meta name="theme-color" content="#4f46e5">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="content-language" content="en">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<meta property="og:title" content="Meta Test">
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  dt { font-weight: bold; margin-top: 8px; }
+  dd { margin: 0 0 0 1em; font-family: monospace; }
+</style>
+</head>
+<body>
+<h1>Document structure — Meta tags</h1>
+<p>This document declares common <code>&lt;meta&gt;</code> tags. None of them
+have visible effects, but the parser must accept all of them without breaking
+subsequent rendering.</p>
+<dl>
+  <dt>viewport</dt><dd>width=device-width, initial-scale=1</dd>
+  <dt>description</dt><dd>Rendering test for meta tag parsing.</dd>
+  <dt>author</dt><dd>Test Suite</dd>
+  <dt>theme-color</dt><dd>#4f46e5</dd>
+  <dt>color-scheme</dt><dd>light dark</dd>
+  <dt>robots</dt><dd>noindex, nofollow</dd>
+  <dt>og:title</dt><dd>Meta Test</dd>
+</dl>
+</body>
+</html>

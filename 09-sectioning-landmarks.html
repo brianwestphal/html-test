@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>09 — Sectioning landmarks</title>
+<style>
+  body { font-family: sans-serif; margin: 0; }
+  body > * { padding: 12px 24px; }
+  header { background: #1e293b; color: white; }
+  nav { background: #334155; color: white; }
+  nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 18px; }
+  nav a { color: white; text-decoration: none; }
+  main { background: #f8fafc; }
+  aside { background: #fef3c7; float: right; width: 220px; margin: 0 0 10px 14px; border: 1px dashed #ca8a04; }
+  article { background: white; border: 1px solid #e2e8f0; padding: 12px; margin-bottom: 12px; }
+  footer { background: #0f172a; color: #cbd5e1; }
+  search { display: block; background: #dbeafe; border: 1px solid #60a5fa; padding: 8px; margin: 10px 0; }
+  figure { margin: 10px 0; border-left: 4px solid #6366f1; padding: 6px 12px; }
+  figcaption { color: #475569; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Site header</h1>
+  <p>Tagline / introductory content</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <search>
+    <form>
+      <label>Search <input type="search" placeholder="Find articles…"></label>
+      <button>Go</button>
+    </form>
+  </search>
+
+  <aside>
+    <h2>Related</h2>
+    <p>Sidebar content (tangentially related).</p>
+  </aside>
+
+  <article>
+    <header><h2>Article title</h2><p>Posted 2026-04-21</p></header>
+    <section>
+      <h3>First section</h3>
+      <p>Article content goes here.</p>
+    </section>
+    <section>
+      <h3>Second section</h3>
+      <p>More article content.</p>
+    </section>
+    <footer>Article footer — <small>Article-level footer (not page footer)</small></footer>
+  </article>
+
+  <figure>
+    <img src="assets/img-blue.jpg" alt="blue sample" width="80" height="80">
+    <figcaption>Figure caption: the JPEG sample</figcaption>
+  </figure>
+</main>
+
+<footer>
+  <p>&copy; 2026 Example Corp. — Site footer</p>
+</footer>
+</body>
+</html>

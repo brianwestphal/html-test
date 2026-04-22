@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 — border-radius</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .r {
+    display: inline-block;
+    width: 160px;
+    height: 100px;
+    margin: 8px;
+    padding: 8px;
+    background: #4f46e5;
+    color: white;
+    font-weight: 600;
+    vertical-align: top;
+    text-align: center;
+    line-height: 84px;
+  }
+  .uniform { border-radius: 20px; }
+  .two     { border-radius: 30px 8px; }
+  .four    { border-radius: 10px 30px 50px 70px; }
+  .ellip   { border-radius: 50px / 20px; }
+  .ellip-corners { border-radius: 50% 20% 10% 80%; }
+  .pill    { border-radius: 999px; }
+  .circle  { border-radius: 50%; width: 100px; height: 100px; line-height: 84px; }
+  .mixed   { border-radius: 50px 10px 50px 10px / 10px 50px 10px 50px; }
+</style>
+</head>
+<body>
+<h1>border-radius variations</h1>
+<div class="r uniform">uniform 20px</div>
+<div class="r two">30 / 8 (diag)</div>
+<div class="r four">10 / 30 / 50 / 70</div>
+<div class="r ellip">elliptical 50/20</div>
+<div class="r ellip-corners">% per corner</div>
+<div class="r pill">pill (999px)</div>
+<div class="r circle">circle (50%)</div>
+<div class="r mixed">asymmetric</div>
+</body>
+</html>

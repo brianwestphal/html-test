@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>25 — overscroll-behavior</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .panel {
+    height: 180px;
+    overflow: auto;
+    border: 2px solid #334155;
+    padding: 8px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+  }
+  .auto     { overscroll-behavior: auto; }
+  .contain  { overscroll-behavior: contain; }
+  .none     { overscroll-behavior: none; }
+
+  .long p { line-height: 1.8; }
+</style>
+</head>
+<body>
+<h1>overscroll-behavior</h1>
+<p>When you scroll to the top or bottom of each panel, the browser's chain
+behavior differs:</p>
+<ul>
+  <li><code>auto</code> — scrolling continues to the parent (whole page).</li>
+  <li><code>contain</code> — scroll is contained inside; no parent scroll or pull-to-refresh.</li>
+  <li><code>none</code> — same as contain, and also blocks browser overscroll glow/bounce effects.</li>
+</ul>
+
+<div class="panel auto long">
+  <h3>auto</h3>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+</div>
+
+<div class="panel contain long">
+  <h3>contain</h3>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+</div>
+
+<div class="panel none long">
+  <h3>none</h3>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+</div>
+
+<div style="height: 200vh; background: linear-gradient(#fef9c3, #fecaca); padding: 10px;">
+  Extra page body so the outer viewport also has scroll.
+</div>
+</body>
+</html>

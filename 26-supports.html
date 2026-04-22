@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>26 — @supports</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .tag { display: inline-block; padding: 6px 12px; margin: 4px; background: #cbd5e1; color: #334155; border-radius: 4px; font-weight: 600; }
+
+  @supports (display: grid) { .grid-s { background: #16a34a; color: white; } }
+  @supports (display: flex) { .flex-s { background: #16a34a; color: white; } }
+  @supports (aspect-ratio: 1) { .ar-s { background: #16a34a; color: white; } }
+  @supports (color: color(display-p3 0 0 0)) { .p3-s { background: #16a34a; color: white; } }
+  @supports (color: oklch(60% 0.2 30)) { .oklch-s { background: #16a34a; color: white; } }
+
+  @supports not (display: gridXXX) { .not-s { background: #dc2626; color: white; } }
+
+  @supports (display: grid) and (gap: 10px) { .and-s { background: #ea580c; color: white; } }
+  @supports (display: grid) or (display: masonry) { .or-s { background: #ea580c; color: white; } }
+
+  @supports selector(:has(a)) { .has-s { background: #7c3aed; color: white; } }
+  @supports selector(:is(a, b)) { .is-s { background: #7c3aed; color: white; } }
+</style>
+</head>
+<body>
+<h1>@supports — feature queries</h1>
+<span class="tag grid-s">display: grid</span>
+<span class="tag flex-s">display: flex</span>
+<span class="tag ar-s">aspect-ratio: 1</span>
+<span class="tag p3-s">color(display-p3 …)</span>
+<span class="tag oklch-s">oklch(…)</span>
+<span class="tag not-s">not (display: gridXXX)</span>
+<span class="tag and-s">grid AND gap</span>
+<span class="tag or-s">grid OR masonry</span>
+<span class="tag has-s">selector(:has(a))</span>
+<span class="tag is-s">selector(:is(a,b))</span>
+</body>
+</html>

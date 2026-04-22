@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>14 — shape-outside</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 40em; line-height: 1.6; }
+  .circle {
+    float: left;
+    width: 140px; height: 140px;
+    background: #fb7185;
+    border-radius: 50%;
+    shape-outside: circle(70px);
+    margin: 0 12px 8px 0;
+  }
+  .poly {
+    float: right;
+    width: 160px; height: 140px;
+    background: #fde68a;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    shape-outside: polygon(100% 0, 100% 100%, 0 100%);
+    margin: 0 0 8px 12px;
+  }
+  .inset {
+    float: left;
+    width: 140px; height: 80px;
+    background: #93c5fd;
+    shape-outside: inset(10px 20px 10px 20px round 20px);
+    margin: 10px 12px 8px 0;
+  }
+</style>
+</head>
+<body>
+<h1>shape-outside — text wraps to non-rectangular floats</h1>
+
+<p>
+<span class="circle"></span>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Text curves around the
+circular float on the left, following the circle() shape rather than its
+bounding box.</p>
+
+<p>
+<span class="poly"></span>
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat. Text wraps along the triangular polygon on
+the right, following the polygon() shape of the floated box.</p>
+
+<p>
+<span class="inset"></span>
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+eu fugiat nulla pariatur. The inset shape with rounded corners affects how
+tightly the text wraps on the left side.</p>
+</body>
+</html>

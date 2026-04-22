@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — text-indent, vertical-align</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 36em; line-height: 1.6; }
+  .indent    { text-indent: 2em; }
+  .indent-pc { text-indent: 20%; }
+  .hang      { text-indent: -2em; padding-left: 2em; }
+
+  .va { background: #e0f2fe; padding: 2px 6px; }
+  .va > * { display: inline-block; background: #4f46e5; color: white; padding: 2px 6px; height: 40px; }
+  .baseline    { vertical-align: baseline; }
+  .sub         { vertical-align: sub; }
+  .super       { vertical-align: super; }
+  .top         { vertical-align: top; }
+  .middle      { vertical-align: middle; }
+  .bottom      { vertical-align: bottom; }
+  .text-top    { vertical-align: text-top; }
+  .text-bottom { vertical-align: text-bottom; }
+  .va-em       { vertical-align: 1em; }
+</style>
+</head>
+<body>
+<h1>text-indent &amp; vertical-align</h1>
+
+<h2>text-indent</h2>
+<p class="indent">First-line indent 2em — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p class="indent-pc">First-line indent 20% — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor.</p>
+<p class="hang">Hanging indent (negative text-indent + padding-left) — Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+
+<h2>vertical-align (inline-block boxes on a text line)</h2>
+<p class="va" style="font-size: 22px;">
+  Baseline →
+  <span class="baseline">baseline</span>
+  <span class="sub">sub</span>
+  <span class="super">super</span>
+  <span class="top">top</span>
+  <span class="middle">middle</span>
+  <span class="bottom">bottom</span>
+  <span class="text-top">text-top</span>
+  <span class="text-bottom">text-bottom</span>
+  <span class="va-em">+1em</span>
+</p>
+</body>
+</html>

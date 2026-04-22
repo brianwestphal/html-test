@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — fieldset / legend</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  fieldset { margin-bottom: 16px; }
+  legend { font-weight: 600; padding: 0 6px; }
+  .row { margin: 6px 0; }
+</style>
+</head>
+<body>
+<h1>&lt;fieldset&gt; + &lt;legend&gt;</h1>
+<form action="#" onsubmit="return false">
+  <fieldset>
+    <legend>Personal details</legend>
+    <div class="row"><label>Name <input type="text"></label></div>
+    <div class="row"><label>Email <input type="email"></label></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Preferences</legend>
+    <fieldset>
+      <legend>Contact method</legend>
+      <label><input type="radio" name="c"> Email</label>
+      <label><input type="radio" name="c"> SMS</label>
+      <label><input type="radio" name="c"> Mail</label>
+    </fieldset>
+    <fieldset>
+      <legend>Topics</legend>
+      <label><input type="checkbox"> News</label>
+      <label><input type="checkbox"> Offers</label>
+      <label><input type="checkbox"> Events</label>
+    </fieldset>
+  </fieldset>
+
+  <fieldset disabled>
+    <legend>Disabled group (all children disabled)</legend>
+    <label>Locked input <input type="text" value="can't edit"></label>
+    <button>Can't click</button>
+  </fieldset>
+</form>
+</body>
+</html>

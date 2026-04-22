@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>22 — mix-blend-mode / background-blend-mode</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .scene {
+    position: relative;
+    width: 460px;
+    height: 180px;
+    background: url("assets/img-wide.png") center/cover;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 700;
+  }
+  .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    letter-spacing: 2px;
+  }
+
+  .normal     .overlay { mix-blend-mode: normal; }
+  .multiply   .overlay { mix-blend-mode: multiply; }
+  .screen     .overlay { mix-blend-mode: screen; }
+  .overlay-m  .overlay { mix-blend-mode: overlay; }
+  .difference .overlay { mix-blend-mode: difference; }
+  .color-dodge .overlay { mix-blend-mode: color-dodge; }
+  .lighten    .overlay { mix-blend-mode: lighten; }
+  .darken     .overlay { mix-blend-mode: darken; }
+
+  .bg-blend {
+    width: 460px;
+    height: 180px;
+    background: url("assets/img-wide.png") center/cover, #dc2626;
+    background-blend-mode: multiply;
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<h1>mix-blend-mode (overlays) &amp; background-blend-mode</h1>
+
+<div class="scene normal"><div class="overlay">NORMAL</div></div>
+<div class="scene multiply"><div class="overlay">MULTIPLY</div></div>
+<div class="scene screen"><div class="overlay">SCREEN</div></div>
+<div class="scene overlay-m"><div class="overlay">OVERLAY</div></div>
+<div class="scene difference"><div class="overlay">DIFFERENCE</div></div>
+<div class="scene color-dodge"><div class="overlay">COLOR-DODGE</div></div>
+<div class="scene lighten"><div class="overlay">LIGHTEN</div></div>
+<div class="scene darken"><div class="overlay">DARKEN</div></div>
+
+<h2>background-blend-mode: multiply (image × red solid)</h2>
+<div class="bg-blend">tinted background</div>
+</body>
+</html>

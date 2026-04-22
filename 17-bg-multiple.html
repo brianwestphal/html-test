@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>17 — Multiple backgrounds layered</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .multi {
+    width: 500px;
+    height: 260px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    background:
+      url("assets/img-orange.svg") no-repeat 20px 20px / 64px,
+      url("assets/img-red.png") no-repeat right 20px bottom 20px / 64px,
+      linear-gradient(120deg, #4f46e5 0%, #9333ea 50%, #dc2626 100%);
+    border: 1px solid #111;
+  }
+  .gradient-stack {
+    width: 500px;
+    height: 200px;
+    padding: 10px;
+    color: white;
+    background:
+      linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.7)),
+      linear-gradient(90deg, #0ea5e9, #10b981, #f59e0b);
+  }
+</style>
+</head>
+<body>
+<h1>Multiple backgrounds (front-to-back layering)</h1>
+
+<div class="multi">
+  Layers: orange SVG top-left, red square bottom-right, purple gradient base.
+</div>
+
+<p>Gradient over gradient (two linear-gradients stacked):</p>
+<div class="gradient-stack">
+  Top layer is a vertical black fade; bottom is a rainbow horizontal gradient.
+</div>
+</body>
+</html>

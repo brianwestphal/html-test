@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>07 — object-fit, object-position</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row { display: grid; grid-template-columns: repeat(5, 160px); gap: 14px; margin-bottom: 18px; }
+  .box { width: 160px; height: 120px; border: 2px solid #334155; background: #fef3c7; }
+  .box img { width: 100%; height: 100%; display: block; }
+  figcaption { font-size: 12px; text-align: center; color: #475569; margin-top: 4px; }
+  figure { margin: 0; }
+</style>
+</head>
+<body>
+<h1>object-fit &amp; object-position</h1>
+<p>The source image is 3:1 landscape (<code>img-wide.png</code>) placed into
+a 4:3 container.</p>
+
+<div class="row">
+  <figure><div class="box"><img src="assets/img-wide.png" alt="fill" style="object-fit:fill"></div><figcaption>fill (default-ish, stretches)</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-wide.png" alt="contain" style="object-fit:contain"></div><figcaption>contain (letterboxes)</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-wide.png" alt="cover" style="object-fit:cover"></div><figcaption>cover (crops)</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-wide.png" alt="none" style="object-fit:none"></div><figcaption>none (intrinsic, overflows)</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-wide.png" alt="scale-down" style="object-fit:scale-down"></div><figcaption>scale-down</figcaption></figure>
+</div>
+
+<h2>object-position (cover, shifting focal point)</h2>
+<div class="row">
+  <figure><div class="box"><img src="assets/img-tall.png" alt="top" style="object-fit:cover; object-position: top;"></div><figcaption>cover / top</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-tall.png" alt="center" style="object-fit:cover; object-position: center;"></div><figcaption>cover / center</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-tall.png" alt="bottom" style="object-fit:cover; object-position: bottom;"></div><figcaption>cover / bottom</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-tall.png" alt="left" style="object-fit:cover; object-position: left;"></div><figcaption>cover / left</figcaption></figure>
+  <figure><div class="box"><img src="assets/img-tall.png" alt="75% 25%" style="object-fit:cover; object-position: 75% 25%;"></div><figcaption>cover / 75% 25%</figcaption></figure>
+</div>
+</body>
+</html>

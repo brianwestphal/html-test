@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>17 — background: color, image, position, repeat, size</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .bx { width: 240px; height: 160px; margin-right: 10px; margin-bottom: 12px; display: inline-block; color: white; padding: 6px; border: 1px solid #111; vertical-align: top; font-weight: bold; }
+  .bg1 { background-color: #dc2626; }
+  .bg2 { background: url("assets/img-orange.svg") #0f172a no-repeat center / 80px; }
+  .bg-repeat-x    { background: url("assets/img-orange.svg") #f1f5f9 repeat-x; background-size: 48px; color: #334155;}
+  .bg-repeat-y    { background: url("assets/img-orange.svg") #f1f5f9 repeat-y; background-size: 48px; color: #334155;}
+  .bg-no-repeat   { background: url("assets/img-orange.svg") #f1f5f9 no-repeat right bottom; background-size: 64px; color: #334155;}
+  .bg-cover       { background: url("assets/img-wide.png") center/cover; }
+  .bg-contain     { background: url("assets/img-wide.png") center/contain no-repeat #0f172a; }
+  .bg-size-fixed  { background: url("assets/img-red.png") no-repeat; background-size: 60px 100px; background-color: #fef3c7; color: #334155; }
+  .bg-pos-pct     { background: url("assets/img-red.png") no-repeat 75% 25% #ecfdf5; color: #334155; background-size: 50px; }
+  .bg-clip        { background: url("assets/img-wide.png") center/cover; border: 10px dashed rgba(255,255,255,.7); padding: 20px; background-clip: content-box; }
+  .bg-origin      { background: url("assets/img-red.png") no-repeat top left #fef3c7; background-origin: border-box; border: 10px dashed rgba(15,23,42,.4); padding: 10px; color: #334155; }
+  .bg-attach      { background: url("assets/img-red.png") no-repeat; background-attachment: fixed; background-size: 80px; background-color: #0ea5e9; }
+</style>
+</head>
+<body>
+<h1>background — color, image, position, repeat, size, clip, origin, attachment</h1>
+
+<div class="bx bg1">background-color only</div>
+<div class="bx bg2">image no-repeat, centered, size 80px</div>
+<div class="bx bg-repeat-x">repeat-x</div>
+<div class="bx bg-repeat-y">repeat-y</div>
+<div class="bx bg-no-repeat">no-repeat right bottom</div>
+<div class="bx bg-cover">size: cover (fills, crops)</div>
+<div class="bx bg-contain">size: contain (letterboxes)</div>
+<div class="bx bg-size-fixed">size 60 × 100 (stretched)</div>
+<div class="bx bg-pos-pct">position 75% 25%</div>
+<div class="bx bg-clip">background-clip: content-box (dashed border shows edges)</div>
+<div class="bx bg-origin">background-origin: border-box (image starts at border edge)</div>
+<div class="bx bg-attach">background-attachment: fixed (scroll page to see)</div>
+
+<div style="height: 120vh; background: linear-gradient(#fef9c3, #fecaca); margin-top: 20px;"></div>
+</body>
+</html>

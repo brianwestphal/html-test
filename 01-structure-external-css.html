@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>01 — External CSS via link + @import</title>
+<link rel="stylesheet" href="assets/shared.css">
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  h1 { color: #334155; }
+</style>
+</head>
+<body>
+<h1>Document structure — External stylesheet + @import</h1>
+<p>The purple banner below is styled by rules in
+<code>assets/shared.css</code> loaded via <code>&lt;link rel=stylesheet&gt;</code>.
+The green box is styled by <code>assets/shared-import.css</code>, pulled in by
+an <code>@import</code> inside <code>shared.css</code>.</p>
+<div class="shared-banner">Styled by link rel=stylesheet → shared.css</div>
+<p></p>
+<div class="shared-import-note">Styled via @import → shared-import.css</div>
+</body>
+</html>

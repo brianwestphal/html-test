@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 — grid-auto-flow & auto rows/cols</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .g {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-auto-rows: 50px;
+    gap: 4px;
+    background: #e2e8f0;
+    padding: 4px;
+    margin-bottom: 14px;
+  }
+  .g > div { background: #16a34a; color: white; padding: 4px 6px; font-size: 13px; }
+
+  .row   { grid-auto-flow: row; }
+  .col   { grid-auto-flow: column; grid-template-rows: repeat(3, 50px); grid-template-columns: auto; grid-auto-columns: 80px; }
+  .dense { grid-auto-flow: row dense; }
+
+  .big   { grid-column: span 2; grid-row: span 2; background: #dc2626; }
+</style>
+</head>
+<body>
+<h1>grid-auto-flow — row / column / dense</h1>
+
+<h2>row (default)</h2>
+<div class="g row">
+  <div>1</div><div>2</div><div class="big">big 2×2</div><div>3</div>
+  <div>4</div><div>5</div><div>6</div><div>7</div>
+</div>
+
+<h2>column</h2>
+<div class="g col">
+  <div>1</div><div>2</div><div>3</div><div>4</div>
+  <div>5</div><div>6</div>
+</div>
+
+<h2>dense (fills holes left by big item)</h2>
+<div class="g dense">
+  <div>1</div><div>2</div><div class="big">big 2×2</div><div>3</div>
+  <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+</body>
+</html>

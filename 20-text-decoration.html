@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — text-decoration</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; font-size: 18px; line-height: 1.9; }
+  .u  { text-decoration: underline; }
+  .o  { text-decoration: overline; }
+  .lt { text-decoration: line-through; }
+  .combo { text-decoration: underline overline; }
+
+  .style-wavy   { text-decoration: underline wavy #dc2626; }
+  .style-dotted { text-decoration: underline dotted #2563eb; }
+  .style-dashed { text-decoration: underline dashed #16a34a; }
+  .style-double { text-decoration: underline double #a855f7; }
+  .style-solid  { text-decoration: underline solid #f59e0b; }
+
+  .thick  { text-decoration: underline 5px #dc2626; }
+  .thin   { text-decoration: underline from-font #2563eb; }
+  .offset { text-decoration: underline #0ea5e9; text-underline-offset: 6px; }
+
+  .skip-none   { text-decoration: underline 3px #111; text-decoration-skip-ink: none; }
+  .skip-auto   { text-decoration: underline 3px #111; text-decoration-skip-ink: auto; }
+</style>
+</head>
+<body>
+<h1>text-decoration</h1>
+
+<p>Basic lines:
+  <span class="u">underline</span> ·
+  <span class="o">overline</span> ·
+  <span class="lt">line-through</span> ·
+  <span class="combo">underline+overline</span>
+</p>
+
+<p>Styles:
+  <span class="style-wavy">wavy</span> ·
+  <span class="style-dotted">dotted</span> ·
+  <span class="style-dashed">dashed</span> ·
+  <span class="style-double">double</span> ·
+  <span class="style-solid">solid</span>
+</p>
+
+<p>Thickness &amp; offset:
+  <span class="thick">5px red</span> ·
+  <span class="thin">from-font blue</span> ·
+  <span class="offset">offset 6px</span>
+</p>
+
+<p>Skip-ink comparison (affects descenders on y, g, p):
+  <span class="skip-none">skip-ink: none — jumping junipers</span> vs
+  <span class="skip-auto">skip-ink: auto — jumping junipers</span>
+</p>
+</body>
+</html>

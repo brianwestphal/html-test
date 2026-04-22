@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 — grid-template-areas</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .layout {
+    display: grid;
+    grid-template-columns: 200px 1fr 220px;
+    grid-template-rows: 60px 1fr 40px;
+    grid-template-areas:
+      "header header header"
+      "nav    main   aside"
+      "footer footer footer";
+    gap: 6px;
+    min-height: 380px;
+    background: #e2e8f0;
+    padding: 6px;
+  }
+  .layout > * { padding: 8px 10px; color: white; font-weight: 600; }
+  .h { grid-area: header; background: #1d4ed8; }
+  .n { grid-area: nav;    background: #be123c; }
+  .m { grid-area: main;   background: #0f766e; }
+  .a { grid-area: aside;  background: #a16207; }
+  .f { grid-area: footer; background: #334155; }
+</style>
+</head>
+<body>
+<h1>grid-template-areas — named placement</h1>
+<div class="layout">
+  <div class="h">HEADER</div>
+  <div class="n">NAV</div>
+  <div class="m">MAIN</div>
+  <div class="a">ASIDE</div>
+  <div class="f">FOOTER</div>
+</div>
+</body>
+</html>

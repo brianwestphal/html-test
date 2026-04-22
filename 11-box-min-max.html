@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 — min/max width & height</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .box { background: #dbeafe; border: 1px solid #1e40af; padding: 8px; margin-bottom: 8px; color: #1e3a8a; }
+
+  .w-fluid    { width: 100%; max-width: 400px; min-width: 150px; }
+  .grow-short { width: 50px; min-width: 200px; }
+  .shrink-big { width: 900px; max-width: 300px; }
+
+  .h-box     { height: 50px; max-height: 80px; min-height: 30px; background: #fde68a; border-color: #ca8a04; color: #78350f; padding: 4px; margin-bottom: 8px; overflow: auto; }
+  .h-content { height: 10px; min-height: 60px; }
+  .h-cap     { height: 300px; max-height: 80px; }
+</style>
+</head>
+<body>
+<h1>min/max sizing</h1>
+
+<h2>max-width: 400px</h2>
+<div class="box w-fluid">Container is 100% wide but never wider than 400px (and never narrower than 150px).</div>
+
+<h2>min-width overrides shrinking: width 50 + min-width 200 = 200</h2>
+<div class="box grow-short">width:50px but min-width:200px wins → box is 200px wide.</div>
+
+<h2>max-width overrides growth: width 900 + max-width 300 = 300</h2>
+<div class="box shrink-big">width:900px but max-width:300px wins.</div>
+
+<h2>height vs min-height (min wins if content is taller)</h2>
+<div class="h-box h-content">height:10, min-height:60 → min wins.</div>
+
+<h2>max-height constrains and content overflows (scroll)</h2>
+<div class="h-box h-cap">
+  height:300, max-height:80 → 80. Lots of text lorem ipsum dolor sit amet
+  consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et
+  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+  ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+</body>
+</html>

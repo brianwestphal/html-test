@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 — outline / outline-offset</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .o {
+    display: inline-block;
+    width: 140px;
+    height: 80px;
+    margin: 14px 24px;
+    padding: 8px;
+    text-align: center;
+    line-height: 64px;
+    background: #fde68a;
+    border: 2px solid #111;
+    font-weight: 600;
+    vertical-align: top;
+  }
+  .solid   { outline: 3px solid #dc2626; }
+  .dashed  { outline: 3px dashed #2563eb; }
+  .dotted  { outline: 3px dotted #16a34a; }
+  .double  { outline: 6px double #a855f7; }
+  .offset  { outline: 3px solid #0ea5e9; outline-offset: 8px; }
+  .neg     { outline: 3px solid #ea580c; outline-offset: -8px; }
+</style>
+</head>
+<body>
+<h1>outline &amp; outline-offset (outline is drawn outside, not in the box model)</h1>
+<div class="o solid">solid</div>
+<div class="o dashed">dashed</div>
+<div class="o dotted">dotted</div>
+<div class="o double">double</div>
+<div class="o offset">offset +8</div>
+<div class="o neg">offset -8 (inside border)</div>
+</body>
+</html>

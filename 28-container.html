@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 — @container</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+
+  .wrap { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .card {
+    container-type: inline-size;
+    container-name: card;
+    background: #fef3c7;
+    border: 1px solid #ca8a04;
+    padding: 10px;
+    width: 220px;
+  }
+  .card .inner h2 { margin: 0 0 4px; color: #78350f; }
+  .card .inner p  { margin: 0; }
+
+  /* Query the card container */
+  @container card (min-width: 320px) {
+    .inner { display: flex; gap: 12px; }
+    .inner img { width: 64px; height: 64px; }
+    .inner h2 { font-size: 22px; }
+  }
+  @container card (max-width: 320px) {
+    .inner h2 { font-size: 14px; }
+  }
+
+  .card.wide   { width: 360px; }
+  .card.xwide  { width: 500px; }
+
+  /* cqw unit */
+  .cqcard {
+    container-type: inline-size;
+    background: #dcfce7;
+    border: 1px solid #15803d;
+    padding: 10px;
+    width: 300px;
+    margin-top: 12px;
+  }
+  .cqcard h2 { font-size: 5cqw; color: #064e3b; }
+</style>
+</head>
+<body>
+<h1>@container — container queries (inline-size)</h1>
+
+<div class="wrap">
+  <div class="card">
+    <div class="inner">
+      <img src="assets/img-red.png" alt="">
+      <div>
+        <h2>Narrow card</h2>
+        <p>Small h2, stacked layout (220px wide, below 320px).</p>
+      </div>
+    </div>
+  </div>
+  <div class="card wide">
+    <div class="inner">
+      <img src="assets/img-red.png" alt="">
+      <div>
+        <h2>Wide card</h2>
+        <p>Side-by-side layout (360px).</p>
+      </div>
+    </div>
+  </div>
+  <div class="card xwide">
+    <div class="inner">
+      <img src="assets/img-red.png" alt="">
+      <div>
+        <h2>Extra-wide card</h2>
+        <p>Also side-by-side (500px).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>cqw units — heading scales with container</h2>
+<div class="cqcard"><h2>Heading at 5cqw</h2></div>
+<div class="cqcard" style="width:500px;"><h2>Same 5cqw, container 500px</h2></div>
+</body>
+</html>

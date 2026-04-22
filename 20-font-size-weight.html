@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 — font-size &amp; font-weight</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .size-row span { margin-right: 12px; vertical-align: baseline; }
+  .s1 { font-size: 10px; }
+  .s2 { font-size: 14px; }
+  .s3 { font-size: 18px; }
+  .s4 { font-size: 24px; }
+  .s5 { font-size: 32px; }
+  .s6 { font-size: 48px; }
+  .s7 { font-size: 0.75em; }
+  .s8 { font-size: 1.5em; }
+  .s9 { font-size: 200%; }
+  .s10 { font-size: xx-small; }
+  .s11 { font-size: small; }
+  .s12 { font-size: medium; }
+  .s13 { font-size: large; }
+  .s14 { font-size: xx-large; }
+
+  .w1  { font-weight: 100; }
+  .w2  { font-weight: 300; }
+  .w3  { font-weight: 400; }  /* normal */
+  .w4  { font-weight: 500; }
+  .w5  { font-weight: 600; }
+  .w6  { font-weight: 700; }  /* bold */
+  .w7  { font-weight: 900; }
+  .w8  { font-weight: normal; }
+  .w9  { font-weight: bold; }
+  .w10 { font-weight: bolder; }  /* depends on parent */
+  .w11 { font-weight: lighter; }
+</style>
+</head>
+<body>
+<h1>font-size keywords + units</h1>
+<p class="size-row">
+  <span class="s1">10px</span>
+  <span class="s2">14px</span>
+  <span class="s3">18px</span>
+  <span class="s4">24px</span>
+  <span class="s5">32px</span>
+  <span class="s6">48px</span>
+</p>
+<p class="size-row">
+  <span class="s7">0.75em</span>
+  <span class="s8">1.5em</span>
+  <span class="s9">200%</span>
+</p>
+<p class="size-row">
+  <span class="s10">xx-small</span>
+  <span class="s11">small</span>
+  <span class="s12">medium</span>
+  <span class="s13">large</span>
+  <span class="s14">xx-large</span>
+</p>
+
+<h1>font-weight 100 → 900</h1>
+<p class="size-row" style="font-size:22px;">
+  <span class="w1">100</span>
+  <span class="w2">300</span>
+  <span class="w3">400</span>
+  <span class="w4">500</span>
+  <span class="w5">600</span>
+  <span class="w6">700</span>
+  <span class="w7">900</span>
+</p>
+<p class="size-row" style="font-size:22px;">
+  <span class="w8">normal</span>
+  <span class="w9">bold</span>
+</p>
+<p style="font-weight:600; font-size:22px;">
+  Parent 600: <span class="w10">bolder → 700+</span>, <span class="w11">lighter → 400-</span>
+</p>
+</body>
+</html>

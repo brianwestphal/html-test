@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>05 — Anchor variations</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.7; }
+  ul { padding-left: 22px; }
+  #later { margin-top: 120vh; padding: 12px; background: #fef3c7; }
+</style>
+</head>
+<body>
+<h1>Anchors — href variations</h1>
+<ul>
+  <li><a href="https://example.com/">Absolute https:// URL</a></li>
+  <li><a href="//example.com/protocol-relative">Protocol-relative (//)</a></li>
+  <li><a href="assets/img-red.png">Relative → assets/img-red.png</a></li>
+  <li><a href="/absolute/path.html">Root-relative (/...)</a></li>
+  <li><a href="#later">Fragment link (#later) on this page</a></li>
+  <li><a href="mailto:someone@example.com?subject=Hi">mailto: with query</a></li>
+  <li><a href="tel:+15551234567">tel:+15551234567</a></li>
+  <li><a href="sms:+15551234567">sms:</a></li>
+  <li><a href="https://example.com/" target="_blank" rel="noopener noreferrer">target=_blank + rel=noopener noreferrer</a></li>
+  <li><a href="assets/img-red.png" download="red-square.png">download attribute (filename hint)</a></li>
+  <li><a href="https://example.com/" referrerpolicy="no-referrer">referrerpolicy=no-referrer</a></li>
+  <li><a href="https://example.com/" hreflang="fr" title="Version française">hreflang + title tooltip</a></li>
+  <li><a href="https://example.com/" type="text/html">type=text/html advisory</a></li>
+</ul>
+
+<h2>Anchors wrapping block content (permitted in HTML5)</h2>
+<a href="https://example.com/" style="display:block; border:2px solid #334155; padding: 12px; text-decoration: none; color: inherit; max-width: 20em;">
+  <h3>Whole card is a link</h3>
+  <p>An <code>&lt;a&gt;</code> can contain flow content in HTML5.</p>
+</a>
+
+<div id="later"><h2>Fragment target</h2><p>Jumped here from #later.</p></div>
+</body>
+</html>

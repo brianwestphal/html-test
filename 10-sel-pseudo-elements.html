@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 — Pseudo-elements</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .bf::before { content: "⚑ "; color: #dc2626; }
+  .bf::after  { content: " ✓"; color: #16a34a; }
+
+  .drop::first-letter {
+    font-size: 2.6em;
+    font-weight: bold;
+    float: left;
+    line-height: 1;
+    padding: 4px 6px 0 0;
+    color: #4f46e5;
+  }
+  .drop::first-line {
+    font-variant: small-caps;
+    letter-spacing: 1px;
+  }
+
+  ul.marker-demo li::marker {
+    color: #ea580c;
+    font-weight: bold;
+  }
+
+  ::selection {
+    background: #4f46e5;
+    color: white;
+  }
+
+  input::placeholder {
+    color: #a855f7;
+    font-style: italic;
+    opacity: 1;
+  }
+
+  input[type="file"]::file-selector-button {
+    padding: 4px 10px;
+    border: 1px solid #334155;
+    background: #fef3c7;
+    border-radius: 4px;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h1>Pseudo-elements</h1>
+
+<h2>::before / ::after</h2>
+<p class="bf">This line has flag before and check after.</p>
+
+<h2>::first-letter / ::first-line</h2>
+<p class="drop">First letter is a giant purple drop cap, and the first line
+renders in small-caps with letter spacing. Additional sentences here
+demonstrate that subsequent lines revert to the normal body style without
+any of those decorations applied.</p>
+
+<h2>::marker</h2>
+<ul class="marker-demo">
+  <li>orange bold disc markers</li>
+  <li>second</li>
+</ul>
+
+<h2>::selection (highlight some text)</h2>
+<p>Drag-select any text on this page to see the purple highlight.</p>
+
+<h2>::placeholder</h2>
+<p><input type="text" placeholder="This placeholder is purple italic" style="width: 320px;"></p>
+
+<h2>::file-selector-button</h2>
+<p><input type="file"></p>
+</body>
+</html>

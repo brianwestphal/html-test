@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 — @import</title>
+<style>
+  @import url("assets/shared-import.css");
+  @import url("assets/shared.css") screen;
+  @import "assets/shared.css" (min-width: 100px);
+
+  body { font-family: sans-serif; margin: 2em; }
+</style>
+</head>
+<body>
+<h1>@import variants</h1>
+<p>Three <code>@import</code> rules pulled in, including one conditional on
+media and one conditional on a width query. The banner/note below come from
+those imported stylesheets.</p>
+
+<div class="shared-banner">shared-banner from shared.css (via @import)</div>
+<p></p>
+<div class="shared-import-note">shared-import-note from shared-import.css</div>
+</body>
+</html>

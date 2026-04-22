@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — output element</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  form { display: flex; align-items: center; gap: 8px; }
+  output { font-weight: bold; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<h1>&lt;output&gt; — calculated value sink</h1>
+<p>Static rendering only. The <code>&lt;output&gt;</code> element is
+represented inline and styled like any phrasing element.</p>
+
+<form>
+  <input type="number" value="3"> × <input type="number" value="4"> =
+  <output for="a b" name="result">12</output>
+</form>
+<p>Inline flow: the total is <output>$199.00</output>, which includes tax.</p>
+</body>
+</html>

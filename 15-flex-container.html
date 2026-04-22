@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 — Flex container: direction / wrap / gap</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .fx { display: flex; gap: 8px; background: #e2e8f0; padding: 8px; margin-bottom: 12px; min-height: 60px; }
+  .fx > div { background: #4f46e5; color: white; padding: 6px 10px; min-width: 36px; text-align: center; }
+
+  .row           { flex-direction: row; }
+  .row-reverse   { flex-direction: row-reverse; }
+  .col           { flex-direction: column; }
+  .col-reverse   { flex-direction: column-reverse; }
+  .wrap          { flex-wrap: wrap; }
+  .nowrap        { flex-wrap: nowrap; }
+  .wrap-reverse  { flex-wrap: wrap-reverse; }
+
+  .gapxy { gap: 20px 6px; }
+</style>
+</head>
+<body>
+<h1>Flex — flex-direction / flex-wrap / gap</h1>
+
+<h2>row (default)</h2>
+<div class="fx row"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+
+<h2>row-reverse</h2>
+<div class="fx row-reverse"><div>1</div><div>2</div><div>3</div><div>4</div></div>
+
+<h2>column</h2>
+<div class="fx col" style="max-width:200px"><div>1</div><div>2</div><div>3</div></div>
+
+<h2>column-reverse</h2>
+<div class="fx col-reverse" style="max-width:200px"><div>1</div><div>2</div><div>3</div></div>
+
+<h2>wrap</h2>
+<div class="fx wrap" style="max-width: 260px">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+
+<h2>nowrap (default) — items shrink</h2>
+<div class="fx nowrap" style="max-width: 260px">
+  <div style="min-width:0">looooooong item one</div><div>2</div><div>3</div><div>4</div>
+</div>
+
+<h2>wrap-reverse</h2>
+<div class="fx wrap-reverse" style="max-width: 260px">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+</div>
+
+<h2>gap 20px 6px (row-gap column-gap)</h2>
+<div class="fx wrap gapxy" style="max-width: 260px">
+  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+</div>
+</body>
+</html>

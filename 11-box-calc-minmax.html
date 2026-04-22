@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 — calc(), min(), max(), clamp()</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .bar { background: #4f46e5; color: white; padding: 6px 12px; margin: 4px 0; }
+  .calc1 { width: calc(50% - 40px); }
+  .calc2 { width: calc(100px + 10em); }
+  .calc3 { width: calc(100% / 3); }
+  .min   { width: min(400px, 80vw); }
+  .max   { width: max(200px, 30%); }
+  .clamp { width: clamp(200px, 50%, 500px); }
+  .calc-nested { padding: calc(4px + 0.5rem) calc(1em + 10px); }
+  .font-clamp { font-size: clamp(14px, 2vw + 8px, 28px); }
+</style>
+</head>
+<body>
+<h1>calc(), min(), max(), clamp()</h1>
+<div class="bar calc1">width: calc(50% - 40px)</div>
+<div class="bar calc2">width: calc(100px + 10em)</div>
+<div class="bar calc3">width: calc(100% / 3)</div>
+<div class="bar min">min(400px, 80vw)</div>
+<div class="bar max">max(200px, 30%)</div>
+<div class="bar clamp">clamp(200px, 50%, 500px)</div>
+<div class="bar calc-nested">padding: calc(4px + 0.5rem) calc(1em + 10px)</div>
+<div class="bar font-clamp">font-size: clamp(14px, 2vw + 8px, 28px)</div>
+</body>
+</html>

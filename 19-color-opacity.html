@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>19 — opacity vs rgba alpha</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .scene {
+    background: url("assets/img-wide.png") center/cover;
+    padding: 16px;
+    border: 1px solid #111;
+    margin-bottom: 10px;
+  }
+  .card {
+    background: #dc2626;
+    color: white;
+    padding: 8px 14px;
+    width: fit-content;
+    font-weight: bold;
+    display: inline-block;
+    margin: 4px;
+  }
+  .op-1 { opacity: 1; }
+  .op-075 { opacity: 0.75; }
+  .op-05 { opacity: 0.5; }
+  .op-025 { opacity: 0.25; }
+  .op-text { opacity: 0.5; }
+  .rgba-bg { background: rgba(220, 38, 38, .5); }
+  .stack { position: relative; }
+  .stack > * { position: absolute; }
+  .l1 { top: 10px;  left: 10px; width: 160px; height: 70px; background: rgba(255,0,0,0.6); }
+  .l2 { top: 40px;  left: 60px; width: 160px; height: 70px; background: rgba(0,255,0,0.6); }
+  .l3 { top: 70px;  left: 110px; width: 160px; height: 70px; background: rgba(0,0,255,0.6); }
+</style>
+</head>
+<body>
+<h1>opacity vs color alpha</h1>
+
+<h2>opacity on element (affects children too)</h2>
+<div class="scene">
+  <span class="card op-1">op 1</span>
+  <span class="card op-075">op 0.75</span>
+  <span class="card op-05">op 0.5</span>
+  <span class="card op-025">op 0.25</span>
+</div>
+
+<h2>rgba background alpha only</h2>
+<div class="scene">
+  <span class="card rgba-bg">bg rgba .5 — text stays opaque</span>
+</div>
+
+<h2>Additive blending of alpha layers</h2>
+<div class="scene" style="height: 160px; position: relative;">
+  <div class="stack" style="position: static;">
+    <div class="l1"></div>
+    <div class="l2"></div>
+    <div class="l3"></div>
+  </div>
+</div>
+</body>
+</html>

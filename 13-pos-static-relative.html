@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 — position: static / relative</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row { margin-bottom: 20px; border: 1px solid #cbd5e1; padding: 10px; }
+  .box { display: inline-block; width: 80px; height: 50px; background: #bae6fd; border: 1px solid #0369a1; text-align: center; line-height: 50px; margin-right: 8px; }
+  .shifted {
+    position: relative;
+    top: 12px;
+    left: 24px;
+    background: #fca5a5;
+    border-color: #991b1b;
+  }
+  .shift-neg {
+    position: relative;
+    top: -8px;
+    right: 16px; /* right with no explicit left means move leftward */
+    background: #bbf7d0;
+    border-color: #166534;
+  }
+</style>
+</head>
+<body>
+<h1>position: static &amp; relative</h1>
+
+<div class="row">
+  <span class="box">static</span>
+  <span class="box">static</span>
+  <span class="box shifted">relative +12/+24</span>
+  <span class="box">static</span>
+  <span class="box shift-neg">rel -8 top, right 16</span>
+  <span class="box">static</span>
+</div>
+
+<p>The shifted boxes leave their original "slot" in the flow (other boxes don't
+reflow to fill the gap); their visual position is offset by top/left/right.</p>
+</body>
+</html>

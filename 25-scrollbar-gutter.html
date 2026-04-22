@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>25 — scrollbar-gutter</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .row { display: flex; gap: 14px; }
+  .panel {
+    flex: 1;
+    height: 160px;
+    border: 2px solid #334155;
+    padding: 8px;
+    overflow-y: auto;
+    background: #fef3c7;
+  }
+  .stable       { scrollbar-gutter: stable; }
+  .stable-both  { scrollbar-gutter: stable both-edges; }
+  .auto         { scrollbar-gutter: auto; }
+
+  .short { max-height: 100px; }
+  h3 { margin: 4px 0 8px; }
+</style>
+</head>
+<body>
+<h1>scrollbar-gutter</h1>
+<p>Each box has the same content. <code>stable</code> reserves space for the
+scrollbar even when no scrolling is needed, so widths don't jump as content
+changes.</p>
+
+<div class="row">
+  <div class="panel auto">
+    <h3>auto (default)</h3>
+    <p>Short content — no scrollbar, no reserved gutter.</p>
+  </div>
+  <div class="panel stable">
+    <h3>stable</h3>
+    <p>Short content — gutter still reserved on the end side.</p>
+  </div>
+  <div class="panel stable-both">
+    <h3>stable both-edges</h3>
+    <p>Short content — gutter reserved on both sides.</p>
+  </div>
+</div>
+
+<h2>Now with long content (all should overflow)</h2>
+<div class="row">
+  <div class="panel auto">
+    <h3>auto</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+  <div class="panel stable">
+    <h3>stable</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+  <div class="panel stable-both">
+    <h3>stable both-edges</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+</div>
+</body>
+</html>

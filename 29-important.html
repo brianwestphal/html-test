@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 — !important</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.8; font-size: 20px; }
+
+  p         { color: red; }
+  p.imp     { color: green !important; }       /* beats higher specificity without !important */
+  p#eye     { color: blue; }
+  p#eye.imp { color: orange; }                  /* normal: orange would win */
+
+  p.double       { color: red !important; }
+  p#eye.double   { color: teal !important; }    /* two !importants: specificity breaks the tie */
+</style>
+</head>
+<body>
+<h1>!important</h1>
+<p>Plain p → red.</p>
+<p id="eye" class="imp">id + class, but class has !important → green (normal specificity loses to !important).</p>
+<p id="eye" class="double">Both !important → teal wins by higher specificity.</p>
+<p style="color: black !important;" id="eye" class="imp">inline !important → black (beats everything in the author sheet).</p>
+</body>
+</html>

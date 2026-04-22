@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 — Character entities</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.8; }
+  table { border-collapse: collapse; }
+  td, th { border: 1px solid #cbd5e1; padding: 4px 10px; }
+  td.char { font-size: 22px; text-align: center; }
+  code { background: #eef; padding: 0 4px; }
+</style>
+</head>
+<body>
+<h1>Character entities — named, decimal, hex</h1>
+<table>
+  <tr><th>Source</th><th>Rendered</th></tr>
+  <tr><td><code>&amp;amp;</code></td><td class="char">&amp;</td></tr>
+  <tr><td><code>&amp;lt; &amp;gt;</code></td><td class="char">&lt; &gt;</td></tr>
+  <tr><td><code>&amp;quot; &amp;apos;</code></td><td class="char">&quot; &apos;</td></tr>
+  <tr><td><code>&amp;nbsp;</code> (between pipes) </td><td class="char">|&nbsp;|</td></tr>
+  <tr><td><code>&amp;copy; &amp;reg; &amp;trade;</code></td><td class="char">&copy; &reg; &trade;</td></tr>
+  <tr><td><code>&amp;hellip; &amp;mdash; &amp;ndash;</code></td><td class="char">&hellip; &mdash; &ndash;</td></tr>
+  <tr><td><code>&amp;laquo; &amp;raquo; &amp;ldquo;&amp;rdquo;</code></td><td class="char">&laquo; &raquo; &ldquo;&rdquo;</td></tr>
+  <tr><td><code>&amp;larr; &amp;rarr; &amp;uarr; &amp;darr;</code></td><td class="char">&larr; &rarr; &uarr; &darr;</td></tr>
+  <tr><td><code>&amp;alpha;&amp;beta;&amp;gamma;&amp;pi;&amp;infin;</code></td><td class="char">&alpha;&beta;&gamma;&pi;&infin;</td></tr>
+  <tr><td>Numeric decimal <code>&amp;#169;</code></td><td class="char">&#169;</td></tr>
+  <tr><td>Numeric hex <code>&amp;#xA9;</code></td><td class="char">&#xA9;</td></tr>
+  <tr><td>Emoji hex <code>&amp;#x1F600;</code></td><td class="char">&#x1F600;</td></tr>
+  <tr><td>Chess pieces <code>&amp;#x2654;&amp;#x265A;</code></td><td class="char">&#x2654;&#x265A;</td></tr>
+</table>
+</body>
+</html>

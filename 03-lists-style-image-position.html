@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>03 — list-style-image, list-style-position</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  ul.imaged {
+    list-style-image: url("assets/img-orange.svg");
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px 12px 12px 44px;
+  }
+  ul.outside {
+    list-style-type: square;
+    list-style-position: outside;
+    background: #fef9c3;
+    border: 1px solid #ca8a04;
+    padding: 12px 12px 12px 44px;
+  }
+  ul.inside {
+    list-style-type: square;
+    list-style-position: inside;
+    background: #dcfce7;
+    border: 1px solid #15803d;
+    padding: 12px;
+  }
+</style>
+</head>
+<body>
+<h1>list-style-image and list-style-position</h1>
+
+<h2>list-style-image: url(…)</h2>
+<ul class="imaged">
+  <li>The marker is the orange SVG circle.</li>
+  <li>Marker repeats per list item.</li>
+  <li>Third item.</li>
+</ul>
+
+<h2>list-style-position: outside (default)</h2>
+<ul class="outside">
+  <li>Square markers sit outside the content box, so wrapped text is flush
+  with the first line's start and the marker sticks out into the padding.</li>
+  <li>Second item with a longer sentence that will wrap onto a second line
+  to demonstrate marker vs content alignment.</li>
+</ul>
+
+<h2>list-style-position: inside</h2>
+<ul class="inside">
+  <li>Square markers are inline with content, so wrapped text aligns
+  beneath the marker rather than beneath the first character of content.</li>
+  <li>Second item with a longer sentence that will wrap onto a second line
+  to demonstrate the difference.</li>
+</ul>
+</body>
+</html>

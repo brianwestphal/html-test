@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 — Nested flex</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .outer { display: flex; gap: 10px; background: #e2e8f0; padding: 10px; }
+  .outer > div { background: #dbeafe; padding: 8px; flex: 1; }
+  .inner { display: flex; gap: 6px; background: #fef3c7; padding: 6px; margin-top: 6px; }
+  .inner > span { background: #ea580c; color: white; padding: 4px 8px; }
+
+  .col { display: flex; flex-direction: column; gap: 6px; background: #ede9fe; padding: 8px; flex: 2; }
+  .col > span { background: #7c3aed; color: white; padding: 4px 8px; }
+
+  .basis-min { flex-basis: min-content; background: #fef2f2; }
+  .basis-max { flex-basis: max-content; background: #ecfdf5; }
+</style>
+</head>
+<body>
+<h1>Nested flex containers</h1>
+
+<div class="outer">
+  <div>
+    <p>Left (flex:1)</p>
+    <div class="inner"><span>a</span><span>b</span><span>c</span></div>
+  </div>
+  <div class="col">
+    <span>Column item 1</span>
+    <span>Column item 2</span>
+    <span>Column item 3 (inside an outer row, inner col)</span>
+  </div>
+  <div>
+    <p>Right (flex:1)</p>
+    <div class="inner"><span>x</span><span>y</span></div>
+  </div>
+</div>
+
+<h2>basis: min-content vs max-content</h2>
+<div class="outer" style="max-width: 600px">
+  <div class="basis-min">basis min-content: supercalifragilistic</div>
+  <div class="basis-max">basis max-content: short text here stays on one line</div>
+</div>
+</body>
+</html>

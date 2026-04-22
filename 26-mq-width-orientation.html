@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>26 — @media width / orientation / aspect-ratio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .badge { display: inline-block; padding: 8px 14px; margin: 4px; font-weight: 600; color: white; border-radius: 6px; }
+
+  .narrow { background: #64748b; }
+  .medium { background: #64748b; }
+  .wide   { background: #64748b; }
+
+  @media (max-width: 480px) {
+    .narrow { background: #16a34a; }
+  }
+  @media (min-width: 481px) and (max-width: 900px) {
+    .medium { background: #16a34a; }
+  }
+  @media (min-width: 901px) {
+    .wide { background: #16a34a; }
+  }
+
+  .port { background: #64748b; color: white; padding: 8px 14px; border-radius: 6px; display: inline-block; margin: 4px; font-weight: 600; }
+  .land { background: #64748b; color: white; padding: 8px 14px; border-radius: 6px; display: inline-block; margin: 4px; font-weight: 600; }
+
+  @media (orientation: portrait)  { .port { background: #4f46e5; } }
+  @media (orientation: landscape) { .land { background: #4f46e5; } }
+
+  .wide-ar  { background: #64748b; color: white; padding: 8px 14px; border-radius: 6px; display: inline-block; margin: 4px; font-weight: 600; }
+  @media (min-aspect-ratio: 16/9) { .wide-ar { background: #ea580c; } }
+</style>
+</head>
+<body>
+<h1>@media — width, orientation, aspect-ratio</h1>
+<p>The active breakpoint glows green (width) / indigo (orientation) / orange (aspect-ratio).</p>
+
+<h2>width</h2>
+<span class="badge narrow">≤ 480px (narrow)</span>
+<span class="badge medium">481–900 (medium)</span>
+<span class="badge wide">≥ 901 (wide)</span>
+
+<h2>orientation</h2>
+<span class="port">portrait</span>
+<span class="land">landscape</span>
+
+<h2>aspect-ratio</h2>
+<span class="wide-ar">min-aspect-ratio: 16/9</span>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 — Flex item properties</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .fx { display: flex; gap: 6px; background: #e2e8f0; padding: 8px; margin-bottom: 10px; }
+  .fx > div { background: #4f46e5; color: white; padding: 6px 10px; min-width: 40px; }
+
+  .grow1   { flex: 1; }
+  .grow2   { flex: 2; }
+  .grow0-basis { flex: 0 0 150px; }
+  .shrinkless { flex: 1 0 auto; }
+  .shrinkmore { flex: 1 2 auto; }
+
+  .order3 { order: 3; background: #dc2626; }
+  .order1 { order: 1; background: #16a34a; }
+  .order2 { order: 2; background: #f59e0b; }
+  .order-neg { order: -1; background: #0ea5e9; }
+
+  .self-start   { align-self: flex-start; }
+  .self-end     { align-self: flex-end; }
+  .self-center  { align-self: center; }
+  .self-stretch { align-self: stretch; }
+  .self-baseline{ align-self: baseline; }
+
+  .tall { height: 100px; }
+  .big  { padding: 16px 10px; font-size: 20px; background: #7c3aed; }
+</style>
+</head>
+<body>
+<h1>Flex item properties</h1>
+
+<h2>flex-grow (1 / 2 / 1)</h2>
+<div class="fx"><div class="grow1">1fr</div><div class="grow2">2fr</div><div class="grow1">1fr</div></div>
+
+<h2>flex-basis explicit (150px fixed middle)</h2>
+<div class="fx"><div class="grow1">1fr</div><div class="grow0-basis">150px basis, no grow/shrink</div><div class="grow1">1fr</div></div>
+
+<h2>flex-shrink comparison</h2>
+<div class="fx" style="max-width:500px">
+  <div class="shrinkless">shrink:0 (stays wide) content content content content content</div>
+  <div class="shrinkmore">shrink:2 (more shrink) content content content</div>
+</div>
+
+<h2>order (reorder without DOM change)</h2>
+<div class="fx">
+  <div class="order3">DOM 1 / order 3</div>
+  <div class="order1">DOM 2 / order 1</div>
+  <div class="order2">DOM 3 / order 2</div>
+  <div class="order-neg">DOM 4 / order -1 (first)</div>
+</div>
+
+<h2>align-self (overrides container's align-items)</h2>
+<div class="fx tall">
+  <div class="self-start">start</div>
+  <div class="self-end">end</div>
+  <div class="self-center big">center (big)</div>
+  <div class="self-stretch">stretch</div>
+  <div class="self-baseline">baseline</div>
+</div>
+</body>
+</html>

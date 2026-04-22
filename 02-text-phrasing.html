@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 — Phrasing content</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 44em; line-height: 1.7; }
+  blockquote { border-left: 4px solid #94a3b8; margin-left: 0; padding: 0 12px; color: #334155; }
+  address { font-style: italic; }
+</style>
+</head>
+<body>
+<h1>Phrasing content — inline semantics</h1>
+<p>Quotation with <code>&lt;q&gt;</code>: As she said, <q>The quick brown
+fox jumps over the lazy dog</q>, and then she ran off.</p>
+<blockquote cite="https://example.com/source">
+  <p>A blockquote preserves attribution via the <code>cite</code> attribute
+  and usually indents the text as a block.</p>
+</blockquote>
+<p>
+  <cite>Moby-Dick</cite> is a <dfn>novel</dfn> by
+  <abbr title="Herman Melville">HM</abbr>, first published in
+  <time datetime="1851-10-18">October 18, 1851</time>.
+  The product code is <data value="9780142437247">9780142437247</data>.
+</p>
+<address>
+  Example Corp.<br>
+  123 Demo Street, Springfield
+</address>
+<p>Code &amp; I/O:
+  <code>map(fn, xs)</code>,
+  <kbd>Ctrl</kbd>+<kbd>C</kbd>,
+  <samp>Segmentation fault: 11</samp>,
+  <var>x</var>² + <var>y</var>² = <var>r</var>².</p>
+</body>
+</html>

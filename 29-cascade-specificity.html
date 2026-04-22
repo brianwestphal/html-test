@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 — Cascade specificity</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.6; font-size: 18px; }
+
+  p         { color: red; }              /* (0,0,0,1) */
+  .klass    { color: green; }            /* (0,0,1,0) */
+  #eye      { color: blue; }             /* (0,1,0,0) */
+  p.klass   { color: orange; }           /* (0,0,1,1) — beats .klass */
+  p#eye.klass { color: purple; }         /* (0,1,1,1) */
+
+  p.later { color: red; }
+  p.later { color: blue; }    /* same specificity → later one wins */
+
+  .inline-demo { color: red; }
+</style>
+</head>
+<body>
+<h1>Cascade specificity</h1>
+
+<p>Plain p → red.</p>
+<p class="klass">p.klass → orange (beats .klass green because type+class &gt; class).</p>
+<p id="eye">p#id → blue.</p>
+<p id="eye" class="klass">p#id.klass → purple (id + class + type).</p>
+<p class="later">same-specificity: later rule wins → blue.</p>
+<p class="inline-demo" style="color: teal;">inline style → teal (beats any non-important class rule).</p>
+</body>
+</html>

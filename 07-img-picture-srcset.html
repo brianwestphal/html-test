@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>07 — picture, source, srcset</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  figure { margin: 16px 0; }
+  figcaption { font-size: 13px; color: #475569; margin-top: 4px; }
+  img { border: 1px solid #334155; max-width: 100%; }
+</style>
+</head>
+<body>
+<h1>&lt;picture&gt; and srcset</h1>
+
+<figure>
+  <picture>
+    <source media="(min-width: 800px)" srcset="assets/img-wide.png">
+    <source media="(min-width: 500px)" srcset="assets/img-red.png">
+    <img src="assets/img-tall.png" alt="Responsive: wide above 800px, red between 500 and 800, tall below 500" width="200">
+  </picture>
+  <figcaption>&lt;picture&gt; with media queries on &lt;source&gt;. Resize the
+  viewport to see it change between tall / red-square / wide.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+    <source type="image/webp" srcset="assets/img-purple.webp">
+    <source type="image/svg+xml" srcset="assets/img-orange.svg">
+    <img src="assets/img-red.png" alt="Format negotiation: WebP &gt; SVG &gt; PNG" width="128" height="128">
+  </picture>
+  <figcaption>Type negotiation — first supported type wins.</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/img-red.png"
+       srcset="assets/img-red.png 1x, assets/img-orange.svg 2x"
+       alt="srcset with 1x/2x density" width="128" height="128">
+  <figcaption>srcset with density descriptors (<code>1x</code>/<code>2x</code>).</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/img-red.png"
+       srcset="assets/img-red.png 128w, assets/img-wide.png 384w"
+       sizes="(min-width: 700px) 384px, 128px"
+       alt="srcset with width descriptors" width="128" height="128">
+  <figcaption>srcset with width descriptors + sizes hint.</figcaption>
+</figure>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — select / option / optgroup</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  section { margin-bottom: 20px; }
+  label { display: block; font-weight: 600; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<h1>&lt;select&gt;, &lt;option&gt;, &lt;optgroup&gt;</h1>
+
+<section>
+  <label>Single-choice dropdown (default)</label>
+  <select>
+    <option>First</option>
+    <option selected>Second (selected)</option>
+    <option>Third</option>
+    <option disabled>Fourth (disabled)</option>
+  </select>
+</section>
+
+<section>
+  <label>With optgroup</label>
+  <select>
+    <optgroup label="Fruits">
+      <option>Apple</option>
+      <option>Banana</option>
+      <option>Cherry</option>
+    </optgroup>
+    <optgroup label="Vegetables">
+      <option>Carrot</option>
+      <option>Broccoli</option>
+      <option disabled>Celery (out of stock)</option>
+    </optgroup>
+    <optgroup label="Grains" disabled>
+      <option>Rice</option>
+      <option>Wheat</option>
+    </optgroup>
+  </select>
+</section>
+
+<section>
+  <label>size=5 list-box</label>
+  <select size="5">
+    <option>Mercury</option>
+    <option>Venus</option>
+    <option selected>Earth</option>
+    <option>Mars</option>
+    <option>Jupiter</option>
+    <option>Saturn</option>
+    <option>Uranus</option>
+    <option>Neptune</option>
+  </select>
+</section>
+
+<section>
+  <label>multiple (Ctrl/Cmd-click to select multiple)</label>
+  <select multiple size="6">
+    <option selected>Red</option>
+    <option selected>Green</option>
+    <option>Blue</option>
+    <option>Cyan</option>
+    <option>Magenta</option>
+    <option>Yellow</option>
+  </select>
+</section>
+</body>
+</html>

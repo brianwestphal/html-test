@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 — z-index & stacking contexts</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .stage {
+    position: relative;
+    width: 420px;
+    height: 260px;
+    background: #f8fafc;
+    border: 1px solid #334155;
+    margin-bottom: 16px;
+  }
+  .card {
+    position: absolute;
+    width: 160px;
+    height: 100px;
+    padding: 8px;
+    font-weight: bold;
+    color: white;
+  }
+  .a { top: 10px;  left: 10px;  background: #dc2626; z-index: 1; }
+  .b { top: 40px;  left: 80px;  background: #16a34a; z-index: 3; }
+  .c { top: 70px;  left: 150px; background: #2563eb; z-index: 2; }
+  .d { top: 100px; left: 220px; background: #ea580c; z-index: 0; }
+  .auto { top: 130px; left: 20px; background: #7c3aed; z-index: auto; }
+
+  /* Stacking context demo */
+  .ctx {
+    position: relative;
+    opacity: 0.999;         /* creates a stacking context */
+    outline: 2px dashed #64748b;
+    margin-top: 20px;
+  }
+  .ctx .inner-top { z-index: 9999; } /* trapped inside ctx */
+</style>
+</head>
+<body>
+<h1>z-index — explicit ordering + stacking contexts</h1>
+
+<div class="stage">
+  <div class="card a">A z:1</div>
+  <div class="card b">B z:3 (front)</div>
+  <div class="card c">C z:2</div>
+  <div class="card d">D z:0</div>
+  <div class="card auto">AUTO (tree order)</div>
+</div>
+
+<p>Inside a stacking context (dashed outline below, <code>opacity: .999</code>),
+child <code>z-index:9999</code> can't escape — it still sits below outside
+siblings with any positive z-index.</p>
+
+<div class="stage">
+  <div class="card a" style="top:20px; left:40px; background:#0f172a">OUTSIDE z:1</div>
+  <div class="ctx stage" style="position:absolute; top:60px; left:120px; width:260px; height:160px; background:#ecfdf5;">
+    <div class="card inner-top" style="top:10px; left:10px; width:140px; height:80px; background:#f59e0b;">INNER z:9999</div>
+  </div>
+</div>
+</body>
+</html>

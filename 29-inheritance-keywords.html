@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 — inherit / initial / unset / revert / revert-layer</title>
+<style>
+  @layer base, theme;
+
+  @layer base   { .demo { color: green; border: 2px solid green; padding: 4px; } }
+  @layer theme  { .demo { color: blue;  border: 2px solid blue; } }
+
+  body {
+    font-family: sans-serif;
+    color: #7c3aed;
+    margin: 2em;
+    line-height: 1.7;
+    border: 3px solid pink;
+  }
+
+  .inherit { color: inherit; border: inherit; }
+  .initial { color: initial; border: initial; }
+  .unset   { color: unset;   border: unset; }
+  .revert  { color: revert;  border: revert; }
+  .revert-layer { color: revert-layer; border: revert-layer; }
+
+  p { margin: 6px 0; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<h1>Inheritance keywords</h1>
+<p>Default on body: purple text, pink 3px border.</p>
+
+<p class="demo inherit">inherit: copies computed parent value (purple text, pink border).</p>
+<p class="demo initial">initial: property's CSS initial value (black text, no border).</p>
+<p class="demo unset">unset: inherits if inherited-prop, else initial (color → purple from parent; border → no border).</p>
+<p class="demo revert">revert: rolls back to user-agent stylesheet (browser default).</p>
+<p class="demo revert-layer">revert-layer: rolls back to the <em>previous</em> layer — base green, not theme blue.</p>
+</body>
+</html>

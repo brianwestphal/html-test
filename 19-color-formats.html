@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>19 — Color formats</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .sw {
+    padding: 10px;
+    color: white;
+    font-family: monospace;
+    font-size: 13px;
+    min-height: 60px;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  }
+  .light { color: #111; text-shadow: none; }
+</style>
+</head>
+<body>
+<h1>CSS color notations</h1>
+<div class="grid">
+  <div class="sw" style="background: crimson">named: crimson</div>
+  <div class="sw" style="background: #0ea5e9">#hex 6: #0ea5e9</div>
+  <div class="sw light" style="background: #f59">#hex 3: #f59</div>
+  <div class="sw" style="background: #0ea5e9c0">#hex 8 (alpha): #0ea5e9c0</div>
+  <div class="sw light" style="background: #fc39">#hex 4 (alpha): #fc39</div>
+  <div class="sw" style="background: rgb(220, 38, 38)">rgb(220, 38, 38)</div>
+  <div class="sw" style="background: rgb(220 38 38 / 0.6)">rgb(220 38 38 / 0.6)</div>
+  <div class="sw" style="background: rgba(220, 38, 38, 0.3); color: #111; text-shadow: none;">rgba(…, 0.3)</div>
+  <div class="sw" style="background: hsl(200, 80%, 40%)">hsl(200, 80%, 40%)</div>
+  <div class="sw" style="background: hsla(200 80% 40% / 0.7)">hsla slash</div>
+  <div class="sw" style="background: hwb(200 20% 30%)">hwb(200 20% 30%)</div>
+  <div class="sw" style="background: lab(60% 40 -20)">lab(60% 40 -20)</div>
+  <div class="sw" style="background: lch(60% 50 180)">lch(60% 50 180)</div>
+  <div class="sw" style="background: oklab(70% 0.2 -0.1)">oklab(70% 0.2 -0.1)</div>
+  <div class="sw" style="background: oklch(70% 0.2 30)">oklch(70% 0.2 30)</div>
+  <div class="sw" style="background: color(srgb 0.2 0.5 0.8)">color(srgb 0.2 0.5 0.8)</div>
+  <div class="sw" style="background: color(display-p3 1 0.2 0.2)">color(display-p3 1 .2 .2)</div>
+  <div class="sw" style="background: color-mix(in oklch, #dc2626, #0ea5e9)">color-mix(#dc2626, #0ea5e9)</div>
+  <div class="sw" style="background: color-mix(in srgb, yellow 30%, blue)">color-mix srgb 30/70</div>
+  <div class="sw light" style="background: transparent; border: 2px dashed #94a3b8">transparent (see-through)</div>
+  <div class="sw" style="background: #0ea5e9; border: 6px solid currentColor; color: #f59e0b">currentColor on border (orange)</div>
+</div>
+</body>
+</html>
