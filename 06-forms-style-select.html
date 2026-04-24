@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled select</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  .row { display: grid; grid-template-columns: 200px 1fr; gap: 8px 16px; align-items: center; margin: 10px 0; }
+  label { font-size: 13px; color: #475569; }
+
+  /* SVG chevron as a data URL used for the custom arrow */
+  .sel {
+    -webkit-appearance: none; -moz-appearance: none; appearance: none;
+    font: inherit; padding: 8px 34px 8px 12px; border: 1px solid #cbd5e1;
+    border-radius: 6px; background: white; color: #0f172a;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" fill="none" stroke="%23475569" stroke-width="2"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    width: 100%;
+  }
+  .sel:focus { outline: 2px solid #6366f1; outline-offset: 1px; border-color: #6366f1; }
+
+  .sel-filled {
+    background-color: #f1f5f9; border: 0; border-bottom: 2px solid #94a3b8;
+    border-radius: 6px 6px 0 0;
+  }
+  .sel-filled:focus { outline: none; background-color: #e0e7ff; border-bottom-color: #4f46e5; }
+
+  .sel-pill { border-radius: 999px; padding: 8px 34px 8px 18px; }
+
+  .sel-sm { font-size: 12px; padding: 4px 26px 4px 8px; background-size: 8px 5px; }
+  .sel-lg { font-size: 18px; padding: 12px 40px 12px 14px; background-size: 12px 8px; background-position: right 14px center; }
+
+  /* Dark-theme select */
+  .dark {
+    background-color: #1e293b; color: #f8fafc; border-color: #334155;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" fill="none" stroke="%23cbd5e1" stroke-width="2"/></svg>');
+  }
+  .dark option { background: #1e293b; color: #f8fafc; }
+
+  /* Colorful option groups (option/optgroup color support is limited per engine) */
+  .sel option.warn { color: #b91c1c; }
+  .sel option:checked { font-weight: 700; }
+  .sel optgroup { font-style: italic; color: #334155; }
+
+  /* Styled multi-select (list box) */
+  .multi {
+    -webkit-appearance: none; appearance: none;
+    font: inherit; padding: 6px; border: 1px solid #cbd5e1; border-radius: 6px;
+    background: white; width: 100%; height: 140px;
+  }
+  .multi option { padding: 4px 8px; border-radius: 4px; }
+  .multi option:checked { background: #eef2ff; color: #312e81; }
+
+  /* Disabled */
+  .sel:disabled { background-color: #f1f5f9; color: #94a3b8; cursor: not-allowed; }
+
+  /* Size=N rendered list */
+  .sel-sized {
+    -webkit-appearance: none; appearance: none;
+    font: inherit; padding: 4px; border: 1px solid #cbd5e1; border-radius: 6px;
+    background: white;
+  }
+</style>
+</head>
+<body>
+<h1>Styled &lt;select&gt;</h1>
+<p>Pass criterion: native arrow is suppressed and replaced by a custom SVG
+chevron in the background; padding-right leaves room for it; focus ring
+renders; <code>option</code> / <code>optgroup</code> tweaks apply where
+supported.</p>
+
+<h2>Visual variants</h2>
+<div class="row"><label>Outlined</label>
+  <select class="sel">
+    <option>Alpha</option><option selected>Bravo</option><option>Charlie</option>
+  </select>
+</div>
+<div class="row"><label>Filled</label>
+  <select class="sel sel-filled">
+    <option>Alpha</option><option selected>Bravo</option><option>Charlie</option>
+  </select>
+</div>
+<div class="row"><label>Pill</label>
+  <select class="sel sel-pill">
+    <option>Alpha</option><option selected>Bravo</option><option>Charlie</option>
+  </select>
+</div>
+<div class="row"><label>Dark</label>
+  <select class="sel dark">
+    <option>Alpha</option><option selected>Bravo</option><option>Charlie</option>
+  </select>
+</div>
+<div class="row"><label>Disabled</label>
+  <select class="sel" disabled>
+    <option selected>Locked</option>
+  </select>
+</div>
+
+<h2>Sizes</h2>
+<div class="row"><label>sm</label><select class="sel sel-sm"><option>One</option><option>Two</option></select></div>
+<div class="row"><label>md</label><select class="sel"><option>One</option><option>Two</option></select></div>
+<div class="row"><label>lg</label><select class="sel sel-lg"><option>One</option><option>Two</option></select></div>
+
+<h2>optgroup / colored option</h2>
+<div class="row"><label>Category</label>
+  <select class="sel">
+    <optgroup label="Fruits">
+      <option>Apple</option>
+      <option selected>Banana</option>
+      <option class="warn">Rotten strawberry</option>
+    </optgroup>
+    <optgroup label="Vegetables">
+      <option>Carrot</option>
+      <option>Broccoli</option>
+    </optgroup>
+  </select>
+</div>
+
+<h2>Multi-select list box</h2>
+<div class="row"><label>Colors</label>
+  <select class="multi" multiple>
+    <option selected>Red</option>
+    <option selected>Green</option>
+    <option>Blue</option>
+    <option>Cyan</option>
+    <option>Magenta</option>
+    <option>Yellow</option>
+  </select>
+</div>
+
+<h2>size=4 single-select</h2>
+<div class="row"><label>Planet</label>
+  <select class="sel-sized" size="4">
+    <option>Mercury</option>
+    <option>Venus</option>
+    <option selected>Earth</option>
+    <option>Mars</option>
+    <option>Jupiter</option>
+  </select>
+</div>
+</body>
+</html>

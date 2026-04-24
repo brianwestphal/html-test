@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled fieldset / legend</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  input, select, textarea {
+    font: inherit; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 2px solid #6366f1; outline-offset: 1px; border-color: #6366f1;
+  }
+  .stack label { display: block; margin: 6px 0; font-size: 13px; color: #475569; }
+  .stack input { width: 100%; max-width: 300px; }
+  legend { font-weight: 600; }
+
+  /* 1. Card-style fieldset */
+  fieldset.card {
+    border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 20px;
+    background: white;
+    box-shadow: 0 1px 2px rgb(0 0 0 / .04);
+  }
+  fieldset.card legend {
+    padding: 0 8px; color: #334155; font-size: 15px;
+  }
+
+  /* 2. Notched border (legend cuts into the top border) */
+  fieldset.notch {
+    border: 2px solid #4f46e5; border-radius: 10px; padding: 16px 20px;
+  }
+  fieldset.notch legend {
+    color: #4f46e5; padding: 0 8px;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em;
+  }
+
+  /* 3. Legend offset left, with underline */
+  fieldset.offset {
+    border: 0; border-top: 1px solid #cbd5e1; padding: 18px 0 0; margin: 28px 0;
+  }
+  fieldset.offset legend {
+    margin-left: -4px; padding: 0 8px 0 0; background: white;
+    font-size: 14px; color: #0f172a;
+  }
+
+  /* 4. Callout / colored */
+  fieldset.callout {
+    border: 0; border-left: 4px solid #f59e0b;
+    background: #fffbeb; padding: 14px 18px; border-radius: 0 6px 6px 0;
+  }
+  fieldset.callout legend {
+    float: none; color: #92400e; font-size: 14px;
+    padding: 0; background: none;
+  }
+
+  /* 5. Two-column fieldset */
+  fieldset.grid {
+    border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 20px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px;
+  }
+  fieldset.grid legend { grid-column: 1 / -1; padding: 0 8px; }
+  fieldset.grid label { font-size: 13px; color: #475569; display: block; margin-bottom: 4px; font-weight: 600; }
+  fieldset.grid input { width: 100%; }
+
+  /* 6. Dark surface */
+  fieldset.dark {
+    border: 1px solid #334155; border-radius: 10px; padding: 16px 20px;
+    background: #0f172a; color: #e2e8f0;
+  }
+  fieldset.dark legend { color: #f8fafc; padding: 0 8px; }
+  fieldset.dark input { background: #1e293b; border: 1px solid #334155; color: #f8fafc; }
+  fieldset.dark input:focus { border-color: #22d3ee; outline-color: #22d3ee; }
+
+  /* 7. Legend with badge */
+  fieldset.badged {
+    border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 20px;
+  }
+  fieldset.badged legend {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: #334155; padding: 0 8px;
+  }
+  fieldset.badged legend .badge {
+    background: #16a34a; color: white; font-size: 11px;
+    padding: 2px 8px; border-radius: 999px; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+
+  /* 8. Collapsed-looking disabled fieldset */
+  fieldset.card:disabled {
+    background: #f1f5f9; color: #94a3b8;
+  }
+  fieldset.card:disabled legend { color: #94a3b8; }
+</style>
+</head>
+<body>
+<h1>Styled &lt;fieldset&gt; / &lt;legend&gt;</h1>
+<p>Pass criterion: each fieldset renders its border/background and legend
+positioning as labeled.</p>
+
+<h2>1. Card-style fieldset</h2>
+<fieldset class="card stack">
+  <legend>Personal details</legend>
+  <label>Name <input value="Jane Doe"></label>
+  <label>Email <input type="email" value="jane@example.com"></label>
+</fieldset>
+
+<h2>2. Notched (thick colored border)</h2>
+<fieldset class="notch stack">
+  <legend>Shipping address</legend>
+  <label>Street <input value="123 Main St"></label>
+  <label>City <input value="Portland"></label>
+</fieldset>
+
+<h2>3. Legend offset above a top rule</h2>
+<fieldset class="offset stack">
+  <legend>Preferences</legend>
+  <label>Theme
+    <select><option>Light</option><option>Dark</option><option>Auto</option></select>
+  </label>
+</fieldset>
+
+<h2>4. Callout / left-bar</h2>
+<fieldset class="callout stack">
+  <legend>Important</legend>
+  <label>Confirmation code <input value="XK29"></label>
+</fieldset>
+
+<h2>5. Two-column grid inside fieldset</h2>
+<fieldset class="grid">
+  <legend>Billing</legend>
+  <div><label>Card number</label><input value="4242 4242 4242 4242"></div>
+  <div><label>CVC</label><input value="123"></div>
+  <div><label>Expiry</label><input value="12/28"></div>
+  <div><label>ZIP</label><input value="97201"></div>
+</fieldset>
+
+<h2>6. Dark surface</h2>
+<fieldset class="dark stack">
+  <legend>API credentials</legend>
+  <label>Key <input value="pk_live_abc123"></label>
+  <label>Secret <input type="password" value="shh"></label>
+</fieldset>
+
+<h2>7. Legend with status badge</h2>
+<fieldset class="badged stack">
+  <legend>Account <span class="badge">verified</span></legend>
+  <label>Display name <input value="jane"></label>
+</fieldset>
+
+<h2>8. Disabled card fieldset (all children locked)</h2>
+<fieldset class="card stack" disabled>
+  <legend>Locked section</legend>
+  <label>Name <input value="Jane Doe"></label>
+  <label><input type="checkbox"> Subscribe to newsletter</label>
+  <button type="button">Save</button>
+</fieldset>
+</body>
+</html>

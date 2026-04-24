@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — comprehensive button styles</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 860px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  .bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 10px 0; }
+
+  /* Base */
+  .btn {
+    font: inherit; font-weight: 600; cursor: pointer;
+    padding: 8px 14px; border-radius: 6px; border: 1px solid transparent;
+    display: inline-flex; align-items: center; gap: 6px;
+    line-height: 1.2;
+  }
+  .btn:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* Variants */
+  .btn-primary   { background: #4f46e5; color: white; }
+  .btn-primary:hover:not(:disabled)   { background: #4338ca; }
+  .btn-secondary { background: #e2e8f0; color: #0f172a; }
+  .btn-secondary:hover:not(:disabled) { background: #cbd5e1; }
+  .btn-ghost     { background: transparent; color: #4f46e5; }
+  .btn-ghost:hover:not(:disabled)     { background: #eef2ff; }
+  .btn-outline   { background: white; color: #4f46e5; border-color: #4f46e5; }
+  .btn-outline:hover:not(:disabled)   { background: #eef2ff; }
+  .btn-destructive { background: #dc2626; color: white; }
+  .btn-destructive:hover:not(:disabled) { background: #b91c1c; }
+  .btn-success   { background: #16a34a; color: white; }
+  .btn-link      { background: transparent; color: #2563eb; padding: 0; border-radius: 0; }
+  .btn-link:hover:not(:disabled) { text-decoration: underline; }
+
+  /* Sizes */
+  .btn-xs { font-size: 11px; padding: 3px 8px;  border-radius: 4px; }
+  .btn-sm { font-size: 13px; padding: 6px 10px; border-radius: 5px; }
+  .btn-md { font-size: 14px; padding: 8px 14px; border-radius: 6px; }
+  .btn-lg { font-size: 16px; padding: 12px 20px; border-radius: 8px; }
+  .btn-xl { font-size: 20px; padding: 16px 28px; border-radius: 10px; }
+
+  /* Shapes */
+  .btn-pill   { border-radius: 999px; }
+  .btn-square { border-radius: 2px; }
+  .btn-round  {
+    width: 40px; height: 40px; padding: 0; border-radius: 50%;
+    display: inline-grid; place-items: center;
+  }
+
+  /* Icon button */
+  .icon-btn {
+    width: 36px; height: 36px; padding: 0;
+    display: inline-grid; place-items: center;
+    background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; border-radius: 8px;
+    cursor: pointer;
+  }
+  .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .icon-btn:hover { background: #e2e8f0; }
+
+  /* Gradient / elevated */
+  .btn-gradient {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white; border: 0;
+    box-shadow: 0 4px 14px rgb(139 92 246 / .4);
+  }
+  .btn-elev {
+    background: white; color: #0f172a; border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgb(0 0 0 / .05), 0 2px 8px rgb(0 0 0 / .08);
+  }
+
+  /* Loading (static — spinner drawn as conic gradient, not animated per scope) */
+  .btn-loading {
+    pointer-events: none; opacity: .85;
+  }
+  .spinner {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0 25%, currentColor 25% 100%);
+    mask: radial-gradient(circle, transparent 55%, black 56%);
+    -webkit-mask: radial-gradient(circle, transparent 55%, black 56%);
+  }
+
+  /* Button group / segmented */
+  .group {
+    display: inline-flex; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;
+    background: white;
+  }
+  .group .btn {
+    border-radius: 0; border: 0; border-left: 1px solid #e2e8f0;
+    background: white; color: #334155;
+  }
+  .group .btn:first-child { border-left: 0; }
+  .group .btn:hover { background: #f1f5f9; }
+  .group .btn[aria-pressed="true"] { background: #4f46e5; color: white; }
+
+  /* Split button */
+  .split { display: inline-flex; }
+  .split .btn-primary:first-child { border-radius: 6px 0 0 6px; border-right: 1px solid #4338ca; }
+  .split .btn-primary:last-child  { border-radius: 0 6px 6px 0; padding-left: 8px; padding-right: 8px; }
+
+  /* Link-looking button */
+  a.btn { text-decoration: none; }
+
+  /* Dark-surface demo strip */
+  .dark-strip { background: #0f172a; padding: 20px; border-radius: 10px; color: #f8fafc; }
+  .btn-dark-outline {
+    background: transparent; color: #f8fafc; border-color: #f8fafc;
+  }
+  .btn-dark-outline:hover { background: rgb(255 255 255 / .1); }
+</style>
+</head>
+<body>
+<h1>Comprehensive button styles</h1>
+<p>Pass criterion: each variant, size, shape, and state renders as labeled.
+Focus rings come from <code>:focus-visible</code>, not <code>:focus</code>.</p>
+
+<h2>Variants</h2>
+<div class="bar">
+  <button class="btn btn-primary">Primary</button>
+  <button class="btn btn-secondary">Secondary</button>
+  <button class="btn btn-ghost">Ghost</button>
+  <button class="btn btn-outline">Outline</button>
+  <button class="btn btn-destructive">Destructive</button>
+  <button class="btn btn-success">Success</button>
+  <button class="btn btn-link">Link-style</button>
+  <button class="btn btn-gradient">Gradient</button>
+  <button class="btn btn-elev">Elevated</button>
+</div>
+
+<h2>Sizes</h2>
+<div class="bar">
+  <button class="btn btn-primary btn-xs">xs</button>
+  <button class="btn btn-primary btn-sm">sm</button>
+  <button class="btn btn-primary btn-md">md</button>
+  <button class="btn btn-primary btn-lg">lg</button>
+  <button class="btn btn-primary btn-xl">xl</button>
+</div>
+
+<h2>Shapes</h2>
+<div class="bar">
+  <button class="btn btn-primary">Default</button>
+  <button class="btn btn-primary btn-pill">Pill</button>
+  <button class="btn btn-primary btn-square">Square</button>
+  <button class="btn btn-primary btn-round" aria-label="close">&times;</button>
+</div>
+
+<h2>Icon + label / icon-only</h2>
+<div class="bar">
+  <button class="btn btn-primary">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+    Add item
+  </button>
+  <button class="btn btn-secondary">
+    Download
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+  </button>
+  <button class="icon-btn" aria-label="settings">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+  </button>
+  <button class="icon-btn" aria-label="trash">
+    <svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"/></svg>
+  </button>
+</div>
+
+<h2>States</h2>
+<div class="bar">
+  <button class="btn btn-primary">Normal</button>
+  <button class="btn btn-primary" disabled>Disabled</button>
+  <button class="btn btn-primary btn-loading"><span class="spinner"></span> Loading…</button>
+  <button class="btn btn-outline" aria-pressed="true" style="background:#eef2ff">Pressed (toggle)</button>
+</div>
+
+<h2>Button group / segmented / split</h2>
+<div class="bar">
+  <div class="group" role="group" aria-label="alignment">
+    <button class="btn" aria-pressed="true">Left</button>
+    <button class="btn">Center</button>
+    <button class="btn">Right</button>
+    <button class="btn">Justify</button>
+  </div>
+</div>
+<div class="bar">
+  <div class="split">
+    <button class="btn btn-primary">Save</button>
+    <button class="btn btn-primary" aria-label="more save options">&#x25BE;</button>
+  </div>
+</div>
+
+<h2>Anchor styled as button</h2>
+<div class="bar">
+  <a class="btn btn-primary" href="#">Anchor button</a>
+  <a class="btn btn-outline" href="#">Secondary link</a>
+</div>
+
+<h2>On dark surface</h2>
+<div class="dark-strip">
+  <div class="bar">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-dark-outline">Outline</button>
+    <button class="btn btn-gradient">Gradient</button>
+    <button class="btn btn-primary" disabled>Disabled</button>
+  </div>
+</div>
+</body>
+</html>

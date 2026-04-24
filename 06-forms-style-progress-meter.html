@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled progress & meter</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  .row { display: grid; grid-template-columns: 220px 1fr; align-items: center; gap: 12px; margin: 10px 0; }
+  label { font-size: 13px; color: #475569; }
+
+  /* =========================================================== */
+  /* progress                                                    */
+  /* =========================================================== */
+  progress.base { width: 100%; height: 14px; }
+
+  /* Rounded chip with gradient fill (WebKit) */
+  progress.grad {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 14px; border: 0; border-radius: 7px; overflow: hidden;
+  }
+  progress.grad::-webkit-progress-bar {
+    background: #e2e8f0; border-radius: 7px;
+  }
+  progress.grad::-webkit-progress-value {
+    background: linear-gradient(90deg, #22d3ee, #4f46e5);
+    border-radius: 7px;
+  }
+  progress.grad::-moz-progress-bar {
+    background: linear-gradient(90deg, #22d3ee, #4f46e5);
+    border-radius: 7px;
+  }
+
+  /* Thin minimal */
+  progress.thin {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px; border: 0; background: #e2e8f0;
+  }
+  progress.thin::-webkit-progress-bar  { background: #e2e8f0; }
+  progress.thin::-webkit-progress-value{ background: #0f172a; }
+  progress.thin::-moz-progress-bar     { background: #0f172a; }
+
+  /* Big chunky with inset shadow */
+  progress.chunky {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 28px; border: 0; border-radius: 14px; overflow: hidden;
+    background: #0f172a;
+  }
+  progress.chunky::-webkit-progress-bar {
+    background: #1e293b; border-radius: 14px;
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / .6);
+  }
+  progress.chunky::-webkit-progress-value {
+    background: linear-gradient(180deg, #fbbf24, #d97706);
+    border-radius: 14px;
+  }
+  progress.chunky::-moz-progress-bar {
+    background: linear-gradient(180deg, #fbbf24, #d97706);
+    border-radius: 14px;
+  }
+
+  /* Striped (repeating gradient) */
+  progress.stripe {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 18px; border: 0; border-radius: 4px; overflow: hidden;
+  }
+  progress.stripe::-webkit-progress-bar { background: #e2e8f0; }
+  progress.stripe::-webkit-progress-value {
+    background:
+      repeating-linear-gradient(45deg,
+        #16a34a 0 10px,
+        #15803d 10px 20px);
+  }
+  progress.stripe::-moz-progress-bar {
+    background:
+      repeating-linear-gradient(45deg,
+        #16a34a 0 10px,
+        #15803d 10px 20px);
+  }
+
+  /* =========================================================== */
+  /* meter                                                       */
+  /* =========================================================== */
+  meter.base { width: 100%; height: 16px; }
+
+  meter.pill {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 16px; border: 0; border-radius: 8px; overflow: hidden;
+    background: #e2e8f0;
+  }
+  /* WebKit meter parts */
+  meter.pill::-webkit-meter-bar {
+    background: #e2e8f0; border-radius: 8px; border: 0;
+  }
+  meter.pill::-webkit-meter-optimum-value     { background: #16a34a; border-radius: 8px; }
+  meter.pill::-webkit-meter-suboptimum-value  { background: #f59e0b; border-radius: 8px; }
+  meter.pill::-webkit-meter-even-less-good-value { background: #dc2626; border-radius: 8px; }
+  /* Firefox meter parts */
+  meter.pill::-moz-meter-bar { border-radius: 8px; }
+  meter.pill:-moz-meter-optimum::-moz-meter-bar      { background: #16a34a; }
+  meter.pill:-moz-meter-sub-optimum::-moz-meter-bar  { background: #f59e0b; }
+  meter.pill:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: #dc2626; }
+
+  meter.tall {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 28px; border: 1px solid #334155; border-radius: 4px; overflow: hidden;
+    background: #0f172a;
+  }
+  meter.tall::-webkit-meter-bar { background: #0f172a; border: 0; }
+  meter.tall::-webkit-meter-optimum-value { background: linear-gradient(180deg, #4ade80, #166534); }
+  meter.tall:-moz-meter-optimum::-moz-meter-bar { background: linear-gradient(180deg, #4ade80, #166534); }
+
+  /* Progress labeled with percent using adjacent span */
+  .labeled { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+  .labeled span { font-variant-numeric: tabular-nums; color: #475569; font-size: 13px; min-width: 40px; text-align: right; }
+</style>
+</head>
+<body>
+<h1>Styled &lt;progress&gt; and &lt;meter&gt;</h1>
+<p>Pass criterion: the native bar/value pseudo-elements (WebKit and Gecko
+prefixed) are restyled per variant; <code>&lt;meter&gt;</code> color
+switches when the value crosses <code>low</code> / <code>high</code>.</p>
+
+<h2>progress — base (native)</h2>
+<div class="row"><label>25 / 100</label><progress class="base" value="25" max="100"></progress></div>
+<div class="row"><label>75 / 100</label><progress class="base" value="75" max="100"></progress></div>
+<div class="row"><label>indeterminate</label><progress class="base"></progress></div>
+
+<h2>progress — gradient rounded</h2>
+<div class="row"><label>20%</label><progress class="grad" value="20" max="100"></progress></div>
+<div class="row"><label>60%</label><progress class="grad" value="60" max="100"></progress></div>
+<div class="row"><label>95%</label><progress class="grad" value="95" max="100"></progress></div>
+
+<h2>progress — thin minimal</h2>
+<div class="row"><label>40%</label><progress class="thin" value="40" max="100"></progress></div>
+
+<h2>progress — chunky gold</h2>
+<div class="row"><label>70%</label><progress class="chunky" value="70" max="100"></progress></div>
+
+<h2>progress — diagonal stripes</h2>
+<div class="row"><label>50%</label><progress class="stripe" value="50" max="100"></progress></div>
+
+<h2>progress with adjacent % label</h2>
+<div class="row"><label>Uploading</label>
+  <div class="labeled"><progress class="grad" value="42" max="100"></progress><span>42%</span></div>
+</div>
+
+<h2>meter — base (native)</h2>
+<div class="row"><label>value 2, low 3, high 7</label>
+  <meter class="base" value="2" min="0" max="10" low="3" high="7" optimum="8">2/10</meter></div>
+<div class="row"><label>value 5</label>
+  <meter class="base" value="5" min="0" max="10" low="3" high="7" optimum="8">5/10</meter></div>
+<div class="row"><label>value 9</label>
+  <meter class="base" value="9" min="0" max="10" low="3" high="7" optimum="8">9/10</meter></div>
+
+<h2>meter — pill (color by zone)</h2>
+<div class="row"><label>sub-sub-optimum (2)</label>
+  <meter class="pill" value="2" min="0" max="10" low="3" high="7" optimum="8">2</meter></div>
+<div class="row"><label>sub-optimum (5)</label>
+  <meter class="pill" value="5" min="0" max="10" low="3" high="7" optimum="8">5</meter></div>
+<div class="row"><label>optimum (9)</label>
+  <meter class="pill" value="9" min="0" max="10" low="3" high="7" optimum="8">9</meter></div>
+
+<h2>meter — tall with gradient fill</h2>
+<div class="row"><label>0.7</label><meter class="tall" value="0.7">70%</meter></div>
+</body>
+</html>

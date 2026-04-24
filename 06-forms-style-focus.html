@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — focus states on form elements</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  section { margin: 14px 0; }
+  p.note { color: #475569; font-size: 13px; }
+  label.stacked { display: block; font-size: 13px; color: #475569; margin-bottom: 4px; }
+
+  /* 1. Classic :focus outline */
+  .inp-basic { font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  .inp-basic:focus { outline: 2px solid #6366f1; outline-offset: 1px; border-color: #6366f1; }
+
+  /* 2. Soft glow ring (box-shadow halo) */
+  .inp-glow { font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  .inp-glow:focus {
+    outline: none; border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgb(79 70 229 / .25);
+  }
+
+  /* 3. Underline-grow on focus */
+  .inp-uline { font: inherit; padding: 6px 2px; border: 0; border-bottom: 1px solid #94a3b8; background: transparent; }
+  .inp-uline:focus { outline: none; border-bottom: 2px solid #0ea5e9; padding-bottom: 5px; }
+
+  /* 4. :focus-visible — keyboard-only indicator */
+  .btn-fv {
+    font: inherit; font-weight: 600; padding: 8px 14px; border-radius: 6px;
+    border: 0; background: #4f46e5; color: white; cursor: pointer;
+  }
+  .btn-fv:focus { outline: none; } /* mouse click won't ring */
+  .btn-fv:focus-visible {
+    outline: 3px solid #fbbf24; outline-offset: 2px;
+  }
+
+  /* 5. :focus-within on a container */
+  .card {
+    padding: 14px; border: 1px solid #e2e8f0; border-radius: 10px;
+    background: white; display: flex; gap: 10px; align-items: center;
+  }
+  .card:focus-within {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgb(79 70 229 / .15);
+  }
+  .card input { border: 0; outline: 0; font: inherit; flex: 1; padding: 4px; background: transparent; }
+  .card button { font: inherit; border: 0; background: #4f46e5; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+
+  /* 6. Field + label color change via :focus-within */
+  .field { position: relative; }
+  .field label { font-size: 13px; color: #64748b; display: block; margin-bottom: 4px; }
+  .field:focus-within label { color: #4f46e5; font-weight: 600; }
+  .field input {
+    font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%;
+  }
+  .field input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgb(79 70 229 / .2); }
+
+  /* 7. Strong high-contrast ring */
+  .inp-a11y { font: inherit; padding: 8px 10px; border: 2px solid #0f172a; border-radius: 4px; }
+  .inp-a11y:focus { outline: 3px solid #eab308; outline-offset: 2px; }
+
+  /* 8. Textarea glow */
+  .ta-glow { font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; }
+  .ta-glow:focus { outline: none; border-color: #059669; box-shadow: 0 0 0 4px rgb(5 150 105 / .2); }
+
+  /* 9. :focus-visible on the tile label pattern (the underlying input is visually hidden) */
+  .tile { position: relative; display: inline-block; }
+  .tile input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .tile span {
+    display: block; padding: 12px 20px; border: 2px solid #cbd5e1;
+    border-radius: 8px; background: white; font-weight: 600; color: #334155;
+  }
+  .tile input:checked + span { border-color: #4f46e5; background: #eef2ff; color: #312e81; }
+  .tile input:focus-visible + span { outline: 3px solid #fbbf24; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<h1>Form focus states</h1>
+<p class="note">Pass criterion: tab through each control to see the focus
+indicator. <code>:focus-visible</code> rings appear on keyboard focus only;
+<code>:focus-within</code> promotes the parent.</p>
+
+<h2>1. Basic <code>:focus</code> outline</h2>
+<section><input class="inp-basic" placeholder="click / tab here"></section>
+
+<h2>2. Soft glow ring (box-shadow)</h2>
+<section><input class="inp-glow" placeholder="glow on focus"></section>
+
+<h2>3. Underline grows on focus</h2>
+<section><input class="inp-uline" placeholder="minimal underline"></section>
+
+<h2>4. <code>:focus-visible</code> vs <code>:focus</code> — buttons</h2>
+<section>
+  <button class="btn-fv">Tab to me (keyboard ring shows)</button>
+  <button class="btn-fv">Mouse click ≠ keyboard</button>
+</section>
+
+<h2>5. <code>:focus-within</code> on a container</h2>
+<section>
+  <div class="card">
+    <input placeholder="Search anything…">
+    <button>Go</button>
+  </div>
+</section>
+
+<h2>6. Label recolors when field is focused</h2>
+<section>
+  <div class="field">
+    <label>Full name</label>
+    <input placeholder="Jane Doe">
+  </div>
+</section>
+
+<h2>7. High-contrast a11y ring</h2>
+<section><input class="inp-a11y" placeholder="strong ring"></section>
+
+<h2>8. Textarea focus glow</h2>
+<section>
+  <label class="stacked">Message</label>
+  <textarea class="ta-glow" rows="3" placeholder="Type something…"></textarea>
+</section>
+
+<h2>9. :focus-visible on tile / card picker</h2>
+<section>
+  <label class="tile"><input type="radio" name="plan"><span>Free</span></label>
+  <label class="tile"><input type="radio" name="plan" checked><span>Pro</span></label>
+  <label class="tile"><input type="radio" name="plan"><span>Team</span></label>
+</section>
+</body>
+</html>

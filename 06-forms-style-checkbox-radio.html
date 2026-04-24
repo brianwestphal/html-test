@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled checkbox, radio, switch</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  .row { display: flex; gap: 18px; align-items: center; margin: 10px 0; flex-wrap: wrap; }
+  label { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+
+  /* 1. accent-color native restyle */
+  .accent-red    { accent-color: #dc2626; }
+  .accent-blue   { accent-color: #2563eb; }
+  .accent-green  { accent-color: #16a34a; }
+  .accent-purple { accent-color: #9333ea; }
+
+  /* 2. Fully custom checkbox via appearance:none */
+  .cbx {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px; margin: 0;
+    border: 2px solid #94a3b8; border-radius: 5px;
+    background: white; display: inline-grid; place-content: center;
+    cursor: pointer; vertical-align: middle;
+  }
+  .cbx::before {
+    content: ""; width: 10px; height: 10px;
+    transform: scale(0);
+    box-shadow: inset 10px 10px #4f46e5;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+  .cbx:checked { background: #eef2ff; border-color: #4f46e5; }
+  .cbx:checked::before { transform: scale(1); }
+  .cbx:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+  .cbx:disabled { opacity: .5; cursor: not-allowed; }
+  .cbx:indeterminate { background: #4f46e5; border-color: #4f46e5; }
+  .cbx:indeterminate::before { transform: none; width: 10px; height: 2px; background: white; box-shadow: none; clip-path: none; }
+
+  /* 3. Custom radio */
+  .rdo {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px; margin: 0;
+    border: 2px solid #94a3b8; border-radius: 50%;
+    display: inline-grid; place-content: center;
+    background: white; cursor: pointer; vertical-align: middle;
+  }
+  .rdo::before {
+    content: ""; width: 10px; height: 10px; border-radius: 50%;
+    transform: scale(0); background: #059669;
+  }
+  .rdo:checked { border-color: #059669; background: #ecfdf5; }
+  .rdo:checked::before { transform: scale(1); }
+  .rdo:focus-visible { outline: 2px solid #059669; outline-offset: 2px; }
+
+  /* 4. Toggle switch from checkbox */
+  .sw {
+    -webkit-appearance: none; appearance: none;
+    width: 44px; height: 24px; border-radius: 999px;
+    background: #cbd5e1; position: relative; cursor: pointer; margin: 0;
+    vertical-align: middle;
+  }
+  .sw::before {
+    content: ""; position: absolute; top: 2px; left: 2px;
+    width: 20px; height: 20px; border-radius: 50%; background: white;
+    box-shadow: 0 1px 3px rgb(0 0 0 / .3);
+  }
+  .sw:checked { background: #16a34a; }
+  .sw:checked::before { left: 22px; }
+  .sw:disabled { opacity: .5; cursor: not-allowed; }
+  .sw:focus-visible { outline: 2px solid #4338ca; outline-offset: 2px; }
+
+  /* 5. Card / tile checkbox */
+  .tiles { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tile { position: relative; }
+  .tile input {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0;
+  }
+  .tile span {
+    display: block; padding: 14px 18px; border: 2px solid #cbd5e1;
+    border-radius: 8px; background: white; min-width: 120px; text-align: center;
+    font-weight: 600; color: #334155;
+  }
+  .tile input:checked + span {
+    border-color: #4f46e5; background: #eef2ff; color: #312e81;
+    box-shadow: 0 0 0 3px rgb(99 102 241 / .2);
+  }
+  .tile input:focus-visible + span { outline: 2px solid #6366f1; outline-offset: 2px; }
+  .tile input:disabled + span { opacity: .5; cursor: not-allowed; }
+
+  /* 6. Segmented (radios) */
+  .seg { display: inline-flex; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg label {
+    padding: 8px 14px; font-size: 14px; cursor: pointer;
+    border-inline-start: 1px solid #e2e8f0; background: white; color: #334155;
+  }
+  .seg label:first-of-type { border-inline-start: 0; }
+  .seg input:checked + label { background: #4f46e5; color: white; }
+</style>
+</head>
+<body>
+<h1>Styled checkbox, radio, switch</h1>
+<p>Pass criterion: native controls respect <code>accent-color</code>; custom
+controls render checkmarks/dots/thumb positions via <code>:checked</code>
+and <code>::before</code>.</p>
+
+<h2>1. accent-color on native controls</h2>
+<div class="row">
+  <label class="accent-red"><input type="checkbox" checked> red</label>
+  <label class="accent-blue"><input type="checkbox" checked> blue</label>
+  <label class="accent-green"><input type="checkbox" checked> green</label>
+  <label class="accent-purple"><input type="checkbox" checked> purple</label>
+</div>
+<div class="row">
+  <label class="accent-red"><input type="radio" name="a" checked> red</label>
+  <label class="accent-blue"><input type="radio" name="a"> blue</label>
+  <label class="accent-green"><input type="radio" name="a"> green</label>
+</div>
+
+<h2>2. Fully custom checkbox (appearance:none + ::before)</h2>
+<div class="row">
+  <label><input class="cbx" type="checkbox" checked> checked</label>
+  <label><input class="cbx" type="checkbox"> unchecked</label>
+  <label><input class="cbx" type="checkbox" checked disabled> disabled</label>
+</div>
+
+<h2>3. Custom radio</h2>
+<div class="row">
+  <label><input class="rdo" type="radio" name="r1" checked> one</label>
+  <label><input class="rdo" type="radio" name="r1"> two</label>
+  <label><input class="rdo" type="radio" name="r1"> three</label>
+  <label><input class="rdo" type="radio" name="r1" disabled> disabled</label>
+</div>
+
+<h2>4. Toggle switch (checkbox restyled)</h2>
+<div class="row">
+  <label><input class="sw" type="checkbox" checked> wifi on</label>
+  <label><input class="sw" type="checkbox"> bluetooth off</label>
+  <label><input class="sw" type="checkbox" checked disabled> locked</label>
+</div>
+
+<h2>5. Card / tile pickers (checkbox inside label)</h2>
+<div class="tiles">
+  <label class="tile"><input type="checkbox"><span>Option A</span></label>
+  <label class="tile"><input type="checkbox" checked><span>Option B</span></label>
+  <label class="tile"><input type="checkbox" checked><span>Option C</span></label>
+  <label class="tile"><input type="checkbox" disabled><span>Disabled</span></label>
+</div>
+
+<h2>6. Segmented control (radio group)</h2>
+<div class="seg">
+  <input type="radio" name="sz" id="sz-s"><label for="sz-s">S</label>
+  <input type="radio" name="sz" id="sz-m" checked><label for="sz-m">M</label>
+  <input type="radio" name="sz" id="sz-l"><label for="sz-l">L</label>
+  <input type="radio" name="sz" id="sz-xl"><label for="sz-xl">XL</label>
+</div>
+</body>
+</html>

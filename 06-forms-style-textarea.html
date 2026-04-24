@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled textarea</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  section { margin: 14px 0; }
+  label { display: block; font-size: 13px; color: #475569; margin-bottom: 4px; font-weight: 600; }
+
+  /* Outlined */
+  .ta-outline {
+    font: inherit; padding: 10px 12px; border: 1px solid #cbd5e1;
+    border-radius: 6px; background: white; width: 100%;
+  }
+  .ta-outline:focus { outline: 2px solid #6366f1; outline-offset: 1px; border-color: #6366f1; }
+
+  /* Filled */
+  .ta-filled {
+    font: inherit; padding: 10px 12px; border: 0;
+    border-bottom: 2px solid #94a3b8;
+    background: #f1f5f9; border-radius: 6px 6px 0 0; width: 100%;
+  }
+  .ta-filled:focus { outline: none; background: #e0e7ff; border-bottom-color: #4f46e5; }
+
+  /* Borderless / bare */
+  .ta-bare {
+    font: inherit; padding: 10px 12px; border: 0; background: transparent;
+    width: 100%; resize: none;
+  }
+  .ta-bare:focus { outline: 0; background: #fef9c3; }
+
+  /* Code editor style */
+  .ta-code {
+    font: 13px/1.45 ui-monospace, Menlo, Consolas, monospace;
+    padding: 10px 12px; border: 1px solid #334155; border-radius: 6px;
+    background: #0f172a; color: #e2e8f0; width: 100%;
+    tab-size: 2;
+  }
+  .ta-code:focus { outline: 2px solid #22d3ee; outline-offset: 1px; }
+
+  /* Resize variants */
+  .ta-resize-none  { resize: none;  width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  .ta-resize-vert  { resize: vertical;   width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  .ta-resize-horiz { resize: horizontal; max-width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  .ta-resize-both  { resize: both; max-width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+
+  /* Wrapper with character counter in a sibling */
+  .ta-wrap { position: relative; }
+  .ta-wrap textarea {
+    font: inherit; padding: 10px 12px; padding-bottom: 26px; /* room for counter */
+    border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; background: white;
+  }
+  .ta-wrap .count {
+    position: absolute; right: 10px; bottom: 8px;
+    font-size: 11px; color: #64748b; pointer-events: none;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(to top, white 70%, transparent);
+    padding: 0 4px;
+  }
+
+  /* Floating label (uses :placeholder-shown) */
+  .float {
+    position: relative;
+  }
+  .float textarea {
+    font: inherit; padding: 22px 12px 10px; width: 100%;
+    border: 1px solid #cbd5e1; border-radius: 6px; background: white;
+  }
+  .float label {
+    position: absolute; left: 12px; top: 16px; font-size: 14px; color: #64748b;
+    pointer-events: none; background: white; padding: 0 4px; margin: 0;
+    font-weight: 400;
+  }
+  .float textarea:focus + label,
+  .float textarea:not(:placeholder-shown) + label {
+    top: -8px; font-size: 11px; color: #4f46e5; font-weight: 600;
+  }
+  .float textarea:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgb(79 70 229 / .2); }
+
+  /* Quote style */
+  .ta-quote {
+    font: italic 16px/1.5 Georgia, serif;
+    padding: 14px 18px; border: 0; border-left: 4px solid #9333ea;
+    background: #faf5ff; color: #4c1d95; width: 100%;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Gradient-bordered */
+  .ta-grad {
+    font: inherit; padding: 10px 12px; width: 100%;
+    border: 2px solid transparent; border-radius: 8px;
+    background:
+      linear-gradient(white, white) padding-box,
+      linear-gradient(135deg, #8b5cf6, #ec4899) border-box;
+  }
+  .ta-grad:focus { outline: none; }
+
+  /* Disabled / readonly */
+  .ta-disabled { background: #f1f5f9; color: #94a3b8; border: 1px dashed #94a3b8; }
+</style>
+</head>
+<body>
+<h1>Styled &lt;textarea&gt;</h1>
+<p>Pass criterion: each textarea variant renders per its label;
+<code>resize</code> handles show in the bottom-right corner where allowed,
+and are suppressed on <code>resize: none</code>.</p>
+
+<h2>Outlined / filled / borderless</h2>
+<section>
+  <label>Outlined</label>
+  <textarea class="ta-outline" rows="3">An outlined textarea with a neutral border that turns indigo on focus.</textarea>
+</section>
+<section>
+  <label>Filled (material-style)</label>
+  <textarea class="ta-filled" rows="3">A filled textarea with an underline that thickens on focus.</textarea>
+</section>
+<section>
+  <label>Borderless (focus tints background)</label>
+  <textarea class="ta-bare" rows="3">No border until focus.</textarea>
+</section>
+
+<h2>Code editor look</h2>
+<section>
+  <label>Code</label>
+  <textarea class="ta-code" rows="6">function hello(name) {
+  return `hello, ${name}`;
+}
+console.log(hello("world"));
+</textarea>
+</section>
+
+<h2>Resize variants</h2>
+<section>
+  <label>resize: none</label>
+  <textarea class="ta-resize-none" rows="2">Cannot be resized.</textarea>
+</section>
+<section>
+  <label>resize: vertical</label>
+  <textarea class="ta-resize-vert" rows="2">Vertical only — grab the handle in the bottom right.</textarea>
+</section>
+<section>
+  <label>resize: horizontal</label>
+  <textarea class="ta-resize-horiz" rows="2">Horizontal only.</textarea>
+</section>
+<section>
+  <label>resize: both</label>
+  <textarea class="ta-resize-both" rows="2">Both axes resizable.</textarea>
+</section>
+
+<h2>Character counter (adjacent span)</h2>
+<section>
+  <label>Bio (max 140)</label>
+  <div class="ta-wrap">
+    <textarea rows="3" maxlength="140">Rendering tests for a new HTML/CSS engine.</textarea>
+    <span class="count">42 / 140</span>
+  </div>
+</section>
+
+<h2>Floating label</h2>
+<section>
+  <div class="float">
+    <textarea rows="4" placeholder=" ">Already has content, so label floats above.</textarea>
+    <label>Description</label>
+  </div>
+</section>
+<section>
+  <div class="float">
+    <textarea rows="4" placeholder=" "></textarea>
+    <label>Empty (label in place)</label>
+  </div>
+</section>
+
+<h2>Quote style</h2>
+<section>
+  <textarea class="ta-quote" rows="3">The best way to predict the future is to invent it.</textarea>
+</section>
+
+<h2>Gradient border</h2>
+<section>
+  <label>Gradient</label>
+  <textarea class="ta-grad" rows="3">Gradient borders use two backgrounds with different background-origin.</textarea>
+</section>
+
+<h2>Disabled / readonly</h2>
+<section>
+  <label>readonly</label>
+  <textarea class="ta-outline" rows="2" readonly>Readonly content — focusable but not editable.</textarea>
+</section>
+<section>
+  <label>disabled</label>
+  <textarea class="ta-outline ta-disabled" rows="2" disabled>Disabled content.</textarea>
+</section>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled file input</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  section { margin: 16px 0; }
+
+  /* 1. Style the native browse button via ::file-selector-button */
+  .f-primary::file-selector-button {
+    font: inherit; padding: 8px 14px;
+    border: 0; border-radius: 6px;
+    background: #4f46e5; color: white;
+    margin-right: 12px; cursor: pointer;
+    font-weight: 600;
+  }
+  .f-primary::file-selector-button:hover { background: #4338ca; }
+
+  .f-outline::file-selector-button {
+    font: inherit; padding: 8px 14px;
+    border: 2px solid #4f46e5; border-radius: 6px;
+    background: white; color: #4f46e5;
+    margin-right: 12px; cursor: pointer; font-weight: 600;
+  }
+
+  .f-pill::file-selector-button {
+    font: inherit; padding: 6px 16px; border: 0;
+    background: #0f172a; color: white;
+    border-radius: 999px; margin-right: 12px; cursor: pointer;
+  }
+
+  .f-danger::file-selector-button {
+    font: inherit; padding: 8px 14px; border: 0; border-radius: 4px;
+    background: #dc2626; color: white; margin-right: 12px; cursor: pointer; font-weight: 600;
+  }
+
+  /* 2. Label-wrapped pattern: hide the real input, style the label */
+  .hidden-file { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .faux-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 8px;
+    background: linear-gradient(#4f46e5, #3730a3);
+    color: white; font-weight: 600; cursor: pointer;
+    box-shadow: 0 1px 2px rgb(0 0 0 / .2);
+  }
+  .faux-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* 3. Drop-zone style */
+  .drop {
+    position: relative;
+    border: 2px dashed #94a3b8; border-radius: 10px;
+    padding: 28px; text-align: center; background: #f8fafc; color: #475569;
+  }
+  .drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .drop .icon { font-size: 28px; }
+  .drop strong { display: block; color: #0f172a; margin-top: 6px; }
+  .drop small { display: block; color: #64748b; margin-top: 4px; }
+  .drop:focus-within { border-color: #4f46e5; background: #eef2ff; }
+
+  /* 4. Compact inline */
+  .f-compact::file-selector-button {
+    font-size: 12px; padding: 4px 10px; border: 1px solid #cbd5e1;
+    border-radius: 4px; background: #f1f5f9; margin-right: 8px;
+    color: #0f172a; cursor: pointer;
+  }
+
+  /* 5. Disabled */
+  .f-primary:disabled::file-selector-button { background: #cbd5e1; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<h1>Styled file input</h1>
+<p>Pass criterion: <code>::file-selector-button</code> is restyled on the
+native input; label-wrapped pattern produces a pill/drop-zone with the real
+<code>&lt;input type=file&gt;</code> hidden but still functional.</p>
+
+<h2>1. ::file-selector-button variants</h2>
+<section><input class="f-primary"  type="file"></section>
+<section><input class="f-outline"  type="file" multiple></section>
+<section><input class="f-pill"     type="file"></section>
+<section><input class="f-danger"   type="file"></section>
+<section><input class="f-primary"  type="file" disabled></section>
+<section><input class="f-compact"  type="file"></section>
+
+<h2>2. Label-wrapped custom button (input hidden)</h2>
+<section>
+  <label class="faux-btn">
+    <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    Upload a document
+    <input class="hidden-file" type="file">
+  </label>
+</section>
+
+<h2>3. Drop-zone (visually a zone, semantically an input)</h2>
+<section>
+  <label class="drop">
+    <span class="icon">&#x2601;&#xFE0F;</span>
+    <strong>Drop files or click to browse</strong>
+    <small>PNG, JPG, up to 10 MB</small>
+    <input type="file" multiple>
+  </label>
+</section>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — input groups / addons</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  .row { display: grid; grid-template-columns: 180px 1fr; gap: 10px 16px; align-items: center; margin: 10px 0; }
+  label { font-size: 13px; color: #475569; }
+
+  /* A group wraps: [addon-left?][input][addon-right?] into one bordered pill */
+  .ig {
+    display: inline-flex; align-items: stretch; width: 100%;
+    border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; background: white;
+  }
+  .ig:focus-within {
+    border-color: #6366f1; box-shadow: 0 0 0 3px rgb(99 102 241 / .25);
+  }
+  .ig input, .ig select {
+    flex: 1; min-width: 0; border: 0; font: inherit; padding: 8px 10px; background: transparent;
+  }
+  .ig input:focus, .ig select:focus { outline: none; }
+  .ig .addon {
+    display: inline-flex; align-items: center; padding: 0 12px;
+    background: #f1f5f9; color: #475569; font-size: 13px;
+    border-inline: 1px solid #e2e8f0;
+  }
+  .ig .addon:first-child { border-left: 0; }
+  .ig .addon:last-child  { border-right: 0; }
+  .ig .addon.icon { background: transparent; color: #64748b; padding: 0 8px; }
+
+  /* Addon as interactive button */
+  .ig button {
+    font: inherit; border: 0; padding: 0 14px;
+    background: #4f46e5; color: white; cursor: pointer; font-weight: 600;
+  }
+  .ig button:hover { background: #4338ca; }
+  .ig button.ghost {
+    background: transparent; color: #475569; padding: 0 10px;
+  }
+  .ig button.ghost:hover { background: #f1f5f9; }
+
+  /* Variant: rounded pill */
+  .ig.pill { border-radius: 999px; padding: 0 4px; }
+  .ig.pill input { padding: 8px 12px; }
+
+  /* Variant: tall */
+  .ig.lg input { padding: 12px 14px; font-size: 16px; }
+  .ig.lg .addon, .ig.lg button { font-size: 15px; padding: 0 14px; }
+
+  /* Embedded select (like country code picker) */
+  .ig select.embedded {
+    background: #f1f5f9; padding: 0 10px; border-right: 1px solid #e2e8f0;
+    flex: 0 0 auto; width: auto; -webkit-appearance: menulist; appearance: menulist;
+  }
+
+  /* Spin controls: number input with plus/minus */
+  .spin input { text-align: center; }
+  .spin .step {
+    font: inherit; width: 34px; border: 0; background: #f1f5f9; color: #0f172a;
+    cursor: pointer; font-weight: 700; font-size: 16px;
+  }
+  .spin .step:hover { background: #e2e8f0; }
+
+  /* Error / success state on the whole group */
+  .ig.err { border-color: #dc2626; }
+  .ig.err:focus-within { box-shadow: 0 0 0 3px rgb(220 38 38 / .25); }
+  .ig.ok  { border-color: #16a34a; }
+  .ig.ok:focus-within  { box-shadow: 0 0 0 3px rgb(22 163 74 / .25); }
+  .hint { font-size: 12px; color: #64748b; }
+  .hint.err { color: #dc2626; }
+  .hint.ok  { color: #16a34a; }
+
+  /* Icon strokes */
+  .ig svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+</style>
+</head>
+<body>
+<h1>Input groups / addons</h1>
+<p>Pass criterion: input, addons, and buttons appear seamlessly inside a
+single bordered container; the whole group highlights on focus-within.</p>
+
+<h2>Text prefix / suffix</h2>
+<div class="row"><label>URL</label>
+  <span class="ig">
+    <span class="addon">https://</span>
+    <input value="example.com">
+  </span>
+</div>
+<div class="row"><label>Email alias</label>
+  <span class="ig">
+    <input value="jane">
+    <span class="addon">@acme.com</span>
+  </span>
+</div>
+<div class="row"><label>Price</label>
+  <span class="ig">
+    <span class="addon">$</span>
+    <input type="number" value="49.99">
+    <span class="addon">USD</span>
+  </span>
+</div>
+
+<h2>Icon prefix / clear-suffix</h2>
+<div class="row"><label>Search</label>
+  <span class="ig">
+    <span class="addon icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+    <input value="rendering engine">
+    <button class="ghost" aria-label="clear">&times;</button>
+  </span>
+</div>
+<div class="row"><label>Password</label>
+  <span class="ig">
+    <input type="password" value="hunter2">
+    <button class="ghost">show</button>
+  </span>
+</div>
+
+<h2>Embedded select prefix</h2>
+<div class="row"><label>Phone</label>
+  <span class="ig">
+    <select class="embedded">
+      <option>+1</option>
+      <option>+44</option>
+      <option>+81</option>
+    </select>
+    <input type="tel" value="555-123-4567">
+  </span>
+</div>
+
+<h2>Inline submit</h2>
+<div class="row"><label>Subscribe</label>
+  <span class="ig">
+    <input type="email" value="you@example.com">
+    <button>Subscribe</button>
+  </span>
+</div>
+
+<h2>Spin control (minus / number / plus)</h2>
+<div class="row"><label>Quantity</label>
+  <span class="ig spin" style="max-width:170px">
+    <button class="step" aria-label="decrease">&minus;</button>
+    <input type="number" value="3" min="0" max="99">
+    <button class="step" aria-label="increase">+</button>
+  </span>
+</div>
+
+<h2>Pill shape, large size</h2>
+<div class="row"><label>Pill</label>
+  <span class="ig pill">
+    <span class="addon">@</span>
+    <input value="handle">
+  </span>
+</div>
+<div class="row"><label>Large</label>
+  <span class="ig lg">
+    <span class="addon">https://</span>
+    <input value="example.com">
+    <button>Go</button>
+  </span>
+</div>
+
+<h2>State: error / success</h2>
+<div class="row"><label>Error</label>
+  <div style="width:100%">
+    <span class="ig err">
+      <span class="addon">@</span>
+      <input value="bad value">
+    </span>
+    <div class="hint err">Username is already taken.</div>
+  </div>
+</div>
+<div class="row"><label>Success</label>
+  <div style="width:100%">
+    <span class="ig ok">
+      <span class="addon">@</span>
+      <input value="jane-doe">
+    </span>
+    <div class="hint ok">Username is available.</div>
+  </div>
+</div>
+</body>
+</html>

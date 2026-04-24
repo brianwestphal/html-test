@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — form layout patterns</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 880px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  form { margin-bottom: 10px; }
+  input, select, textarea {
+    font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px;
+    background: white;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: 2px solid #6366f1; outline-offset: 1px; border-color: #6366f1;
+  }
+  .btn {
+    font: inherit; font-weight: 600; padding: 8px 14px; border-radius: 6px;
+    border: 0; background: #4f46e5; color: white; cursor: pointer;
+  }
+
+  /* 1. Stacked */
+  .stacked label { display: block; font-size: 13px; color: #475569; margin: 10px 0 4px; font-weight: 600; }
+  .stacked input, .stacked select, .stacked textarea { display: block; width: 100%; max-width: 360px; }
+  .stacked .help { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+  /* 2. Inline */
+  .inline { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .inline label { font-size: 13px; color: #475569; font-weight: 600; }
+
+  /* 3. Horizontal (label beside field, right-aligned) */
+  .horiz { display: grid; grid-template-columns: 160px 1fr; gap: 10px 16px; align-items: center; max-width: 560px; }
+  .horiz label { text-align: right; font-size: 13px; color: #475569; font-weight: 600; }
+  .horiz .actions { grid-column: 2 / -1; }
+
+  /* 4. Two-column responsive grid with spans */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; max-width: 680px; }
+  .grid2 label { font-size: 13px; color: #475569; font-weight: 600; display: block; margin-bottom: 4px; }
+  .grid2 input, .grid2 select, .grid2 textarea { width: 100%; }
+  .grid2 .full { grid-column: 1 / -1; }
+
+  /* 5. Floating label (pure-CSS, using :placeholder-shown) */
+  .float-field {
+    position: relative; max-width: 360px; margin: 10px 0;
+  }
+  .float-field input {
+    width: 100%; padding: 20px 12px 8px; /* reserve space for label on top */
+  }
+  .float-field label {
+    position: absolute; left: 12px; top: 14px;
+    font-size: 14px; color: #64748b; pointer-events: none;
+    background: white; padding: 0 4px;
+  }
+  /* when value present (placeholder not shown) OR focused → shrink */
+  .float-field input:focus + label,
+  .float-field input:not(:placeholder-shown) + label {
+    top: -8px; font-size: 11px; color: #4f46e5; font-weight: 600;
+  }
+  .float-field input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgb(79 70 229 / .2); }
+
+  /* 6. Compact grid: label-above rows with field+hint */
+  .rows { display: grid; gap: 14px; max-width: 520px; }
+  .rows .field input { width: 100%; }
+  .rows .field .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .rows .field .head label { font-size: 13px; color: #475569; font-weight: 600; }
+  .rows .field .head small { font-size: 11px; color: #94a3b8; }
+
+  /* 7. Section divider heading */
+  .form-section {
+    border-top: 1px solid #e2e8f0; margin-top: 18px; padding-top: 14px;
+  }
+  .form-section > h3 {
+    font-size: 14px; color: #0f172a; margin: 0 0 10px;
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+</style>
+</head>
+<body>
+<h1>Form layout patterns</h1>
+<p>Pass criterion: each pattern renders its labels, fields, and actions in
+the documented arrangement.</p>
+
+<h2>1. Stacked (label above field)</h2>
+<form class="stacked">
+  <label for="s-name">Name</label>
+  <input id="s-name" value="Jane Doe">
+  <label for="s-email">Email</label>
+  <input id="s-email" type="email" value="jane@example.com">
+  <div class="help">We'll never share your email.</div>
+  <label for="s-bio">Bio</label>
+  <textarea id="s-bio" rows="3">Short bio goes here.</textarea>
+  <p><button class="btn" type="button">Save</button></p>
+</form>
+
+<h2>2. Inline (single-row compact form)</h2>
+<form class="inline">
+  <label for="i-q">Search</label>
+  <input id="i-q" value="html rendering">
+  <label for="i-cat">In</label>
+  <select id="i-cat"><option>All</option><option>Docs</option><option>Issues</option></select>
+  <button class="btn" type="button">Go</button>
+</form>
+
+<h2>3. Horizontal (right-aligned label beside field)</h2>
+<form class="horiz">
+  <label for="h-fn">First name</label>   <input id="h-fn" value="Jane">
+  <label for="h-ln">Last name</label>    <input id="h-ln" value="Doe">
+  <label for="h-co">Company</label>      <input id="h-co" value="Acme Inc.">
+  <label for="h-role">Role</label>
+  <select id="h-role"><option>Engineer</option><option selected>Designer</option><option>PM</option></select>
+  <div class="actions"><button class="btn" type="button">Save</button></div>
+</form>
+
+<h2>4. Two-column grid with full-width spans</h2>
+<form class="grid2">
+  <div><label>First name</label><input value="Jane"></div>
+  <div><label>Last name</label><input value="Doe"></div>
+  <div><label>City</label><input value="Portland"></div>
+  <div><label>State</label><input value="OR"></div>
+  <div class="full"><label>Street</label><input value="123 Main St"></div>
+  <div class="full"><label>Notes</label><textarea rows="2">Anything else?</textarea></div>
+</form>
+
+<h2>5. Floating labels (pure CSS, uses <code>:placeholder-shown</code>)</h2>
+<form>
+  <div class="float-field">
+    <input id="f-email" type="email" placeholder=" " value="jane@example.com">
+    <label for="f-email">Email</label>
+  </div>
+  <div class="float-field">
+    <input id="f-empty" type="text" placeholder=" ">
+    <label for="f-empty">Company (empty — label sits inside)</label>
+  </div>
+  <div class="float-field">
+    <input id="f-focus" type="text" placeholder=" " value="Jane Doe">
+    <label for="f-focus">Name</label>
+  </div>
+</form>
+
+<h2>6. Label + hint split header</h2>
+<form class="rows">
+  <div class="field">
+    <div class="head"><label>Username</label><small>required</small></div>
+    <input value="jane">
+  </div>
+  <div class="field">
+    <div class="head"><label>Password</label><small>min 8 chars</small></div>
+    <input type="password" value="hunter22">
+  </div>
+</form>
+
+<h2>7. Sectioned form</h2>
+<form class="grid2">
+  <div class="full form-section"><h3>Contact</h3></div>
+  <div><label>Name</label><input value="Jane"></div>
+  <div><label>Email</label><input type="email" value="jane@example.com"></div>
+  <div class="full form-section"><h3>Shipping</h3></div>
+  <div class="full"><label>Address</label><input value="123 Main St"></div>
+  <div><label>City</label><input value="Portland"></div>
+  <div><label>ZIP</label><input value="97201"></div>
+</form>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>06 — styled text inputs</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2em; max-width: 760px; color: #0f172a; }
+  h2 { margin-top: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; font-size: 16px; color: #334155; }
+  .row { display: grid; grid-template-columns: 180px 1fr; gap: 8px 16px; align-items: center; margin: 8px 0; }
+  label { font-size: 13px; color: #475569; }
+
+  /* Outlined (default-ish, but tuned) */
+  .inp-outlined {
+    font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1;
+    border-radius: 6px; background: white; color: #0f172a; width: 100%;
+  }
+  .inp-outlined:focus { outline: 2px solid #6366f1; outline-offset: 1px; border-color: #6366f1; }
+
+  /* Filled */
+  .inp-filled {
+    font: inherit; padding: 10px 12px; border: 0; border-bottom: 2px solid #94a3b8;
+    background: #f1f5f9; border-radius: 6px 6px 0 0; width: 100%;
+  }
+  .inp-filled:focus { outline: none; background: #e0e7ff; border-bottom-color: #4f46e5; }
+
+  /* Underlined only */
+  .inp-underline {
+    font: inherit; padding: 6px 2px; border: 0; border-bottom: 1px solid #94a3b8;
+    background: transparent; width: 100%;
+  }
+  .inp-underline:focus { outline: none; border-bottom: 2px solid #0ea5e9; padding-bottom: 5px; }
+
+  /* Pill */
+  .inp-pill {
+    font: inherit; padding: 8px 16px; border: 1px solid #cbd5e1;
+    border-radius: 999px; background: white; width: 100%;
+  }
+  .inp-pill:focus { outline: 3px solid rgb(99 102 241 / .3); border-color: #6366f1; }
+
+  /* Borderless */
+  .inp-bare {
+    font: inherit; padding: 8px 10px; border: 0; background: transparent; width: 100%;
+  }
+  .inp-bare:focus { outline: 0; background: #fef3c7; }
+
+  /* Glass */
+  .glass-wrap {
+    padding: 20px;
+    background: linear-gradient(135deg, #a78bfa, #f472b6);
+    border-radius: 10px;
+  }
+  .inp-glass {
+    font: inherit; padding: 10px 14px; width: 100%;
+    border: 1px solid rgb(255 255 255 / .5);
+    background: rgb(255 255 255 / .2);
+    color: white;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+  }
+  .inp-glass::placeholder { color: rgb(255 255 255 / .75); }
+
+  /* Sizes */
+  .sz-sm { font-size: 12px; padding: 4px 8px; border: 1px solid #cbd5e1; border-radius: 4px; }
+  .sz-md { font-size: 14px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+  .sz-lg { font-size: 18px; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 8px; }
+
+  /* State tints */
+  .inp-ok      { border: 1px solid #16a34a; background: #f0fdf4; }
+  .inp-warn    { border: 1px solid #ea580c; background: #fff7ed; }
+  .inp-err     { border: 1px solid #dc2626; background: #fef2f2; }
+  .inp-disabled{ border: 1px dashed #94a3b8; background: #f1f5f9; color: #64748b; }
+
+  /* Prefix/suffix using flex wrapper */
+  .field {
+    display: inline-flex; align-items: stretch; width: 100%;
+    border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; background: white;
+  }
+  .field:focus-within { border-color: #6366f1; outline: 2px solid rgb(99 102 241 / .3); }
+  .field input { flex: 1; min-width: 0; border: 0; padding: 8px 10px; font: inherit; background: transparent; }
+  .field input:focus { outline: none; }
+  .affix {
+    display: inline-flex; align-items: center; padding: 0 10px;
+    background: #f1f5f9; color: #475569; font-size: 13px; border-inline: 1px solid #e2e8f0;
+  }
+  .affix.left  { border-left: 0; }
+  .affix.right { border-right: 0; }
+
+  /* Caret color demo */
+  .inp-caret { font: inherit; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; caret-color: #ef4444; width: 100%; }
+</style>
+</head>
+<body>
+<h1>Styled text inputs</h1>
+<p>Pass criterion: each row renders with the intended visual treatment
+(border, padding, radius, background, focus outline, addons).</p>
+
+<h2>Visual variants</h2>
+<div class="row"><label>Outlined</label>      <input class="inp-outlined" value="Outlined input"></div>
+<div class="row"><label>Filled</label>        <input class="inp-filled" value="Filled input"></div>
+<div class="row"><label>Underlined</label>    <input class="inp-underline" value="Underline only"></div>
+<div class="row"><label>Pill</label>          <input class="inp-pill" value="Fully rounded"></div>
+<div class="row"><label>Borderless</label>    <input class="inp-bare" value="No border until focus"></div>
+
+<h2>Glass on gradient</h2>
+<div class="glass-wrap">
+  <input class="inp-glass" placeholder="Search…">
+</div>
+
+<h2>Sizes</h2>
+<div class="row"><label>sm</label>  <input class="sz-sm" value="small"></div>
+<div class="row"><label>md</label>  <input class="sz-md" value="medium"></div>
+<div class="row"><label>lg</label>  <input class="sz-lg" value="large"></div>
+
+<h2>Semantic state tints</h2>
+<div class="row"><label>Success</label>  <input class="inp-outlined inp-ok"   value="looks good"></div>
+<div class="row"><label>Warning</label>  <input class="inp-outlined inp-warn" value="double-check this"></div>
+<div class="row"><label>Error</label>    <input class="inp-outlined inp-err"  value="wrong value"></div>
+<div class="row"><label>Disabled</label> <input class="inp-outlined inp-disabled" value="can't edit" disabled></div>
+
+<h2>Prefix / suffix addons (flex wrapper)</h2>
+<div class="row"><label>$ amount</label>
+  <span class="field"><span class="affix left">$</span><input type="number" value="49.99"><span class="affix right">USD</span></span>
+</div>
+<div class="row"><label>URL</label>
+  <span class="field"><span class="affix left">https://</span><input value="example.com"></span>
+</div>
+<div class="row"><label>Search</label>
+  <span class="field"><span class="affix left">&#x1F50D;</span><input value="rendering tests"><span class="affix right">&times;</span></span>
+</div>
+
+<h2>caret-color</h2>
+<div class="row"><label>Red caret</label><input class="inp-caret" value="focus me to see red caret"></div>
+</body>
+</html>
