@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 deep — grid intrinsic track sizing</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  .grid {
+    display: grid; background: #fef3c7; gap: 4px; padding: 4px;
+    border: 1px solid #b45309;
+    width: 600px;
+  }
+  .item { background: #1d4ed8; color: white; padding: 6px; border: 2px solid #1e3a8a; }
+  .nowrap { white-space: nowrap; }
+</style>
+</head>
+<body>
+<h1>Grid intrinsic track sizing — min-content / max-content / fit-content / auto / fr</h1>
+
+<h2><code>auto auto auto</code> — each track sizes to its content (max-content if fits)</h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: auto auto auto;">
+    <div class="item">short</div>
+    <div class="item">medium content</div>
+    <div class="item">a much longer content cell here</div>
+  </div>
+</div>
+
+<h2><code>min-content max-content auto</code></h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: min-content max-content auto;">
+    <div class="item nowrap">supercalifragilisticexpialidocious</div>
+    <div class="item nowrap">supercalifragilisticexpialidocious</div>
+    <div class="item">filler</div>
+  </div>
+</div>
+
+<h2><code>minmax(min-content, 1fr)</code> — flexible but never below min-content</h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr) minmax(min-content, 1fr);">
+    <div class="item nowrap">supercalifragilisticexpialidocious</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+</div>
+
+<h2><code>minmax(0, 1fr)</code> — equal columns regardless of content</h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+    <div class="item nowrap" style="overflow: hidden;">supercalifragilisticexpialidocious clipped</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+</div>
+
+<h2><code>fit-content(120px)</code> tracks</h2>
+<p>Each track grows up to 120px, then wraps content (caps at content's max-content if smaller).</p>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: fit-content(120px) fit-content(120px) fit-content(120px);">
+    <div class="item">short</div>
+    <div class="item">a longer phrase that should wrap</div>
+    <div class="item">tiny</div>
+  </div>
+</div>
+
+<h2><code>1fr 2fr 1fr</code> — fr distributes free space</h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: 1fr 2fr 1fr;">
+    <div class="item">1fr</div>
+    <div class="item">2fr</div>
+    <div class="item">1fr</div>
+  </div>
+</div>
+
+<h2>Mixed fixed + fr + auto</h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: 100px auto 1fr 80px;">
+    <div class="item">100px</div>
+    <div class="item">auto</div>
+    <div class="item">1fr (rest)</div>
+    <div class="item">80px</div>
+  </div>
+</div>
+
+<h2>Track with single very wide item — auto track expands</h2>
+<div class="frame">
+  <div class="grid" style="grid-template-columns: auto auto;">
+    <div class="item">A</div>
+    <div class="item"><img src="assets/img-wide.png" alt="wide" style="display:block; width:300px;"></div>
+  </div>
+</div>
+</body>
+</html>

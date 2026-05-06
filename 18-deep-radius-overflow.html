@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 deep — border-radius + overflow clipping</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+  .lab { font-size: 11px; color: #475569; }
+
+  .card {
+    width: 220px; height: 140px;
+    border: 4px solid #1e3a8a;
+    border-radius: 32px;
+    background: linear-gradient(135deg, #fde68a, #f97316);
+    position: relative;
+  }
+  .child {
+    position: absolute; inset: 0;
+    background: #1d4ed8;
+    color: white; padding: 8px;
+  }
+
+  .clip-hidden  { overflow: hidden; }
+  .clip-clip    { overflow: clip; }
+  .clip-visible { overflow: visible; }
+
+  /* Inset shadow vs radius */
+  .shadow-inset {
+    width: 220px; height: 140px;
+    border-radius: 32px;
+    background: #fef3c7;
+    box-shadow: inset 0 0 0 8px #b45309, inset 0 6px 24px rgba(0,0,0,.4);
+  }
+
+  /* Uneven per-corner / elliptical */
+  .uneven {
+    width: 220px; height: 140px;
+    background: linear-gradient(135deg, #ddd6fe, #7c3aed);
+    border-radius: 4px 32px 60px 0 / 8px 60px 12px 0;
+    border: 2px solid #1e293b;
+  }
+
+  /* Image clipped by radius */
+  .img-card {
+    width: 220px; height: 140px;
+    border-radius: 32px;
+    overflow: hidden;
+  }
+  .img-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* nested radius — child should look radial */
+  .outer-rad {
+    width: 220px; height: 140px;
+    border-radius: 40px;
+    background: #fef3c7;
+    padding: 8px;
+    overflow: hidden;
+  }
+  .inner-rad {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #16a34a, #1d4ed8);
+    border-radius: 32px;            /* outer 40 - 8 padding */
+  }
+</style>
+</head>
+<body>
+<h1>border-radius — overflow clipping rules</h1>
+
+<h2>overflow: visible — child paints OUTSIDE radius (corners square)</h2>
+<div class="row">
+  <div class="card clip-visible">
+    <span class="lab">overflow visible</span>
+    <div class="child">child overflows corners</div>
+  </div>
+  <div class="card clip-hidden">
+    <span class="lab">overflow hidden</span>
+    <div class="child">clipped by radius</div>
+  </div>
+  <div class="card clip-clip">
+    <span class="lab">overflow clip</span>
+    <div class="child">also clipped</div>
+  </div>
+</div>
+
+<h2>Inset shadow follows the radius</h2>
+<div class="row">
+  <div class="shadow-inset"></div>
+</div>
+
+<h2>Uneven per-corner / elliptical radii</h2>
+<div class="row">
+  <div class="uneven"></div>
+  <div class="uneven" style="border-radius: 50% 0 50% 0;"></div>
+  <div class="uneven" style="border-radius: 50% / 25%;"></div>
+  <div class="uneven" style="border-radius: 999px;"></div>
+</div>
+
+<h2>Image clipped by radius (overflow:hidden)</h2>
+<div class="row">
+  <div class="img-card"><img src="assets/img-wide.png" alt=""></div>
+  <div class="img-card" style="border-radius: 50%;"><img src="assets/img-blue.jpg" alt=""></div>
+  <div class="img-card" style="border-radius: 0 50% 0 50%;"><img src="assets/img-purple.webp" alt=""></div>
+</div>
+
+<h2>Nested radius (outer 40 - 8 padding = inner 32)</h2>
+<div class="row">
+  <div class="outer-rad"><div class="inner-rad"></div></div>
+</div>
+
+<h2>Negative spread shadow stays inside radius</h2>
+<div class="row">
+  <div class="card" style="background: #1d4ed8; box-shadow: 0 8px 16px -4px #b91c1c;"></div>
+</div>
+</body>
+</html>

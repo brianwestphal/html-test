@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 deep — line breaking</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .col {
+    width: 200px; background: #fef3c7; border: 1px solid #b45309;
+    padding: 6px; margin-right: 12px; display: inline-block; vertical-align: top;
+    font-size: 14px; line-height: 1.5;
+  }
+  .a { word-break: normal; }
+  .b { word-break: break-all; }
+  .c { word-break: keep-all; }
+  .d { overflow-wrap: normal; }
+  .e { overflow-wrap: break-word; }
+  .f { overflow-wrap: anywhere; }
+  .g { hyphens: none; }
+  .h { hyphens: manual; }
+  .i { hyphens: auto; }
+  .lab { display: block; color: #475569; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>Line breaking — soft hyphen, word-break, overflow-wrap, hyphens</h1>
+
+<h2><code>word-break</code> — same long word, three values</h2>
+<div>
+  <div class="col a"><span class="lab">word-break: normal</span>antidisestablishmentarianism is a really really long word</div>
+  <div class="col b"><span class="lab">word-break: break-all</span>antidisestablishmentarianism is a really really long word</div>
+  <div class="col c"><span class="lab">word-break: keep-all (CJK)</span>한국어 keep-all 단어 분리 없이 줄바꿈</div>
+</div>
+
+<h2><code>overflow-wrap</code></h2>
+<div>
+  <div class="col d"><span class="lab">normal — overflows</span>antidisestablishmentarianism breakable</div>
+  <div class="col e"><span class="lab">break-word — wrap unbreakable</span>antidisestablishmentarianism breakable</div>
+  <div class="col f"><span class="lab">anywhere — also affects min-content</span>antidisestablishmentarianism breakable</div>
+</div>
+
+<h2>Soft hyphen <code>&amp;shy;</code> — only breaks when needed</h2>
+<div>
+  <div class="col" style="width: 80px;">
+    <span class="lab">narrow</span>su&shy;per&shy;cal&shy;i&shy;fra&shy;gi&shy;lis&shy;tic
+  </div>
+  <div class="col" style="width: 240px;">
+    <span class="lab">wide — same source, no hyphens visible</span>su&shy;per&shy;cal&shy;i&shy;fra&shy;gi&shy;lis&shy;tic
+  </div>
+</div>
+
+<h2><code>hyphens</code> property (requires <code>lang</code>)</h2>
+<div>
+  <div class="col g" lang="en"><span class="lab">none — ignores soft-hyphen</span>de&shy;spite the prov&shy;a&shy;tion the situa&shy;tion was hand&shy;ling</div>
+  <div class="col h" lang="en"><span class="lab">manual — uses soft-hyphen</span>de&shy;spite the prov&shy;a&shy;tion the situa&shy;tion was hand&shy;ling</div>
+  <div class="col i" lang="en"><span class="lab">auto — engine inserts</span>despite the provocation the situation was handling unconventionally</div>
+</div>
+
+<h2>Long URL / no-space text</h2>
+<div>
+  <div class="col d"><span class="lab">overflow-wrap: normal</span>https://example.com/this/is/a/very/long/url/path/segment</div>
+  <div class="col e"><span class="lab">overflow-wrap: break-word</span>https://example.com/this/is/a/very/long/url/path/segment</div>
+  <div class="col f"><span class="lab">overflow-wrap: anywhere</span>https://example.com/this/is/a/very/long/url/path/segment</div>
+</div>
+
+<h2>line-break property (CJK)</h2>
+<div lang="ja" style="font-size: 14px;">
+  <div class="col" style="line-break: strict;"><span class="lab">strict</span>「日本語の文字列で、句読点や中点・記号などの扱いを試す。」</div>
+  <div class="col" style="line-break: loose;"><span class="lab">loose</span>「日本語の文字列で、句読点や中点・記号などの扱いを試す。」</div>
+  <div class="col" style="line-break: anywhere;"><span class="lab">anywhere</span>「日本語の文字列で、句読点や中点・記号などの扱いを試す。」</div>
+</div>
+
+<h2><code>text-wrap: balance / pretty</code> on headings</h2>
+<h3 style="text-wrap: balance; max-width: 320px; background: #fef3c7;">
+  Balanced headlines spread evenly across all the lines they need
+</h3>
+<h3 style="text-wrap: pretty; max-width: 320px; background: #fef3c7;">
+  Pretty wrap avoids orphaned last lines on the right side
+</h3>
+</body>
+</html>

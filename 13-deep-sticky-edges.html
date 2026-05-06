@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — sticky edges</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .scroller {
+    height: 240px;
+    overflow: auto;
+    border: 2px solid #475569;
+    background: #f8fafc;
+    padding: 0 12px;
+  }
+  .row { padding: 6px 8px; border-bottom: 1px solid #cbd5e1; }
+  .head {
+    position: sticky;
+    top: 0;
+    background: #1e3a8a;
+    color: white;
+    padding: 8px;
+    margin: 0 -12px;
+    font-weight: bold;
+  }
+  .head.h2 { top: 32px; background: #b91c1c; }
+  .head.h3 { top: 64px; background: #047857; }
+
+  /* Sticky bottom */
+  .bottom-bar {
+    position: sticky;
+    bottom: 0;
+    background: #fde68a;
+    padding: 6px 8px;
+    margin: 0 -12px;
+    border-top: 2px solid #92400e;
+    font-weight: bold;
+  }
+
+  /* Sticky in flex */
+  .flex-scroller {
+    height: 200px; overflow: auto;
+    border: 2px solid #475569;
+    display: flex;
+    background: #f1f5f9;
+  }
+  .flex-scroller > .col {
+    flex: 1;
+    border-right: 1px solid #cbd5e1;
+    padding: 6px;
+  }
+  .flex-scroller .label {
+    position: sticky;
+    top: 0;
+    background: #4338ca;
+    color: white;
+    padding: 4px 6px;
+    font-weight: bold;
+  }
+
+  /* Sticky in grid */
+  .grid-scroller {
+    height: 200px; overflow: auto;
+    border: 2px solid #475569;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background: #f1f5f9;
+  }
+  .grid-scroller .gh {
+    position: sticky;
+    top: 0;
+    background: #b45309;
+    color: white;
+    padding: 6px;
+    font-weight: bold;
+  }
+  .grid-scroller .gc { padding: 6px; border-bottom: 1px solid #cbd5e1; }
+
+  /* Horizontal sticky */
+  .h-scroll {
+    overflow-x: auto;
+    border: 2px solid #475569;
+    white-space: nowrap;
+    padding: 12px 0;
+    background: #f8fafc;
+  }
+  .h-scroll .col {
+    display: inline-block; vertical-align: top;
+    width: 200px; padding: 8px; border-right: 1px solid #cbd5e1;
+  }
+  .h-scroll .pin {
+    position: sticky;
+    left: 0;
+    background: #0f172a; color: white;
+    display: inline-block; padding: 6px 8px;
+    margin-right: 8px;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<h1>position: sticky — edge cases</h1>
+
+<h2>Stacked sticky headers (top: 0 / 32 / 64)</h2>
+<p>Three nested sticky bars stack as you scroll — each pinned to a different
+top offset. Lower-priority headers slide under higher ones.</p>
+<div class="scroller">
+  <div class="head">Section 1 (top: 0)</div>
+  <div class="head h2">Subsection A (top: 32)</div>
+  <div class="head h3">Group α (top: 64)</div>
+  <div class="row">α-1</div><div class="row">α-2</div><div class="row">α-3</div>
+  <div class="head h3">Group β (top: 64)</div>
+  <div class="row">β-1</div><div class="row">β-2</div><div class="row">β-3</div>
+  <div class="head h2">Subsection B (top: 32)</div>
+  <div class="head h3">Group γ (top: 64)</div>
+  <div class="row">γ-1</div><div class="row">γ-2</div><div class="row">γ-3</div>
+  <div class="head">Section 2 (top: 0)</div>
+  <div class="row">2-1</div><div class="row">2-2</div><div class="row">2-3</div>
+  <div class="row">2-4</div><div class="row">2-5</div><div class="row">2-6</div>
+</div>
+
+<h2>Sticky bottom bar</h2>
+<div class="scroller">
+  <div class="row">item 1</div><div class="row">item 2</div>
+  <div class="row">item 3</div><div class="row">item 4</div>
+  <div class="row">item 5</div><div class="row">item 6</div>
+  <div class="row">item 7</div><div class="row">item 8</div>
+  <div class="row">item 9</div><div class="row">item 10</div>
+  <div class="bottom-bar">Sticky bottom (always at the bottom edge)</div>
+</div>
+
+<h2>Sticky inside flex columns</h2>
+<div class="flex-scroller">
+  <div class="col">
+    <div class="label">Col A</div>
+    <div>a1</div><div>a2</div><div>a3</div><div>a4</div><div>a5</div>
+    <div>a6</div><div>a7</div><div>a8</div><div>a9</div><div>a10</div>
+  </div>
+  <div class="col">
+    <div class="label">Col B</div>
+    <div>b1</div><div>b2</div><div>b3</div><div>b4</div><div>b5</div>
+    <div>b6</div><div>b7</div><div>b8</div><div>b9</div><div>b10</div>
+  </div>
+  <div class="col">
+    <div class="label">Col C</div>
+    <div>c1</div><div>c2</div><div>c3</div><div>c4</div><div>c5</div>
+    <div>c6</div><div>c7</div><div>c8</div><div>c9</div><div>c10</div>
+  </div>
+</div>
+
+<h2>Sticky in a CSS grid</h2>
+<div class="grid-scroller">
+  <div class="gh">Cat A</div><div class="gc">Many</div>
+  <div class="gc">a1</div><div class="gc">value</div>
+  <div class="gc">a2</div><div class="gc">value</div>
+  <div class="gc">a3</div><div class="gc">value</div>
+  <div class="gh">Cat B</div><div class="gc">Many</div>
+  <div class="gc">b1</div><div class="gc">value</div>
+  <div class="gc">b2</div><div class="gc">value</div>
+  <div class="gc">b3</div><div class="gc">value</div>
+</div>
+
+<h2>Sticky on the horizontal axis (left: 0)</h2>
+<div class="h-scroll">
+  <span class="pin">PINNED LEFT</span>
+  <div class="col">col 1: lorem ipsum dolor</div>
+  <div class="col">col 2: amet consectetur</div>
+  <div class="col">col 3: adipiscing elit</div>
+  <div class="col">col 4: sed do eiusmod</div>
+  <div class="col">col 5: tempor incididunt</div>
+  <div class="col">col 6: ut labore et</div>
+  <div class="col">col 7: dolore magna</div>
+</div>
+</body>
+</html>

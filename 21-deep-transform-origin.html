@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>21 deep — transform-origin</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+  .stage {
+    width: 160px; height: 160px;
+    background: repeating-linear-gradient(45deg, #fef3c7 0 8px, #fde68a 8px 16px);
+    border: 1px solid #b45309;
+    position: relative;
+  }
+  .ghost {
+    position: absolute; inset: 0;
+    background: rgba(29, 78, 216, 0.2);
+    border: 2px dashed #1d4ed8;
+  }
+  .box {
+    position: absolute; inset: 0;
+    background: #1d4ed8;
+    color: white; padding: 4px;
+    transform: rotate(20deg);
+  }
+  .lab { font-size: 11px; color: #475569; margin-top: 4px; }
+
+  .o-tl { transform-origin: top left; }
+  .o-tr { transform-origin: top right; }
+  .o-bl { transform-origin: bottom left; }
+  .o-br { transform-origin: bottom right; }
+  .o-c  { transform-origin: center; }
+  .o-pct { transform-origin: 25% 75%; }
+  .o-px  { transform-origin: 8px 24px; }
+
+  /* 3D origin (with z) */
+  .stage-3d { perspective: 600px; }
+  .box-3d {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+    transform: rotateY(45deg);
+  }
+  .o-3d-front { transform-origin: 50% 50% 0; }
+  .o-3d-back  { transform-origin: 50% 50% -60px; }
+  .o-3d-side  { transform-origin: 0 50% 0; }
+</style>
+</head>
+<body>
+<h1><code>transform-origin</code> — keywords, %, lengths, 3D</h1>
+<p>Each yellow stage is the original box position; the blue box is rotated
+20° around the listed origin. Compare to a default <code>center</code>.</p>
+
+<h2>Keyword origins</h2>
+<div class="row">
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-tl">top left</div></div>
+    <div class="lab">top left</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-tr">top right</div></div>
+    <div class="lab">top right</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-bl">bot left</div></div>
+    <div class="lab">bottom left</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-br">bot right</div></div>
+    <div class="lab">bottom right</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-c">center</div></div>
+    <div class="lab">center (default)</div>
+  </div>
+</div>
+
+<h2>Percentage and length origins</h2>
+<div class="row">
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-pct">25% 75%</div></div>
+    <div class="lab">25% 75%</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box o-px">8px 24px</div></div>
+    <div class="lab">8px 24px</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box" style="transform-origin: 0 0;">0 0</div></div>
+    <div class="lab">0 0 = top left</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box" style="transform-origin: 100% 100%;">100% 100%</div></div>
+    <div class="lab">100% 100% = bot right</div>
+  </div>
+</div>
+
+<h2>3D — third value is z</h2>
+<div class="row">
+  <div>
+    <div class="stage stage-3d"><div class="ghost"></div><div class="box-3d o-3d-front">z 0</div></div>
+    <div class="lab">origin z: 0 (in box plane)</div>
+  </div>
+  <div>
+    <div class="stage stage-3d"><div class="ghost"></div><div class="box-3d o-3d-back">z -60</div></div>
+    <div class="lab">origin z: -60px (rotates around point behind)</div>
+  </div>
+  <div>
+    <div class="stage stage-3d"><div class="ghost"></div><div class="box-3d o-3d-side">left edge</div></div>
+    <div class="lab">origin x: 0 (rotates from left edge)</div>
+  </div>
+</div>
+
+<h2>Origin during scale</h2>
+<div class="row">
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box" style="transform: scale(0.5); transform-origin: top left;">scale .5 from TL</div></div>
+    <div class="lab">scale .5 from top-left</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box" style="transform: scale(0.5); transform-origin: bottom right;">scale .5 from BR</div></div>
+    <div class="lab">scale .5 from bottom-right</div>
+  </div>
+  <div>
+    <div class="stage"><div class="ghost"></div><div class="box" style="transform: scaleX(2); transform-origin: left;">scaleX 2 from L</div></div>
+    <div class="lab">scaleX 2 from left edge</div>
+  </div>
+</div>
+</body>
+</html>

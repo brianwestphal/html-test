@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 deep — @property registration</title>
+<style>
+  /* Register custom properties with type, inheritance, and initial value */
+  @property --tint {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #1d4ed8;
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 45deg;
+  }
+
+  @property --pad {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 8px;
+  }
+
+  @property --tag {
+    syntax: "small | medium | large";
+    inherits: false;
+    initial-value: medium;
+  }
+
+  @property --pct {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 50%;
+  }
+
+  @property --multi {
+    syntax: "<length> | <percentage>";
+    inherits: false;
+    initial-value: 0px;
+  }
+
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+
+  .swatch {
+    background: var(--tint);          /* registered <color> */
+    color: white;
+    padding: var(--pad);                /* registered <length> */
+    margin: 4px 0;
+  }
+
+  .swatch.alt   { --tint: #b91c1c; --pad: 16px; }
+  .swatch.green { --tint: #16a34a; }
+  .swatch.bad   { --tint: not-a-color; }   /* invalid → uses initial #1d4ed8 */
+  .swatch.bad-pad { --pad: red; }          /* invalid → uses initial 8px */
+
+  /* registered angle in gradient */
+  .gradient {
+    background: linear-gradient(var(--angle), #fde68a, #1d4ed8);
+    height: 80px;
+  }
+  .gradient.spin { --angle: 135deg; }
+
+  /* enum-style typed (values keyword) */
+  .pill[data-tag="small"]  { --tag: small; }
+  .pill[data-tag="large"]  { --tag: large; }
+  .pill {
+    --pad: 4px;
+    padding: var(--pad);
+    background: #c7d2fe;
+    display: inline-block; margin: 2px;
+  }
+
+  /* Inheritance */
+  .parent { --tint: #ea580c; }     /* inherits true → child sees orange */
+  .parent .swatch { background: var(--tint); }
+
+  .parent-noinh { --pad: 24px; }   /* inherits false → child uses initial 8px */
+  .parent-noinh .swatch { padding: var(--pad); }
+</style>
+</head>
+<body>
+<h1><code>@property</code> — registered custom properties</h1>
+
+<h2>Inheritance &amp; type</h2>
+<div class="frame">
+  <div class="swatch">default — initial blue</div>
+  <div class="swatch alt">--tint: #b91c1c, --pad: 16px</div>
+  <div class="swatch green">--tint: #16a34a (uses default --pad)</div>
+</div>
+
+<h2>Invalid values fall back to initial-value</h2>
+<div class="frame">
+  <div class="swatch bad">--tint: not-a-color → falls back to initial #1d4ed8</div>
+  <div class="swatch bad-pad">--pad: red (not a length) → falls back to 8px</div>
+</div>
+
+<h2>Registered angle in gradient</h2>
+<div class="frame">
+  <div class="gradient">--angle 45deg (default)</div>
+  <div class="gradient spin">--angle 135deg</div>
+</div>
+
+<h2>Enum syntax (small | medium | large)</h2>
+<div class="frame">
+  <span class="pill" data-tag="small">small</span>
+  <span class="pill">medium (default)</span>
+  <span class="pill" data-tag="large">large</span>
+</div>
+
+<h2>Inheritance flag — inherits: true vs false</h2>
+<div class="frame">
+  <div class="parent">
+    <div class="swatch">child sees parent's orange tint (inherits: true)</div>
+  </div>
+  <div class="parent-noinh">
+    <div class="swatch">child uses initial 8px padding (inherits: false)</div>
+  </div>
+</div>
+
+<h2>Multi-syntax property</h2>
+<div class="frame">
+  <div class="swatch" style="--multi: 24px; transform: translateX(var(--multi));">--multi: 24px</div>
+  <div class="swatch" style="--multi: 50%; transform: translateX(var(--multi));">--multi: 50%</div>
+  <div class="swatch" style="--multi: red; transform: translateX(var(--multi));">--multi: red (invalid → 0px)</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 deep — anonymous table boxes</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+
+  .cell {
+    display: table-cell;
+    border: 1px solid #1d4ed8;
+    padding: 4px 8px;
+    background: #dbeafe;
+  }
+  .row {
+    display: table-row;
+  }
+  .tab {
+    display: table;
+    border-collapse: collapse;
+    background: #fef3c7;
+    border: 1px solid #b45309;
+  }
+  .anon-block {
+    /* a non-table-display sibling forces an anonymous table-cell wrap if needed */
+    background: #fde68a;
+  }
+</style>
+</head>
+<body>
+<h1>Anonymous table-box generation</h1>
+<p>When <code>display: table-cell</code> appears without an enclosing
+<code>table-row</code> / <code>table</code>, the engine must synthesize
+anonymous wrappers. Same goes for <code>table-row</code> outside a
+<code>table</code>.</p>
+
+<h2>1. table-cell siblings with no row/table — anonymous table+row wrap</h2>
+<div class="frame">
+  <div class="cell">A</div>
+  <div class="cell">B</div>
+  <div class="cell">C</div>
+</div>
+
+<h2>2. table-row outside a table — anonymous table wraps it</h2>
+<div class="frame">
+  <div class="row">
+    <div class="cell">row 1 / A</div>
+    <div class="cell">row 1 / B</div>
+  </div>
+  <div class="row">
+    <div class="cell">row 2 / A</div>
+    <div class="cell">row 2 / B</div>
+  </div>
+</div>
+
+<h2>3. table-cell among normal blocks — anonymous wrap, but blocks remain block-level</h2>
+<div class="frame">
+  <div class="anon-block">plain block before</div>
+  <div class="cell">cell-1</div>
+  <div class="cell">cell-2</div>
+  <div class="anon-block">plain block between rows</div>
+  <div class="cell">cell-3</div>
+  <div class="cell">cell-4</div>
+</div>
+
+<h2>4. table-row + table-cell + non-table sibling inside a table</h2>
+<div class="frame">
+  <div class="tab">
+    <div class="row">
+      <div class="cell">A</div>
+      <span style="background: #ddd6fe; padding: 4px;">stray inline → anonymous cell row</span>
+      <div class="cell">B</div>
+    </div>
+  </div>
+</div>
+
+<h2>5. Real HTML table with stray text/elements between rows</h2>
+<table border="1" style="background: #fef3c7; border-collapse: collapse;">
+  stray text before tbody — gets foster-parented out
+  <tr><td>r1c1</td><td>r1c2</td></tr>
+  stray text between rows
+  <tr><td>r2c1</td><td>r2c2</td></tr>
+  <p>stray paragraph</p>
+  <tr><td>r3c1</td><td>r3c2</td></tr>
+</table>
+
+<h2>6. table-cell width/height contributes to track sizes</h2>
+<div class="frame">
+  <div class="tab">
+    <div class="row">
+      <div class="cell" style="width: 200px;">200px</div>
+      <div class="cell">auto</div>
+      <div class="cell" style="width: 80px;">80px</div>
+    </div>
+    <div class="row">
+      <div class="cell">a</div>
+      <div class="cell">very wide content fills the auto column with extra padding inside</div>
+      <div class="cell">c</div>
+    </div>
+  </div>
+</div>
+
+<h2>7. Inline-table — flows inline with surrounding text</h2>
+<div class="frame">
+  before
+  <span style="display: inline-table; background: #fef3c7; border: 1px solid #b45309;">
+    <span style="display: table-row;">
+      <span class="cell">x</span>
+      <span class="cell">y</span>
+    </span>
+  </span>
+  after
+</div>
+</body>
+</html>

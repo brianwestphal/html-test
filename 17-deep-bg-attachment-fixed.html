@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>17 deep — background-attachment: fixed</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; padding: 16px; margin-bottom: 8px; }
+
+  .body-fixed {
+    /* viewport-fixed bg layer demonstrated via a sibling area */
+  }
+  .panel {
+    height: 200px; overflow: auto;
+    background-image: linear-gradient(135deg, #fde68a, #f97316);
+    background-attachment: fixed;
+    color: #1e293b;
+  }
+  .panel-local {
+    background-attachment: local;
+    background-image: linear-gradient(135deg, #ddd6fe, #7c3aed);
+  }
+  .panel-scroll {
+    background-attachment: scroll;
+    background-image: linear-gradient(135deg, #bbf7d0, #16a34a);
+  }
+  .filler { height: 800px; padding: 12px; color: #1e293b; }
+
+  /* Multiple-layer attachment mix */
+  .multi {
+    height: 220px; overflow: auto;
+    background:
+      linear-gradient(transparent, rgba(0,0,0,.3)),                 /* fixed overlay */
+      url(assets/img-wide.png) 0 0 / contain repeat;                /* local pattern */
+    background-attachment: fixed, local;
+    color: white;
+  }
+</style>
+</head>
+<body>
+<h1><code>background-attachment: fixed / local / scroll</code></h1>
+
+<h2>Fixed — gradient pinned to viewport</h2>
+<div class="frame">
+  <div class="panel">
+    <div class="filler">
+      Scroll inside this box. The background gradient should remain fixed
+      to the viewport, so as content scrolls, the gradient appears
+      stationary behind the rolling text.
+      <p>line a</p><p>line b</p><p>line c</p>
+      <p>line d</p><p>line e</p><p>line f</p>
+      <p>line g</p><p>line h</p><p>line i</p>
+    </div>
+  </div>
+</div>
+
+<h2>Local — gradient scrolls WITH content</h2>
+<div class="frame">
+  <div class="panel panel-local">
+    <div class="filler">
+      Same scrollable, but background-attachment:local. Gradient sticks to
+      the content; you can scroll past it.
+      <p>line a</p><p>line b</p><p>line c</p>
+      <p>line d</p><p>line e</p><p>line f</p>
+    </div>
+  </div>
+</div>
+
+<h2>Scroll (default) — gradient pinned to the scrollable element</h2>
+<div class="frame">
+  <div class="panel panel-scroll">
+    <div class="filler">
+      Default. Gradient stays in place relative to the panel as you scroll
+      its content.
+      <p>line a</p><p>line b</p><p>line c</p>
+      <p>line d</p><p>line e</p><p>line f</p>
+    </div>
+  </div>
+</div>
+
+<h2>Multi-layer attachment — fixed overlay over local repeating image</h2>
+<div class="frame">
+  <div class="multi">
+    <div class="filler">
+      Two layers: top is a darken gradient (fixed); bottom is a tiled wide
+      image (local). Scroll: image scrolls, gradient doesn't.
+      <p>more</p><p>more</p><p>more</p><p>more</p><p>more</p>
+      <p>more</p><p>more</p><p>more</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

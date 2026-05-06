@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — stacking context creators</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 980px; }
+  h2 { font-size: 14px; margin: 14px 0 4px; color: #334155; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+  .stage {
+    position: relative; width: 200px; height: 110px;
+    background: #f1f5f9; border: 1px solid #94a3b8;
+    font-size: 12px;
+  }
+  .stage > b { position: absolute; top: 4px; left: 6px; font-size: 11px; color: #475569; }
+  .out, .in {
+    position: absolute; width: 90px; height: 56px;
+    color: white; font-weight: bold; padding: 4px;
+  }
+  .out { background: #dc2626; top: 26px; left: 14px; z-index: 1; }
+  .in  { background: #2563eb; top: 50px; left: 60px; z-index: 9999; }
+  /* Each .ctx becomes a stacking context via the listed property only */
+  .ctx { position: relative; outline: 2px dashed #64748b; }
+  .ctx-opacity   { opacity: 0.99; }
+  .ctx-transform { transform: translate(0,0); }
+  .ctx-filter    { filter: blur(0); }
+  .ctx-isolation { isolation: isolate; }
+  .ctx-blend     { mix-blend-mode: normal; }
+  .ctx-mask      { mask-image: linear-gradient(black,black); }
+  .ctx-clippath  { clip-path: inset(0); }
+  .ctx-will      { will-change: transform; }
+  .ctx-contain   { contain: paint; }
+  .ctx-perspect  { perspective: 600px; }
+  .ctx-flexitem  { /* set on parent below */ }
+  .ctx-zindex    { z-index: 0; }
+  .ctx-backface  { backface-visibility: hidden; }
+  .flexparent { display: flex; }
+  .flexparent > .ctx { z-index: 0; flex: 1; height: 100%; }
+</style>
+</head>
+<body>
+<h1>Stacking-context creators</h1>
+<p>Each stage holds a red OUTSIDE box (z:1) and an INSIDE box with z:9999.
+If the dashed inner box is a stacking context, INSIDE is trapped — OUTSIDE
+paints in front. Otherwise INSIDE wins.</p>
+
+<h2>opacity &lt; 1</h2>
+<div class="row">
+  <div class="stage"><b>opacity .99</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-opacity" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+
+  <h2>transform / filter</h2>
+  <div class="stage"><b>transform</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-transform" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>filter blur(0)</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-filter" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+</div>
+
+<h2>isolation / blend / mask / clip-path</h2>
+<div class="row">
+  <div class="stage"><b>isolation</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-isolation" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>mix-blend-mode</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-blend" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>mask-image</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-mask" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>clip-path</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-clippath" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+</div>
+
+<h2>will-change / contain / perspective / backface</h2>
+<div class="row">
+  <div class="stage"><b>will-change:transform</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-will" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>contain:paint</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-contain" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>perspective</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-perspect" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>backface:hidden</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-backface" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+</div>
+
+<h2>z-index:0 on positioned / flex item</h2>
+<div class="row">
+  <div class="stage"><b>position:relative + z:0</b>
+    <div class="out">OUT z:1</div>
+    <div class="ctx ctx-zindex" style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+  <div class="stage"><b>flex item + z:0</b>
+    <div class="out">OUT z:1</div>
+    <div class="flexparent" style="position:absolute; top:18px; left:50px; width:130px; height:80px;">
+      <div class="ctx ctx-flexitem" style="background:#fef9c3; position:relative;">
+        <div class="in" style="position:absolute; top:0; left:0;">IN z:9999</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>NEGATIVE — these alone do NOT create a stacking context</h2>
+<p>position:relative without z-index, opacity:1, transform:none. INSIDE z:9999 escapes.</p>
+<div class="row">
+  <div class="stage"><b>position:relative only</b>
+    <div class="out">OUT z:1</div>
+    <div style="position:absolute; top:18px; left:50px; width:130px; height:80px; background:#fef9c3; outline:2px dashed #64748b;">
+      <div class="in">IN z:9999</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 deep — text-emphasis</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; line-height: 2.4; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; line-height: 1.4; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+  .lab { color: #475569; font-size: 11px; }
+  em.dot      { font-style: normal; text-emphasis: dot; }
+  em.cir      { font-style: normal; text-emphasis: filled circle; }
+  em.dou      { font-style: normal; text-emphasis: filled double-circle; }
+  em.tri      { font-style: normal; text-emphasis: filled triangle; }
+  em.ses      { font-style: normal; text-emphasis: open sesame; }
+  em.col      { font-style: normal; text-emphasis: filled circle red; }
+  em.col2     { font-style: normal; text-emphasis: filled dot #1d4ed8; }
+  em.under    { font-style: normal; text-emphasis: filled circle; text-emphasis-position: under; }
+  em.left     { font-style: normal; text-emphasis: filled circle; text-emphasis-position: over left; }
+  em.skip     { font-style: normal; text-emphasis: filled dot; text-emphasis-skip: punctuation; }
+  em.cust     { font-style: normal; text-emphasis: "★"; text-emphasis-color: gold; }
+</style>
+</head>
+<body>
+<h1><code>text-emphasis</code> — east-asian style emphasis marks</h1>
+
+<h2>Mark style</h2>
+<div class="frame">
+  <p>The <em class="dot">dot</em> emphasis is the default east-asian style.</p>
+  <p>You can use <em class="cir">filled circle</em> too.</p>
+  <p>Or <em class="dou">double-circle</em>, <em class="tri">triangle</em>, or <em class="ses">open sesame</em>.</p>
+</div>
+
+<h2>Color</h2>
+<div class="frame">
+  <p>Default color: <em class="cir">match the text</em>.</p>
+  <p>Explicit red: <em class="col">red marks</em> matter here.</p>
+  <p>Custom blue: <em class="col2">blue dots</em> beneath blue text.</p>
+</div>
+
+<h2>Position: over / under, left / right</h2>
+<div class="frame">
+  <p>Default over right: <em class="cir">marked above</em>.</p>
+  <p>Below: <em class="under">marked under</em>.</p>
+  <p>Over left: <em class="left">left side</em>.</p>
+</div>
+
+<h2>Skip punctuation</h2>
+<div class="frame">
+  <p>Default: <em class="dot">"hello, world!"</em></p>
+  <p>Skip: <em class="skip">"hello, world!"</em></p>
+</div>
+
+<h2>Custom string</h2>
+<div class="frame">
+  <p>Star marker: <em class="cust">special words</em> shine.</p>
+</div>
+
+<h2>Vertical writing-mode</h2>
+<div class="frame" style="height: 200px; writing-mode: vertical-rl;">
+  <p>縦書きで <em class="dot">傍点</em> がついた文字列の例。</p>
+  <p>傍点は <em class="ses">右側</em> に表示されます。</p>
+</div>
+</body>
+</html>

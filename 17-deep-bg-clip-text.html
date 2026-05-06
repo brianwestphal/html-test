@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>17 deep — background-clip: text</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f8fafc; padding: 12px; margin-bottom: 8px; }
+  .clip-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
+  }
+  .gradient1 { background-image: linear-gradient(90deg, #b91c1c, #f97316, #facc15, #16a34a, #1d4ed8, #7c3aed); }
+  .gradient2 { background-image: radial-gradient(circle at 30% 30%, #ec4899, #1d4ed8 70%); }
+  .image1   { background-image: url(assets/img-wide.png); background-size: cover; }
+  .image2   { background-image: url(assets/img-tall.png); background-size: contain; background-repeat: no-repeat; background-position: center; }
+
+  /* multi-layer clip */
+  .multi {
+    background:
+      linear-gradient(45deg, #b91c1c, transparent 60%),
+      linear-gradient(-45deg, transparent 40%, #1d4ed8),
+      url(assets/img-orange.svg) center/cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+    font-size: 64px;
+  }
+
+  /* combined with text-stroke */
+  .stroked {
+    -webkit-text-stroke: 2px #1e3a8a;
+    color: transparent;
+    background: linear-gradient(180deg, #fde68a, #f97316);
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 72px; font-weight: 900;
+  }
+</style>
+</head>
+<body>
+<h1>background-clip: text</h1>
+
+<h2>Linear gradient</h2>
+<div class="frame">
+  <div class="clip-text gradient1">RAINBOW</div>
+</div>
+
+<h2>Radial gradient</h2>
+<div class="frame">
+  <div class="clip-text gradient2">RADIAL</div>
+</div>
+
+<h2>Image (cover)</h2>
+<div class="frame">
+  <div class="clip-text image1">WIDE-IMG</div>
+</div>
+
+<h2>Image (contain)</h2>
+<div class="frame">
+  <div class="clip-text image2">TALL-IMG</div>
+</div>
+
+<h2>Multi-layer (gradient + gradient + image)</h2>
+<div class="frame">
+  <div class="multi">LAYERED</div>
+</div>
+
+<h2>+ text-stroke</h2>
+<div class="frame">
+  <div class="stroked">OUTLINE</div>
+</div>
+
+<h2>Inline with surrounding text</h2>
+<div class="frame" style="font-size: 24px;">
+  prefix <span class="clip-text gradient1" style="font-size: 36px;">CLIPPED</span> suffix
+</div>
+</body>
+</html>

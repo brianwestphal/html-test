@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 deep — @import &amp; @layer ordering</title>
+<style>
+  /* Layer ordering: layers established later in the cascade are STRONGER
+     for normal declarations. Unlayered rules are stronger than any layer. */
+
+  /* 1. @import with layer() — registers/enters layers in order */
+  @import url("assets/shared.css") layer(reset);
+  @import url("assets/shared-import.css") layer(theme);
+
+  /* 2. Anonymous layers via @layer block */
+  @layer {
+    /* anonymous — appended at end of layer order */
+    .anon { background: #fef3c7; }
+  }
+
+  /* 3. Explicit named layers — order established here */
+  @layer reset, theme, components, utilities;
+
+  /* 4. Define rules in each layer */
+  @layer reset {
+    .swatch { color: black; background: white; padding: 8px; border: 1px solid #cbd5e1; margin: 4px 0; }
+  }
+  @layer theme {
+    .swatch { color: white; background: #1d4ed8; }
+  }
+  @layer components {
+    .swatch { background: #16a34a; }
+  }
+  @layer utilities {
+    .swatch.green { background: #166534; }
+  }
+
+  /* 5. Unlayered rule — wins over any layer */
+  .swatch.unlayered { background: #b91c1c; }
+
+  /* 6. Sub-layers via dot path */
+  @layer comp.btn {
+    .btn { background: #ea580c; color: white; padding: 4px 8px; }
+  }
+  @layer comp.input {
+    .inp { border: 1px solid #94a3b8; padding: 2px 6px; }
+  }
+  @layer comp {
+    .btn { border-radius: 0; }   /* same level as btn/input doesn't override sub */
+  }
+
+  /* 7. Adoption order doesn't matter — first encounter sets order */
+  @layer late-defined {
+    .late { background: #fbbf24; }
+  }
+  @layer early-defined {
+    .early { background: #ddd6fe; }
+  }
+  /* layer order so far: reset, theme, components, utilities, comp, comp.btn, comp.input, late-defined, early-defined */
+
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<h1>@import + @layer — ordering</h1>
+
+<h2>1. Layer wins among themselves (later layer wins)</h2>
+<div class="frame">
+  <div class="swatch">layered: reset &lt; theme &lt; components &lt; utilities → green from components (no .green)</div>
+  <div class="swatch green">layered + .green → utilities color (#166534)</div>
+</div>
+
+<h2>2. Unlayered rule beats any layer</h2>
+<div class="frame">
+  <div class="swatch unlayered">unlayered red wins</div>
+</div>
+
+<h2>3. Sub-layers (comp.btn / comp.input)</h2>
+<div class="frame">
+  <button class="btn">btn (in comp.btn)</button>
+  <input class="inp" value="inp (in comp.input)">
+</div>
+
+<h2>4. Anonymous layer (no name)</h2>
+<div class="frame">
+  <div class="anon swatch">anon yellow</div>
+</div>
+
+<h2>5. @import layer() — these styles loaded into named layers</h2>
+<div class="frame">
+  <p class="from-shared">.from-shared (loaded via @import layer(reset))</p>
+  <p class="from-shared-import">.from-shared-import (loaded via @import layer(theme))</p>
+</div>
+
+<h2>6. Layer-order independence: late-defined declared first, early-defined second</h2>
+<p>Order in this file: late-defined first, then early-defined. Late wins
+because layers are ordered by first appearance.</p>
+<div class="frame">
+  <div class="late swatch">late-defined (yellow)</div>
+  <div class="early swatch">early-defined (purple) — beats late since "early" appears AFTER "late" in source</div>
+</div>
+</body>
+</html>

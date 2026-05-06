@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>19 deep — color-mix() across spaces</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+  .sw {
+    width: 90px; height: 70px;
+    color: white; padding: 4px;
+    font-size: 11px; text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  }
+  .label { font-size: 12px; color: #475569; margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1><code>color-mix()</code> across spaces</h1>
+
+<h2>50/50 red ↔ blue across spaces</h2>
+<div class="row">
+  <div class="sw" style="background: color-mix(in srgb,    red, blue);">srgb</div>
+  <div class="sw" style="background: color-mix(in srgb-linear, red, blue);">srgb-linear</div>
+  <div class="sw" style="background: color-mix(in hsl,     red, blue);">hsl</div>
+  <div class="sw" style="background: color-mix(in hwb,     red, blue);">hwb</div>
+  <div class="sw" style="background: color-mix(in lab,     red, blue);">lab</div>
+  <div class="sw" style="background: color-mix(in lch,     red, blue);">lch</div>
+  <div class="sw" style="background: color-mix(in oklab,   red, blue);">oklab</div>
+  <div class="sw" style="background: color-mix(in oklch,   red, blue);">oklch</div>
+</div>
+
+<h2>Hue interpolation: shorter / longer / increasing / decreasing</h2>
+<div class="row">
+  <div class="sw" style="background: color-mix(in oklch shorter hue, red, blue);">shorter</div>
+  <div class="sw" style="background: color-mix(in oklch longer hue, red, blue);">longer</div>
+  <div class="sw" style="background: color-mix(in oklch increasing hue, red, blue);">increasing</div>
+  <div class="sw" style="background: color-mix(in oklch decreasing hue, red, blue);">decreasing</div>
+</div>
+
+<h2>Percentage hint — red/blue at varying mix</h2>
+<div class="row">
+  <div class="sw" style="background: color-mix(in oklch, red 0%,   blue);">0% red</div>
+  <div class="sw" style="background: color-mix(in oklch, red 25%,  blue);">25%</div>
+  <div class="sw" style="background: color-mix(in oklch, red 50%,  blue);">50%</div>
+  <div class="sw" style="background: color-mix(in oklch, red 75%,  blue);">75%</div>
+  <div class="sw" style="background: color-mix(in oklch, red 100%, blue);">100% red</div>
+</div>
+
+<h2>color-mix with currentColor + transparent (tinting)</h2>
+<div style="color: #1d4ed8;">
+  <div class="row" style="background: repeating-conic-gradient(#ddd 0 25%, white 0 50%) 0/24px 24px;">
+    <div class="sw" style="background: color-mix(in srgb, currentColor 10%, transparent); color:#1e293b;">10% blue</div>
+    <div class="sw" style="background: color-mix(in srgb, currentColor 30%, transparent); color:#1e293b;">30%</div>
+    <div class="sw" style="background: color-mix(in srgb, currentColor 60%, transparent); color:#1e293b;">60%</div>
+    <div class="sw" style="background: color-mix(in srgb, currentColor 100%, transparent);">100%</div>
+  </div>
+</div>
+
+<h2>Mixing semantic-named tones</h2>
+<div class="row">
+  <div class="sw" style="background: color-mix(in oklch, navajowhite, midnightblue 30%);">navajowhite + 30% midnightblue</div>
+  <div class="sw" style="background: color-mix(in oklch, gold 60%, hotpink);">gold 60 + hotpink</div>
+  <div class="sw" style="background: color-mix(in oklch, mediumseagreen, deeppink);">mediumseagreen + deeppink</div>
+  <div class="sw" style="background: color-mix(in oklch, indigo, lemonchiffon);">indigo + lemonchiffon</div>
+</div>
+
+<h2>Tinted gradient via color-mix in stops</h2>
+<div style="height: 60px; border: 1px solid #475569; background: linear-gradient(90deg,
+  color-mix(in oklch, #1d4ed8, white 80%),
+  color-mix(in oklch, #1d4ed8, white 60%),
+  color-mix(in oklch, #1d4ed8, white 40%),
+  color-mix(in oklch, #1d4ed8, white 20%),
+  #1d4ed8,
+  color-mix(in oklch, #1d4ed8, black 20%),
+  color-mix(in oklch, #1d4ed8, black 40%));"></div>
+</body>
+</html>

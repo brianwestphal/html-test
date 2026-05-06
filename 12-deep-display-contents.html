@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 deep — display: contents</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { background: #f1f5f9; border: 1px solid #475569; padding: 8px; margin-bottom: 8px; }
+
+  .grid-parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .group {
+    display: contents;            /* dissolve the wrapper */
+    background: #b91c1c;          /* IGNORED — no box */
+    border: 4px solid red;        /* IGNORED */
+  }
+  .gi {
+    background: #1d4ed8; color: white;
+    padding: 8px; text-align: center;
+  }
+
+  /* Flex with display:contents wrapper */
+  .flex-parent { display: flex; gap: 6px; }
+  .fi { background: #16a34a; color: white; padding: 6px 10px; }
+
+  /* Link with display:contents — children become independent items */
+  .link-wrap {
+    display: contents;
+  }
+
+  /* Background loss demo */
+  .bgwrap {
+    display: contents;
+    background: yellow !important;   /* still ignored */
+  }
+  .bgwrap-normal {
+    background: yellow;
+    padding: 8px;
+  }
+</style>
+</head>
+<body>
+<h1><code>display: contents</code></h1>
+<p><code>display: contents</code> makes the element generate no box: its
+children are promoted to the parent's layout, and the element's own
+background, border, padding, margin all disappear.</p>
+
+<h2>Used to "ungroup" semantic wrappers in a grid</h2>
+<p>The .group divs vanish; their children become direct children of the
+grid for layout purposes.</p>
+<div class="frame grid-parent">
+  <div class="group">
+    <div class="gi">A</div><div class="gi">B</div>
+  </div>
+  <div class="group">
+    <div class="gi">C</div><div class="gi">D</div>
+  </div>
+  <div class="group">
+    <div class="gi">E</div><div class="gi">F</div>
+  </div>
+  <div class="group">
+    <div class="gi">G</div><div class="gi">H</div>
+  </div>
+</div>
+
+<h2>Same effect on a flex parent</h2>
+<div class="frame flex-parent">
+  <div class="group">
+    <div class="fi">a</div><div class="fi">b</div><div class="fi">c</div>
+  </div>
+  <div class="fi">x</div>
+</div>
+
+<h2>Backgrounds, borders and padding are LOST</h2>
+<p>Top wrapper has display:contents, so its yellow bg disappears. Bottom
+wrapper is normal flow — yellow renders.</p>
+<div class="frame">
+  <div class="bgwrap">
+    <p>I'm a child of a display:contents wrapper. No yellow.</p>
+  </div>
+  <div class="bgwrap-normal">
+    <p>I'm a child of a normal-flow wrapper. Yellow shows.</p>
+  </div>
+</div>
+
+<h2>Link with display:contents — kids inherit grid item role</h2>
+<div class="frame grid-parent">
+  <a href="#" class="link-wrap">
+    <div class="gi">link kid 1</div>
+    <div class="gi">link kid 2</div>
+  </a>
+  <div class="gi">plain</div>
+  <div class="gi">plain</div>
+</div>
+
+<h2>Fieldset / button / input — display:contents tends to be ignored on these</h2>
+<p>Browsers are required to NOT honor display:contents on form controls
+(replaced semantics). Fieldset, button, input, textarea, select keep their
+boxes — the rendering engine should match.</p>
+<fieldset style="display:contents;">
+  <legend>fieldset legend</legend>
+  <label>label <input value="text"></label>
+</fieldset>
+</body>
+</html>

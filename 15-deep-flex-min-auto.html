@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 deep — flex min:auto</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; padding: 8px; margin-bottom: 8px; }
+  .row { display: flex; gap: 8px; width: 360px; background: #f1f5f9; }
+  .item {
+    background: #1d4ed8; color: white;
+    padding: 6px; border: 2px solid #1e3a8a;
+    overflow: hidden;
+  }
+  .nowrap { white-space: nowrap; }
+</style>
+</head>
+<body>
+<h1>Flex item <code>min-width: auto</code> default</h1>
+<p>Flex items default to <code>min-width: auto</code>, which resolves to
+the item's <em>min-content</em> size — i.e. the longest unbreakable token.
+This means flex items will overflow rather than shrink past their
+min-content unless explicitly overridden.</p>
+
+<h2>Default min:auto — long word forces overflow</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item nowrap">supercalifragilisticexpialidocious</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+</div>
+
+<h2>Explicit <code>min-width: 0</code> — items can shrink to zero, longest token clips</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item nowrap" style="min-width: 0;">supercalifragilisticexpialidocious</div>
+    <div class="item">B</div>
+    <div class="item">C</div>
+  </div>
+</div>
+
+<h2>Same with <code>flex: 1 1 0</code> — items distribute available space evenly</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item nowrap" style="flex: 1 1 0;">supercalifragilisticexpialidocious</div>
+    <div class="item" style="flex: 1 1 0;">B</div>
+    <div class="item" style="flex: 1 1 0;">C</div>
+  </div>
+</div>
+
+<h2><code>flex: 1 1 0; min-width: 0</code> — overflow gone</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item nowrap" style="flex: 1 1 0; min-width: 0;">supercalifragilisticexpialidocious</div>
+    <div class="item" style="flex: 1 1 0; min-width: 0;">B</div>
+    <div class="item" style="flex: 1 1 0; min-width: 0;">C</div>
+  </div>
+</div>
+
+<h2>Vertical flex — <code>min-height: auto</code> equally affects column overflow</h2>
+<div class="frame">
+  <div class="row" style="flex-direction: column; height: 120px; width: 240px;">
+    <div class="item" style="flex: 1;">tall A<br>line<br>line<br>line<br>line<br>line<br>line</div>
+    <div class="item" style="flex: 1;">B</div>
+  </div>
+</div>
+
+<h2>Replaced item (img) — also uses min-content (its intrinsic min)</h2>
+<div class="frame">
+  <div class="row">
+    <img src="assets/img-wide.png" alt="" style="flex: 1; min-width: 0;">
+    <div class="item">B</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>04 deep — border-collapse conflict resolution</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  table { border-collapse: collapse; margin-bottom: 8px; background: white; }
+  td { padding: 8px 12px; }
+  /* Test 1 — style precedence: double > solid > dashed > dotted (greater visual weight wins) */
+  /* Order in CSS: double, solid, dashed, dotted, hidden, none */
+  .style-test td.a { border: 4px dotted #b91c1c; }
+  .style-test td.b { border: 4px dashed #1d4ed8; }
+  .style-test td.c { border: 4px solid  #16a34a; }
+  .style-test td.d { border: 4px double #ea580c; }
+
+  /* Test 2 — wider border wins over narrower regardless of style */
+  .width-test td.a { border: 2px solid #b91c1c; }
+  .width-test td.b { border: 8px solid #1d4ed8; }
+  .width-test td.c { border: 5px solid #16a34a; }
+
+  /* Test 3 — hidden wins over EVERYTHING (even with greater width) */
+  .hidden-test td.a { border: 12px solid #b91c1c; }
+  .hidden-test td.b { border: 4px hidden; }
+  .hidden-test td.c { border: 12px solid #16a34a; }
+
+  /* Test 4 — none loses to everything */
+  .none-test td.a { border: 4px solid #b91c1c; }
+  .none-test td.b { border: 4px none; }
+  .none-test td.c { border: 4px solid #16a34a; }
+
+  /* Test 5 — ties broken by source: cell > row > rowgroup > col > colgroup > table */
+  .tie-test { border: 8px solid #fde68a; }      /* table — last in order */
+  .tie-test colgroup { border: 8px solid #c7d2fe; }
+  .tie-test col      { border: 8px solid #ddd6fe; }
+  .tie-test thead    { border: 8px solid #fed7aa; }
+  .tie-test tr       { border: 8px solid #bbf7d0; }
+  .tie-test td       { border: 8px solid #1e3a8a; } /* cell — should win */
+</style>
+</head>
+<body>
+<h1>border-collapse conflict resolution</h1>
+
+<h2>1. Style precedence (same width)</h2>
+<p>Greater visual weight wins. Order: <code>hidden &gt; double &gt; solid
+&gt; dashed &gt; dotted &gt; none</code> (with <code>hidden</code> as
+the absolute winner). Below: orange double, then green solid, then blue
+dashed, then red dotted.</p>
+<table class="style-test">
+  <tr><td class="a">dotted red</td><td class="b">dashed blue</td><td class="c">solid green</td><td class="d">double orange</td></tr>
+</table>
+
+<h2>2. Width precedence (different widths)</h2>
+<p>Wider border wins regardless of style.</p>
+<table class="width-test">
+  <tr><td class="a">2px red</td><td class="b">8px blue (wins)</td><td class="c">5px green</td></tr>
+</table>
+
+<h2>3. <code>border-style: hidden</code> beats everything</h2>
+<p>Even though red and green declare 12px solid, the middle cell's
+4px hidden border wipes them out at the shared edge.</p>
+<table class="hidden-test">
+  <tr><td class="a">12px solid red</td><td class="b">4px HIDDEN</td><td class="c">12px solid green</td></tr>
+</table>
+
+<h2>4. <code>border-style: none</code> loses to everything</h2>
+<p>Middle cell declares <code>none</code>; neighbors win their solid borders.</p>
+<table class="none-test">
+  <tr><td class="a">4px solid red</td><td class="b">4px NONE</td><td class="c">4px solid green</td></tr>
+</table>
+
+<h2>5. Tie-breaker by source</h2>
+<p>All declarations are 8px solid. Per spec the cell wins over row,
+rowgroup, col, colgroup and table.</p>
+<table class="tie-test">
+  <colgroup><col><col><col></colgroup>
+  <thead>
+    <tr>
+      <td>a</td><td>b</td><td>c</td>
+    </tr>
+  </thead>
+</table>
+<p>Expected border color: navy (the cell's <code>#1e3a8a</code>).</p>
+
+<h2>6. border-spacing only applies to separate model</h2>
+<table style="border-collapse: separate; border-spacing: 8px 16px; background: #fef3c7;">
+  <tr><td style="border: 2px solid #b45309;">a</td><td style="border: 2px solid #b45309;">b</td></tr>
+  <tr><td style="border: 2px solid #b45309;">c</td><td style="border: 2px solid #b45309;">d</td></tr>
+</table>
+</body>
+</html>

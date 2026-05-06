@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 deep — CSS nesting complex</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+
+  /* 1. Implicit & in descendant */
+  .card {
+    background: #fef3c7;
+    padding: 8px;
+
+    p { color: #1e293b; }
+    h3 { color: #b45309; }
+  }
+
+  /* 2. Explicit & with combinators */
+  .item {
+    background: #ddd6fe;
+    padding: 4px;
+
+    & + & { margin-top: 4px; }
+    & > .child { background: #4338ca; color: white; padding: 4px; }
+    & ~ & { border-top: 1px dashed #6d28d9; }
+  }
+
+  /* 3. & in selector lists */
+  .btn {
+    padding: 4px 8px;
+    background: #475569; color: white;
+
+    &.primary, &.success {
+      font-weight: bold;
+    }
+    &.primary { background: #1d4ed8; }
+    &.success { background: #16a34a; }
+    &.danger { background: #b91c1c; }
+  }
+
+  /* 4. Pseudo-classes / pseudo-elements */
+  .link {
+    color: #1d4ed8;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+    &:visited { color: #6d28d9; }
+
+    &::before { content: "› "; }
+    &::after { content: " ↗"; font-size: 80%; }
+  }
+
+  /* 5. :is(&) and :has(&) */
+  .post {
+    padding: 6px;
+    background: #fce7f3;
+
+    /* compound :is for combined parents */
+    :is(&) header h4 { color: #831843; }
+
+    /* :has lookup back to parent */
+    &:has(img) { background: #fde68a; }
+  }
+
+  /* 6. Nested @media / @supports / @container */
+  .responsive {
+    background: #c7d2fe;
+    padding: 8px;
+
+    @media (min-width: 600px) {
+      background: #4338ca; color: white;
+    }
+    @supports (display: grid) {
+      outline: 2px dashed #1e293b;
+    }
+    @container (min-width: 200px) {
+      font-weight: bold;
+    }
+  }
+
+  /* 7. Deep nesting */
+  .nav {
+    background: #1e293b; color: white;
+    padding: 8px;
+
+    ul {
+      list-style: none; padding: 0; margin: 0;
+
+      li {
+        padding: 4px 8px;
+
+        &:hover { background: #334155; }
+
+        a {
+          color: #93c5fd;
+
+          &.active { color: #fde68a; font-weight: bold; }
+          &:hover { color: white; }
+        }
+
+        ul {
+          margin-left: 16px;
+          background: #334155;
+
+          li { padding: 2px 6px; }
+        }
+      }
+    }
+  }
+</style>
+</head>
+<body>
+<h1>CSS nesting — complex</h1>
+
+<h2>1. Implicit nesting (no <code>&amp;</code>)</h2>
+<div class="frame">
+  <div class="card">
+    <h3>title</h3>
+    <p>paragraph in card</p>
+  </div>
+</div>
+
+<h2>2. <code>&amp;</code> with combinators</h2>
+<div class="frame">
+  <div class="item"><div class="child">first item child</div></div>
+  <div class="item">second item (margin-top, border-top)</div>
+  <div class="item">third item</div>
+</div>
+
+<h2>3. Selector lists with <code>&amp;</code></h2>
+<div class="frame">
+  <button class="btn">default</button>
+  <button class="btn primary">primary</button>
+  <button class="btn success">success</button>
+  <button class="btn danger">danger</button>
+</div>
+
+<h2>4. Pseudo-classes &amp; pseudo-elements</h2>
+<div class="frame">
+  <a class="link" href="#">a link</a><br>
+  <a class="link" href="#visited">visited (history-dependent)</a>
+</div>
+
+<h2>5. <code>:is(&amp;)</code> / <code>:has(&amp;)</code></h2>
+<div class="frame">
+  <article class="post"><header><h4>plain post</h4></header><p>no image</p></article>
+  <article class="post"><header><h4>image post</h4></header><img src="assets/img-blue.jpg" alt="" style="width: 60px;"></article>
+</div>
+
+<h2>6. Nested @media / @supports / @container</h2>
+<div class="frame">
+  <div class="responsive">resize window to see media query effect</div>
+</div>
+
+<h2>7. Deep nesting (3 levels)</h2>
+<div class="frame">
+  <nav class="nav">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#" class="active">Docs</a>
+        <ul>
+          <li><a href="#">intro</a></li>
+          <li><a href="#" class="active">guide</a></li>
+        </ul>
+      </li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+</div>
+</body>
+</html>

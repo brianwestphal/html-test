@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 deep — :nth-* depth</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  .item { background: #e2e8f0; padding: 4px 8px; margin: 2px 0; border-left: 4px solid transparent; }
+
+  /* odd / even */
+  .a > .item:nth-child(odd) { background: #fde68a; }
+
+  /* an+b */
+  .b > .item:nth-child(3n+1) { border-left-color: #b91c1c; }
+  .b > .item:nth-child(3n+2) { border-left-color: #16a34a; }
+  .b > .item:nth-child(3n)   { border-left-color: #1d4ed8; }
+
+  /* :nth-last-child */
+  .c > .item:nth-last-child(-n+3) { background: #ddd6fe; }
+
+  /* :nth-child(an+b of S) — selector list */
+  .d > .item:nth-child(2n+1 of .yellow) { background: #fde68a; font-weight: bold; }
+
+  /* :nth-of-type vs nth-child */
+  .e h3:nth-of-type(2) { color: #b91c1c; }
+  .e h3:nth-child(2)   { background: #ddd6fe; }       /* may not match if other types intersperse */
+
+  /* combine with :not */
+  .f .item:nth-child(2n):not(.skip) { background: #bbf7d0; }
+
+  /* :first-of-type vs :first-child */
+  .g .item:first-of-type { outline: 2px solid #b45309; }
+  .g .row:first-of-type  { outline: 2px solid #1d4ed8; }
+</style>
+</head>
+<body>
+<h1>:nth-* deeper cases</h1>
+
+<h2>:nth-child(odd)</h2>
+<div class="frame a">
+  <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+</div>
+
+<h2>:nth-child(3n+1) red, (3n+2) green, (3n) blue</h2>
+<div class="frame b">
+  <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+  <div class="item">7</div><div class="item">8</div><div class="item">9</div>
+</div>
+
+<h2>:nth-last-child(-n+3) — last 3 items purple</h2>
+<div class="frame c">
+  <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+  <div class="item">7</div>
+</div>
+
+<h2>:nth-child(2n+1 of .yellow) — every other yellow-tagged item</h2>
+<div class="frame d">
+  <div class="item">no tag</div>
+  <div class="item yellow">tagged 1</div>
+  <div class="item">no tag</div>
+  <div class="item yellow">tagged 2</div>
+  <div class="item yellow">tagged 3</div>
+  <div class="item">no tag</div>
+  <div class="item yellow">tagged 4</div>
+  <div class="item yellow">tagged 5</div>
+</div>
+
+<h2>:nth-of-type vs :nth-child (interspersed types)</h2>
+<div class="frame e">
+  <p>p</p>
+  <h3>h1 of type — purple via nth-child(2)</h3>
+  <p>p</p>
+  <h3>h2 of type — red via nth-of-type(2)</h3>
+  <p>p</p>
+  <h3>h3 of type</h3>
+</div>
+
+<h2>:nth-child(2n):not(.skip) — even rows except skipped</h2>
+<div class="frame f">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item skip">4 (skipped)</div>
+  <div class="item">5</div>
+  <div class="item">6</div>
+</div>
+
+<h2>:first-of-type vs :first-child (mixed types)</h2>
+<div class="frame g">
+  <div class="row">first row</div>
+  <div class="item">first item</div>
+  <div class="row">second row</div>
+  <div class="item">second item</div>
+</div>
+</body>
+</html>

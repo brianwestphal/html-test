@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 deep — bidi isolation &amp; embedding</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; line-height: 1.6; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  .embed   { unicode-bidi: embed; }
+  .isolate { unicode-bidi: isolate; }
+  .iso-ovr { unicode-bidi: isolate-override; }
+  .override { unicode-bidi: bidi-override; }
+  .plain    { unicode-bidi: plaintext; }
+  .rtl { direction: rtl; }
+  .ltr { direction: ltr; }
+  .h { background: #fde68a; padding: 0 4px; }
+</style>
+</head>
+<body>
+<h1>Bidi: isolate / embed / override / plaintext / bdi / bdo</h1>
+
+<h2>1. Plain mixed text (default)</h2>
+<div class="frame">
+  English start — שלום עולם — and English end.
+</div>
+
+<h2>2. <code>unicode-bidi: embed</code> + RTL on a span</h2>
+<div class="frame">
+  English: <span class="embed rtl h">שלום (one) עולם</span> tail.
+</div>
+
+<h2>3. <code>unicode-bidi: isolate</code> — surrounding text unaffected</h2>
+<p>Compare to embed: with isolate the inner content is treated as a single
+neutral character by the outer paragraph.</p>
+<div class="frame">
+  user 1: <span class="isolate rtl h">שלום (one) עולם</span> says hi.
+</div>
+<div class="frame">
+  user 1: <span class="embed rtl h">שלום (one) עולם</span> says hi.
+</div>
+
+<h2>4. <code>unicode-bidi: bidi-override</code> + LTR — force visual order</h2>
+<div class="frame">
+  english <span class="override ltr h">שלום ניסיון</span> tail.
+</div>
+
+<h2>5. <code>unicode-bidi: plaintext</code> — direction inferred per paragraph</h2>
+<div class="frame">
+  <div class="plain">English first → matches LTR even with שלום inside.</div>
+  <div class="plain">שלום ראשון → matches RTL even with English inside.</div>
+</div>
+
+<h2>6. Nested <code>&lt;bdi&gt;</code> — isolation by element name</h2>
+<div class="frame">
+  posts: <bdi class="h">user שלום_user</bdi> wrote, <bdi class="h">user_עולם</bdi> replied.
+</div>
+
+<h2>7. <code>&lt;bdo dir=rtl&gt;</code> — bidi override (visual reverse)</h2>
+<div class="frame">
+  <bdo dir="rtl" class="h">ABCDEFG 123</bdo> in surrounding LTR.
+</div>
+
+<h2>8. Explicit RLO / LRO control characters</h2>
+<div class="frame">
+  Raw paragraph with RLO ⏎ &#x202E;ABCDEFG&#x202C; ⏐ LRO &#x202D;ABCDEFG&#x202C; — followed by tail.
+</div>
+
+<h2>9. Mixed bidi + numbers — Arabic-Indic shaping</h2>
+<div class="frame">
+  مرحبا 123 و 456 — combining digits with Arabic.
+</div>
+
+<h2>10. RTL block with embedded LTR phrase</h2>
+<div class="frame rtl" style="direction: rtl;">
+  שלום, this is some <bdi>English text</bdi>, ועוד טקסט בעברית.
+</div>
+</body>
+</html>

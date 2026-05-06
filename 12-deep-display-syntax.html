@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>12 deep — multi-keyword display</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { background: #f1f5f9; border: 1px solid #475569; padding: 8px; margin-bottom: 8px; }
+  .item {
+    background: #1d4ed8; color: white; padding: 6px 10px;
+    margin: 4px; border: 2px solid #1e3a8a;
+  }
+  /* Modern two-keyword display values */
+  .d-inline-flex   { display: inline flex; }
+  .d-block-flex    { display: block flex; }
+  .d-inline-grid   { display: inline grid; }
+  .d-block-grid    { display: block grid; }
+  .d-block-flow-root { display: block flow-root; }
+  .d-inline-flow   { display: inline flow; }
+  .d-list-item     { display: list-item; }
+  .d-block-list-item { display: block flow list-item; }
+
+  /* Equivalence shorthands */
+  .legacy-inline-flex { display: inline-flex; }
+  .legacy-flex        { display: flex; }
+  .legacy-flow-root   { display: flow-root; }
+
+  /* float on an inline-flex container — should auto-block-ify */
+  .float-it { float: left; background: #fde68a; padding: 6px; margin: 4px; }
+</style>
+</head>
+<body>
+<h1>Multi-keyword <code>display</code> syntax</h1>
+<p>The two-keyword form is <em>outer inner</em>: e.g. <code>inline flex</code>
+= an inline-level box that lays its children out as flex.</p>
+
+<h2><code>inline flex</code> vs legacy <code>inline-flex</code></h2>
+<div class="frame">
+  text before
+  <span class="d-inline-flex">
+    <span class="item">A</span><span class="item">B</span>
+  </span>
+  text after
+</div>
+<div class="frame">
+  text before
+  <span class="legacy-inline-flex">
+    <span class="item">A</span><span class="item">B</span>
+  </span>
+  text after
+</div>
+
+<h2><code>block flex</code> vs legacy <code>flex</code></h2>
+<div class="frame">
+  <div class="d-block-flex">
+    <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+  </div>
+</div>
+<div class="frame">
+  <div class="legacy-flex">
+    <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+  </div>
+</div>
+
+<h2><code>inline grid</code> / <code>block grid</code></h2>
+<div class="frame">
+  <span class="d-inline-grid" style="grid-template-columns: 60px 60px 60px; gap:4px;">
+    <span class="item">1</span><span class="item">2</span><span class="item">3</span>
+  </span>
+</div>
+<div class="frame">
+  <div class="d-block-grid" style="grid-template-columns: 1fr 1fr 1fr; gap:4px;">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+  </div>
+</div>
+
+<h2><code>flow-root</code> establishes a BFC (clearfix replacement)</h2>
+<div class="frame d-block-flow-root">
+  <div class="float-it">FLOAT</div>
+  <div class="float-it">FLOAT</div>
+  <div class="float-it">FLOAT</div>
+  <p style="margin: 0;">Without flow-root, this parent would have zero height. With it, the parent encloses the floats.</p>
+</div>
+
+<h2><code>list-item</code> via two- and three-keyword forms</h2>
+<div class="frame">
+  <div class="d-list-item" style="margin-left: 24px;">single-keyword list-item</div>
+  <div class="d-block-list-item" style="margin-left: 24px;">block flow list-item</div>
+</div>
+
+<h2><code>inline flow</code> (default for span)</h2>
+<div class="frame">
+  text <span class="d-inline-flow">just an inline span (explicit)</span> more text
+</div>
+</body>
+</html>

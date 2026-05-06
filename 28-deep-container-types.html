@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>28 deep — container types &amp; cq* units</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+
+  /* Container types */
+  .ci { container-type: inline-size; }
+  .cs { container-type: size; height: 200px; }            /* requires fixed dim */
+  .cn { container-type: normal; }                         /* no containment */
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .card { background: #fef3c7; padding: 8px; border: 1px solid #b45309; }
+  .card h3 { margin: 4px 0; }
+
+  /* Container queries */
+  @container (min-width: 200px) {
+    .card h3 { color: #1d4ed8; }
+  }
+  @container (min-width: 320px) {
+    .card { background: #ddd6fe; }
+    .card h3 { color: #6d28d9; }
+  }
+  @container (min-width: 500px) {
+    .card { background: #bbf7d0; }
+    .card::after { content: " · wide"; }
+  }
+
+  /* container query units */
+  .cq-units {
+    font-size: 4cqi;          /* container inline size */
+    padding: 2cqi 3cqi;
+    background: #fde68a;
+    margin: 4cqb 0;
+  }
+
+  /* Named containers */
+  .nc { container: card-ctx / inline-size; }
+  @container card-ctx (min-width: 250px) {
+    .named-target { font-weight: bold; color: #b91c1c; }
+  }
+
+  /* Nested containers */
+  .outer-c { container-type: inline-size; container-name: outer; padding: 8px; background: #c7d2fe; }
+  .inner-c { container-type: inline-size; container-name: inner; padding: 8px; background: #fcd34d; }
+  @container outer (min-width: 400px) {
+    .nested-target { background: #4338ca; color: white; }
+  }
+  @container inner (min-width: 100px) {
+    .nested-target::after { content: " [inner ≥ 100]"; }
+  }
+
+  /* Style queries */
+  @container style(--theme: dark) {
+    .style-q { background: #0f172a; color: #fde68a; }
+  }
+  .style-q { padding: 8px; background: #fef3c7; }
+</style>
+</head>
+<body>
+<h1>Container types &amp; container queries</h1>
+
+<h2>inline-size container — three siblings of different widths</h2>
+<div class="frame row">
+  <div class="ci"><div class="card"><h3>Card narrow</h3>200px column</div></div>
+  <div class="ci" style="width: 320px;"><div class="card"><h3>Card mid</h3>320px column</div></div>
+  <div class="ci" style="width: 500px;"><div class="card"><h3>Card wide</h3>500px column</div></div>
+</div>
+
+<h2>cqi / cqb units</h2>
+<div class="frame">
+  <div class="ci" style="width: 480px; background: white; padding: 4px; border: 1px solid #cbd5e1;">
+    <div class="cq-units">font-size: 4cqi · padding 2cqi 3cqi · margin 4cqb 0</div>
+  </div>
+  <div class="ci" style="width: 240px; margin-top: 8px; background: white; padding: 4px; border: 1px solid #cbd5e1;">
+    <div class="cq-units">same source, narrower container</div>
+  </div>
+</div>
+
+<h2>Named containers</h2>
+<div class="frame">
+  <div class="nc" style="width: 280px; background: white; padding: 6px;">
+    <p class="named-target">named-target — bold red because <code>card-ctx ≥ 250px</code></p>
+  </div>
+</div>
+
+<h2>Nested containers — query different ancestors</h2>
+<div class="frame">
+  <div class="outer-c" style="width: 500px;">
+    <p>outer container 500px</p>
+    <div class="inner-c" style="width: 200px;">
+      <p>inner container 200px</p>
+      <p class="nested-target">nested-target — picks up rules from BOTH outer (≥400) and inner (≥100)</p>
+    </div>
+  </div>
+</div>
+
+<h2>Style queries</h2>
+<div class="frame">
+  <div style="container-type: inline-size; --theme: dark;">
+    <div class="style-q">style-q — dark theme via <code>style(--theme: dark)</code></div>
+  </div>
+  <div style="container-type: inline-size; --theme: light;">
+    <div class="style-q">style-q — light theme</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>23 deep — clip-path shapes</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+  .lab { font-size: 11px; color: #475569; margin-top: 4px; }
+  .img {
+    width: 160px; height: 100px;
+    background: linear-gradient(135deg, #f97316, #1d4ed8);
+    color: white; padding: 8px; font-weight: bold;
+  }
+  .arrow    { clip-path: polygon(0 20%, 60% 20%, 60% 0, 100% 50%, 60% 100%, 60% 80%, 0 80%); }
+  .star     { clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+  .chevron  { clip-path: polygon(75% 0, 100% 50%, 75% 100%, 0 100%, 25% 50%, 0 0); }
+  .blob     { clip-path: path('M20,50 C20,20 80,20 80,50 C80,80 20,80 20,50 Z'); }
+  .ellipse-pct { clip-path: ellipse(50% 35% at 50% 50%); }
+  .ellipse-px  { clip-path: ellipse(60px 30px at 50% 50%); }
+  .circle-px   { clip-path: circle(40px at 50% 50%); }
+  .inset-r     { clip-path: inset(10px 20px round 12px); }
+  .inset-corner { clip-path: inset(0 round 0 50% 0 50%); }
+
+  /* geometry-box references */
+  .geo {
+    width: 160px; height: 100px;
+    padding: 16px;
+    border: 8px solid #16a34a;
+    background: linear-gradient(135deg, #fde68a, #f97316) padding-box;
+  }
+  .geo-content { clip-path: inset(0) content-box; background-clip: content-box; }
+  .geo-padding { clip-path: inset(0) padding-box; }
+  .geo-border  { clip-path: inset(0) border-box; }
+  .geo-margin  { clip-path: inset(0) margin-box; }
+</style>
+</head>
+<body>
+<h1><code>clip-path</code> — every shape function</h1>
+
+<h2>polygon()</h2>
+<div class="row">
+  <div><div class="img arrow">arrow</div><div class="lab">polygon arrow</div></div>
+  <div><div class="img star">star</div><div class="lab">polygon star</div></div>
+  <div><div class="img chevron">chevron</div><div class="lab">polygon chevron</div></div>
+</div>
+
+<h2>path() (SVG path data)</h2>
+<div class="row">
+  <div><div class="img blob">blob</div><div class="lab">path('…')</div></div>
+</div>
+
+<h2>circle / ellipse</h2>
+<div class="row">
+  <div><div class="img ellipse-pct">ellipse %</div><div class="lab">ellipse(50% 35% at 50% 50%)</div></div>
+  <div><div class="img ellipse-px">ellipse px</div><div class="lab">ellipse(60px 30px at center)</div></div>
+  <div><div class="img circle-px">circle</div><div class="lab">circle(40px at center)</div></div>
+  <div><div class="img" style="clip-path: circle(closest-side at 75% 50%);">circle CS</div><div class="lab">circle(closest-side)</div></div>
+  <div><div class="img" style="clip-path: circle(farthest-side at 25% 50%);">circle FS</div><div class="lab">circle(farthest-side)</div></div>
+</div>
+
+<h2>inset() with rounded corners</h2>
+<div class="row">
+  <div><div class="img inset-r">inset round</div><div class="lab">inset(10 20 round 12)</div></div>
+  <div><div class="img inset-corner">corner</div><div class="lab">inset(0 round 0 50% 0 50%)</div></div>
+  <div><div class="img" style="clip-path: inset(20%);">inset 20%</div><div class="lab">inset(20%)</div></div>
+</div>
+
+<h2>geometry-box references</h2>
+<div class="row">
+  <div><div class="geo geo-content">content-box</div><div class="lab">content-box</div></div>
+  <div><div class="geo geo-padding">padding-box</div><div class="lab">padding-box</div></div>
+  <div><div class="geo geo-border">border-box</div><div class="lab">border-box</div></div>
+  <div><div class="geo geo-margin">margin-box</div><div class="lab">margin-box</div></div>
+</div>
+
+<h2>view-box on inline SVG</h2>
+<div class="row">
+  <div>
+    <svg viewBox="0 0 200 100" width="160" height="80" style="clip-path: ellipse(50% 50% at 50% 50%); background: #1d4ed8;">
+      <rect x="0" y="0" width="200" height="100" fill="#fef3c7"/>
+      <text x="100" y="55" text-anchor="middle" font-size="24" fill="#1c1917">SVG</text>
+    </svg>
+  </div>
+</div>
+
+<h2>SVG <code>clipPath</code> reference</h2>
+<svg width="0" height="0" style="position: absolute;">
+  <clipPath id="hex" clipPathUnits="objectBoundingBox">
+    <polygon points="0.25 0, 0.75 0, 1 0.5, 0.75 1, 0.25 1, 0 0.5"/>
+  </clipPath>
+</svg>
+<div class="row">
+  <div><div class="img" style="clip-path: url(#hex);">hex via SVG</div><div class="lab">url(#hex)</div></div>
+</div>
+</body>
+</html>

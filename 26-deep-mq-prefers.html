@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>26 deep — prefers-* media queries</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .card {
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 2px solid #94a3b8;
+    background: #f1f5f9;
+  }
+
+  /* color-scheme */
+  .scheme { background: #fff; color: #0f172a; border-color: #cbd5e1; }
+  @media (prefers-color-scheme: dark) {
+    .scheme { background: #0f172a; color: #f8fafc; border-color: #334155; }
+  }
+  @media (prefers-color-scheme: light) {
+    .scheme::after { content: " (resolved: light)"; color: #16a34a; }
+  }
+  @media (prefers-color-scheme: dark) {
+    .scheme::after { content: " (resolved: dark)"; color: #fbbf24; }
+  }
+
+  /* prefers-reduced-motion (rendered statically — only the stop state is shown) */
+  .rm { background: linear-gradient(90deg, #f97316, #1d4ed8); color: white; padding: 10px; }
+  @media (prefers-reduced-motion: reduce) {
+    .rm::after { content: " · reduced motion ON"; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rm::after { content: " · reduced motion OFF"; }
+  }
+
+  /* prefers-contrast */
+  .pc { padding: 10px; background: #ddd6fe; color: #4338ca; border: 1px solid #4338ca; }
+  @media (prefers-contrast: more) {
+    .pc { background: white; color: black; border: 2px solid black; }
+    .pc::after { content: " · contrast: more"; }
+  }
+  @media (prefers-contrast: less) {
+    .pc { background: #ede9fe; color: #6d28d9; border: 1px dotted #c4b5fd; }
+    .pc::after { content: " · contrast: less"; }
+  }
+  @media (prefers-contrast: no-preference) {
+    .pc::after { content: " · contrast: no-preference"; }
+  }
+
+  /* prefers-reduced-transparency */
+  .pt { background: rgba(34, 197, 94, 0.4); padding: 10px; }
+  @media (prefers-reduced-transparency: reduce) {
+    .pt { background: rgb(34, 197, 94); }
+    .pt::after { content: " · transparency reduced"; }
+  }
+  @media (prefers-reduced-transparency: no-preference) {
+    .pt::after { content: " · transparency normal"; }
+  }
+
+  /* prefers-reduced-data */
+  .pd { background: #fef3c7; padding: 10px; }
+  @media (prefers-reduced-data: reduce) {
+    .pd { background: #fde68a; }
+    .pd::after { content: " · data-saver"; }
+  }
+  @media (prefers-reduced-data: no-preference) {
+    .pd::after { content: " · data normal"; }
+  }
+
+  /* forced-colors */
+  .fc { background: #d1fae5; padding: 10px; border: 1px solid #047857; }
+  @media (forced-colors: active) {
+    .fc { background: Canvas; color: CanvasText; border: 1px solid LinkText; }
+    .fc::after { content: " · forced-colors ON"; }
+  }
+  @media (forced-colors: none) {
+    .fc::after { content: " · forced-colors OFF"; }
+  }
+
+  /* inverted-colors */
+  .ic { background: #fbcfe8; padding: 10px; }
+  @media (inverted-colors: inverted) {
+    .ic::after { content: " · inverted"; }
+  }
+  @media (inverted-colors: none) {
+    .ic::after { content: " · normal colors"; }
+  }
+</style>
+</head>
+<body>
+<h1>User-preference media queries</h1>
+<p>Each card flips style based on system preference. Toggle your OS theme,
+high-contrast, reduced-motion, etc. to see them change.</p>
+
+<div class="card scheme">prefers-color-scheme</div>
+<div class="card rm">prefers-reduced-motion</div>
+<div class="card pc">prefers-contrast</div>
+<div class="card pt">prefers-reduced-transparency</div>
+<div class="card pd">prefers-reduced-data</div>
+<div class="card fc">forced-colors (system colors)</div>
+<div class="card ic">inverted-colors</div>
+
+<h2>Combined query: dark + reduced-motion</h2>
+<style>
+  .combo { background: #fef3c7; padding: 10px; }
+  @media (prefers-color-scheme: dark) and (prefers-reduced-motion: reduce) {
+    .combo { background: #1e293b; color: #fde68a; }
+    .combo::after { content: " · both ON"; }
+  }
+</style>
+<div class="card combo">dark AND reduced-motion combined</div>
+</body>
+</html>

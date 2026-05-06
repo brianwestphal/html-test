@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 deep — percentage resolution</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 18px; }
+  .row { background: #f1f5f9; border: 1px solid #475569; padding: 8px; margin-bottom: 8px; }
+  .lab { color: #64748b; font-size: 12px; margin-bottom: 4px; }
+
+  .h-cb { width: 400px; background: #fef3c7; border: 2px solid #b45309; }
+  .v-cb {
+    width: 220px; height: 220px;
+    background: #fef3c7; border: 2px solid #b45309;
+    writing-mode: vertical-rl;
+  }
+  .padbox {
+    background: #1d4ed8; color: white;
+    padding: 10% 0;          /* 10% of inline size */
+  }
+  .marbox {
+    background: #16a34a; color: white;
+    padding: 4px;
+    margin: 10% 0;           /* 10% of containing block inline size */
+  }
+
+  /* Auto-height parent + percentage child height */
+  .auto-h-parent { background: #ddd6fe; border:1px solid #6d28d9; width: 240px; }
+  .auto-h-child  { background: #4338ca; color: white; padding: 4px; height: 50%; }
+
+  /* Parent height set, child h:50% works */
+  .fix-h-parent { background: #ddd6fe; border:1px solid #6d28d9; width: 240px; height: 120px; }
+  .fix-h-child  { background: #4338ca; color: white; padding: 4px; height: 50%; }
+
+  /* min-height percentage falls back to 0 if parent height auto */
+  .min-h-child  { background: #b91c1c; color: white; padding: 4px; min-height: 50%; }
+</style>
+</head>
+<body>
+<h1>Percentage resolution</h1>
+
+<h2>Horizontal CB — % padding/margin against width</h2>
+<div class="h-cb">
+  <div class="lab">CB width 400px → 10% padding = 40px (top &amp; bottom)</div>
+  <div class="padbox">padding: 10% 0</div>
+</div>
+
+<div class="h-cb">
+  <div class="lab">CB width 400px → 10% margin = 40px</div>
+  <div class="marbox">margin: 10% 0</div>
+</div>
+
+<h2>Vertical writing mode — % padding/margin against the new INLINE size (=height)</h2>
+<p>In <code>writing-mode: vertical-rl</code>, the inline axis is vertical.
+% padding/margin still resolves against inline size, which is now the
+container's height. Visually the swelling happens on the horizontal axis
+of the box (block axis).</p>
+
+<div class="row">
+  <div class="v-cb">
+    <div class="lab">CB height 220px → 10% padding = 22px on the block axis</div>
+    <div class="padbox" style="padding: 10% 0;">padding: 10% 0 (vert)</div>
+  </div>
+</div>
+
+<h2>Auto-height parent — % height on child resolves to <code>auto</code></h2>
+<div class="auto-h-parent">
+  <div class="auto-h-child">height: 50% → auto (parent has no defined height)</div>
+</div>
+
+<h2>Fixed-height parent — % height on child works</h2>
+<div class="fix-h-parent">
+  <div class="fix-h-child">height: 50% of 120 = 60</div>
+</div>
+
+<h2>min-height: 50% on auto-height parent — resolves to 0</h2>
+<div class="auto-h-parent">
+  <div class="min-h-child">min-height: 50% (no effect — parent auto)</div>
+</div>
+
+<h2>min-height with content fallback: parent auto, child has content</h2>
+<div class="auto-h-parent" style="height: 100px;">
+  <div class="min-h-child">min-height: 50% of 100 = 50, content larger wins</div>
+</div>
+</body>
+</html>

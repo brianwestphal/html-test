@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>02 — Symbol-block fallback fonts</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; line-height: 1.7; font-size: 16px; max-width: 40em; }
+  .label { display: inline-block; width: 16em; color: #475569; font-size: 13px; }
+  .row { white-space: pre; font-size: 18px; }
+  .serif { font-family: serif; }
+  .mono  { font-family: monospace; }
+  h2 { font-size: 14px; color: #0f172a; margin-top: 1.5em; }
+</style>
+</head>
+<body>
+<h1>Symbol-block fallback fonts (DM-256)</h1>
+<p>Each row exercises one Unicode block we route through a fallback font in
+  <code>fallbackFontChain</code>. The chars should render in the same shape and
+  width Chrome paints, regardless of the requested primary family.</p>
+
+<h2>Box Drawing (U+2500–257F) — Menlo</h2>
+<div class="row">┌──────┬──────┐</div>
+<div class="row">│ left │right │</div>
+<div class="row">└──────┴──────┘</div>
+
+<h2>Geometric Shapes (U+25A0–25FF) — Hiragino Sans GB / Apple Symbols</h2>
+<div class="row"><span class="label">Triangles:</span>▲ △ ▼ ▽ ▶ ▷ ◀ ◁</div>
+<div class="row"><span class="label">Dots/discs:</span>● ○ ◉ ◌ ◐ ◑</div>
+<div class="row"><span class="label">Diamonds:</span>◆ ◇ ◈</div>
+<div class="row"><span class="label">Stars:</span>★ ☆ ✪ ✦ ✧</div>
+<div class="row"><span class="label">Squares:</span>■ □ ▣ ▤ ▥ ▦ ▧ ▨ ▩</div>
+
+<h2>Misc Symbols (U+2600–26FF) — Hiragino / Apple Symbols</h2>
+<div class="row"><span class="label">Weather:</span>☀ ☁ ☂ ☃ ❄</div>
+<div class="row"><span class="label">Card suits:</span>♠ ♣ ♥ ♦</div>
+<div class="row"><span class="label">Music notes:</span>♩ ♪ ♫ ♬</div>
+<div class="row"><span class="label">Gender:</span>♀ ♂ ⚥</div>
+<div class="row"><span class="label">Ballot/check:</span>☑ ☒ ☘ ✓ ✗</div>
+
+<h2>Math Operators (U+2200–22FF) — primary or Apple Symbols</h2>
+<div class="row"><span class="label">Quantifiers:</span>∀ ∃ ∄ ∈ ∉ ∋ ∌</div>
+<div class="row"><span class="label">Aggregators:</span>∑ ∏ ∫ ∮ ∂ ∇</div>
+<div class="row"><span class="label">Comparison:</span>≠ ≤ ≥ ± ≈ ≡ ≢</div>
+<div class="row"><span class="label">Sets:</span>∪ ∩ ⊂ ⊃ ⊆ ⊇ ∅</div>
+
+<h2>Arrows (U+2190–21FF) — primary or Apple Symbols</h2>
+<div class="row"><span class="label">Single:</span>← → ↑ ↓ ↔ ↕ ↖ ↗ ↘ ↙</div>
+<div class="row"><span class="label">Double:</span>⇐ ⇒ ⇑ ⇓ ⇔ ⇕</div>
+
+<h2>Letterlike (U+2100–214F) — primary or Apple Symbols</h2>
+<div class="row"><span class="label">Common:</span>™ © ® ℃ ℉ № ℗ ℠ ℡</div>
+<div class="row"><span class="label">Math letters:</span>ℝ ℕ ℤ ℂ ℚ ℵ</div>
+
+<h2>Math Alphanumeric (U+1D400–1D7FF) — STIX Two Math</h2>
+<div class="row"><span class="label">Bold:</span>𝐀 𝐁 𝐂 𝐃 𝐄</div>
+<div class="row"><span class="label">Script:</span>𝒜 𝒷 𝒞 𝒟 𝓁</div>
+<div class="row"><span class="label">Double-struck:</span>𝕊 𝕋 𝕌 𝕍 𝕏</div>
+<div class="row"><span class="label">Fraktur:</span>𝔄 𝔅 𝔇 𝔈 𝔉</div>
+<div class="row"><span class="label">Bold Greek:</span>𝛼 𝛽 𝛾 𝛿 𝜀</div>
+<div class="row"><span class="label">Sans digits:</span>𝟬 𝟭 𝟮 𝟯 𝟰 𝟱 𝟲 𝟳 𝟴 𝟵</div>
+
+<h2>Dingbats (U+2700–27BF) — Zapf Dingbats</h2>
+<div class="row"><span class="label">Punctuation:</span>✂ ✈ ✉ ✏ ✐</div>
+<div class="row"><span class="label">Checks/crosses:</span>✓ ✔ ✗ ✘ ✚</div>
+<div class="row"><span class="label">Stars/hearts:</span>✦ ✪ ❄ ❤ ❥</div>
+<div class="row"><span class="label">Numerals:</span>❶ ❷ ❸ ❹ ❺</div>
+
+<h2>Same chars in serif / mono primaries</h2>
+<div class="row serif"><span class="label">serif:</span>● ★ ♥ ✓ → ∑ ™</div>
+<div class="row mono"><span class="label">mono:</span>● ★ ♥ ✓ → ∑ ™</div>
+
+</body>
+</html>

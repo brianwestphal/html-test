@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — z-index on flex/grid items</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  h2 { margin-top: 24px; font-size: 14px; color: #334155; }
+  .flex, .grid {
+    background: #f1f5f9;
+    border: 1px solid #475569;
+    margin-bottom: 8px;
+    padding: 0;
+  }
+  .flex { display: flex; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .item {
+    height: 80px;
+    color: white; font-weight: bold; padding: 8px;
+    border: 2px solid white;
+    margin: -10px;       /* force overlap */
+  }
+  .a { background: #dc2626; }
+  .b { background: #16a34a; }
+  .c { background: #2563eb; }
+  .d { background: #ea580c; }
+</style>
+</head>
+<body>
+<h1>z-index on flex / grid items (no position)</h1>
+<p>Flex and grid items can use <code>z-index</code> directly — they don't
+need <code>position: relative</code>. Each item with a non-auto z-index
+becomes a stacking context.</p>
+
+<h2>Flex — overlapping via negative margin, default tree-order paint</h2>
+<div class="flex">
+  <div class="item a">A (default)</div>
+  <div class="item b">B (default)</div>
+  <div class="item c">C (default)</div>
+  <div class="item d">D (default)</div>
+</div>
+<p>Without z-index, paint order = source order: D on top.</p>
+
+<h2>Flex — z-index reorders</h2>
+<div class="flex">
+  <div class="item a" style="z-index: 4;">A z:4 (front)</div>
+  <div class="item b" style="z-index: 1;">B z:1</div>
+  <div class="item c" style="z-index: 3;">C z:3</div>
+  <div class="item d" style="z-index: 2;">D z:2</div>
+</div>
+
+<h2>Grid — z-index also works without position</h2>
+<div class="grid">
+  <div class="item a" style="z-index: 2;">A z:2</div>
+  <div class="item b" style="z-index: 4;">B z:4 (front)</div>
+  <div class="item c" style="z-index: 1;">C z:1</div>
+  <div class="item d" style="z-index: 3;">D z:3</div>
+</div>
+
+<h2>order rearranges layout but NOT paint without z-index</h2>
+<p>order moves items in the flex flow. Paint order, however, stays in
+source order until z-index is set. Look: visual flow is D, C, B, A but
+paint stack still goes A → D, so D paints in front of overlap.</p>
+<div class="flex">
+  <div class="item a" style="order: 4;">A (order 4)</div>
+  <div class="item b" style="order: 3;">B (order 3)</div>
+  <div class="item c" style="order: 2;">C (order 2)</div>
+  <div class="item d" style="order: 1;">D (order 1, painted last)</div>
+</div>
+
+<h2>NEGATIVE — z-index on a non-flex/grid in-flow block does nothing</h2>
+<p>Plain block siblings, no positioning, no flex/grid parent. z-index here
+is ignored; paint = source order: B is in front of A.</p>
+<div style="background:#f1f5f9; border:1px solid #475569;">
+  <div class="item a" style="z-index: 99; width: 60%;">A z:99 (ignored)</div>
+  <div class="item b" style="z-index: 1; width: 60%; margin-top: -40px;">B z:1 (still on top)</div>
+</div>
+</body>
+</html>

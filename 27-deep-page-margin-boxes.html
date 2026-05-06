@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>27 deep — @page margin boxes</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+
+  /* General page setup */
+  @page {
+    size: A4;
+    margin: 24mm;
+    @top-left     { content: "DRAFT"; color: #b91c1c; font-weight: bold; }
+    @top-center   { content: "Annual Report 2025"; }
+    @top-right    { content: counter(page) " / " counter(pages); }
+    @bottom-left  { content: "Confidential"; font-size: 10pt; }
+    @bottom-center{ content: "© 2025"; }
+    @bottom-right { content: "page " counter(page); }
+    @left-middle  { content: "side note"; writing-mode: vertical-rl; }
+    @right-middle { content: "side note"; writing-mode: vertical-lr; }
+  }
+
+  /* :first — different margin boxes for the first page */
+  @page :first {
+    @top-center { content: ""; }
+    @top-left   { content: "TITLE PAGE"; color: #1d4ed8; }
+  }
+
+  /* :left / :right — alternating headers (book-style) */
+  @page :left {
+    margin-left: 36mm;
+    @top-left  { content: counter(page); }
+    @top-right { content: "Annual Report"; }
+  }
+  @page :right {
+    margin-right: 36mm;
+    @top-right { content: counter(page); }
+    @top-left  { content: "Chapter " counter(chapter); }
+  }
+
+  /* :blank — blank pages get marked */
+  @page :blank {
+    @top-center { content: "(intentionally blank)"; color: #94a3b8; }
+  }
+
+  /* Named pages */
+  @page wide {
+    size: A4 landscape;
+    margin: 12mm;
+    @top-center { content: "WIDE TABLE PAGE"; }
+  }
+  @page narrow {
+    size: 100mm 200mm;
+    margin: 8mm;
+  }
+
+  .wide-table { page: wide; }
+  .narrow-card { page: narrow; }
+
+  /* Counters used in margin boxes */
+  body { counter-reset: chapter; }
+  h2 { counter-increment: chapter; }
+
+  /* Page break controls */
+  .page-break-after { break-after: page; }
+  .avoid-break { break-inside: avoid; }
+  .recto-start { break-before: recto; }
+  .verso-start { break-before: verso; }
+
+  .widows-test { widows: 4; orphans: 4; }
+</style>
+</head>
+<body>
+<h1>@page — margin boxes &amp; page selectors</h1>
+<p>Print preview this document (or generate PDF) to see effects. Each
+heading below describes the corresponding rule in the print stylesheet.</p>
+
+<h2>Default page margin boxes</h2>
+<div class="frame">
+  <p>top-left: "DRAFT" · top-center: title · top-right: page counter</p>
+  <p>bottom-left: "Confidential" · bottom-center: copyright · bottom-right: page label</p>
+  <p>left-middle / right-middle: vertical side notes</p>
+</div>
+
+<h2>:first — title page</h2>
+<div class="frame">
+  <p>The first page replaces the top-center with empty and top-left with
+  "TITLE PAGE" in blue.</p>
+</div>
+
+<h2>:left and :right — duplex book pagination</h2>
+<div class="frame">
+  <p>Even pages (:left) — page number on left header, "Annual Report" on right.</p>
+  <p>Odd pages (:right) — page number on right header, chapter on left.</p>
+</div>
+
+<h2>Named page <code>wide</code> — landscape A4</h2>
+<div class="wide-table frame">
+  <table border="1" style="width: 100%; border-collapse: collapse;">
+    <tr><th>col 1</th><th>col 2</th><th>col 3</th><th>col 4</th><th>col 5</th><th>col 6</th><th>col 7</th><th>col 8</th></tr>
+    <tr><td>data</td><td>data</td><td>data</td><td>data</td><td>data</td><td>data</td><td>data</td><td>data</td></tr>
+  </table>
+</div>
+
+<h2>Named page <code>narrow</code></h2>
+<div class="narrow-card frame">
+  <p>This block triggers a narrow page (100×200mm).</p>
+</div>
+
+<h2>Break controls</h2>
+<div class="frame avoid-break">
+  <p>break-inside: avoid — this block tries to stay on one page.</p>
+  <p>break-inside: avoid — this block tries to stay on one page.</p>
+  <p>break-inside: avoid — this block tries to stay on one page.</p>
+</div>
+
+<div class="page-break-after frame">
+  <p>break-after: page — next content starts new page</p>
+</div>
+
+<div class="recto-start frame">
+  <p>break-before: recto — start on the right-hand page</p>
+</div>
+
+<div class="verso-start frame">
+  <p>break-before: verso — start on the left-hand page</p>
+</div>
+
+<h2>widows / orphans</h2>
+<div class="widows-test frame">
+  <p>This paragraph forces at least 4 lines on each side of a page break.
+  Lorem ipsum dolor sit amet consectetur adipiscing elit. Vivamus a quam
+  in ligula scelerisque luctus eu vel orci. Curabitur lobortis sapien
+  vitae lacus tincidunt, eu varius mauris vehicula. Pellentesque habitant
+  morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+</div>
+</body>
+</html>

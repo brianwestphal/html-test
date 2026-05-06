@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 deep — order vs z-index</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  .row { display: flex; }
+  .item {
+    width: 120px; height: 60px; padding: 6px; color: white; font-weight: bold;
+    border: 2px solid white;
+    margin-left: -20px;          /* force overlap */
+  }
+  .item:first-child { margin-left: 0; }
+  .a { background: #dc2626; }
+  .b { background: #16a34a; }
+  .c { background: #2563eb; }
+  .d { background: #ea580c; }
+  .e { background: #7c3aed; }
+</style>
+</head>
+<body>
+<h1>flex <code>order</code> vs <code>z-index</code></h1>
+<p><code>order</code> rearranges visual layout but does not affect paint
+order. To change paint stacking you need <code>z-index</code> on the
+flex item.</p>
+
+<h2>Source order, no order, no z-index → paint = source (E on top)</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item a">A</div>
+    <div class="item b">B</div>
+    <div class="item c">C</div>
+    <div class="item d">D</div>
+    <div class="item e">E (top)</div>
+  </div>
+</div>
+
+<h2>Reversed via <code>order</code> only — visual order E,D,C,B,A but E still painted last</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item a" style="order: 5;">A</div>
+    <div class="item b" style="order: 4;">B</div>
+    <div class="item c" style="order: 3;">C</div>
+    <div class="item d" style="order: 2;">D</div>
+    <div class="item e" style="order: 1;">E (still on top)</div>
+  </div>
+</div>
+
+<h2>Same with <code>flex-direction: row-reverse</code> — visual reversed but paint = source</h2>
+<div class="frame">
+  <div class="row" style="flex-direction: row-reverse;">
+    <div class="item a">A</div>
+    <div class="item b">B</div>
+    <div class="item c">C</div>
+    <div class="item d">D</div>
+    <div class="item e">E (still on top)</div>
+  </div>
+</div>
+
+<h2>Now add <code>z-index</code> to A — A pops to top despite source order</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item a" style="z-index: 10;">A z:10</div>
+    <div class="item b">B</div>
+    <div class="item c">C</div>
+    <div class="item d">D</div>
+    <div class="item e">E</div>
+  </div>
+</div>
+
+<h2>order + z-index — independent axes</h2>
+<p>Visual order: C, D, B, A, E. Paint stack: B (z:5) on top, then E (default).</p>
+<div class="frame">
+  <div class="row">
+    <div class="item a" style="order: 4;">A o:4</div>
+    <div class="item b" style="order: 3; z-index: 5;">B o:3 z:5</div>
+    <div class="item c" style="order: 1;">C o:1</div>
+    <div class="item d" style="order: 2;">D o:2</div>
+    <div class="item e" style="order: 5;">E o:5</div>
+  </div>
+</div>
+</body>
+</html>

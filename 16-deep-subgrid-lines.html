@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>16 deep — subgrid line names &amp; gap</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+  .outer {
+    display: grid;
+    grid-template-columns: [start] 100px [a] 1fr [b] 1fr [c] 100px [end];
+    grid-template-rows: 40px 80px 40px;
+    gap: 8px;
+    background: #fef3c7; padding: 8px; border: 1px solid #b45309;
+  }
+  .header, .footer { background: #b45309; color: white; padding: 6px; }
+  .header { grid-column: start / end; }
+  .footer { grid-column: start / end; grid-row: 3; }
+
+  .panel {
+    grid-column: start / end;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: subgrid;     /* inherit outer columns */
+    background: #c7d2fe; padding: 4px; border: 1px solid #4338ca;
+    gap: 8px;                           /* propagated where not overridden */
+  }
+  .child {
+    background: #1d4ed8; color: white; padding: 4px; text-align: center;
+  }
+  .child.aside { grid-column: start / a; }
+  .child.main  { grid-column: a / c; }
+  .child.note  { grid-column: c / end; }
+
+  /* Subgrid in only one axis */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 100px 200px 100px;
+    grid-template-rows: 40px 40px 40px;
+    gap: 8px;
+    background: #fef3c7; padding: 8px;
+  }
+  .panel-2 {
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: 1fr 1fr;        /* explicit rows, NOT subgrid */
+    gap: 6px;
+    background: #c7d2fe; padding: 4px;
+  }
+  .panel-2 > div { background: #1d4ed8; color:white; padding:4px; text-align:center; }
+</style>
+</head>
+<body>
+<h1><code>subgrid</code> — line names, gap, single-axis</h1>
+
+<h2>Two-axis subgrid inheriting outer column lines (start/a/b/c/end)</h2>
+<div class="frame">
+  <div class="outer">
+    <div class="header">header (col start → end)</div>
+    <div class="panel">
+      <div class="child aside">aside (start → a)</div>
+      <div class="child main">main (a → c)</div>
+      <div class="child note">note (c → end)</div>
+    </div>
+    <div class="footer">footer</div>
+  </div>
+</div>
+
+<h2>Subgrid columns only — rows defined locally</h2>
+<div class="frame">
+  <div class="grid-2">
+    <div class="panel-2">
+      <div>r1c1</div><div>r1c2</div><div>r1c3</div>
+      <div>r2c1</div><div>r2c2</div><div>r2c3</div>
+    </div>
+  </div>
+</div>
+
+<h2>Subgrid with overridden gap on inner axis</h2>
+<p>Outer has gap:8px; inner subgrid sets <code>row-gap: 24px</code> while
+inheriting column gap from the outer grid.</p>
+<div class="frame">
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; background: #fef3c7; padding: 8px; border: 1px solid #b45309;">
+    <div class="header" style="grid-column: 1 / 4;">header</div>
+    <div style="grid-column: 1 / 4; display: grid; grid-template-columns: subgrid; grid-template-rows: subgrid; row-gap: 24px; background: #c7d2fe; padding: 4px;
+                grid-row: 2 / 5;">
+      <div class="child">a</div><div class="child">b</div><div class="child">c</div>
+      <div class="child">d</div><div class="child">e</div><div class="child">f</div>
+      <div class="child">g</div><div class="child">h</div><div class="child">i</div>
+    </div>
+    <div class="footer" style="grid-row: 5; grid-column: 1 / 4;">footer</div>
+  </div>
+</div>
+</body>
+</html>

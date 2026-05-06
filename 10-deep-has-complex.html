@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 deep — :has() complex</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { padding: 4px 8px; background: #e2e8f0; margin: 4px 0; }
+
+  /* 1. card with image inside */
+  .card { border: 2px solid #94a3b8; padding: 6px; margin: 4px 0; }
+  .card:has(img) { background: #fde68a; }
+  .card:has(> img) { border-color: #b45309; }     /* direct child only */
+
+  /* 2. paragraph followed by figure */
+  p:has(+ figure) { font-weight: bold; color: #1d4ed8; }
+
+  /* 3. paragraph that has any sibling list */
+  p:has(~ ul) { background: #ddd6fe; padding-left: 6px; }
+
+  /* 4. li that has no checked input descendant */
+  .todo li:has(input[type=checkbox]:not(:checked)) { color: #b91c1c; }
+  .todo li:has(input[type=checkbox]:checked) { text-decoration: line-through; color: #16a34a; }
+
+  /* 5. form field group: highlight label of any required field */
+  label:has(input:required) { font-weight: bold; }
+  label:has(input:required) span::after { content: " *"; color: #b91c1c; }
+
+  /* 6. compound: section with at least one h2 AND at least one img */
+  section:has(h2):has(img) { background: #ecfccb; padding: 8px; }
+
+  /* 7. :has(:not()) — section that has NO h2 */
+  section:has(:not(h2):not(h3):not(h4)):not(:has(h2,h3,h4)) {
+    border: 2px dashed #b91c1c;
+  }
+
+  /* 8. parent of empty input */
+  label:has(input:placeholder-shown) { background: #fef9c3; }
+</style>
+</head>
+<body>
+<h1>:has() — complex selectors</h1>
+
+<h2>1. <code>.card:has(img)</code> — yellow when contains img; orange border when DIRECT child</h2>
+<div class="frame">
+  <div class="card">no image — plain</div>
+  <div class="card">
+    <p>image deep inside</p>
+    <figure><img src="assets/img-red.png" alt="" style="width: 60px;"></figure>
+  </div>
+  <div class="card">
+    <img src="assets/img-blue.jpg" alt="" style="width: 60px;">
+    direct child img — orange border
+  </div>
+</div>
+
+<h2>2. <code>p:has(+ figure)</code> — paragraph immediately before figure</h2>
+<div class="frame">
+  <p>orphan paragraph</p>
+  <p>caption-like paragraph (highlighted)</p>
+  <figure><img src="assets/img-green.gif" alt="" style="width: 60px;"></figure>
+  <p>after-figure paragraph</p>
+</div>
+
+<h2>3. <code>p:has(~ ul)</code> — paragraph with any FOLLOWING sibling list</h2>
+<div class="frame">
+  <p>this paragraph (has-list)</p>
+  <p>this too (has-list)</p>
+  <ul><li>1</li><li>2</li></ul>
+  <p>this one has no following ul</p>
+</div>
+
+<h2>4. <code>li:has(input:checked)</code> / <code>:not(:checked)</code></h2>
+<ul class="todo frame">
+  <li><label><input type="checkbox"> buy milk</label></li>
+  <li><label><input type="checkbox" checked> walk dog</label></li>
+  <li><label><input type="checkbox"> file taxes</label></li>
+  <li><label><input type="checkbox" checked> read book</label></li>
+</ul>
+
+<h2>5. <code>label:has(input:required)</code></h2>
+<form class="frame">
+  <label><span>email</span> <input type="email" required></label>
+  <label><span>name</span> <input></label>
+  <label><span>age</span> <input type="number" required></label>
+</form>
+
+<h2>6. <code>section:has(h2):has(img)</code> — compound (chained :has)</h2>
+<section class="frame">
+  <h2>Has both</h2>
+  <p>text</p>
+  <img src="assets/img-orange.svg" alt="" style="width: 50px;">
+</section>
+<section class="frame">
+  <h2>Heading only</h2>
+  <p>no image</p>
+</section>
+<section class="frame">
+  <p>image only</p>
+  <img src="assets/img-purple.webp" alt="" style="width: 50px;">
+</section>
+
+<h2>7. <code>label:has(input:placeholder-shown)</code> — highlight empty</h2>
+<form class="frame">
+  <label>name <input placeholder="enter your name"></label><br>
+  <label>title <input placeholder="title" value="hello"></label>
+</form>
+</body>
+</html>

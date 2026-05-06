@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>18 deep — multiple stacked box-shadows</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 8px; }
+  .box {
+    width: 160px; height: 100px;
+    background: #fef3c7;
+    border: 2px solid #b45309;
+    color: #1c1917; padding: 8px;
+  }
+
+  /* multiple outset shadows — listed first paints in front */
+  .multi-out {
+    box-shadow:
+      4px 4px 0 #b91c1c,
+      8px 8px 0 #f97316,
+      12px 12px 0 #facc15,
+      16px 16px 0 #16a34a,
+      20px 20px 0 #1d4ed8,
+      24px 24px 0 #7c3aed;
+  }
+
+  /* concentric layered (offset 0 with growing spread) */
+  .concentric {
+    box-shadow:
+      0 0 0 4px #1d4ed8,
+      0 0 0 8px #16a34a,
+      0 0 0 12px #facc15,
+      0 0 0 16px #f97316,
+      0 0 0 20px #b91c1c;
+  }
+
+  /* outset + inset combination */
+  .mixed {
+    box-shadow:
+      0 8px 16px rgba(0,0,0,.4),
+      inset 0 0 0 4px #b45309,
+      inset 0 -16px 32px rgba(0,0,0,.3);
+  }
+
+  /* spread negative — inset look without inset keyword */
+  .spread-neg {
+    box-shadow: 0 0 24px 12px #fde68a, 0 12px 24px -8px #1e3a8a;
+  }
+
+  /* color-mix in shadow */
+  .color-mix {
+    color: #1d4ed8;
+    box-shadow:
+      0 4px 0 currentColor,
+      0 8px 16px color-mix(in srgb, currentColor 40%, white);
+  }
+
+  /* text-shadow stacking */
+  .ts {
+    font-size: 48px; font-weight: 900;
+    color: white;
+    text-shadow:
+      1px 1px 0 #b91c1c,
+      3px 3px 0 #f97316,
+      5px 5px 0 #facc15,
+      7px 7px 0 #16a34a,
+      9px 9px 0 #1d4ed8,
+      11px 11px 0 #7c3aed;
+  }
+  .ts-glow {
+    font-size: 48px; font-weight: 900;
+    color: #ffffff;
+    text-shadow:
+      0 0 4px #fef3c7,
+      0 0 8px #facc15,
+      0 0 12px #f97316,
+      0 0 16px #b91c1c;
+  }
+</style>
+</head>
+<body>
+<h1>Stacked box-shadow / text-shadow</h1>
+
+<h2>Multiple outset — first listed paints in front</h2>
+<div class="row">
+  <div class="box multi-out">layered offsets</div>
+</div>
+
+<h2>Concentric outline using spread</h2>
+<div class="row">
+  <div class="box concentric"></div>
+</div>
+
+<h2>Outset + inset combo</h2>
+<div class="row">
+  <div class="box mixed"></div>
+</div>
+
+<h2>Negative spread → narrower bottom shadow with bigger blur</h2>
+<div class="row">
+  <div class="box spread-neg"></div>
+</div>
+
+<h2><code>color-mix()</code> with currentColor</h2>
+<div class="row">
+  <div class="box color-mix">color: #1d4ed8</div>
+</div>
+
+<h2>text-shadow — stacked offsets</h2>
+<div class="row" style="background:#0f172a; padding:24px;">
+  <div class="ts">STACK</div>
+</div>
+
+<h2>text-shadow — glow</h2>
+<div class="row" style="background:#0f172a; padding:24px;">
+  <div class="ts-glow">GLOW</div>
+</div>
+
+<h2>shadow on rounded element</h2>
+<div class="row">
+  <div class="box" style="border-radius: 50px; box-shadow: 0 12px 24px rgba(0,0,0,.3), 0 0 0 6px #1d4ed8;"></div>
+</div>
+</body>
+</html>

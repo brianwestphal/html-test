@@ -16,6 +16,8 @@
   a:hover { text-decoration: underline; }
   code { background: #f1f5f9; padding: 0 4px; border-radius: 3px; font-size: 13px; }
   .cat-count { color: #64748b; font-size: 14px; font-weight: normal; }
+  li.deep a::before { content: "deep · "; color: #b45309; font-size: 11px; font-weight: 600; }
+  li.deep a { color: #7c2d12; }
 </style>
 </head>
 <body>
@@ -46,6 +48,8 @@ work without a server.</p>
   <li><a href="02-text-entities.html">Character entities (named / numeric / hex)</a></li>
   <li><a href="02-text-ruby.html">Ruby annotations</a></li>
   <li><a href="02-text-bidi.html">Bidirectional text (dir, bdi, bdo)</a></li>
+  <li class="deep"><a href="02-deep-bidi-isolate.html">unicode-bidi isolate / override / plaintext</a></li>
+  <li class="deep"><a href="02-deep-line-breaking.html">soft hyphen, word-break, overflow-wrap, hyphens</a></li>
 </ul>
 
 <h2>03 — Lists</h2>
@@ -65,6 +69,8 @@ work without a server.</p>
   <li><a href="04-table-borders.html">border-collapse, border-spacing</a></li>
   <li><a href="04-table-layout.html">table-layout auto vs fixed</a></li>
   <li><a href="04-table-caption-empty.html">caption-side, empty-cells</a></li>
+  <li class="deep"><a href="04-deep-anonymous-boxes.html">Anonymous table-box generation</a></li>
+  <li class="deep"><a href="04-deep-border-conflict.html">border-collapse conflict resolution</a></li>
 </ul>
 
 <h2>05 — Links</h2>
@@ -132,6 +138,9 @@ work without a server.</p>
   <li><a href="10-sel-pseudo-logical.html">:not / :is / :where / :has</a></li>
   <li><a href="10-sel-pseudo-lang-dir.html">:lang() / :dir()</a></li>
   <li><a href="10-sel-pseudo-elements.html">Pseudo-elements</a></li>
+  <li class="deep"><a href="10-deep-has-complex.html">:has() complex (combinators, :is/:not inside)</a></li>
+  <li class="deep"><a href="10-deep-nth-of-type.html">:nth-* depth (an+b of S, vs nth-child)</a></li>
+  <li class="deep"><a href="10-deep-attr-quoting.html">Attribute selector quoting, [i]/[s] flags, escapes</a></li>
 </ul>
 
 <h2>11 — Box model &amp; sizing</h2>
@@ -142,6 +151,10 @@ work without a server.</p>
   <li><a href="11-box-min-max.html">min/max width &amp; height</a></li>
   <li><a href="11-box-units.html">Length units</a></li>
   <li><a href="11-box-calc-minmax.html">calc / min / max / clamp</a></li>
+  <li class="deep"><a href="11-deep-margin-collapse-edges.html">Margin collapse edge cases (BFC stoppers)</a></li>
+  <li class="deep"><a href="11-deep-percent-resolution.html">% padding/margin/height resolution</a></li>
+  <li class="deep"><a href="11-deep-intrinsic-sizing.html">min/max/fit-content keywords</a></li>
+  <li class="deep"><a href="11-deep-box-sizing-mix.html">box-sizing mid-cascade + min/max clamping</a></li>
 </ul>
 
 <h2>12 — Display</h2>
@@ -151,6 +164,8 @@ work without a server.</p>
   <li><a href="12-display-list-item.html">display: list-item</a></li>
   <li><a href="12-display-contents.html">display: contents</a></li>
   <li><a href="12-visibility.html">visibility visible/hidden/collapse</a></li>
+  <li class="deep"><a href="12-deep-display-syntax.html">Multi-keyword display (block flow-root, inline flex)</a></li>
+  <li class="deep"><a href="12-deep-display-contents.html">display: contents — wrapper dissolves</a></li>
 </ul>
 
 <h2>13 — Positioning</h2>
@@ -160,6 +175,13 @@ work without a server.</p>
   <li><a href="13-pos-fixed.html">fixed</a></li>
   <li><a href="13-pos-sticky.html">sticky</a></li>
   <li><a href="13-pos-z-index.html">z-index / stacking contexts</a></li>
+  <li class="deep"><a href="13-deep-stacking-context-creators.html">Every property that creates a stacking context</a></li>
+  <li class="deep"><a href="13-deep-stacking-paint-order.html">Seven-level paint order within a context</a></li>
+  <li class="deep"><a href="13-deep-z-index-negative.html">Negative z-index inside a stacking context</a></li>
+  <li class="deep"><a href="13-deep-z-index-flex-grid.html">z-index on flex/grid items (no position)</a></li>
+  <li class="deep"><a href="13-deep-fixed-in-transform.html">fixed inside transform/filter/contain ancestor</a></li>
+  <li class="deep"><a href="13-deep-sticky-edges.html">Sticky edges (stacked, flex, grid, horizontal)</a></li>
+  <li class="deep"><a href="13-deep-containing-block.html">Containing block resolution under transforms</a></li>
 </ul>
 
 <h2>14 — Floats</h2>
@@ -167,6 +189,8 @@ work without a server.</p>
   <li><a href="14-float-basic.html">float left/right, clear</a></li>
   <li><a href="14-float-text-wrap.html">Text wrap around floats</a></li>
   <li><a href="14-float-shape-outside.html">shape-outside</a></li>
+  <li class="deep"><a href="14-deep-float-bfc.html">Float containment via BFC</a></li>
+  <li class="deep"><a href="14-deep-float-interactions.html">Float interactions (negative margin, clear-self)</a></li>
 </ul>
 
 <h2>15 — Flexbox</h2>
@@ -175,6 +199,10 @@ work without a server.</p>
   <li><a href="15-flex-alignment.html">justify / align-items / align-content</a></li>
   <li><a href="15-flex-items.html">grow / shrink / basis / order / align-self</a></li>
   <li><a href="15-flex-nested.html">Nested flex</a></li>
+  <li class="deep"><a href="15-deep-flex-min-auto.html">min-width: auto default for flex items</a></li>
+  <li class="deep"><a href="15-deep-flex-baseline.html">Baseline alignment groups (first / last)</a></li>
+  <li class="deep"><a href="15-deep-flex-aspect-ratio.html">aspect-ratio on flex items</a></li>
+  <li class="deep"><a href="15-deep-flex-order-vs-z.html">order vs z-index — independent axes</a></li>
 </ul>
 
 <h2>16 — Grid</h2>
@@ -186,6 +214,10 @@ work without a server.</p>
   <li><a href="16-grid-repeat.html">repeat / minmax / auto-fit / auto-fill</a></li>
   <li><a href="16-grid-subgrid.html">subgrid</a></li>
   <li><a href="16-grid-alignment.html">justify / align / place</a></li>
+  <li class="deep"><a href="16-deep-grid-implicit.html">Implicit tracks, dense, span beyond explicit</a></li>
+  <li class="deep"><a href="16-deep-grid-min-max-content.html">Intrinsic track sizing (min/max/fit-content/fr)</a></li>
+  <li class="deep"><a href="16-deep-grid-baseline.html">Baseline alignment in grid</a></li>
+  <li class="deep"><a href="16-deep-subgrid-lines.html">Subgrid line names + gap propagation</a></li>
 </ul>
 
 <h2>17 — Backgrounds &amp; gradients</h2>
@@ -196,6 +228,8 @@ work without a server.</p>
   <li><a href="17-gradient-radial.html">radial-gradient</a></li>
   <li><a href="17-gradient-conic.html">conic-gradient</a></li>
   <li><a href="17-gradient-repeating.html">repeating gradients</a></li>
+  <li class="deep"><a href="17-deep-bg-clip-text.html">background-clip: text + multi-layer</a></li>
+  <li class="deep"><a href="17-deep-bg-attachment-fixed.html">background-attachment fixed/local/scroll</a></li>
 </ul>
 
 <h2>18 — Borders, outlines, shadows</h2>
@@ -205,12 +239,16 @@ work without a server.</p>
   <li><a href="18-border-image.html">border-image</a></li>
   <li><a href="18-outline.html">outline / outline-offset</a></li>
   <li><a href="18-shadows.html">box-shadow / text-shadow</a></li>
+  <li class="deep"><a href="18-deep-radius-overflow.html">border-radius + overflow clipping rules</a></li>
+  <li class="deep"><a href="18-deep-shadow-stacking.html">Stacked box-shadow + text-shadow layers</a></li>
 </ul>
 
 <h2>19 — Colors</h2>
 <ul>
   <li><a href="19-color-formats.html">Named / hex / rgb / hsl / hwb / lab / lch / oklch / color-mix</a></li>
   <li><a href="19-color-opacity.html">opacity vs rgba alpha</a></li>
+  <li class="deep"><a href="19-deep-color-spaces.html">color() function and wide-gamut spaces</a></li>
+  <li class="deep"><a href="19-deep-color-mix.html">color-mix across spaces + hue interpolation</a></li>
 </ul>
 
 <h2>20 — Typography &amp; text</h2>
@@ -228,12 +266,20 @@ work without a server.</p>
   <li><a href="20-text-indent-shadow.html">text-indent, vertical-align</a></li>
   <li><a href="20-writing-mode.html">writing-mode, text-orientation, direction</a></li>
   <li><a href="20-logical-properties.html">Logical properties</a></li>
+  <li class="deep"><a href="20-deep-line-box-baselines.html">Line-box baselines + leading distribution</a></li>
+  <li class="deep"><a href="20-deep-vertical-align.html">vertical-align — every value</a></li>
+  <li class="deep"><a href="20-deep-font-features.html">font-feature-settings + variable axes</a></li>
+  <li class="deep"><a href="20-deep-text-emphasis.html">text-emphasis (east-asian style marks)</a></li>
+  <li class="deep"><a href="20-deep-decoration-detail.html">text-decoration thickness/offset/skip-ink</a></li>
+  <li class="deep"><a href="20-deep-writing-mode-mixed.html">writing-mode mixed (tate-chu-yoko, sideways)</a></li>
 </ul>
 
 <h2>21 — Transforms</h2>
 <ul>
   <li><a href="21-transform-2d.html">2D transforms</a></li>
   <li><a href="21-transform-3d.html">3D transforms, perspective</a></li>
+  <li class="deep"><a href="21-deep-transform-origin.html">transform-origin (keywords, %, 3D z)</a></li>
+  <li class="deep"><a href="21-deep-transform-3d-preserve.html">preserve-3d, backface-visibility, perspective-origin</a></li>
 </ul>
 
 <h2>22 — Filters, blending</h2>
@@ -241,12 +287,17 @@ work without a server.</p>
   <li><a href="22-filter.html">filter</a></li>
   <li><a href="22-backdrop-filter.html">backdrop-filter</a></li>
   <li><a href="22-blend-modes.html">mix-blend-mode / background-blend-mode</a></li>
+  <li class="deep"><a href="22-deep-filter-stacking.html">filter stacking context + CB for fixed</a></li>
+  <li class="deep"><a href="22-deep-isolation.html">isolation: isolate confining blend modes</a></li>
+  <li class="deep"><a href="22-deep-blend-groups.html">All mix-blend-mode values compared</a></li>
 </ul>
 
 <h2>23 — Clipping &amp; masking</h2>
 <ul>
   <li><a href="23-clip-path.html">clip-path</a></li>
   <li><a href="23-mask.html">mask</a></li>
+  <li class="deep"><a href="23-deep-clip-path-shapes.html">clip-path — every shape function</a></li>
+  <li class="deep"><a href="23-deep-mask-composite.html">mask-composite, mask-mode, mask-clip</a></li>
 </ul>
 
 <h2>24 — Generated content</h2>
@@ -254,6 +305,7 @@ work without a server.</p>
   <li><a href="24-generated-content.html">::before / ::after</a></li>
   <li><a href="24-counters.html">CSS counters</a></li>
   <li><a href="24-quotes.html">quotes property</a></li>
+  <li class="deep"><a href="24-deep-counter-scope.html">Counter scope, counter-set, counters()</a></li>
 </ul>
 
 <h2>25 — Overflow &amp; scrolling</h2>
@@ -271,11 +323,13 @@ work without a server.</p>
   <li><a href="26-mq-features.html">Feature queries</a></li>
   <li><a href="26-mq-range-syntax.html">Range syntax + and/or/not</a></li>
   <li><a href="26-supports.html">@supports</a></li>
+  <li class="deep"><a href="26-deep-mq-prefers.html">prefers-* queries (color-scheme, contrast, etc.)</a></li>
 </ul>
 
 <h2>27 — Print / paged media</h2>
 <ul>
   <li><a href="27-page.html">@page, break-*, widows, orphans</a></li>
+  <li class="deep"><a href="27-deep-page-margin-boxes.html">@page :first/:left/:right + margin boxes + named pages</a></li>
 </ul>
 
 <h2>28 — @-rules &amp; organization</h2>
@@ -285,6 +339,9 @@ work without a server.</p>
   <li><a href="28-nesting.html">CSS nesting</a></li>
   <li><a href="28-container.html">@container</a></li>
   <li><a href="28-charset-namespace.html">@charset, @namespace</a></li>
+  <li class="deep"><a href="28-deep-container-types.html">container-type / cq* units / nested containers</a></li>
+  <li class="deep"><a href="28-deep-layer-import.html">@import layer() + layer ordering / sub-layers</a></li>
+  <li class="deep"><a href="28-deep-nesting-complex.html">Nesting — &amp; lists, nested @media, deep nesting</a></li>
 </ul>
 
 <h2>29 — Cascade, inheritance, values</h2>
@@ -293,6 +350,9 @@ work without a server.</p>
   <li><a href="29-inheritance-keywords.html">inherit / initial / unset / revert / revert-layer</a></li>
   <li><a href="29-important.html">!important</a></li>
   <li><a href="29-custom-properties.html">Custom properties / var()</a></li>
+  <li class="deep"><a href="29-deep-layer-priority.html">@layer priority + !important reversal</a></li>
+  <li class="deep"><a href="29-deep-where-is-specificity.html">:where / :is / :not / :has specificity</a></li>
+  <li class="deep"><a href="29-deep-property-registration.html">@property registration (syntax / inherits / initial)</a></li>
 </ul>
 
 <h2>30 — UI &amp; interaction</h2>

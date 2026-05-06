@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 deep — flex baseline alignment</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+  .row {
+    display: flex;
+    align-items: baseline;
+    background: repeating-linear-gradient(0deg,
+      transparent 0 19px, #cbd5e1 19px 20px);
+    gap: 16px;
+  }
+  .item {
+    background: #1d4ed8; color: white;
+    padding: 6px 10px;
+  }
+  .row.last { align-items: last baseline; }
+</style>
+</head>
+<body>
+<h1>Baseline alignment in flex containers</h1>
+
+<h2>Mixed font sizes — baselines align</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item" style="font-size: 12px;">12 small</div>
+    <div class="item" style="font-size: 32px;">32 big</div>
+    <div class="item" style="font-size: 18px;">18 mid</div>
+    <div class="item" style="font-size: 24px;">24 mid-big</div>
+  </div>
+</div>
+
+<h2>Mixed padding — baseline still aligns despite different box heights</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item" style="padding: 4px;">small pad</div>
+    <div class="item" style="padding: 20px 6px 4px;">tall top</div>
+    <div class="item" style="padding: 4px 6px 20px;">tall bottom</div>
+    <div class="item" style="padding: 20px 6px 20px;">tall both</div>
+  </div>
+</div>
+
+<h2>Items with no inline text — baseline = bottom margin edge</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item" style="height: 60px; width: 60px;"></div>
+    <div class="item" style="height: 30px; width: 60px;"></div>
+    <div class="item">with text</div>
+    <div class="item" style="height: 80px; width: 60px;"></div>
+  </div>
+</div>
+
+<h2>Items with multiple lines — first baseline used by default</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item">line 1<br>line 2<br>line 3</div>
+    <div class="item">single</div>
+    <div class="item">line 1<br>line 2</div>
+  </div>
+</div>
+
+<h2><code>align-items: last baseline</code> — last line baselines align instead</h2>
+<div class="frame">
+  <div class="row last">
+    <div class="item">line 1<br>line 2<br>line 3</div>
+    <div class="item">single</div>
+    <div class="item">line 1<br>line 2</div>
+  </div>
+</div>
+
+<h2>Mixing align-self per item — baseline group + stretchers</h2>
+<div class="frame">
+  <div class="row" style="height: 100px; align-items: stretch;">
+    <div class="item" style="align-self: baseline;">baseline</div>
+    <div class="item" style="align-self: baseline; font-size: 28px;">baseline 28</div>
+    <div class="item" style="align-self: stretch;">stretch</div>
+    <div class="item" style="align-self: center;">center</div>
+    <div class="item" style="align-self: flex-end;">end</div>
+  </div>
+</div>
+
+<h2>Form controls baseline (input / button / select)</h2>
+<div class="frame">
+  <div class="row">
+    <span>label</span>
+    <input value="text" style="font-size: 14px; padding: 4px;">
+    <button>btn</button>
+    <select><option>opt</option></select>
+    <span style="font-size: 28px;">big</span>
+  </div>
+</div>
+</body>
+</html>

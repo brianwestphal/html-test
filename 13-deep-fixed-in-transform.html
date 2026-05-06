@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — fixed inside transform / filter</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  section {
+    border: 2px solid #475569;
+    background: #f8fafc;
+    padding: 16px;
+    margin-bottom: 12px;
+    height: 220px;
+    overflow: auto;            /* let the page actually scroll a bit */
+  }
+  /* The filler establishes scrollable area inside the section */
+  .filler { height: 600px; }
+
+  /* Each .frame applies one CB-creating property */
+  .frame-transform { transform: translate(0,0); }
+  .frame-filter    { filter: blur(0); }
+  .frame-perspect  { perspective: 600px; }
+  .frame-will      { will-change: transform; }
+  .frame-contain   { contain: paint; }
+
+  .frame {
+    position: relative;
+    background: #fef3c7;
+    border: 2px dashed #b45309;
+    padding: 12px;
+    height: 200px;
+  }
+
+  /* Should be fixed to viewport — but the ancestor breaks out */
+  .pin {
+    position: fixed;
+    bottom: 8px; right: 8px;
+    background: #dc2626; color: white;
+    padding: 6px 10px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<h1>position:fixed inside a transformed / filtered ancestor</h1>
+<p>When an ancestor establishes a containing block for fixed-positioned
+descendants (via <code>transform</code>, <code>filter</code>,
+<code>perspective</code>, <code>will-change: transform</code>, or
+<code>contain: paint</code>), the descendant becomes effectively
+absolutely-positioned to that ancestor instead of to the viewport.</p>
+
+<h2>Reference — fixed pinned to viewport</h2>
+<section>
+  <div style="border:2px dashed #94a3b8; padding:12px; height:200px;">
+    <p>Plain ancestor — no transform/filter/etc.</p>
+    <div class="pin">FIXED → viewport</div>
+    <div class="filler"></div>
+  </div>
+</section>
+
+<h2>transform breaks fixed → CB is the .frame</h2>
+<section>
+  <div class="frame frame-transform">
+    <p>ancestor: transform: translate(0,0)</p>
+    <div class="pin">FIXED → trapped</div>
+    <div class="filler"></div>
+  </div>
+</section>
+
+<h2>filter breaks fixed</h2>
+<section>
+  <div class="frame frame-filter">
+    <p>ancestor: filter: blur(0)</p>
+    <div class="pin">FIXED → trapped</div>
+    <div class="filler"></div>
+  </div>
+</section>
+
+<h2>perspective breaks fixed</h2>
+<section>
+  <div class="frame frame-perspect">
+    <p>ancestor: perspective: 600px</p>
+    <div class="pin">FIXED → trapped</div>
+    <div class="filler"></div>
+  </div>
+</section>
+
+<h2>will-change: transform breaks fixed</h2>
+<section>
+  <div class="frame frame-will">
+    <p>ancestor: will-change: transform</p>
+    <div class="pin">FIXED → trapped</div>
+    <div class="filler"></div>
+  </div>
+</section>
+
+<h2>contain: paint breaks fixed</h2>
+<section>
+  <div class="frame frame-contain">
+    <p>ancestor: contain: paint</p>
+    <div class="pin">FIXED → trapped</div>
+    <div class="filler"></div>
+  </div>
+</section>
+
+<p>Pass: in the reference, the red box pins to the bottom-right of the
+viewport (or section, when scrolling). In every other case, the red box
+sits at the bottom-right of the dashed yellow .frame instead.</p>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>21 deep — 3D transforms &amp; preserve-3d</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
+  .scene {
+    width: 200px; height: 200px;
+    perspective: 600px;
+    background: #f1f5f9; border: 1px solid #475569;
+  }
+  .scene.po-tl { perspective-origin: top left; }
+  .scene.po-br { perspective-origin: bottom right; }
+  .stage {
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(35deg) rotateY(-30deg);
+  }
+  .stage.flat {
+    transform-style: flat;
+  }
+  .face {
+    position: absolute;
+    width: 120px; height: 120px;
+    top: 40px; left: 40px;
+    color: white; font-weight: bold;
+    text-align: center; line-height: 120px;
+    border: 2px solid white;
+  }
+  .f1 { background: #dc2626; transform: translateZ( 60px); }
+  .f2 { background: #16a34a; transform: translateZ(-60px) rotateY(180deg); }
+  .f3 { background: #2563eb; transform: rotateY( 90deg) translateZ(60px); }
+  .f4 { background: #ea580c; transform: rotateY(-90deg) translateZ(60px); }
+  .f5 { background: #7c3aed; transform: rotateX( 90deg) translateZ(60px); }
+  .f6 { background: #facc15; color:#1c1917; transform: rotateX(-90deg) translateZ(60px); }
+
+  .backface-h .face { backface-visibility: hidden; }
+</style>
+</head>
+<body>
+<h1>3D transforms — preserve-3d, backface-visibility, perspective-origin</h1>
+
+<h2>Cube — <code>transform-style: preserve-3d</code></h2>
+<div class="row">
+  <div class="scene"><div class="stage">
+    <div class="face f1">+Z</div>
+    <div class="face f2">-Z</div>
+    <div class="face f3">+X</div>
+    <div class="face f4">-X</div>
+    <div class="face f5">+Y</div>
+    <div class="face f6">-Y</div>
+  </div></div>
+
+  <div class="scene"><div class="stage flat">
+    <div class="face f1">+Z</div>
+    <div class="face f2">-Z</div>
+    <div class="face f3">+X</div>
+    <div class="face f4">-X</div>
+    <div class="face f5">+Y</div>
+    <div class="face f6">-Y</div>
+  </div></div>
+</div>
+<p>Left: preserve-3d → faces sort in 3D space. Right: flat → all faces
+collapse to the same plane and paint in source order (last on top).</p>
+
+<h2><code>backface-visibility: hidden</code> — back faces of rotated planes vanish</h2>
+<div class="row">
+  <div class="scene"><div class="stage backface-h">
+    <div class="face f1">+Z (front)</div>
+    <div class="face f2">-Z (back hidden)</div>
+    <div class="face f3">+X</div>
+    <div class="face f4">-X</div>
+  </div></div>
+</div>
+
+<h2><code>perspective-origin</code> shifts the vanishing point</h2>
+<div class="row">
+  <div class="scene"><div class="stage">
+    <div class="face f1">center</div>
+    <div class="face f3">+X</div>
+    <div class="face f4">-X</div>
+  </div></div>
+  <div class="scene po-tl"><div class="stage">
+    <div class="face f1">PO TL</div>
+    <div class="face f3">+X</div>
+    <div class="face f4">-X</div>
+  </div></div>
+  <div class="scene po-br"><div class="stage">
+    <div class="face f1">PO BR</div>
+    <div class="face f3">+X</div>
+    <div class="face f4">-X</div>
+  </div></div>
+</div>
+
+<h2>Nested 3D containers</h2>
+<div class="row">
+  <div class="scene"><div class="stage">
+    <div class="face f1" style="transform: translateZ(60px); transform-style: preserve-3d;">
+      <span style="position:absolute; top:30px; left:30px; width:60px; height:60px; background:#1e293b; transform: rotateY(45deg) translateZ(20px);">nested</span>
+    </div>
+    <div class="face f3">+X</div>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 deep — :where / :is / :not specificity</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+  .row { display: block; padding: 4px; background: #fef3c7; margin: 2px 0; }
+
+  /* :where always specificity 0,0,0 */
+  :where(.high-spec, #my-id, [data-x]) .a { color: #b91c1c; }
+  /* Plain selector overrides :where */
+  .a { color: #1d4ed8; }
+
+  /* :is takes the maximum of its arguments (1 id raises this to 1,0,0) */
+  :is(#non-existent, .b) { color: #b91c1c; }
+  /* needs a higher selector to override */
+  div.b { color: #1d4ed8; }     /* 0,1,1 — LOSES to :is(...) which is 1,0,0 */
+
+  /* :not also takes the max */
+  :not(.skip, #foo) .c { color: #b91c1c; }
+  div .c { color: #1d4ed8; }    /* 0,1,1 — LOSES to :not which is 1,0,0 */
+
+  /* :has: same rule (max of its arguments) */
+  :has(span#hot) .d { background: #fde68a; }
+  div.d { background: white; }
+
+  /* Compound case study — count the selectors */
+  /* spec: a=ids b=classes/attrs/pseudo-classes c=type/pseudo-elements */
+  /* 1. .a.b.c → 0,3,0 */
+  /* 2. div.a.b.c → 0,3,1 */
+  /* 3. #x.a.b → 1,2,0 */
+  /* 4. .a:where(.b.c) → 0,1,0 */
+  /* 5. .a:is(.b.c) → 0,3,0 */
+
+  .case .one { background: #fde68a; }
+  .case.case.case .one { background: #b91c1c; color: white; }   /* 0,4,0 wins */
+
+  /* Attribute vs class same level */
+  .row[data-x="x"] { color: #ea580c; }
+  .row.tag { color: #16a34a; }      /* same specificity 0,2,0 — later wins */
+
+  /* Universal does nothing for specificity */
+  * .uni { color: #1d4ed8; }   /* 0,1,0 */
+  .uni { color: #b91c1c; }     /* 0,1,0 — same level, later wins (red) */
+</style>
+</head>
+<body>
+<h1>:where / :is / :not / :has &amp; specificity counting</h1>
+
+<h2>:where → 0 specificity</h2>
+<div class="frame">
+  <p class="row a">.a — text is BLUE (plain .a wins over :where(.high-spec, #my-id, [data-x]) .a which is 0)</p>
+</div>
+
+<h2>:is → max specificity of args</h2>
+<div class="frame">
+  <div class="row b">div.b — text is RED (:is(#non-existent, .b) is 1,0,0 ≫ div.b 0,1,1)</div>
+</div>
+
+<h2>:not → max specificity of args</h2>
+<div class="frame">
+  <div class="row c">.c — text is RED (:not(.skip, #foo) .c is 1,0,1 ≫ div .c 0,1,1)</div>
+</div>
+
+<h2>:has → max specificity of args</h2>
+<div class="frame">
+  <div class="row d"><span id="hot">.d with span#hot inside — yellow bg</span></div>
+  <div class="row d">.d without — white bg</div>
+</div>
+
+<h2>Class repetition trick (.case.case.case)</h2>
+<div class="frame case">
+  <p class="row one">.case .one (single .case) — yellow bg</p>
+  <div class="case case">
+    <p class="row one">nested .case.case → still 0,2,1, but rule .case.case.case .one matches → red</p>
+  </div>
+</div>
+
+<h2>Attribute vs class — same level, later wins</h2>
+<div class="frame">
+  <p class="row tag" data-x="x">later wins — green from .row.tag (defined after [data-x="x"])</p>
+</div>
+
+<h2>Universal selector ignored for specificity</h2>
+<div class="frame">
+  <div><p class="row uni">* .uni vs .uni — same 0,1,0 → later wins (red)</p></div>
+</div>
+
+<h2>Inline (style attribute) > any selector</h2>
+<div class="frame">
+  <p class="row a" style="color: green;">inline beats any selector (green)</p>
+</div>
+</body>
+</html>

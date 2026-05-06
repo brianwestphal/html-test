@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 deep — line box baselines</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .baseline-grid {
+    background: repeating-linear-gradient(0deg,
+      transparent 0 19px,
+      #cbd5e1 19px 20px);
+    line-height: 20px;
+    background-position: 0 16px;        /* visualise the baseline rows */
+    padding: 0 6px;
+    border: 1px solid #475569;
+    margin-bottom: 8px;
+  }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  .big   { font-size: 32px; }
+  .small { font-size: 11px; }
+  .mid   { font-size: 18px; }
+</style>
+</head>
+<body>
+<h1>Line box baselines — leading distribution &amp; mixed sizes</h1>
+
+<h2>Mixed font sizes share a single baseline</h2>
+<div class="baseline-grid">
+  text <span class="small">small</span> base <span class="big">BIG</span> middle <span class="mid">mid</span> end
+</div>
+
+<h2>Half-leading distribution: <code>line-height</code> larger than font</h2>
+<div class="frame" style="line-height: 1;">
+  base · line-height 1 · descenders pgy may clip into next line
+</div>
+<div class="frame" style="line-height: 2;">
+  base · line-height 2 · half-leading distributes equally above &amp; below
+</div>
+<div class="frame" style="line-height: 40px;">
+  base · line-height 40px (length) · same equal split
+</div>
+<div class="frame" style="line-height: 1.4;">
+  base · unitless 1.4 — inherits as factor (each child computes against its own font-size)
+  <div style="font-size: 32px;">child 32px · 1.4 → 44.8</div>
+</div>
+
+<h2>Inline-block baseline = baseline of LAST in-flow line, or bottom margin if none</h2>
+<div class="frame" style="font-size: 18px; line-height: 1.5;">
+  text
+  <span style="display: inline-block; background: #fde68a; padding: 4px;">
+    inline-block<br>second line
+  </span>
+  text after — baseline aligns with "second line"
+</div>
+
+<h2>Inline-block with no in-flow lines — baseline = bottom margin</h2>
+<div class="frame">
+  text
+  <span style="display: inline-block; width: 60px; height: 40px; background: #1d4ed8; vertical-align: baseline;"></span>
+  text after — bottom of empty box sits on baseline
+</div>
+
+<h2><code>vertical-align: top / middle / bottom / sub / super</code></h2>
+<div class="frame" style="font-size: 16px; line-height: 1.6;">
+  base
+  <span style="vertical-align: top;    display: inline-block; background: #fde68a; padding: 4px;">top</span>
+  <span style="vertical-align: middle; display: inline-block; background: #fcd34d; padding: 4px;">middle</span>
+  <span style="vertical-align: bottom; display: inline-block; background: #fbbf24; padding: 4px;">bottom</span>
+  <span style="vertical-align: sub;">sub</span>
+  <span style="vertical-align: super;">super</span>
+</div>
+
+<h2><code>vertical-align: 30%</code> and lengths</h2>
+<div class="frame" style="font-size: 16px;">
+  base <span style="vertical-align: 30%;">+30% line-height</span> base
+  <span style="vertical-align: -30%;">-30%</span> base
+  <span style="vertical-align: 8px;">+8px</span> base
+  <span style="vertical-align: -1em;">-1em</span> tail
+</div>
+
+<h2>Replaced element baseline — <code>img</code> sits on baseline by default</h2>
+<div class="frame">
+  text
+  <img src="assets/img-blue.jpg" alt="" style="width: 40px; height: 40px; vertical-align: baseline;">
+  text — bottom of image sits on baseline
+</div>
+<div class="frame">
+  text
+  <img src="assets/img-blue.jpg" alt="" style="width: 40px; height: 40px; vertical-align: middle;">
+  text — middle of image sits on x-height middle
+</div>
+</body>
+</html>

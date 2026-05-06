@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>22 deep — filter / backdrop-filter compositing</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+  .stage {
+    width: 240px; height: 160px;
+    background: url(assets/img-wide.png) center/cover, linear-gradient(135deg, #f97316, #1d4ed8);
+    color: white; padding: 8px;
+    position: relative;
+    border: 1px solid #475569;
+  }
+
+  .panel {
+    position: absolute;
+    inset: 30px 30px;
+    color: white; padding: 8px;
+    font-weight: bold;
+  }
+
+  /* backdrop-filter requires translucent background */
+  .bf-blur     { background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .bf-grayscale{ background: rgba(255,255,255,0.2); backdrop-filter: grayscale(1) blur(2px); -webkit-backdrop-filter: grayscale(1) blur(2px); }
+  .bf-sat      { background: rgba(255,255,255,0.1); backdrop-filter: saturate(3); -webkit-backdrop-filter: saturate(3); }
+  .bf-invert   { background: rgba(255,255,255,0.2); backdrop-filter: invert(1); -webkit-backdrop-filter: invert(1); }
+
+  .filter-blur { filter: blur(4px); }
+  .filter-multi { filter: contrast(1.5) hue-rotate(60deg) drop-shadow(2px 4px 4px black); }
+  .filter-svg-ref { filter: url(#noop); }   /* exists below as identity */
+
+  /* fixed inside a filtered ancestor */
+  .filtered-parent { filter: brightness(1); position: relative; height: 200px; border: 2px dashed #475569; padding: 12px; }
+  .pin-fixed { position: fixed; bottom: 8px; right: 8px; background: #b91c1c; color: white; padding: 4px 8px; }
+</style>
+</head>
+<body>
+<h1>filter / backdrop-filter compositing</h1>
+
+<h2><code>backdrop-filter</code> on a translucent panel</h2>
+<div class="row">
+  <div class="stage"><div class="panel bf-blur">blur 8</div></div>
+  <div class="stage"><div class="panel bf-grayscale">grayscale + blur</div></div>
+  <div class="stage"><div class="panel bf-sat">saturate 3</div></div>
+  <div class="stage"><div class="panel bf-invert">invert</div></div>
+</div>
+
+<h2><code>filter</code> applied to whole element</h2>
+<div class="row">
+  <div class="stage filter-blur"><div class="panel">blur(4px) applied to entire stage</div></div>
+  <div class="stage filter-multi"><div class="panel">contrast + hue-rotate + drop-shadow</div></div>
+</div>
+
+<h2>SVG reference filter (identity feFlood + feComposite)</h2>
+<div class="row">
+  <div class="stage filter-svg-ref"><div class="panel">filter: url(#noop)</div></div>
+</div>
+<svg width="0" height="0" style="position: absolute;">
+  <filter id="noop">
+    <feColorMatrix type="matrix" values="1 0 0 0 0   0 1 0 0 0   0 0 1 0 0   0 0 0 1 0"/>
+  </filter>
+  <filter id="purple-tint">
+    <feColorMatrix type="matrix" values=".4 0 0 0 .2   0 .2 0 0 0   0 0 .8 0 .2   0 0 0 1 0"/>
+  </filter>
+</svg>
+<div class="row">
+  <div class="stage" style="filter: url(#purple-tint);"><div class="panel">purple tint matrix</div></div>
+</div>
+
+<h2><code>filter</code> creates stacking context AND CB for fixed</h2>
+<p>The red badge declares <code>position: fixed</code>, but the parent has
+<code>filter: brightness(1)</code> → the badge is now contained to the
+parent's bottom-right (not the viewport).</p>
+<div class="filtered-parent">
+  <p>filtered parent with a fixed child</p>
+  <div class="pin-fixed">FIXED → trapped to filtered parent</div>
+</div>
+</body>
+</html>

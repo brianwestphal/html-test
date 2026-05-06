@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — negative z-index</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .stage {
+    position: relative;
+    margin-bottom: 24px;
+    background: #fef3c7;
+    border: 2px solid #b45309;
+    width: 480px;
+    padding: 16px;
+  }
+  .stage p { margin: 0; padding: 6px 0; font-weight: bold; color: #1c1917; }
+  .neg {
+    position: absolute;
+    background: #1d4ed8;
+    color: white;
+    width: 240px;
+    height: 50px;
+    padding: 6px;
+    z-index: -1;
+    font-weight: bold;
+  }
+  .deeper { z-index: -2; background: #7e22ce; }
+
+  /* Stacking context blocks negative z-index from escaping */
+  .ctx {
+    position: relative;
+    z-index: 0;             /* establishes stacking context */
+    background: #ecfccb;
+    outline: 2px dashed #4d7c0f;
+    padding: 12px;
+  }
+</style>
+</head>
+<body>
+<h1>Negative z-index inside a stacking context</h1>
+
+<h2>Case A — root stacking context (no ancestor SC)</h2>
+<p>The blue z:-1 box paints below the yellow stage background because the
+root canvas is the stacking context. You see only yellow.</p>
+<div class="stage">
+  <div class="neg" style="top: 30px; left: 30px;">z:-1 (hidden behind body)</div>
+  <p>Stage content above z:-1 box</p>
+  <p>Background of stage covers it</p>
+</div>
+
+<h2>Case B — z:-1 inside its own stacking context</h2>
+<p>The stage is a stacking context (z-index:0 on .ctx). Negative z descendants
+paint above the stage's background but below its in-flow children.</p>
+<div class="stage ctx">
+  <div class="neg" style="top: 30px; left: 30px;">z:-1 (above bg, below text)</div>
+  <p>This text paints in front of z:-1 (in-flow, level 3 &gt; -z level 2)</p>
+  <p>And so does this</p>
+</div>
+
+<h2>Case C — multiple negative z-indices</h2>
+<p>z:-2 paints behind z:-1 — deeper negatives are further back.</p>
+<div class="stage ctx" style="height: 140px;">
+  <div class="neg deeper" style="top: 18px; left: 30px;">z:-2 (deepest)</div>
+  <div class="neg" style="top: 50px; left: 80px;">z:-1</div>
+  <p>In-flow content on top of both</p>
+</div>
+
+<h2>Case D — negative z escaping a non-context</h2>
+<p>The dashed inner div is position:relative WITHOUT z-index → not a stacking
+context. The z:-1 box hides behind the body's background.</p>
+<div class="stage" style="background:#fde68a;">
+  <div style="position:relative; outline:2px dashed #64748b; padding:10px; height:80px;">
+    <div class="neg" style="top:10px; left:10px;">z:-1 (escapes past stage)</div>
+    <p>Inner non-context</p>
+  </div>
+</div>
+</body>
+</html>

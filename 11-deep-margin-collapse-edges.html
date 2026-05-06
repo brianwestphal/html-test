@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 deep — margin collapse edges</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; background:#e2e8f0; padding:4px 8px; }
+  .frame { border: 2px solid #475569; background: #fef3c7; }
+  .blk   { background: #1d4ed8; color: white; padding: 6px 10px; }
+  .blk2  { background: #16a34a; color: white; padding: 6px 10px; }
+  .blk3  { background: #dc2626; color: white; padding: 6px 10px; }
+  .empty { /* no padding, no border, no inline content */ }
+  .bfc-overflow { overflow: hidden; }
+  .bfc-flowroot { display: flow-root; }
+  .bfc-contain  { contain: layout; }
+  .bfc-flex     { display: flex; flex-direction: column; }
+  .bfc-grid     { display: grid; }
+  .pad-stop     { padding-top: 1px; }
+  .border-stop  { border-top: 1px solid #475569; }
+</style>
+</head>
+<body>
+<h1>Margin collapsing — edge cases</h1>
+
+<h2>1. Adjacent siblings — larger margin wins</h2>
+<div class="frame">
+  <div class="blk" style="margin-bottom: 60px;">A · margin-bottom 60</div>
+  <div class="blk2" style="margin-top: 30px;">B · margin-top 30 — gap is 60, not 90</div>
+</div>
+
+<h2>2. Negative margin — algebraic sum</h2>
+<div class="frame">
+  <div class="blk" style="margin-bottom: 60px;">A · mb 60</div>
+  <div class="blk2" style="margin-top: -20px;">B · mt -20 — gap 40 (60-20)</div>
+</div>
+
+<h2>3. Two negatives — most negative wins</h2>
+<div class="frame">
+  <div class="blk" style="margin-bottom: -10px;">A · mb -10</div>
+  <div class="blk2" style="margin-top: -30px;">B · mt -30 — overlap by 30</div>
+</div>
+
+<h2>4. Parent-first-child collapse — child's margin escapes</h2>
+<p>The child's <code>margin-top: 40</code> escapes the parent and pushes the
+whole parent down 40px from the previous block.</p>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">child mt 40 — escapes</div>
+  </div>
+</div>
+
+<h2>5. STOP via padding-top — no escape</h2>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div class="pad-stop" style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">child mt 40 — trapped (parent has padding-top 1px)</div>
+  </div>
+</div>
+
+<h2>6. STOP via border-top</h2>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div class="border-stop" style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">child mt 40 — trapped (parent has border-top)</div>
+  </div>
+</div>
+
+<h2>7. STOP via overflow != visible (BFC)</h2>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div class="bfc-overflow" style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">child mt 40 — trapped (overflow:hidden BFC)</div>
+  </div>
+</div>
+
+<h2>8. STOP via display: flow-root</h2>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div class="bfc-flowroot" style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">child mt 40 — trapped (flow-root BFC)</div>
+  </div>
+</div>
+
+<h2>9. STOP via contain: layout</h2>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div class="bfc-contain" style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">child mt 40 — trapped (contain:layout)</div>
+  </div>
+</div>
+
+<h2>10. STOP via display: flex / grid (NOT a BFC, but flex/grid item margins don't collapse)</h2>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div class="bfc-flex" style="background:#fde68a; outline: 2px dashed #b45309;">
+    <div class="blk2" style="margin-top: 40px;">flex item mt 40 — does not collapse</div>
+  </div>
+</div>
+
+<h2>11. Three-way collapse: parent + first-child + first-grandchild</h2>
+<p>All three margin-tops collapse into a single value (the largest, 50).</p>
+<div class="frame">
+  <div class="blk">PREV</div>
+  <div style="margin-top: 30px; background:#fde68a; outline: 2px dashed #b45309;">
+    <div style="margin-top: 50px; background:#fed7aa; outline: 2px dashed #c2410c;">
+      <div class="blk2" style="margin-top: 20px;">deepest · mt 20 — total gap 50</div>
+    </div>
+  </div>
+</div>
+
+<h2>12. Empty block — margins collapse through it</h2>
+<p>The empty block in the middle has mt:30, mb:40 — they collapse with each
+other and with neighbours; total gap = 40 (max of 30, 40, A's 20).</p>
+<div class="frame">
+  <div class="blk" style="margin-bottom: 20px;">A · mb 20</div>
+  <div class="empty" style="margin-top: 30px; margin-bottom: 40px;"></div>
+  <div class="blk2">B · gap to A is 40, not 90</div>
+</div>
+
+<h2>13. Float / abs / inline-block do NOT participate</h2>
+<div class="frame" style="height: 80px;">
+  <div class="blk" style="margin-bottom: 60px;">A · mb 60</div>
+  <div class="blk2" style="float: left; margin-top: 30px;">FLOAT mt 30 — independent</div>
+  <div class="blk3" style="display: inline-block; margin-top: 40px;">INLINE-BLOCK mt 40</div>
+</div>
+</body>
+</html>

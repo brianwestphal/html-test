@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — containing block resolution</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .stage {
+    border: 2px solid #475569;
+    background: #f8fafc;
+    padding: 16px;
+    margin-bottom: 8px;
+    height: 200px;
+    position: relative;
+  }
+  .marker {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(220, 38, 38, 0.18);
+    border: 2px dashed #dc2626;
+    pointer-events: none;
+  }
+  .marker::after {
+    content: 'CB candidate';
+    position: absolute; top: 4px; left: 6px;
+    background: #dc2626; color: white;
+    padding: 2px 6px; font-size: 11px;
+  }
+
+  .abs {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    background: #1e3a8a; color: white;
+    padding: 6px 10px; font-weight: bold;
+  }
+
+  .frame-rel       { position: relative; }
+  .frame-transform { transform: translate(0,0); }
+  .frame-filter    { filter: brightness(1); }
+  .frame-contain   { contain: paint; }
+
+  .frame {
+    background: #fef3c7;
+    border: 2px solid #b45309;
+    width: 60%; height: 60%;
+    margin: 30px auto;
+    padding: 8px;
+    position: relative;
+  }
+  .frame.no-pos { position: static; }
+
+  /* Percentage padding test */
+  .pad-test {
+    width: 300px; background: #ddd6fe;
+    padding: 20% 0;            /* % of inline size */
+    border: 1px solid #6d28d9;
+  }
+  .pad-test.vert {
+    writing-mode: vertical-rl;
+    height: 200px; width: auto;
+  }
+</style>
+</head>
+<body>
+<h1>Containing block resolution</h1>
+<p>An absolutely-positioned element's containing block is the nearest
+ancestor whose <em>position</em> is not static, OR any ancestor that
+establishes a CB for absolute descendants via transform / filter /
+will-change / contain:paint / perspective.</p>
+
+<h2>position:relative ancestor → CB</h2>
+<div class="stage">
+  <div class="frame frame-rel">
+    <span class="marker"></span>
+    <p>position: relative → CB for .abs</p>
+    <div class="abs">.abs at (8,8) of yellow</div>
+  </div>
+</div>
+
+<h2>position:static + transform → still CB</h2>
+<div class="stage">
+  <div class="frame no-pos frame-transform">
+    <span class="marker"></span>
+    <p>position: static + transform → CB anyway</p>
+    <div class="abs">.abs at (8,8) of yellow</div>
+  </div>
+</div>
+
+<h2>position:static + filter → CB</h2>
+<div class="stage">
+  <div class="frame no-pos frame-filter">
+    <span class="marker"></span>
+    <p>position: static + filter → CB anyway</p>
+    <div class="abs">.abs at (8,8) of yellow</div>
+  </div>
+</div>
+
+<h2>position:static + contain:paint → CB</h2>
+<div class="stage">
+  <div class="frame no-pos frame-contain">
+    <span class="marker"></span>
+    <p>position: static + contain:paint → CB anyway</p>
+    <div class="abs">.abs at (8,8) of yellow</div>
+  </div>
+</div>
+
+<h2>NEGATIVE — plain static ancestor passes through to .stage</h2>
+<div class="stage">
+  <div class="frame no-pos" style="background:#fef3c7; border:2px solid #b45309;">
+    <p>position: static (only) → NOT a CB</p>
+    <div class="abs">.abs sits in .stage's bottom-right</div>
+  </div>
+</div>
+
+<h2>Percentage padding always against inline size</h2>
+<p>Both boxes use <code>padding: 20% 0</code>. In horizontal writing-mode
+the % is computed against width; in vertical-rl, against height (the new
+inline size). Padding swells in opposite axes accordingly.</p>
+<div class="pad-test">horizontal · 20% padding-block-start/end → ~60px</div>
+<div style="height: 220px; margin-top: 12px;">
+  <div class="pad-test vert">vertical-rl · 20% padding now consumes height</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>13 deep — stacking paint order</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; }
+  .stage {
+    position: relative;
+    width: 560px; height: 320px;
+    background: #fde68a;            /* level 1: stacking ctx background */
+    border: 4px solid #92400e;
+    isolation: isolate;             /* make body the stacking ctx root */
+  }
+  .stage > * { font-weight: bold; color: white; padding: 6px; font-size: 14px; }
+
+  /* level 2 — negative z-index descendant */
+  .neg {
+    position: absolute; top: 30px; left: 30px;
+    width: 220px; height: 80px;
+    background: #1e40af;
+    z-index: -1;
+  }
+
+  /* level 3 — block-level non-positioned descendants (in-flow) */
+  .blk {
+    /* not positioned, not floated, in normal flow */
+    margin: 100px 0 0 60px;
+    width: 280px; height: 60px;
+    background: #65a30d;
+  }
+
+  /* level 4 — non-positioned floats */
+  .flt {
+    float: left;
+    margin-left: 240px; margin-top: -180px;
+    width: 130px; height: 130px;
+    background: #c2410c;
+  }
+
+  /* level 5 — inline-level non-positioned descendants */
+  .inl {
+    display: inline-block;
+    background: #7c3aed;
+    margin: 200px 0 0 40px;
+    padding: 10px 16px;
+  }
+
+  /* level 6 — z-index: auto / 0 positioned descendants */
+  .pos0 {
+    position: absolute; top: 60px; left: 280px;
+    width: 180px; height: 80px;
+    background: #be185d;
+    /* implicit z-index: auto */
+  }
+
+  /* level 7 — positive z-index */
+  .posp {
+    position: absolute; top: 130px; left: 320px;
+    width: 200px; height: 80px;
+    background: #0f172a;
+    z-index: 5;
+  }
+</style>
+</head>
+<body>
+<h1>Stacking paint order — seven levels</h1>
+<p>Within a single stacking context the painting order from back to front is:
+(1) the box's own background &amp; borders,
+(2) descendants with negative <code>z-index</code> (deeper first),
+(3) in-flow non-inline non-positioned descendants,
+(4) non-positioned floats,
+(5) in-flow inline non-positioned descendants,
+(6) positioned descendants with <code>z-index: auto</code> or <code>0</code>,
+(7) positioned descendants with positive <code>z-index</code> (lower first).
+</p>
+
+<div class="stage">
+  <div class="neg">2 — negative z (-1)</div>
+  <div class="blk">3 — block in-flow</div>
+  <div class="flt">4 — float</div>
+  <span class="inl">5 — inline-block</span>
+  <div class="pos0">6 — pos z:auto</div>
+  <div class="posp">7 — pos z:5</div>
+</div>
+
+<p>Expected stack (back→front): yellow stage bg → blue (-1) → green block → orange float → purple inline-block → pink z:auto → black z:5.</p>
+</body>
+</html>

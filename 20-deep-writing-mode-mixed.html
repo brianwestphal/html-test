@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 deep — writing-mode mixed text</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #fef3c7; padding: 12px; margin-bottom: 8px; }
+  .vrl { writing-mode: vertical-rl; height: 200px; font-size: 18px; line-height: 2; }
+  .vlr { writing-mode: vertical-lr; height: 200px; font-size: 18px; line-height: 2; }
+  .upright { text-orientation: upright; }
+  .tcu { text-combine-upright: all; background: #fde68a; padding: 0 2px; }
+  .sideways { writing-mode: sideways-rl; height: 200px; font-size: 18px; }
+</style>
+</head>
+<body>
+<h1>Writing-mode + mixed scripts &amp; tate-chu-yoko</h1>
+
+<h2>vertical-rl with English + numbers (default text-orientation: mixed)</h2>
+<div class="frame vrl">
+  本文は縦書きで、English words と 123 数字が混じります。
+  Roman text はそのまま回転、CJK は正立。
+</div>
+
+<h2>vertical-rl + text-orientation: upright (everything stands up)</h2>
+<div class="frame vrl upright">
+  This English will be set UPRIGHT char-by-char alongside CJK 漢字.
+</div>
+
+<h2>tate-chu-yoko: <code>text-combine-upright: all</code></h2>
+<p>Two-digit / multi-character horizontal groups inside a vertical line.</p>
+<div class="frame vrl">
+  平成<span class="tcu">31</span>年<span class="tcu">4</span>月<span class="tcu">30</span>日に終了。
+  令和<span class="tcu">7</span>年現在。
+</div>
+
+<h2>vertical-lr (left-to-right blocks)</h2>
+<div class="frame vlr">
+  vertical-lr inverts block direction. Block 1 is leftmost, 2 next, etc.
+  English words rotate; 漢字 stay upright (mixed).
+</div>
+
+<h2>sideways-rl — entire line rotates 90° clockwise</h2>
+<div class="frame sideways">
+  Sideways rotates everything (no upright CJK). 日本語 も回転 します.
+</div>
+
+<h2>Bidi inside vertical writing</h2>
+<div class="frame vrl">
+  שלום עולם — Hebrew within vertical Japanese 縦書きで日本語と.
+</div>
+
+<h2>Mixed sizes vertically</h2>
+<div class="frame vrl">
+  普通サイズと <span style="font-size: 32px;">大きい</span> 文字, <span style="font-size: 11px;">小さい</span> も混在.
+</div>
+</body>
+</html>

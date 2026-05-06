@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>19 deep — color() function &amp; wide-gamut</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .swatch {
+    width: 110px; height: 80px;
+    color: white; padding: 6px;
+    font-size: 11px; text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  }
+</style>
+</head>
+<body>
+<h1><code>color()</code> &amp; wide-gamut color spaces</h1>
+<p>Wide-gamut spaces (display-p3, rec2020, prophoto-rgb, a98-rgb,
+xyz-d65) only show their full range on capable displays. On sRGB
+displays they should fall back to the nearest sRGB equivalent.</p>
+
+<h2>Same hue across spaces</h2>
+<div class="row">
+  <div class="swatch" style="background: rgb(255 0 0);">sRGB rgb(255,0,0)</div>
+  <div class="swatch" style="background: color(srgb 1 0 0);">color(srgb 1 0 0)</div>
+  <div class="swatch" style="background: color(display-p3 1 0 0);">color(display-p3 1 0 0)</div>
+  <div class="swatch" style="background: color(rec2020 1 0 0);">color(rec2020 1 0 0)</div>
+  <div class="swatch" style="background: color(a98-rgb 1 0 0);">color(a98-rgb 1 0 0)</div>
+  <div class="swatch" style="background: color(prophoto-rgb 1 0 0);">color(prophoto-rgb 1 0 0)</div>
+</div>
+
+<h2>Linear vs gamma-encoded sRGB</h2>
+<div class="row">
+  <div class="swatch" style="background: color(srgb 0.5 0.5 0.5);">srgb 50% gamma</div>
+  <div class="swatch" style="background: color(srgb-linear 0.5 0.5 0.5);">srgb-linear 50%</div>
+  <div class="swatch" style="background: color(srgb 0.21 0.21 0.21);">srgb 21% gamma ≈ linear 50%</div>
+</div>
+
+<h2>XYZ — D50 vs D65</h2>
+<div class="row">
+  <div class="swatch" style="background: color(xyz 0.5 0.5 0.5);">xyz</div>
+  <div class="swatch" style="background: color(xyz-d50 0.5 0.5 0.5);">xyz-d50</div>
+  <div class="swatch" style="background: color(xyz-d65 0.5 0.5 0.5);">xyz-d65</div>
+</div>
+
+<h2>Lab and LCH</h2>
+<div class="row">
+  <div class="swatch" style="background: lab(50 50 -50);">lab(50 50 -50)</div>
+  <div class="swatch" style="background: lab(80 -30 60);">lab(80 -30 60)</div>
+  <div class="swatch" style="background: lch(50 80 30);">lch(50 80 30)</div>
+  <div class="swatch" style="background: lch(80 50 180);">lch(80 50 180)</div>
+</div>
+
+<h2>OKLab and OKLCH</h2>
+<div class="row">
+  <div class="swatch" style="background: oklab(0.7 0.1 0.1);">oklab(.7 .1 .1)</div>
+  <div class="swatch" style="background: oklab(0.5 -0.1 -0.1);">oklab(.5 -.1 -.1)</div>
+  <div class="swatch" style="background: oklch(0.6 0.2 30);">oklch(.6 .2 30)</div>
+  <div class="swatch" style="background: oklch(0.6 0.2 150);">oklch(.6 .2 150)</div>
+  <div class="swatch" style="background: oklch(0.6 0.2 270);">oklch(.6 .2 270)</div>
+</div>
+
+<h2>HWB</h2>
+<div class="row">
+  <div class="swatch" style="background: hwb(0 0% 0%);">hwb(0 0 0)</div>
+  <div class="swatch" style="background: hwb(120 30% 0%);">hwb(120 30 0)</div>
+  <div class="swatch" style="background: hwb(240 0% 30%);">hwb(240 0 30)</div>
+</div>
+
+<h2>Alpha channel via slash</h2>
+<div class="row" style="background: repeating-conic-gradient(#ddd 0 25%, white 0 50%) 0/24px 24px;">
+  <div class="swatch" style="background: rgb(220 38 38 / 0.3);">rgb / .3</div>
+  <div class="swatch" style="background: oklch(0.7 0.2 30 / 0.5);">oklch / .5</div>
+  <div class="swatch" style="background: color(display-p3 1 0 0 / 0.4);">display-p3 / .4</div>
+  <div class="swatch" style="background: lab(70 50 0 / 50%);">lab / 50%</div>
+</div>
+
+<h2>Fallback layering</h2>
+<p>If color() unsupported, expect the simpler color underneath via cascade.</p>
+<div class="row">
+  <div class="swatch" style="background: red; background: color(display-p3 1 0 0);">red → p3 red</div>
+  <div class="swatch" style="background: rgb(0 200 0); background: color(rec2020 0 1 0);">rgb green → rec2020 green</div>
+</div>
+</body>
+</html>

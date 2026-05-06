@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 deep — vertical-align comprehensive</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row {
+    background: repeating-linear-gradient(0deg, transparent 0 23px, #cbd5e1 23px 24px);
+    line-height: 24px;
+    border: 1px solid #475569;
+    padding: 0 6px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    background-position: 0 19px;       /* roughly the baseline of 16px text */
+    overflow: hidden;
+  }
+  .ib {
+    display: inline-block;
+    width: 50px; height: 30px;
+    background: #1d4ed8;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    font-size: 11px;
+  }
+  .label { color: #1e293b; font-size: 12px; padding: 0 4px; background: #fde68a; }
+</style>
+</head>
+<body>
+<h1><code>vertical-align</code> — every value</h1>
+
+<h2>baseline (default)</h2>
+<div class="row">x <span class="ib" style="vertical-align: baseline;">base</span> y baseline</div>
+
+<h2>top — top of inline-block aligns with TOP of line box</h2>
+<div class="row">x <span class="ib" style="vertical-align: top;">top</span> y</div>
+
+<h2>bottom — bottom of inline-block aligns with BOTTOM of line box</h2>
+<div class="row">x <span class="ib" style="vertical-align: bottom;">bot</span> y</div>
+
+<h2>middle — vertical midpoint at parent's baseline + ½ x-height</h2>
+<div class="row">x <span class="ib" style="vertical-align: middle;">mid</span> y</div>
+
+<h2>text-top — top aligns with parent's font top (above x-height)</h2>
+<div class="row">x <span class="ib" style="vertical-align: text-top;">t-top</span> y</div>
+
+<h2>text-bottom — bottom aligns with parent's font bottom (descender)</h2>
+<div class="row">x <span class="ib" style="vertical-align: text-bottom;">t-bot</span> y</div>
+
+<h2>sub — subscript drop</h2>
+<div class="row">x <span class="ib" style="vertical-align: sub;">sub</span> y</div>
+
+<h2>super — superscript rise</h2>
+<div class="row">x <span class="ib" style="vertical-align: super;">sup</span> y</div>
+
+<h2>length / percentage offsets</h2>
+<div class="row">x <span class="ib" style="vertical-align: 8px;">+8px</span> <span class="ib" style="vertical-align: -8px;">-8px</span> <span class="ib" style="vertical-align: 0.5em;">.5em</span> y</div>
+<div class="row">x <span class="ib" style="vertical-align: 50%;">+50%</span> <span class="ib" style="vertical-align: -25%;">-25%</span> y</div>
+
+<h2>All compared in a single line (parent line-height: 60px)</h2>
+<div class="row" style="line-height: 60px; height: 60px;">
+  x
+  <span class="ib" style="vertical-align: baseline;">base</span>
+  <span class="ib" style="vertical-align: top;">top</span>
+  <span class="ib" style="vertical-align: middle;">mid</span>
+  <span class="ib" style="vertical-align: bottom;">bot</span>
+  <span class="ib" style="vertical-align: text-top;">t-top</span>
+  <span class="ib" style="vertical-align: text-bottom;">t-bot</span>
+  <span class="ib" style="vertical-align: sub;">sub</span>
+  <span class="ib" style="vertical-align: super;">sup</span>
+  y
+</div>
+
+<h2>Image vs inline-block in same line</h2>
+<div class="row">
+  <img src="assets/img-red.png" alt="" style="width: 30px; height: 30px; vertical-align: middle;">
+  <img src="assets/img-blue.jpg" alt="" style="width: 30px; height: 30px; vertical-align: top;">
+  <img src="assets/img-green.gif" alt="" style="width: 30px; height: 30px; vertical-align: bottom;">
+  <span class="ib" style="vertical-align: baseline;">base</span>
+  base text
+</div>
+
+<h2>vertical-align in table-cell — different semantics (top/middle/bottom of cell)</h2>
+<table style="border-collapse: collapse;">
+  <tr style="height: 80px;">
+    <td style="vertical-align: top; border: 1px solid #475569; padding: 4px;">top</td>
+    <td style="vertical-align: middle; border: 1px solid #475569; padding: 4px;">middle</td>
+    <td style="vertical-align: bottom; border: 1px solid #475569; padding: 4px;">bottom</td>
+    <td style="vertical-align: baseline; border: 1px solid #475569; padding: 4px;">baseline</td>
+  </tr>
+</table>
+</body>
+</html>

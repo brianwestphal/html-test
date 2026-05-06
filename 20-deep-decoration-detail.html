@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 deep — text-decoration detail</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; font-size: 18px; line-height: 2; }
+
+  .u-solid   { text-decoration: underline solid #1d4ed8; }
+  .u-double  { text-decoration: underline double #b91c1c; }
+  .u-dotted  { text-decoration: underline dotted #16a34a; }
+  .u-dashed  { text-decoration: underline dashed #ea580c; }
+  .u-wavy    { text-decoration: underline wavy #7c3aed; }
+
+  .u-thick   { text-decoration: underline solid 4px; }
+  .u-from-font { text-decoration: underline solid; text-decoration-thickness: from-font; }
+  .u-auto      { text-decoration: underline solid; text-decoration-thickness: auto; }
+
+  .u-skip-ink { text-decoration-skip-ink: auto; text-decoration: underline 2px; }
+  .u-no-skip  { text-decoration-skip-ink: none; text-decoration: underline 2px; }
+
+  .o-line    { text-decoration: overline 2px #b91c1c; }
+  .l-through { text-decoration: line-through 2px #16a34a; }
+  .all       { text-decoration: underline overline line-through wavy #7c3aed; }
+
+  .o-offset-near { text-decoration: underline 2px; text-underline-offset: 2px; }
+  .o-offset-far  { text-decoration: underline 2px; text-underline-offset: 12px; }
+  .o-offset-auto { text-decoration: underline 2px; text-underline-offset: auto; }
+
+  .position-under { text-underline-position: under; text-decoration: underline; }
+  .position-from-font { text-underline-position: from-font; text-decoration: underline; }
+</style>
+</head>
+<body>
+<h1>text-decoration — line styles, thickness, offset, skip-ink</h1>
+
+<h2>Line styles</h2>
+<div class="frame">
+  <span class="u-solid">solid blue</span> ·
+  <span class="u-double">double red</span> ·
+  <span class="u-dotted">dotted green</span> ·
+  <span class="u-dashed">dashed orange</span> ·
+  <span class="u-wavy">wavy purple</span>
+</div>
+
+<h2>Thickness</h2>
+<div class="frame">
+  <span class="u-auto">auto thickness</span> /
+  <span class="u-thick">4px thickness</span> /
+  <span class="u-from-font">from-font</span>
+</div>
+
+<h2>skip-ink — descenders gain a notch</h2>
+<div class="frame">
+  <span class="u-skip-ink">skip-ink: auto — typography pgjqy</span><br>
+  <span class="u-no-skip">skip-ink: none — typography pgjqy</span>
+</div>
+
+<h2>Underline offset</h2>
+<div class="frame">
+  <span class="o-offset-near">underline-offset 2px</span> ·
+  <span class="o-offset-auto">offset auto</span> ·
+  <span class="o-offset-far">offset 12px</span>
+</div>
+
+<h2>Underline position</h2>
+<div class="frame">
+  <span class="position-under">position: under (descenders included)</span><br>
+  <span class="position-from-font">position: from-font</span>
+</div>
+
+<h2>Multiple lines combined</h2>
+<div class="frame">
+  <span class="all">all three lines + wavy purple</span>
+</div>
+
+<h2>Inheritance vs propagation</h2>
+<p>Decorations propagate across descendants of the originating element
+(they don't restart on a new line). Setting a different decoration on a
+descendant doesn't remove the parent's decoration.</p>
+<div class="frame">
+  <span style="text-decoration: underline 2px #1d4ed8;">parent underlined
+    <span style="text-decoration: underline 2px #b91c1c;">child also has its own red underline (overlap stacks)</span>
+    parent continues.
+  </span>
+</div>
+</body>
+</html>

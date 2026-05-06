@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>14 deep — float interactions</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #fef3c7; padding: 8px; margin-bottom: 8px; min-height: 100px; }
+  .fl, .fr { width: 80px; height: 80px; padding: 4px; color: white; font-weight: bold; }
+  .fl { float: left; background: #1d4ed8; margin-right: 6px; margin-bottom: 4px; }
+  .fr { float: right; background: #b91c1c; margin-left: 6px; }
+</style>
+</head>
+<body>
+<h1>Float interactions — adjacency, negative margins, clear-self, inline wrap</h1>
+
+<h2>Multiple left floats stack horizontally then wrap</h2>
+<div class="frame">
+  <div class="fl">A</div><div class="fl">B</div><div class="fl">C</div>
+  <div class="fl">D</div><div class="fl">E</div><div class="fl">F</div>
+</div>
+
+<h2>Left + right float on same line</h2>
+<div class="frame">
+  <div class="fl">L</div>
+  <div class="fr">R</div>
+  <p>Inline text fills the gap. Lorem ipsum dolor sit amet consectetur adipiscing elit. Suspendisse sed mauris vitae nisl.</p>
+</div>
+
+<h2>Negative margin pulls floats over siblings</h2>
+<div class="frame">
+  <div class="fl" style="margin-right: -40px;">A overlap</div>
+  <div class="fl" style="background:#16a34a;">B overlapped by A</div>
+</div>
+
+<h2>Float clears itself</h2>
+<p>FL is float:left + clear:left. Each one clears the previous floated
+sibling and starts on a new line.</p>
+<div class="frame">
+  <div class="fl" style="clear: left;">1</div>
+  <div class="fl" style="clear: left;">2</div>
+  <div class="fl" style="clear: left;">3</div>
+</div>
+
+<h2>Floats wrap inline content (text)</h2>
+<div class="frame">
+  <div class="fl">FL</div>
+  <p>This paragraph's inlines flow around the float. The line boxes shrink
+  on the left side until the float's bottom edge, then resume full width.
+  Lorem ipsum dolor sit amet consectetur adipiscing elit. Pellentesque eu
+  pretium urna. Donec lobortis lacus a ipsum gravida placerat.</p>
+</div>
+
+<h2>Floats DO NOT wrap block content (block extends full width under)</h2>
+<p>The teal block sibling overlaps the float because blocks ignore the
+float's width — only their inline content adjusts.</p>
+<div class="frame">
+  <div class="fl">FL</div>
+  <div style="background: #14b8a6; color: white; padding: 8px; height: 100px;">
+    Block sibling — extends under float
+  </div>
+</div>
+
+<h2>Float beside float of opposite direction — both honored</h2>
+<div class="frame" style="height: 90px;">
+  <div class="fl">L1</div><div class="fl" style="background:#0ea5e9;">L2</div>
+  <div class="fr">R1</div><div class="fr" style="background:#f97316;">R2</div>
+</div>
+
+<h2>Shape-outside still respects float box for block siblings</h2>
+<div class="frame">
+  <div class="fl" style="shape-outside: circle(40px); border-radius: 50%;">FL</div>
+  <p>Inline text wraps around the circle. Lorem ipsum dolor sit amet
+  consectetur adipiscing elit. Etiam in nisl ultrices, accumsan justo eu,
+  laoreet enim. Nullam id condimentum dolor.</p>
+</div>
+</body>
+</html>

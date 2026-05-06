@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.release-state.json
+.glassbox/
+.hotsheet/
+*.map
+.DS_Store
+coverage/
+scheduled_tasks.lock
+.mcp.json
+.claude
+test-results/
+.env

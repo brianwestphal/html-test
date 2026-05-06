@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>23 deep — mask composite</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+  .img {
+    width: 200px; height: 140px;
+    background: linear-gradient(135deg, #f97316, #1d4ed8);
+    color: white; padding: 8px; font-weight: bold;
+  }
+  .lab { font-size: 11px; color: #475569; margin-top: 4px; }
+
+  /* Single mask - linear gradient (alpha) */
+  .m-fade {
+    mask-image: linear-gradient(to right, black, transparent);
+    -webkit-mask-image: linear-gradient(to right, black, transparent);
+  }
+  /* Radial */
+  .m-radial {
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 70%);
+  }
+  /* Multiple layers + composite */
+  .m-add {
+    mask-image:
+      radial-gradient(circle at 30% 50%, black 25%, transparent 26%),
+      radial-gradient(circle at 70% 50%, black 25%, transparent 26%);
+    mask-composite: add;
+    -webkit-mask-composite: source-over;
+  }
+  .m-subtract {
+    mask-image:
+      radial-gradient(circle at 50% 50%, black 50%, transparent 51%),
+      radial-gradient(circle at 50% 50%, black 25%, transparent 26%);
+    mask-composite: subtract;
+    -webkit-mask-composite: source-out;
+  }
+  .m-intersect {
+    mask-image:
+      linear-gradient(black, black),
+      radial-gradient(circle at 50% 50%, black 40%, transparent 41%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+  .m-exclude {
+    mask-image:
+      radial-gradient(circle at 30% 50%, black 30%, transparent 31%),
+      radial-gradient(circle at 70% 50%, black 30%, transparent 31%);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+  }
+
+  /* mask-mode: alpha vs luminance */
+  .m-alpha-mode {
+    mask-image: linear-gradient(to right, white, transparent);
+    mask-mode: alpha;
+    -webkit-mask-image: linear-gradient(to right, white, transparent);
+  }
+  .m-luminance-mode {
+    mask-image: linear-gradient(to right, white, black);
+    mask-mode: luminance;
+    -webkit-mask-image: linear-gradient(to right, white, black);
+  }
+
+  /* mask-image with image */
+  .m-img {
+    mask-image: url(assets/img-orange.svg);
+    -webkit-mask-image: url(assets/img-orange.svg);
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-position: center;
+  }
+
+  /* mask-clip / mask-origin */
+  .m-clip-content {
+    padding: 12px; border: 8px solid #16a34a;
+    mask-image: linear-gradient(black, black);
+    -webkit-mask-image: linear-gradient(black, black);
+    mask-clip: content-box;
+    -webkit-mask-clip: content-box;
+  }
+</style>
+</head>
+<body>
+<h1><code>mask</code> — composite, mode, clip</h1>
+
+<h2>Single layer fades</h2>
+<div class="row">
+  <div><div class="img m-fade">linear fade</div><div class="lab">linear-gradient mask</div></div>
+  <div><div class="img m-radial">radial fade</div><div class="lab">radial-gradient mask</div></div>
+  <div><div class="img m-img">orange svg shape</div><div class="lab">mask-image: url(svg)</div></div>
+</div>
+
+<h2><code>mask-composite</code> across multiple layers</h2>
+<div class="row">
+  <div><div class="img m-add">add</div><div class="lab">add (source-over)</div></div>
+  <div><div class="img m-subtract">subtract</div><div class="lab">subtract (source-out)</div></div>
+  <div><div class="img m-intersect">intersect</div><div class="lab">intersect (source-in)</div></div>
+  <div><div class="img m-exclude">exclude</div><div class="lab">exclude (xor)</div></div>
+</div>
+
+<h2><code>mask-mode</code>: alpha vs luminance</h2>
+<div class="row">
+  <div><div class="img m-alpha-mode">alpha</div><div class="lab">white→opaque, transparent→hidden</div></div>
+  <div><div class="img m-luminance-mode">luminance</div><div class="lab">white→opaque, black→hidden</div></div>
+</div>
+
+<h2><code>mask-clip</code> = content-box</h2>
+<div class="row">
+  <div><div class="img m-clip-content">mask clipped to content area only</div><div class="lab">mask-clip: content-box</div></div>
+</div>
+
+<h2>Mask shorthand with size + position + repeat</h2>
+<div class="row">
+  <div>
+    <div class="img" style="
+      -webkit-mask: url(assets/img-orange.svg) center/40px no-repeat,
+                    radial-gradient(circle, black 60%, transparent 60%);
+      mask: url(assets/img-orange.svg) center/40px no-repeat,
+            radial-gradient(circle, black 60%, transparent 60%);
+      mask-composite: subtract;
+      -webkit-mask-composite: source-out;
+    ">composite</div>
+    <div class="lab">svg knocked out of circle</div>
+  </div>
+</div>
+</body>
+</html>

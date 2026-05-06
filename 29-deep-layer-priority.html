@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>29 deep — layer priority &amp; !important</title>
+<style>
+  /* Layer order: low → high for normal; HIGH → LOW for !important */
+  @layer base, theme, overrides;
+
+  @layer base {
+    .swatch { background: #fde68a; color: #1c1917; padding: 8px; margin: 4px 0; border: 1px solid #b45309; }
+    .imp { background: #fde68a !important; }
+  }
+  @layer theme {
+    .swatch { background: #c7d2fe; color: #1e3a8a; }
+    .imp { background: #c7d2fe !important; }
+  }
+  @layer overrides {
+    .swatch { background: #bbf7d0; color: #14532d; }
+    .imp { background: #bbf7d0 !important; }
+  }
+
+  /* Unlayered rule */
+  .swatch.unlayered { background: #fed7aa; }
+  .imp.unlayered    { background: #fed7aa !important; }
+
+  /* Inline style + !important interplay tested below */
+
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+  code { background: #e2e8f0; padding: 0 4px; }
+</style>
+</head>
+<body>
+<h1>@layer priority + !important reversal</h1>
+<p>Normal cascade: <em>later layer wins</em>. With <code>!important</code>:
+<em>earlier layer wins</em> — order reversed. Unlayered normal wins over
+all layers; unlayered !important LOSES to layered !important.</p>
+
+<h2>Normal declarations (later layer wins)</h2>
+<div class="frame">
+  <div class="swatch">layered: base &lt; theme &lt; overrides → green</div>
+  <div class="swatch unlayered">unlayered → orange (beats all layers)</div>
+</div>
+
+<h2>!important declarations (earlier layer wins)</h2>
+<div class="frame">
+  <div class="imp swatch">!important: base wins → yellow</div>
+  <div class="imp unlayered swatch">unlayered !important → orange (LOSES to base !important above? actually wait)</div>
+</div>
+
+<h2>Cascade origin × !important matrix (per spec)</h2>
+<p>Origin × layer × importance is ordered, from lowest to highest precedence:</p>
+<ol>
+  <li>Animations (transition / @keyframes — out of scope, no animation here)</li>
+  <li>UA layered/unlayered normal</li>
+  <li>User layered/unlayered normal</li>
+  <li>Author layered (low) → unlayered → layered (high) — for normal</li>
+  <li>Inline style normal</li>
+  <li>Author layered (high) → unlayered → layered (low) — for !important <em>(reversed)</em></li>
+  <li>Inline style !important</li>
+  <li>User !important</li>
+  <li>UA !important</li>
+  <li>Transition !important — N/A here</li>
+</ol>
+
+<h2>Inline style vs layer !important</h2>
+<p>Inline normal beats layered normal; inline normal LOSES to any
+!important. Inline !important beats author layered !important.</p>
+<div class="frame">
+  <div class="swatch" style="background: #f87171;">inline normal — beats all layers (red)</div>
+  <div class="imp swatch" style="background: #f87171;">inline normal LOSES to base !important — yellow</div>
+  <div class="imp swatch" style="background: #f87171 !important;">inline !important — wins (red)</div>
+</div>
+
+<h2>Detailed comparison</h2>
+<div class="frame">
+  <div class="swatch">no .imp · no inline → overrides green</div>
+  <div class="swatch" style="background: #f87171;">no .imp · inline → red (inline normal beats normal layer)</div>
+  <div class="imp swatch">.imp · no inline → base yellow (earliest layer, !important reversed)</div>
+  <div class="imp swatch" style="background: #f87171;">.imp · inline normal → yellow (inline normal loses to layered !important)</div>
+  <div class="imp swatch" style="background: #f87171 !important;">.imp · inline !important → red (highest)</div>
+</div>
+</body>
+</html>

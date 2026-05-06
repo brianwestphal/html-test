@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>20 deep — font-feature-settings &amp; variation</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+  .label { color: #475569; font-size: 11px; }
+  .ex { font-size: 24px; font-family: Georgia, "Times New Roman", serif; }
+
+  .liga-on  { font-feature-settings: "liga" on, "dlig" on; font-variant-ligatures: discretionary-ligatures; }
+  .liga-off { font-feature-settings: "liga" off, "dlig" off; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures; }
+
+  .smcp { font-variant-caps: small-caps; }
+  .all-smcp { font-variant-caps: all-small-caps; }
+  .petite { font-variant-caps: petite-caps; }
+  .titling { font-variant-caps: titling-caps; }
+  .unicase { font-variant-caps: unicase; }
+
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; font-family: Menlo, monospace; }
+  .pnum { font-variant-numeric: proportional-nums; }
+  .lnum { font-variant-numeric: lining-nums; }
+  .onum { font-variant-numeric: oldstyle-nums; }
+  .frac { font-variant-numeric: diagonal-fractions; }
+  .stk  { font-variant-numeric: stacked-fractions; }
+  .ord  { font-variant-numeric: ordinal; }
+  .sszero { font-variant-numeric: slashed-zero; font-feature-settings: "zero"; }
+
+  .ss01 { font-feature-settings: "ss01"; }
+  .ss02 { font-feature-settings: "ss02"; }
+  .salt { font-feature-settings: "salt"; }
+
+  .superscr { font-variant-position: super; }
+  .subscr   { font-variant-position: sub; }
+
+  .east-asian-jis78 { font-variant-east-asian: jis78; }
+  .east-asian-trad  { font-variant-east-asian: traditional; }
+
+  /* font-variation-settings (variable fonts) */
+  .v-wght { font-variation-settings: "wght" 100; }
+  .v-wght-h { font-variation-settings: "wght" 900; }
+  .v-wdth { font-variation-settings: "wdth" 50; }
+  .v-wdth-w { font-variation-settings: "wdth" 200; }
+  .v-opsz { font-variation-settings: "opsz" 8; }
+  .v-opsz-h { font-variation-settings: "opsz" 144; }
+  .v-slnt { font-variation-settings: "slnt" -10; }
+</style>
+</head>
+<body>
+<h1>OpenType features &amp; variable axes</h1>
+<p>Visible effect depends on the available system font supporting these
+features. With generic stacks, some changes will be no-ops.</p>
+
+<h2>Ligatures</h2>
+<div class="frame">
+  <div class="ex liga-off"><span class="label">liga off</span> office final flag</div>
+  <div class="ex liga-on"> <span class="label">liga + dlig on</span> office final flag</div>
+</div>
+
+<h2>Caps variants</h2>
+<div class="frame">
+  <div class="ex smcp">small-caps: Hello World 123</div>
+  <div class="ex all-smcp">all-small-caps: Hello WORLD 123</div>
+  <div class="ex petite">petite-caps: Hello World 123</div>
+  <div class="ex titling">titling-caps: HELLO WORLD</div>
+  <div class="ex unicase">unicase: Hello World</div>
+</div>
+
+<h2>Numerics</h2>
+<div class="frame">
+  <div class="ex tnum">tabular: 0123456789<br>tabular: 1111111111</div>
+  <div class="ex pnum">proportional: 0123456789</div>
+  <div class="ex lnum">lining: 0123456789</div>
+  <div class="ex onum">oldstyle: 0123456789</div>
+  <div class="ex frac">fraction: 1/2 3/4 11/16</div>
+  <div class="ex stk">stacked-frac: 1/2 3/4 11/16</div>
+  <div class="ex ord">ordinal: 1st 2nd 3rd</div>
+  <div class="ex sszero">slashed zero: 0 vs O</div>
+</div>
+
+<h2>Stylistic sets / alternates</h2>
+<div class="frame">
+  <div class="ex">default Quick Sword</div>
+  <div class="ex ss01">ss01 Quick Sword</div>
+  <div class="ex ss02">ss02 Quick Sword</div>
+  <div class="ex salt">salt Quick Sword</div>
+</div>
+
+<h2>Variable axes</h2>
+<div class="frame">
+  <div class="ex v-wght">wght 100 — same word</div>
+  <div class="ex v-wght-h">wght 900 — same word</div>
+  <div class="ex v-wdth">wdth 50</div>
+  <div class="ex v-wdth-w">wdth 200</div>
+  <div class="ex v-opsz">opsz 8</div>
+  <div class="ex v-opsz-h">opsz 144</div>
+  <div class="ex v-slnt">slnt -10°</div>
+</div>
+
+<h2>Position (super/sub via font feature)</h2>
+<div class="frame">
+  <div class="ex">H<span class="subscr">2</span>O · E = mc<span class="superscr">2</span></div>
+</div>
+</body>
+</html>

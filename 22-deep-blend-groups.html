@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>22 deep — blend mode groups</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .stage {
+    width: 360px; height: 200px;
+    background: url(assets/img-wide.png) center/cover;
+    position: relative;
+    border: 1px solid #475569;
+    margin-bottom: 8px;
+  }
+  .blob {
+    position: absolute;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+  }
+  .b1 { background: #dc2626; top: 20px; left: 40px; }
+  .b2 { background: #16a34a; top: 20px; left: 120px; }
+  .b3 { background: #1d4ed8; top: 20px; left: 200px; }
+
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .lab { font-size: 11px; color: #475569; }
+
+  .ml-multiply { mix-blend-mode: multiply; }
+  .ml-screen   { mix-blend-mode: screen; }
+  .ml-overlay  { mix-blend-mode: overlay; }
+  .ml-darken   { mix-blend-mode: darken; }
+  .ml-lighten  { mix-blend-mode: lighten; }
+  .ml-cdodge   { mix-blend-mode: color-dodge; }
+  .ml-cburn    { mix-blend-mode: color-burn; }
+  .ml-hardlight{ mix-blend-mode: hard-light; }
+  .ml-softlight{ mix-blend-mode: soft-light; }
+  .ml-difference { mix-blend-mode: difference; }
+  .ml-exclusion  { mix-blend-mode: exclusion; }
+  .ml-hue        { mix-blend-mode: hue; }
+  .ml-saturation { mix-blend-mode: saturation; }
+  .ml-color      { mix-blend-mode: color; }
+  .ml-luminosity { mix-blend-mode: luminosity; }
+  .ml-plus       { mix-blend-mode: plus-lighter; }
+
+  /* background-blend-mode in multi-layer bg */
+  .bgblend {
+    width: 360px; height: 120px;
+    background:
+      linear-gradient(135deg, #fde68a, #f97316),
+      url(assets/img-wide.png) center/cover;
+    background-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+<h1>Blend mode groups</h1>
+<p>Each row tags one blob with the listed mix-blend-mode against an image
+backdrop. Three primary-color blobs in a circle let you see separable
+vs non-separable behaviors clearly.</p>
+
+<div class="row">
+  <div>
+    <div class="stage"><div class="blob b1 ml-multiply"></div><div class="blob b2 ml-multiply"></div><div class="blob b3 ml-multiply"></div></div>
+    <div class="lab">multiply</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-screen"></div><div class="blob b2 ml-screen"></div><div class="blob b3 ml-screen"></div></div>
+    <div class="lab">screen</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-overlay"></div><div class="blob b2 ml-overlay"></div><div class="blob b3 ml-overlay"></div></div>
+    <div class="lab">overlay</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-darken"></div><div class="blob b2 ml-darken"></div><div class="blob b3 ml-darken"></div></div>
+    <div class="lab">darken</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-lighten"></div><div class="blob b2 ml-lighten"></div><div class="blob b3 ml-lighten"></div></div>
+    <div class="lab">lighten</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-cdodge"></div><div class="blob b2 ml-cdodge"></div><div class="blob b3 ml-cdodge"></div></div>
+    <div class="lab">color-dodge</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-cburn"></div><div class="blob b2 ml-cburn"></div><div class="blob b3 ml-cburn"></div></div>
+    <div class="lab">color-burn</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-hardlight"></div><div class="blob b2 ml-hardlight"></div><div class="blob b3 ml-hardlight"></div></div>
+    <div class="lab">hard-light</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-softlight"></div><div class="blob b2 ml-softlight"></div><div class="blob b3 ml-softlight"></div></div>
+    <div class="lab">soft-light</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-difference"></div><div class="blob b2 ml-difference"></div><div class="blob b3 ml-difference"></div></div>
+    <div class="lab">difference</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-exclusion"></div><div class="blob b2 ml-exclusion"></div><div class="blob b3 ml-exclusion"></div></div>
+    <div class="lab">exclusion</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-hue"></div><div class="blob b2 ml-hue"></div><div class="blob b3 ml-hue"></div></div>
+    <div class="lab">hue</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-saturation"></div><div class="blob b2 ml-saturation"></div><div class="blob b3 ml-saturation"></div></div>
+    <div class="lab">saturation</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-color"></div><div class="blob b2 ml-color"></div><div class="blob b3 ml-color"></div></div>
+    <div class="lab">color</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-luminosity"></div><div class="blob b2 ml-luminosity"></div><div class="blob b3 ml-luminosity"></div></div>
+    <div class="lab">luminosity</div>
+  </div>
+  <div>
+    <div class="stage"><div class="blob b1 ml-plus"></div><div class="blob b2 ml-plus"></div><div class="blob b3 ml-plus"></div></div>
+    <div class="lab">plus-lighter</div>
+  </div>
+</div>
+
+<h2><code>background-blend-mode</code> within a single element</h2>
+<div class="bgblend"></div>
+<p class="lab">multi-layer backgrounds blended with multiply at the source.</p>
+</body>
+</html>

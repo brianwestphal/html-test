@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>10 deep — attribute selector quoting</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 8px; margin-bottom: 8px; }
+  .item { padding: 4px 8px; background: #e2e8f0; margin: 2px 0; }
+
+  /* exact match */
+  [data-state="active"] { background: #bbf7d0; }
+  /* case-insensitive */
+  [data-state="active" i] { outline: 2px solid #16a34a; }
+  /* case-sensitive (default) — should NOT match Active */
+  [data-mode="dark" s] { background: #1e293b; color: white; }
+
+  /* substring matching */
+  [class*="primary"] { font-weight: bold; }
+  [class^="btn-"]   { border-left: 4px solid #1d4ed8; }
+  [class$="-lg"]    { font-size: 18px; }
+
+  /* word match */
+  [class~="warn"]   { background: #fde68a; }
+  /* lang-style hyphen prefix */
+  [lang|="en"]      { font-style: italic; }
+
+  /* escapes inside quoted values */
+  [data-q="he said \"hi\""] { color: #b91c1c; }
+
+  /* attribute presence */
+  [disabled]        { opacity: 0.5; }
+</style>
+</head>
+<body>
+<h1>Attribute selectors — quoting, case flags, escapes</h1>
+
+<h2>Exact + case flags</h2>
+<div class="frame">
+  <div class="item" data-state="active">data-state="active" → green bg + outline</div>
+  <div class="item" data-state="Active">data-state="Active" → outline only (case-insensitive [i])</div>
+  <div class="item" data-state="ACTIVE">data-state="ACTIVE" → outline only</div>
+  <div class="item" data-state="inactive">data-state="inactive" → no match</div>
+</div>
+
+<h2>Case-sensitive [s] flag</h2>
+<div class="frame">
+  <div class="item" data-mode="dark">data-mode="dark" — matches</div>
+  <div class="item" data-mode="DARK">data-mode="DARK" — does NOT match (s)</div>
+  <div class="item" data-mode="Dark">data-mode="Dark" — does NOT match (s)</div>
+</div>
+
+<h2>Substring matching: *= / ^= / $=</h2>
+<div class="frame">
+  <div class="item" class="btn primary">btn primary (bold via *= "primary")</div>
+  <div class="item" class="primary-cta">primary-cta (bold)</div>
+  <div class="item" class="btn-large">btn-large (left bar via ^="btn-")</div>
+  <div class="item" class="btn-lg">btn-lg (left bar AND large via $="-lg")</div>
+  <div class="item" class="card-lg">card-lg (large only)</div>
+</div>
+
+<h2>Word match [~=] vs partial [*=]</h2>
+<div class="frame">
+  <div class="item" class="info warn alert">classes "info warn alert" — yellow bg ([~="warn"])</div>
+  <div class="item" class="warning">"warning" — does NOT match ~=warn (whole word)</div>
+  <div class="item" class="warn-x warned">"warn-x warned" — no whole-word match</div>
+</div>
+
+<h2>Hyphen prefix [|=] for language</h2>
+<div class="frame">
+  <div class="item" lang="en">lang="en" — italic</div>
+  <div class="item" lang="en-US">lang="en-US" — italic</div>
+  <div class="item" lang="en-GB-x-foo">lang="en-GB-x-foo" — italic</div>
+  <div class="item" lang="enchanted">lang="enchanted" — NOT italic</div>
+  <div class="item" lang="fr">lang="fr" — NOT italic</div>
+</div>
+
+<h2>Escapes inside quoted values</h2>
+<div class="frame">
+  <div class="item" data-q='he said "hi"'>data-q='he said "hi"' — red text via escaped quotes</div>
+  <div class="item" data-q="he said">no match</div>
+</div>
+
+<h2>Presence (no value)</h2>
+<div class="frame">
+  <button>enabled</button>
+  <button disabled>disabled (opacity .5)</button>
+  <input>
+  <input disabled value="ro">
+</div>
+</body>
+</html>

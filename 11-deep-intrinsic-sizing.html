@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>11 deep — intrinsic sizing keywords</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { background: #f1f5f9; border: 1px solid #475569; padding: 12px; margin-bottom: 8px; }
+  .box {
+    background: #1d4ed8; color: white;
+    padding: 6px 10px;
+    border: 2px solid #1e3a8a;
+    margin-bottom: 6px;
+  }
+  .min-c   { width: min-content; }
+  .max-c   { width: max-content; }
+  .fit-c   { width: fit-content; }
+  .fit-300 { width: fit-content(300px); }
+  .lim     { /* limit container width to expose differences */ width: 360px; }
+
+  /* height intrinsic */
+  .h-min { height: min-content; background: #16a34a; }
+  .h-max { height: max-content; background: #ea580c; }
+  .h-fit { height: fit-content; background: #7c3aed; }
+</style>
+</head>
+<body>
+<h1>Intrinsic sizing keywords on width / height</h1>
+<p>Container is 360px wide. Each blue box wraps the same long-word phrase.</p>
+
+<h2>min-content</h2>
+<div class="frame lim">
+  <div class="box min-c">supercalifragilisticexpialidocious wraps tightly to longest word</div>
+</div>
+
+<h2>max-content</h2>
+<div class="frame lim">
+  <div class="box max-c">supercalifragilisticexpialidocious wraps tightly to longest word — overflows container</div>
+</div>
+
+<h2>fit-content (== min(max-content, max(min-content, available)))</h2>
+<div class="frame lim">
+  <div class="box fit-c">supercalifragilisticexpialidocious wraps tightly to longest word</div>
+</div>
+
+<h2>fit-content(300px)</h2>
+<div class="frame lim">
+  <div class="box fit-300">supercalifragilisticexpialidocious wraps tightly to longest word</div>
+</div>
+
+<h2>Same on height (vertical-rl makes it visually obvious)</h2>
+<div class="frame" style="height: 220px; writing-mode: vertical-rl;">
+  <div class="box h-min" style="width: 80px;">min-content height</div>
+  <div class="box h-max" style="width: 80px;">max-content height</div>
+  <div class="box h-fit" style="width: 80px;">fit-content height</div>
+</div>
+
+<h2>Replaced element + width:min-content vs max-content</h2>
+<div class="frame lim">
+  <p>min-content on an img collapses to its intrinsic minimum (1 word ≈ 0).
+  max-content uses its natural intrinsic width.</p>
+  <img src="assets/img-wide.png" alt="wide" style="width: min-content; display:block; border:2px solid #dc2626; margin-bottom:6px;">
+  <img src="assets/img-wide.png" alt="wide" style="width: max-content; display:block; border:2px solid #16a34a;">
+</div>
+
+<h2>Flex item with flex-basis: content vs auto vs 0</h2>
+<p>flex-basis: content sizes from item content; auto uses its declared main
+size or content fallback; 0 starts from zero and grows by flex-grow.</p>
+<div class="frame" style="display:flex; gap:8px;">
+  <div class="box" style="flex: 1 1 content;">basis content</div>
+  <div class="box" style="flex: 1 1 auto;">basis auto</div>
+  <div class="box" style="flex: 1 1 0;">basis 0</div>
+</div>
+</body>
+</html>

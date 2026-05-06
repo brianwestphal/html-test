@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>14 deep — floats & block formatting context</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; background: #e2e8f0; padding: 4px 8px; }
+  .frame { border: 2px solid #475569; background: #fef3c7; padding: 8px; margin-bottom: 8px; }
+  .float-l { float: left; width: 80px; height: 80px; background: #1d4ed8; color: white; padding: 4px; margin-right: 8px; }
+  .float-r { float: right; width: 80px; height: 80px; background: #b91c1c; color: white; padding: 4px; margin-left: 8px; }
+  .bfc-overflow  { overflow: hidden; }
+  .bfc-flowroot  { display: flow-root; }
+  .bfc-contain   { contain: layout; }
+  .bfc-inlblock  { display: inline-block; width: 100%; box-sizing: border-box; }
+  .bfc-flex      { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+<h1>Float containment via block formatting context</h1>
+
+<h2>1. No BFC — parent height collapses around floats</h2>
+<div class="frame">
+  <div style="background: #ddd6fe; outline: 2px dashed #6d28d9;">
+    <div class="float-l">FL</div>
+    <div class="float-r">FR</div>
+  </div>
+  <p style="margin: 0;">↑ purple wrapper has zero height (floats removed from flow).</p>
+</div>
+
+<h2>2. <code>overflow: hidden</code> establishes BFC → contains floats</h2>
+<div class="frame">
+  <div class="bfc-overflow" style="background: #ddd6fe; outline: 2px dashed #6d28d9;">
+    <div class="float-l">FL</div>
+    <div class="float-r">FR</div>
+  </div>
+</div>
+
+<h2>3. <code>display: flow-root</code> — same effect, no clipping</h2>
+<div class="frame">
+  <div class="bfc-flowroot" style="background: #ddd6fe; outline: 2px dashed #6d28d9;">
+    <div class="float-l">FL</div>
+    <div class="float-r">FR</div>
+  </div>
+</div>
+
+<h2>4. <code>contain: layout</code></h2>
+<div class="frame">
+  <div class="bfc-contain" style="background: #ddd6fe; outline: 2px dashed #6d28d9;">
+    <div class="float-l">FL</div>
+    <div class="float-r">FR</div>
+  </div>
+</div>
+
+<h2>5. <code>display: inline-block</code> on the wrapper</h2>
+<div class="frame">
+  <div class="bfc-inlblock" style="background: #ddd6fe; outline: 2px dashed #6d28d9;">
+    <div class="float-l">FL</div>
+    <div class="float-r">FR</div>
+  </div>
+</div>
+
+<h2>6. Sibling next to a float — without BFC, sibling text wraps; with BFC, sibling forms a column</h2>
+<div class="frame">
+  <div class="float-l">FLOAT</div>
+  <p>Without BFC the paragraph text wraps around the float. Lorem ipsum
+  dolor sit amet consectetur adipiscing elit. Cras sed lectus quam.</p>
+</div>
+<div class="frame">
+  <div class="float-l">FLOAT</div>
+  <p style="overflow: hidden;">With <code>overflow:hidden</code> on this paragraph,
+  it forms a BFC and sits beside the float as a column rather than wrapping
+  underneath. Cras sed lectus quam.</p>
+</div>
+
+<h2>7. Float clearance at BFC boundary</h2>
+<div class="frame bfc-flowroot">
+  <div class="float-l">FL</div>
+  <p>Text — wraps next to float.</p>
+  <p style="clear: left;">clear:left — pushed below FL.</p>
+</div>
+</body>
+</html>

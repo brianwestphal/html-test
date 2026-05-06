@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>24 deep — counter scope &amp; counters()</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; background: #f1f5f9; padding: 12px; margin-bottom: 8px; }
+
+  /* simple counter */
+  .a { counter-reset: section; }
+  .a h3 { counter-increment: section; }
+  .a h3::before { content: "§ " counter(section) ". "; color: #1d4ed8; font-weight: bold; }
+
+  /* nested counters with counters() */
+  ol.b { counter-reset: item; list-style: none; padding-left: 0; }
+  ol.b > li { counter-increment: item; }
+  ol.b > li::before { content: counters(item, ".") ". "; font-weight: bold; color: #b91c1c; }
+
+  /* counter-set vs counter-reset */
+  .c { counter-reset: x 0; }
+  .c span { counter-increment: x; }
+  .c span::after { content: " [" counter(x) "]"; color: #16a34a; }
+  .c .reset { counter-reset: x 100; }       /* hard reset */
+  .c .set   { counter-set: x 50; }          /* one-time set, doesn't establish new scope */
+
+  /* Self-nesting via deeper structure */
+  .d { counter-reset: chapter; }
+  .d section { counter-reset: section; counter-increment: chapter; }
+  .d section::before { content: "Ch " counter(chapter) ". "; font-weight: bold; }
+  .d section h4 { counter-reset: subsec; counter-increment: section; }
+  .d section h4::before { content: counter(chapter) "." counter(section) " "; color: #7c3aed; }
+  .d section h4 + p { counter-increment: subsec; }
+  .d section h4 + p::before { content: "[" counter(chapter) "." counter(section) "." counter(subsec) "] "; color: #b45309; }
+
+  /* Compatible separator */
+  ol.e { counter-reset: outline; list-style: none; }
+  ol.e li { counter-increment: outline; }
+  ol.e li::before { content: counters(outline, " · ", upper-roman) " "; color: #1d4ed8; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>CSS counters — scope, counter-set, counters()</h1>
+
+<h2>Simple counter (reset on parent, increment per heading)</h2>
+<div class="frame a">
+  <h3>introduction</h3>
+  <h3>method</h3>
+  <h3>results</h3>
+  <h3>discussion</h3>
+</div>
+
+<h2><code>counters()</code> for nested numbering</h2>
+<ol class="b frame">
+  <li>first
+    <ol class="b">
+      <li>1.1
+        <ol class="b">
+          <li>1.1.1</li>
+          <li>1.1.2</li>
+        </ol>
+      </li>
+      <li>1.2</li>
+    </ol>
+  </li>
+  <li>second</li>
+  <li>third
+    <ol class="b">
+      <li>3.1</li>
+    </ol>
+  </li>
+</ol>
+
+<h2><code>counter-reset</code> vs <code>counter-set</code></h2>
+<div class="frame c">
+  <p>counter-reset on this parent. Each span increments.</p>
+  <span>a</span>
+  <span>b</span>
+  <span class="set">c (set to 50)</span>
+  <span>d</span>
+  <span class="reset">e (reset 100 — also creates new SCOPE)</span>
+  <span>f</span>
+</div>
+
+<h2>Multi-level structure with multiple counters</h2>
+<div class="frame d">
+  <section>
+    <h4>method overview</h4>
+    <p>this is one paragraph</p>
+    <p>and another</p>
+    <h4>data</h4>
+    <p>another paragraph</p>
+  </section>
+  <section>
+    <h4>analysis</h4>
+    <p>x</p>
+    <p>y</p>
+  </section>
+</div>
+
+<h2>counters() with non-decimal style</h2>
+<ol class="e frame">
+  <li>first
+    <ol class="e">
+      <li>nested first
+        <ol class="e">
+          <li>deep first</li>
+          <li>deep second</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>second</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>15 deep — flex + aspect-ratio</title>
+<style>
+  body { font-family: sans-serif; margin: 2em; max-width: 900px; }
+  h2 { font-size: 14px; color: #334155; margin-top: 22px; }
+  .frame { border: 2px solid #475569; padding: 8px; margin-bottom: 8px; background: #f1f5f9; }
+  .row { display: flex; gap: 8px; height: 120px; }
+  .row.col { flex-direction: column; height: 360px; width: 200px; }
+  .item {
+    background: #1d4ed8; color: white;
+    padding: 4px;
+    border: 2px solid #1e3a8a;
+  }
+  .ar-1   { aspect-ratio: 1; }
+  .ar-2-1 { aspect-ratio: 2 / 1; }
+  .ar-1-2 { aspect-ratio: 1 / 2; }
+  .ar-3-2 { aspect-ratio: 3 / 2; }
+</style>
+</head>
+<body>
+<h1>aspect-ratio on flex items</h1>
+
+<h2>Row direction · 120px tall · aspect-ratio sets width from height</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item ar-1">1:1</div>
+    <div class="item ar-2-1">2:1</div>
+    <div class="item ar-1-2">1:2</div>
+    <div class="item ar-3-2">3:2</div>
+  </div>
+</div>
+
+<h2>Column direction · 200px wide · aspect-ratio sets height from width</h2>
+<div class="frame">
+  <div class="row col">
+    <div class="item ar-1">1:1</div>
+    <div class="item ar-2-1">2:1</div>
+    <div class="item ar-1-2">1:2</div>
+  </div>
+</div>
+
+<h2>flex-basis: auto + aspect-ratio — basis comes from aspect ratio</h2>
+<div class="frame">
+  <div class="row">
+    <div class="item ar-1" style="flex: 0 0 auto;">basis auto</div>
+    <div class="item ar-2-1" style="flex: 0 0 auto;">basis auto</div>
+    <div class="item ar-1-2" style="flex: 0 0 auto;">basis auto</div>
+    <div class="item" style="flex: 1;">grow filler</div>
+  </div>
+</div>
+
+<h2>flex: 1 + aspect-ratio — main size grows, ratio overridden in main</h2>
+<p>flex-grow forces all items to fill the row, so aspect-ratio's
+inline-size constraint loses to flex.</p>
+<div class="frame">
+  <div class="row">
+    <div class="item ar-1" style="flex: 1;">1:1 + flex 1</div>
+    <div class="item ar-2-1" style="flex: 1;">2:1 + flex 1</div>
+    <div class="item ar-1-2" style="flex: 1;">1:2 + flex 1</div>
+  </div>
+</div>
+
+<h2>Replaced (img) flex item with explicit aspect-ratio override</h2>
+<div class="frame">
+  <div class="row">
+    <img src="assets/img-wide.png" alt="" style="height: 100%; aspect-ratio: 1; object-fit: cover;">
+    <img src="assets/img-tall.png" alt="" style="height: 100%; aspect-ratio: 2/1; object-fit: cover;">
+    <div class="item" style="flex: 1;">filler</div>
+  </div>
+</div>
+</body>
+</html>
