@@ -36,7 +36,7 @@ build (see `git log` once the repo is initialized).
 
 ## Assets (`assets/`)
 
-- 5 format-labelled square images (128×128) — `img-{red.png, blue.jpg,
+- 5 format-labeled square images (128×128) — `img-{red.png, blue.jpg,
   green.gif, purple.webp, orange.svg}` — each is a solid color with its
   format name centered in white (SVG has black text on orange).
 - `img-wide.png` (384×128, 3:1) and `img-tall.png` (128×384, 1:3) for
@@ -71,6 +71,11 @@ build (see `git log` once the repo is initialized).
 - **Images must be obviously identifiable** as images (distinct colors,
   labels) — we're not testing image quality, we're testing that an image
   rendered *where expected*.
+- **American-English spelling and grammar** everywhere — file contents,
+  code comments, prose in test pages, commit messages, and this file.
+  No `colour`/`grey`/`labelled`/`centre`/`behaviour`/`organise`/etc.;
+  use `color`/`gray`/`labeled`/`center`/`behavior`/`organize`. Same goes
+  for grammar (e.g. American comma usage, no `whilst`/`amongst`).
 
 ## Things NOT to add without asking
 
